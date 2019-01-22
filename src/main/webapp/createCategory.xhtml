@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<head>
+</head>
+<body>
+	<h:form id="formCategory">
+		<h:outputLabel value="ID: " />
+		<h:inputText value="#{homeController.categoryForm.id}" id="category" />
+		<h:commandButton value="submit" type="submit"
+			action="#{homeController.getCreateCategory()}" />
+	</h:form>
+</body>
+<h:outputScript library="js/vendor" name="jquery-2.2.4.min.js" />
+<h:outputScript library="js/vendor" name="bootstrap.min.js" />
+<h:outputScript>
+	$(document).ready(function() {
+    var x =$('#formCategory\\:category').val();
+    alert(x);
+});
+</h:outputScript>
+</html>
