@@ -54,14 +54,15 @@ public class UserService implements ModelServiceInterface<User> {
 		return 0;
 	}
 
+
 	@Override
-	public int update() {
+	public int update(int id, User e) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int removeById() {
+	public int removeById(int id) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

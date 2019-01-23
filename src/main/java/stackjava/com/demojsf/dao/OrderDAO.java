@@ -16,7 +16,6 @@ import stackjava.com.demojsf.model.Order;
 @ManagedBean
 @SessionScoped
 public class OrderDAO implements ModelDaoInterface<Order> {
-	public final static Logger logger = Logger.getLogger(OrderDAO.class);
 	@ManagedProperty(value = "#{getSessionHibernate}")
 	GetSessionHibernate getSessionHibernate;
 
@@ -39,7 +38,6 @@ public class OrderDAO implements ModelDaoInterface<Order> {
 	public Order getById(int id) {
 		getSessionHibernate = this.getGetSessionHibernate();
 		Order order = new Order(1, 4, Float.valueOf(15), 1, new Date(), new Date());
-		logger.info("\n=======CREATE RECORDS=======");
 		getSessionHibernate.createRecord(order);
 		return order;
 	}

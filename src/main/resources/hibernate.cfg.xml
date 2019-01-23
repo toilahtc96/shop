@@ -20,5 +20,6 @@
 		<!-- Mapping With Model Class Containing Annotations -->
 		<mapping class="stackjava.com.demojsf.model.Order" />
 		<mapping class="stackjava.com.demojsf.model.User" />
+		<mapping class="stackjava.com.demojsf.model.Category" />
 	</session-factory>
 </hibernate-configuration>

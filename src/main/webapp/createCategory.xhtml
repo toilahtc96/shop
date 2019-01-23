@@ -9,18 +9,26 @@
 </head>
 <body>
 	<h:form id="formCategory">
-		<h:outputLabel value="ID: " />
-		<h:inputText value="#{homeController.categoryForm.id}" id="category" />
-		<h:commandButton value="submit" type="submit"
-			action="#{homeController.getCreateCategory()}" />
+		<h:outputLabel value="Name: " />
+		<h:inputText value="#{homeController.categoryForm.catName}"
+			id="categoryName" />
+		<h:commandButton value="add" type="submit"
+			action="#{homeController.getCreateCategory()}"
+			onclick="checkValidate()" />
+
 	</h:form>
 </body>
 <h:outputScript library="js/vendor" name="jquery-2.2.4.min.js" />
 <h:outputScript library="js/vendor" name="bootstrap.min.js" />
 <h:outputScript>
 	$(document).ready(function() {
-    var x =$('#formCategory\\:category').val();
-    alert(x);
-});
+	   checkValidate = function(){
+			var x =$('#formCategory\\:categoryName').val();
+			if(x === ""){
+				alert("Phai nhap Ten");
+				return false;
+			}
+		}
+	});
 </h:outputScript>
 </html>

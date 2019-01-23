@@ -42,14 +42,17 @@ public class OrderService implements ModelServiceInterface<Order> {
 		return 0;
 	}
 
-	public int update() {
+	@Override
+	public int update(int id, Order e) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	public int removeById() {
+	@Override
+	public int removeById(int id) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 }

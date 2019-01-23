@@ -15,7 +15,6 @@ import stackjava.com.demojsf.model.User;
 @ManagedBean
 @SessionScoped
 public class UserDAO implements ModelDaoInterface<User>{
-	public final static Logger logger = Logger.getLogger(UserDAO.class);
 	@ManagedProperty(value = "#{getSessionHibernate}")
 	GetSessionHibernate getSessionHibernate;
 
@@ -62,10 +61,10 @@ public class UserDAO implements ModelDaoInterface<User>{
 	@Override
 	public int add(User e) {
 		
-		logger.info("OK Men");
+		
 		getSessionHibernate = this.getGetSessionHibernate();
 		int rs = getSessionHibernate.createRecord(e);
-		logger.debug(e.toString() + "==============================================");
+		
 		// TODO Auto-generated method stub
 		return rs;
 	}

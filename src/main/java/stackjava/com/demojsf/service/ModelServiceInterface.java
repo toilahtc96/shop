@@ -9,7 +9,7 @@ public interface ModelServiceInterface<E> {
 
 	public int add(E e);
 
-	public int update();
+	public int update(int id, E e);
 
-	public int removeById();
+	public int removeById(int id);
 }

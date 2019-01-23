@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<head>
+</head>
+<body>
+	<h:form>
+		<h:dataTable value="#{homeController.list}" var="category"
+			styleClass="" 
+			headerClass=""
+			rowClasses="">
+			<h:column>
+				<f:facet name="header">ID</f:facet>   
+				<h:outputText value="#{category.catId}"/>   				           
+            </h:column>
+			<h:column>
+				<f:facet name="header">Name</f:facet>  
+				<h:outputText value="#{category.catName}"/>    				
+            </h:column>
+			<h:column>
+				<f:facet name="header">Alias</f:facet>  
+				<h:outputText value="#{category.catAlias}"/>    				
+            </h:column>
+            <h:column>
+				<f:facet name="header">Action</f:facet>  
+				<h:commandButton action="#{homeController.updateCategory()}" value="Update" >
+				<f:param  name="id" value="#{category.catId}"/>
+				</h:commandButton>				
+            </h:column>
+		</h:dataTable>
+	</h:form>
+</body>
+</html>
