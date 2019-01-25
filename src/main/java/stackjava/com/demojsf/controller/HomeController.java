@@ -1,5 +1,6 @@
 package stackjava.com.demojsf.controller;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,40 +11,60 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 
-import stackjava.com.demojsf.form.CategoryForm;
-import stackjava.com.demojsf.form.CategoryFormNew;
+import stackjava.com.demojsf.dao.CategoryDAO;
+import stackjava.com.demojsf.form.CreateCategoryForm;
+import stackjava.com.demojsf.form.UpdateCategoryForm;
 import stackjava.com.demojsf.model.Category;
 import stackjava.com.demojsf.service.CategoryService;
 
 @ManagedBean
 @SessionScoped
 @URLMapping(id = "category", pattern = "/category", viewId = "/ListCategory.xhtml")
-public class HomeController {
+public class HomeController implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	List<Category> list;
 
+	@ManagedProperty(value = "#{categoryDAO}")
+	CategoryDAO categoryDAO;
+
+	public void setCategoryDAO(CategoryDAO categoryDAO) {
+		this.categoryDAO = categoryDAO;
+	}
+
 	@ManagedProperty(value = "#{categoryService}")
 	CategoryService categoryService;
-
-	public CategoryService getCategoryService() {
-	
-		return categoryService;
-	}
 
 	public void setCategoryService(CategoryService categoryService) {
 		this.categoryService = categoryService;
 	}
 
-	CategoryFormNew categoryForm;
+	CreateCategoryForm createCategoryForm;
 
-	public CategoryFormNew getCategoryForm() {
-		if (categoryForm == null)
-			categoryForm = new CategoryFormNew();
-		return categoryForm;
+	public CreateCategoryForm getCategoryForm() {
+		if (createCategoryForm == null)
+			createCategoryForm = new CreateCategoryForm();
+		return createCategoryForm;
 	}
 
-	public void setCategoryForm(CategoryFormNew categoryForm) {
-		this.categoryForm = categoryForm;
+	public void setCategoryForm(CreateCategoryForm categoryForm) {
+		this.createCategoryForm = categoryForm;
+	}
+
+	UpdateCategoryForm updateCategoryForm;
+
+	public UpdateCategoryForm getUpdateCategoryForm() {
+		if (updateCategoryForm == null)
+			updateCategoryForm = new UpdateCategoryForm();
+		return updateCategoryForm;
+	}
+
+	public void setUpdateCategoryForm(UpdateCategoryForm updateCategoryForm) {
+		this.updateCategoryForm = updateCategoryForm;
 	}
 
 	public HomeController() {
@@ -59,7 +80,7 @@ public class HomeController {
 	}
 
 	public String getCreateCategory() {
-		String categoryName = this.categoryForm.getCatName();
+		String categoryName = this.createCategoryForm.getCatName();
 		Category cat = new Category();
 		cat.setCatName(categoryName);
 		categoryService.add(cat);
@@ -68,30 +89,43 @@ public class HomeController {
 	}
 
 	public String getUpdateCategory() {
-		String catName = this.categoryForm.getCatName();
+		int id = updateCategoryForm.getCatID();
+//		Category cate = categoryDAO.getById(id);
+		String name = updateCategoryForm.getCatName();
+//		cate.setCatName(updateCategoryForm.getCatName());
+		Category cate = new Category(id, name, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+		categoryService.update(id, cate);
 		return "";
 	}
 
 	public String updateCategory() {
 
-//		FacesContext fc = FacesContext.getCurrentInstance();
+		FacesContext fc = FacesContext.getCurrentInstance();
+		int id = (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
+		Category cate = categoryDAO.getById(id);
+		if (cate == null) {
+			System.out.println("xxxxx");
+		} else {
+			System.out.println(cate.getCatName());
+		}
+		// createCategoryForm = new CreateCategoryForm();
+		// createCategoryForm.setCatName(cate.getCatName());
+		updateCategoryForm = new UpdateCategoryForm();
+		updateCategoryForm.setCatName(cate.getCatName());
+		updateCategoryForm.setCatID(cate.getCatId());
+		return "updateCategory";
+	}
 
-//		int id= (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
+	public String deleteCategory() {
 		Category cate = categoryService.getById(1);
 		if (cate == null) {
 			System.out.println("xxxxx");
 		} else {
 			System.out.println(cate.getCatName());
 		}
-		categoryForm.setCatName("test");
-		return "index";
-		// sau thay trang nay = 1 trang update moi
+		return "createCategory";
 	}
 
-	// public List<Category> getListCategory(){
-	// list = categoryService.getAll();
-	// return list;
-	// }
 	public static void main(String[] args) {
 		CategoryService cates = new CategoryService();
 		cates.getById(1);

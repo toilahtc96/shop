@@ -8,13 +8,15 @@
 <head>
 </head>
 <body>
-	<h:form id="formCreateCategory">
+	<h:form id="formUpdateCategory">
 		<h:outputLabel value="Name: " />
-		<h:inputText value="#{homeController.createCategoryForm.catName}"
+		<h:inputText value="#{homeController.updateCategoryForm.catName}"
 			id="categoryName" />
-		<h:commandButton value="add" type="submit"
-			action="#{homeController.getCreateCategory()}"
-			onclick="checkValidate()" />
+		<h:commandButton value="Submit" type="submit"
+			action="#{homeController.getUpdateCategory()}"
+			onclick="checkValidate()">
+		<f:param  name="id" value="#{category.catId}"/>
+		</h:commandButton>
 
 	</h:form>
 </body>

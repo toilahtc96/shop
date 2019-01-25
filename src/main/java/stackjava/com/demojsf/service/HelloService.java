@@ -7,7 +7,7 @@ import javax.faces.bean.SessionScoped;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 
-import stackjava.com.demojsf.form.CategoryForm;
+
 import stackjava.com.demojsf.model.Order;
 
 @ManagedBean

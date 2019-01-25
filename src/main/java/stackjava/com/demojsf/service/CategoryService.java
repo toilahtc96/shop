@@ -1,5 +1,6 @@
 package stackjava.com.demojsf.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -12,20 +13,24 @@ import stackjava.com.demojsf.model.Category;
 
 @ManagedBean
 @SessionScoped
-public class CategoryService implements ModelServiceInterface<Category> {
+public class CategoryService implements ModelServiceInterface<Category> , Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@ManagedProperty(value = "#{categoryDAO}")
 	CategoryDAO categoryDAO;
 
-	public CategoryDAO getCategoryDAO() {
-		if(categoryDAO == null){
-			categoryDAO = new CategoryDAO();
-		}
+//	public CategoryDAO getCategoryDAO() {
+//		if(categoryDAO == null){
+//			categoryDAO = new CategoryDAO();
+//		}
+//
+//		return categoryDAO;
+//	}
 
-		return categoryDAO;
-	}
-
-	public void setCategoryDAO(CategoryDAO categoryDAO) {
+	public void setCategoryDAO(CategoryDAO categoryDAO){
 		this.categoryDAO = categoryDAO;
 	}
 

@@ -1,5 +1,6 @@
 package stackjava.com.demojsf.dao;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,17 +19,21 @@ import stackjava.com.demojsf.connection.GetSessionHibernate;
 
 @ManagedBean
 @SessionScoped
-public class CategoryDAO implements ModelDaoInterface<Category> {
+public class CategoryDAO implements ModelDaoInterface<Category> , Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@ManagedProperty(value = "#{getSessionHibernate}")
 	GetSessionHibernate getSessionHibernate;
 
-	public GetSessionHibernate getGetSessionHibernate() {
-		if (getSessionHibernate == null) {
-			getSessionHibernate = new GetSessionHibernate();
-		}
-		return getSessionHibernate;
-	}
+//	public GetSessionHibernate getGetSessionHibernate() {
+//		if (getSessionHibernate == null) {
+//			getSessionHibernate = new GetSessionHibernate();
+//		}
+//		return getSessionHibernate;
+//	}
 
 	public void setGetSessionHibernate(GetSessionHibernate getSessionHibernate) {
 		this.getSessionHibernate = getSessionHibernate;
@@ -36,7 +41,7 @@ public class CategoryDAO implements ModelDaoInterface<Category> {
 
 	public CategoryDAO() {
 		super();
-		BasicConfigurator.configure();
+//		BasicConfigurator.configure();
 	}
 
 	@Override
@@ -66,13 +71,17 @@ public class CategoryDAO implements ModelDaoInterface<Category> {
 	}
 
 	@Override
-	public int removeById(int id) {
+	public int removeById(int id) { 
 		return 0;
 	}
-
+//	@SuppressWarnings({ "unused" })
 	@Override
 	public int update(int id, Category e) {
 		// TODO Auto-generated method stub
+//		@SuppressWarnings("static-access")
+//		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
+//		Transaction transObj = sessionObj.beginTransaction();
+//		Category cate = new Category(id, "Hiep dep trai", null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 		return getSessionHibernate.updateRecord(e);
 	}
 

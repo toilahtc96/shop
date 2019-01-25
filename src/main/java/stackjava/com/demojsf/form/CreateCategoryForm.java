@@ -1,6 +1,6 @@
 package stackjava.com.demojsf.form;
 
-public class CategoryFormNew {
+public class CreateCategoryForm {
 	String catName;
 	//phai nho get set
 

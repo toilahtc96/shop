@@ -31,6 +31,12 @@
 				<f:param  name="id" value="#{category.catId}"/>
 				</h:commandButton>				
             </h:column>
+            <h:column>
+				<f:facet name="header">Action</f:facet>  
+				<h:commandButton action="#{homeController.deleteCategory()}" value="Delete" >
+				<f:param  name="id" value="#{category.catId}"/>
+				</h:commandButton>				
+            </h:column>
 		</h:dataTable>
 	</h:form>
 </body>
