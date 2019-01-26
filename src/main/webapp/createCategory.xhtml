@@ -3,32 +3,43 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-<head>
-</head>
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+</h:head>
 <body>
 	<h:form id="formCreateCategory">
 		<h:outputLabel value="Name: " />
-		<h:inputText value="#{categoryController.createCategoryForm.catName}"
-			id="categoryName" />
-		<h:commandButton value="Add" type="submit"
-			action="#{categoryController.getCreateCategory()}"
-			onclick="checkValidate()" />
+		<h:inputText value="#{homeController.createCategoryForm.catName}"
+			id="categoryName"
+			required="#{not empty homeController.createCategoryForm.catName} ">
+			<f:validateRequired />
+		</h:inputText>
+		<h:commandButton value="Add" type="button" onclick="checkValidate()">
+
+			<f:ajax execute="categoryName"
+				listener="#{homeController.getCreateCategory()}" />
+		</h:commandButton>
+
+		<!-- action="#{homeController.getCreateCategory()}" -->
+
 
 	</h:form>
 </body>
-<h:outputScript library="js/vendor" name="jquery-2.2.4.min.js" />
+<h:outputScript library="js/vendor" name="jquery-2.2.4.min.js"
+	target="head" />
 <h:outputScript library="js/vendor" name="bootstrap.min.js" />
-<h:outputScript>
-	$(document).ready(function() {
+<h:outputScript target="head">
+    $ = jQuery;
+    // Then you can use it
+    $(document).ready(function() {
 	   checkValidate = function(){
-			var x = $('#formCategory\\:categoryName').val();
-			if(x == null){
+			var x = $("#formCreateCategory\\:categoryName").val();
+			alert(x);
+			if(x == ""){
 				alert("Phai nhap Ten");
-				return false;
+    			return false;
+			};
 			}
-		}
-	});
+		});
 </h:outputScript>
 </html>
