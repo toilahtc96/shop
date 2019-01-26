@@ -19,7 +19,7 @@ import stackjava.com.demojsf.service.CategoryService;
 
 @ManagedBean
 @SessionScoped
-@URLMapping(id = "category", pattern = "/category", viewId = "/ListCategory.xhtml")
+@URLMapping(id = "category", pattern = "/category", viewId = "/listCategory.xhtml")
 public class HomeController implements Serializable {
 
 	/**
@@ -95,7 +95,7 @@ public class HomeController implements Serializable {
 //		cate.setCatName(updateCategoryForm.getCatName());
 		Category cate = new Category(id, name, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 		categoryService.update(id, cate);
-		return "";
+		return "listCategory";
 	}
 
 	public String updateCategory() {
@@ -117,13 +117,20 @@ public class HomeController implements Serializable {
 	}
 
 	public String deleteCategory() {
-		Category cate = categoryService.getById(1);
-		if (cate == null) {
-			System.out.println("xxxxx");
-		} else {
-			System.out.println(cate.getCatName());
-		}
-		return "createCategory";
+//		Category cate = categoryService.getById(1);
+//		if (cate == null) {
+//			System.out.println("xxxxx");
+//		} else {
+//			System.out.println(cate.getCatName());
+//		}
+		FacesContext fc = FacesContext.getCurrentInstance();
+		int id = (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
+//		Category cate = categoryDAO.getById(id);
+//		updateCategoryForm = new UpdateCategoryForm();
+//		updateCategoryForm.setCatName(cate.getCatName());
+//		updateCategoryForm.setCatID(cate.getCatId());
+		categoryService.removeById(id);
+		return "listCategory";
 	}
 
 	public static void main(String[] args) {
