@@ -3,7 +3,9 @@ package stackjava.com.demojsf.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -12,6 +14,8 @@ import stackjava.com.demojsf.connection.GetSessionHibernate;
 import stackjava.com.demojsf.model.Category;
 import stackjava.com.demojsf.model.Product;
 
+@ManagedBean
+@SessionScoped
 public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
 
 	/**
@@ -73,6 +77,7 @@ public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
 	@Override
 	public int add(Product e) {
 		// TODO Auto-generated method stub
+		
 		return getSessionHibernate.createRecord(e);
 	}
 

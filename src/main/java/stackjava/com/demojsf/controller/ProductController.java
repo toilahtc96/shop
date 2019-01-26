@@ -77,6 +77,7 @@ public class ProductController implements Serializable {
 	
 	public String getCreateProduct() {
 		String proName = this.createProductForm.getProName();
+		
 		System.out.println(proName);
 		Product pro = new Product();
 		pro.setProName(proName);
