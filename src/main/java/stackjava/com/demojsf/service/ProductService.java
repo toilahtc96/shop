@@ -3,11 +3,14 @@ package stackjava.com.demojsf.service;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 
 import stackjava.com.demojsf.dao.ProductDAO;
 import stackjava.com.demojsf.model.Product;
-
+@ManagedBean
+@SessionScoped
 public class ProductService implements ModelServiceInterface<Product> , Serializable{
 
 	/**

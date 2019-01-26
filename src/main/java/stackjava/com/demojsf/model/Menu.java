@@ -15,7 +15,7 @@ import javax.persistence.UniqueConstraint;
 public class Menu {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "men_id", length = 11, nullable = false, unique = true)
+	@Column(name = "men_id", nullable = false, unique = true)
 	private Integer menId;
 
 	@Column(name = "men_position", nullable = true)
@@ -45,7 +45,7 @@ public class Menu {
 	@Column(name = "men_upadte_time", nullable = true)
 	private Date menUpadteTime;
 
-	@Column(name = "men_id", nullable = true)
+	@Column(name = "men_root", nullable = true)
 	private Integer men_root;
 
 	public Menu() {

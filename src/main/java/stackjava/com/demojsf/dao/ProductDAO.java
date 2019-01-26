@@ -3,7 +3,9 @@ package stackjava.com.demojsf.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,7 +13,8 @@ import org.hibernate.Transaction;
 import stackjava.com.demojsf.connection.GetSessionHibernate;
 import stackjava.com.demojsf.model.Category;
 import stackjava.com.demojsf.model.Product;
-
+@ManagedBean
+@SessionScoped
 public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
 
 	/**
@@ -53,7 +56,7 @@ public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
 		@SuppressWarnings("static-access")
 		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
 		Transaction transObj = sessionObj.beginTransaction();
-		List<Product> listPro = sessionObj.createCriteria(Category.class).list();
+		List<Product> listPro = sessionObj.createCriteria(Product.class).list();
 		return listPro;
 	}
 

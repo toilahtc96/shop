@@ -13,24 +13,24 @@
 			styleClass="" headerClass="" rowClasses="">
 			<h:column>
 				<f:facet name="header">ID</f:facet>
-				<h:outputText value="#{product.catId}" />
+				<h:outputText value="#{product.proId}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">Name</f:facet>
-				<h:outputText value="#{product.catName}" />
+				<h:outputText value="#{product.proName}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">Action</f:facet>
 				<h:commandButton action="#{productController.updateProduct()}"
 					value="Update">
-					<f:param name="id" value="#{product.catId}" />
+					<f:param name="id" value="#{product.proId}" />
 				</h:commandButton>
 			</h:column>
 			<h:column>
 				<f:facet name="header">Action</f:facet>
 				<h:commandButton action="#{productController.deleteProduct()}"
 					value="Delete">
-					<f:param name="id" value="#{product.catId}" />
+					<f:param name="id" value="#{product.proId}" />
 				</h:commandButton>
 			</h:column>
 
