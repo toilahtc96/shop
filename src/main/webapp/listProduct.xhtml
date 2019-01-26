@@ -9,33 +9,28 @@
 </head>
 <body>
 	<h:form>
-		<h:dataTable value="#{categoryController.list}" var="category"
+		<h:dataTable value="#{productController.list}" var="product"
 			styleClass="" headerClass="" rowClasses="">
 			<h:column>
 				<f:facet name="header">ID</f:facet>
-				<h:outputText value="#{category.catId}" />
+				<h:outputText value="#{product.catId}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">Name</f:facet>
-				<h:outputText value="#{category.catName}" />
-			</h:column>
-			<h:column>
-
-				<f:facet name="header">Alias</f:facet>
-				<h:outputText value="#{category.catAlias}" />
+				<h:outputText value="#{product.catName}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">Action</f:facet>
-				<h:commandButton action="#{categoryController.updateCategory()}"
+				<h:commandButton action="#{productController.updateProduct()}"
 					value="Update">
-					<f:param name="id" value="#{category.catId}" />
+					<f:param name="id" value="#{product.catId}" />
 				</h:commandButton>
 			</h:column>
 			<h:column>
 				<f:facet name="header">Action</f:facet>
-				<h:commandButton action="#{categoryController.deleteCategory()}"
+				<h:commandButton action="#{productController.deleteProduct()}"
 					value="Delete">
-					<f:param name="id" value="#{category.catId}" />
+					<f:param name="id" value="#{product.catId}" />
 				</h:commandButton>
 			</h:column>
 

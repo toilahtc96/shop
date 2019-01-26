@@ -10,10 +10,10 @@
 <body>
 	<h:form id="formUpdateCategory">
 		<h:outputLabel value="Name: " />
-		<h:inputText value="#{homeController.updateCategoryForm.catName}"
+		<h:inputText value="#{categoryController.updateCategoryForm.catName}"
 			id="categoryName" />
 		<h:commandButton value="Submit" type="submit"
-			action="#{homeController.getUpdateCategory()}"
+			action="#{categoryController.getUpdateCategory()}"
 			onclick="checkValidate()">
 		<f:param  name="id" value="#{category.catId}"/>
 		</h:commandButton>

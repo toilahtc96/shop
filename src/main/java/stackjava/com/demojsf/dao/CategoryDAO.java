@@ -72,8 +72,8 @@ public class CategoryDAO implements ModelDaoInterface<Category> , Serializable{
 
 	@Override
 	public int removeById(int id) {
-		CategoryDAO categoryDAO = new CategoryDAO();
-		Category cate = categoryDAO.getById(id);
+//		CategoryDAO categoryDAO = new CategoryDAO();
+		Category cate = this.getById(id);
 		return getSessionHibernate.deleteRecord(cate);
 	}
 //	@SuppressWarnings({ "unused" })
