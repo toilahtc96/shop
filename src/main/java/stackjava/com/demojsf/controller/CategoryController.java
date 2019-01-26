@@ -103,8 +103,6 @@ public class CategoryController implements Serializable {
 		} else {
 			System.out.println(cate.getCatName());
 		}
-		// createCategoryForm = new CreateCategoryForm();
-		// createCategoryForm.setCatName(cate.getCatName());
 		updateCategoryForm = new UpdateCategoryForm();
 		updateCategoryForm.setCatName(cate.getCatName());
 		updateCategoryForm.setCatID(cate.getCatId());
@@ -112,24 +110,9 @@ public class CategoryController implements Serializable {
 	}
 
 	public String deleteCategory() {
-		// Category cate = categoryService.getById(1);
-		// if (cate == null) {
-		// System.out.println("xxxxx");
-		// } else {
-		// System.out.println(cate.getCatName());
-		// }
 		FacesContext fc = FacesContext.getCurrentInstance();
 		int id = (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
-		// Category cate = categoryDAO.getById(id);
-		// updateCategoryForm = new UpdateCategoryForm();
-		// updateCategoryForm.setCatName(cate.getCatName());
-		// updateCategoryForm.setCatID(cate.getCatId());
 		categoryService.removeById(id);
 		return "listCate";
 	}
-//
-//	public static void main(String[] args) {
-//		CategoryService cates = new CategoryService();
-//		cates.getById(1);
-//	}
 }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<head>
+</head>
+<body>
+	<h:form id="formUpdateProduct">
+		<h:outputLabel value="Name: " />
+		<h:inputText value="#{productController.updateProductForm.proName}"
+			id="productName" />
+		<h:commandButton value="Submit" type="submit"
+			action="#{productController.getUpdateProduct()}"
+			onclick="checkValidate()">
+		<f:param  name="id" value="#{product.proId}"/>
+		</h:commandButton>
+
+	</h:form>
+</body>
+<h:outputScript library="js/vendor" name="jquery-2.2.4.min.js" />
+<h:outputScript library="js/vendor" name="bootstrap.min.js" />
+<h:outputScript>
+</h:outputScript>
+</html>

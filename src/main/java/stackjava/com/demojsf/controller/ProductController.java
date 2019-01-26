@@ -54,8 +54,6 @@ public class ProductController implements Serializable {
 	@ManagedProperty(value = "#{createProductForm}")
 	CreateProductForm createProductForm;
 
-	
-	
 	public CreateProductForm getCreateProductForm() {
 		if(createProductForm == null) {
 			createProductForm = new CreateProductForm();
@@ -70,6 +68,13 @@ public class ProductController implements Serializable {
 	@ManagedProperty(value = "#{updateProductForm}")
 	UpdateProductForm updateProductForm;
 	
+	
+	public UpdateProductForm getUpdateProductForm() {
+		if(updateProductForm == null) {
+			updateProductForm = new UpdateProductForm();
+		}
+		return updateProductForm;
+	}
 
 	public void setUpdateProductForm(UpdateProductForm updateProductForm) {
 		this.updateProductForm = updateProductForm;
