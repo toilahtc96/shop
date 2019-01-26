@@ -39,10 +39,6 @@ public class CategoryService implements ModelServiceInterface<Category> , Serial
 		Category cate = categoryDAO.getById(id);
 		return cate;
 	}
-	public static void main(String[] args) {
-		CategoryService sv = new CategoryService();
-		sv.getById(1);
-	}
 
 	@Override
 	public List<Category> getAll() {

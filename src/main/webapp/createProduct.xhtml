@@ -5,30 +5,22 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-<head>
-</head>
+<h:head>
+</h:head>
 <body>
-	<h:form id="formCreateCategory">
+	<h:form id="formCreateProduct">
 		<h:outputLabel value="Name: " />
-		<h:inputText value="#{homeController.createCategoryForm.catName}"
-			id="categoryName" />
+		<h:inputText value="#{productController.createProductForm.proName}"
+			id="proName" />
 		<h:commandButton value="Add" type="submit"
-			action="#{homeController.getCreateCategory()}"
+			action="#{productController.getCreateProduct()}"
 			onclick="checkValidate()" />
 
 	</h:form>
 </body>
-<h:outputScript library="js/vendor" name="jquery-2.2.4.min.js" />
-<h:outputScript library="js/vendor" name="bootstrap.min.js" />
+<h:outputScript library="js/vendor" name="jquery-2.2.4.min.js" target="head"/>
+<h:outputScript library="js/vendor" name="bootstrap.min.js" target="head"/>
 <h:outputScript>
-	$(document).ready(function() {
-	   checkValidate = function(){
-			var x =$('#formCategory\\:categoryName').val();
-			if(x === ""){
-				alert("Phai nhap Ten");
-				return false;
-			}
-		}
-	});
+
 </h:outputScript>
 </html>

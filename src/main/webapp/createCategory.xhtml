@@ -10,10 +10,10 @@
 <body>
 	<h:form id="formCreateCategory">
 		<h:outputLabel value="Name: " />
-		<h:inputText value="#{homeController.createCategoryForm.catName}"
+		<h:inputText value="#{categoryController.createCategoryForm.catName}"
 			id="categoryName" />
 		<h:commandButton value="Add" type="submit"
-			action="#{homeController.getCreateCategory()}"
+			action="#{categoryController.getCreateCategory()}"
 			onclick="checkValidate()" />
 
 	</h:form>
@@ -23,8 +23,8 @@
 <h:outputScript>
 	$(document).ready(function() {
 	   checkValidate = function(){
-			var x =$('#formCategory\\:categoryName').val();
-			if(x === ""){
+			var x = $('#formCategory\\:categoryName').val();
+			if(x == null){
 				alert("Phai nhap Ten");
 				return false;
 			}
