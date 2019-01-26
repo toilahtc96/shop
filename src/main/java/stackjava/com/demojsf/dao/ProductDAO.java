@@ -76,6 +76,7 @@ public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
 	@Override
 	public int add(Product e) {
 		// TODO Auto-generated method stub
+		
 		return getSessionHibernate.createRecord(e);
 	}
 
