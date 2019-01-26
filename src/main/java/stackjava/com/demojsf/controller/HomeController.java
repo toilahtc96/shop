@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
+import com.ocpsoft.pretty.faces.annotation.URLMappings;
 
 import stackjava.com.demojsf.dao.CategoryDAO;
 import stackjava.com.demojsf.form.CreateCategoryForm;
@@ -16,7 +17,9 @@ import stackjava.com.demojsf.service.CategoryService;
 
 @ManagedBean
 @SessionScoped
-@URLMapping(id = "category", pattern = "/category", viewId = "/listCate.xhtml")
+
+@URLMappings(mappings = { @URLMapping(id = "category", pattern = "/category", viewId = "/listCate.xhtml"),
+		@URLMapping(id = "addCategory", pattern = "/createCategory", viewId = "/createCategory.xhtml") })
 public class HomeController implements Serializable {
 
 	/**
@@ -82,7 +85,7 @@ public class HomeController implements Serializable {
 		cat.setCatName(categoryName);
 		categoryService.add(cat);
 		System.out.println("sussceess");
-		return "index";
+		return "listCate";
 	}
 
 	public String getUpdateCategory() {
