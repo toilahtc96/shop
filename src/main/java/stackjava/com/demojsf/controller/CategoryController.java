@@ -93,7 +93,7 @@ public class CategoryController implements Serializable {
 		return "listCate";
 	}
 
-	public String updateCategory() {
+	public String doUpdateCategory() {
 
 		FacesContext fc = FacesContext.getCurrentInstance();
 		int id = (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
