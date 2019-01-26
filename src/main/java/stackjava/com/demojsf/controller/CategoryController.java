@@ -6,7 +6,7 @@ import javax.faces.bean.SessionScoped;
 
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 
-import stackjava.com.demojsf.form.CategoryFormNew;
+import stackjava.com.demojsf.form.CreateCategoryForm;
 import stackjava.com.demojsf.model.Category;
 import stackjava.com.demojsf.service.CategoryService;
 
@@ -18,13 +18,13 @@ public class CategoryController {
 	@ManagedProperty(value = "#{categoryService}")
 	CategoryService categoryService;
 	
-	CategoryFormNew categoryForm;
+	CreateCategoryForm categoryForm;
 
-	public CategoryFormNew getCategoryForm() {
+	public CreateCategoryForm getCategoryForm() {
 		return categoryForm;
 	}
 
-	public void setCategoryForm(CategoryFormNew categoryForm) {
+	public void setCategoryForm(CreateCategoryForm categoryForm) {
 		this.categoryForm = categoryForm;
 	}
 

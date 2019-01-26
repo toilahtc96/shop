@@ -1,6 +1,10 @@
 package stackjava.com.demojsf.form;
 
-public class CategoryFormNew {
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+@ManagedBean
+@SessionScoped
+public class CreateCategoryForm {
 	String catName;
 	//phai nho get set
 
