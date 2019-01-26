@@ -1,6 +1,7 @@
 package stackjava.com.demojsf.controller;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -29,7 +30,6 @@ public class CategoryController implements Serializable {
 
 	List<Category> list;
 
-	
 	@ManagedProperty(value = "#{categoryService}")
 	CategoryService categoryService;
 
@@ -74,9 +74,23 @@ public class CategoryController implements Serializable {
 	}
 
 	public String getCreateCategory() {
-		String categoryName = this.createCategoryForm.getCatName();
+		String catName = this.createCategoryForm.getCatName();
+		String catAlias = this.createCategoryForm.getCatAlias();
+		String catSeoText = this.createCategoryForm.getCatSeoText();
+		String catPicture = this.createCategoryForm.getCatPicture();
+		String catDes = this.createCategoryForm.getCatDes();
+		String catType = this.createCategoryForm.getCatType();
+		int catActive = this.createCategoryForm.getCatActive();
+		int catParent = this.createCategoryForm.getCatParent();
+		int catChild = this.createCategoryForm.getCatChild();
+		int catHot = this.createCategoryForm.getCatHot();
+		int catNew = this.createCategoryForm.getCatNew();
+		int catRoot = this.createCategoryForm.getCatRoot();
+		String catSlug = this.createCategoryForm.getCatSlug();
+		Date catCreate = this.createCategoryForm.getCatCreat();
+		Date catUpdate = this.createCategoryForm.getCatUpdate();
 		Category cat = new Category();
-		cat.setCatName(categoryName);
+		cat.setCatName(catName);
 		categoryService.add(cat);
 		System.out.println("sussceess");
 		return "listCate";
@@ -84,9 +98,7 @@ public class CategoryController implements Serializable {
 
 	public String getUpdateCategory() {
 		int id = updateCategoryForm.getCatID();
-		// Category cate = categoryDAO.getById(id);
 		String name = updateCategoryForm.getCatName();
-		// cate.setCatName(updateCategoryForm.getCatName());
 		Category cate = new Category(id, name, null, null, null, null, null, null, null, null, null, null, null, null,
 				null, null);
 		categoryService.update(id, cate);
@@ -98,11 +110,6 @@ public class CategoryController implements Serializable {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		int id = (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
 		Category cate = categoryService.getById(id);
-		if (cate == null) {
-			System.out.println("xxxxx");
-		} else {
-			System.out.println(cate.getCatName());
-		}
 		updateCategoryForm = new UpdateCategoryForm();
 		updateCategoryForm.setCatName(cate.getCatName());
 		updateCategoryForm.setCatID(cate.getCatId());

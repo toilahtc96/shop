@@ -14,6 +14,135 @@
 			required="#{not empty homeController.createCategoryForm.catName} ">
 			<f:validateRequired />
 		</h:inputText>
+		<br />
+		<br />
+
+		<h:outputLabel value="Alias: " />
+		<h:inputText value="#{homeController.createCategoryForm.catAlias}"
+			id="categoryAlias"
+			required="#{not empty homeController.createCategoryForm.catAlias} ">
+			<f:validateRequired />
+		</h:inputText>
+		<br />
+		<br />
+
+		<h:outputLabel value="SeoText: " />
+		<h:inputText value="#{homeController.createCategoryForm.catSeoText}"
+			id="categorySeoText"
+			required="#{not empty homeController.createCategoryForm.catAlias} ">
+			<f:validateRequired />
+		</h:inputText>
+		<br />
+		<br />
+
+		<h:outputLabel value="Picture: " />
+		<h:inputText value="#{homeController.createCategoryForm.catPicture}"
+			id="categoryPicture"
+			required="#{not empty homeController.createCategoryForm.catPicture} ">
+			<f:validateRequired />
+		</h:inputText>
+		<br />
+		<br />
+
+		<h:outputLabel value="Description: " />
+		<h:inputText value="#{homeController.createCategoryForm.catDes}"
+			id="categoryDescription"
+			required="#{not empty homeController.createCategoryForm.catDes} ">
+			<f:validateRequired />
+		</h:inputText>
+		<br />
+		<br />
+
+		<h:outputLabel value="Type: " />
+		<h:inputText value="#{homeController.createCategoryForm.catType}"
+			id="categoryType"
+			required="#{not empty homeController.createCategoryForm.catType} ">
+			<f:validateRequired />
+		</h:inputText>
+		<br />
+		<br />
+
+		<h:outputLabel value="Active: " />
+		<h:inputText value="#{homeController.createCategoryForm.catActive}"
+			id="categoryActive"
+			required="#{not empty homeController.createCategoryForm.catActive} ">
+			<f:validateRequired />
+		</h:inputText>
+		<br />
+		<br />
+
+		<h:outputLabel value="Parent ID: " />
+		<h:inputText value="#{homeController.createCategoryForm.catParent}"
+			id="categoryParent"
+			required="#{not empty homeController.createCategoryForm.catParent} ">
+			<f:validateRequired />
+		</h:inputText>
+		<br />
+		<br />
+
+		<h:outputLabel value="Children: " />
+		<h:inputText value="#{homeController.createCategoryForm.catChild}"
+			id="categoryChildren"
+			required="#{not empty homeController.createCategoryForm.catChild} ">
+			<f:validateRequired />
+		</h:inputText>
+		<br />
+		<br />
+
+		<h:outputLabel value="Hot: " />
+		<h:inputText value="#{homeController.createCategoryForm.catHot}"
+			id="categoryHot"
+			required="#{not empty homeController.createCategoryForm.catHot} ">
+			<f:validateRequired />
+		</h:inputText>
+		<br />
+		<br />
+
+		<h:outputLabel value="New: " />
+		<h:inputText value="#{homeController.createCategoryForm.catNew}"
+			id="categoryNew"
+			required="#{not empty homeController.createCategoryForm.catNew} ">
+			<f:validateRequired />
+		</h:inputText>
+		<br />
+		<br />
+
+		<h:outputLabel value="Root: " />
+		<h:inputText value="#{homeController.createCategoryForm.catRoot}"
+			id="categoryRoot"
+			required="#{not empty homeController.createCategoryForm.catRoot} ">
+			<f:validateRequired />
+		</h:inputText>
+		<br />
+		<br />
+
+		<h:outputLabel value="Slug: " />
+		<h:inputText value="#{homeController.createCategoryForm.catSlug}"
+			id="categorySlug"
+			required="#{not empty homeController.createCategoryForm.catSlug} ">
+			<f:validateRequired />
+		</h:inputText>
+		<br />
+		<br />
+
+		<h:outputLabel value="Create Date: " />
+		<h:inputText value="#{homeController.createCategoryForm.catCreate}"
+			id="categoryCreate"
+			required="#{not empty homeController.createCategoryForm.catCreate} ">
+			<f:validateRequired />
+		</h:inputText>
+		<br />
+		<br />
+
+		<h:outputLabel value="Update Date: " />
+		<h:inputText value="#{homeController.createCategoryForm.catUpdate}"
+			id="categoryUpdate"
+			required="#{not empty homeController.createCategoryForm.catUpdate} ">
+			<f:validateRequired />
+		</h:inputText>
+		<br />
+		<br />
+
 		<h:commandButton value="Add" type="button" onclick="checkValidate()">
 
 			<f:ajax execute="categoryName"

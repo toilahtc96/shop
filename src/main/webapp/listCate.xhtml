@@ -3,11 +3,22 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
-<head>
-</head>
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<h:outputStylesheet name="bootstrap.css" library="css" />
+</h:head>
 <body>
+	<table>
+	<tr>
+	<td width="25%"/>
+	<td width="25%"/>
+	<td>
+	<button type="button" class="btn btn-primary">
+		<h:outputLink style="color:#ffffff;" value="createCategory">Add category</h:outputLink>
+	</button>
+	</td>
+	</tr>
+	</table>
 	<h:form>
 		<h:dataTable value="#{categoryController.list}" var="category"
 			styleClass="" headerClass="" rowClasses="">
@@ -27,19 +38,19 @@
 			<h:column>
 				<f:facet name="header">Action</f:facet>
 				<h:commandButton action="#{categoryController.doUpdateCategory()}"
-					value="Update">
+					value="Update" class = "btn btn-outline-success btn-sm">
 					<f:param name="id" value="#{category.catId}" />
 				</h:commandButton>
 			</h:column>
 			<h:column>
 				<f:facet name="header">Action</f:facet>
 				<h:commandButton action="#{categoryController.deleteCategory()}"
-					value="Delete">
+					value="Delete" class = "btn btn-outline-danger btn-sm">
 					<f:param name="id" value="#{category.catId}" />
 				</h:commandButton>
 			</h:column>
-
 		</h:dataTable>
+
 	</h:form>
 </body>
 </html>
