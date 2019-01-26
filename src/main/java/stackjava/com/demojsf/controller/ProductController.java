@@ -1,7 +1,11 @@
 package stackjava.com.demojsf.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -16,9 +20,10 @@ import stackjava.com.demojsf.form.CreateProductForm;
 import stackjava.com.demojsf.form.UpdateProductForm;
 import stackjava.com.demojsf.model.Category;
 import stackjava.com.demojsf.model.Product;
+import stackjava.com.demojsf.service.CategoryService;
 import stackjava.com.demojsf.service.ProductService;
 
-@ManagedBean(name="productController")
+@ManagedBean(name = "productController")
 @SessionScoped
 @URLMappings(mappings = { @URLMapping(id = "product", pattern = "/products", viewId = "/listProduct.xhtml"),
 		@URLMapping(id = "addProduct", pattern = "/createProduct", viewId = "/createProduct.xhtml") })
@@ -29,10 +34,35 @@ public class ProductController implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	List<Product> list;
+
+	List<Integer> keyList;
+	private int idCate;
 	
+	public int getIdCate() {
+		return idCate;
+	}
+
+	public void setIdCate(int idCate) {
+		this.idCate = idCate;
+	}
+
+	public List<Integer> getKeyList() {
+		return keyList;
+	}
+
+	public void setKeyList(List<Integer> keyList) {
+		this.keyList = keyList;
+	}
 
 	@ManagedProperty(value = "#{productService}")
 	ProductService productService;
+
+	@ManagedProperty(value = "#{categoryService}")
+	CategoryService categoryService;
+
+	public void setCategoryService(CategoryService categoryService) {
+		this.categoryService = categoryService;
+	}
 
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
@@ -50,12 +80,12 @@ public class ProductController implements Serializable {
 	public void setList(List<Product> list) {
 		this.list = list;
 	}
-	
+
 	@ManagedProperty(value = "#{createProductForm}")
 	CreateProductForm createProductForm;
 
 	public CreateProductForm getCreateProductForm() {
-		if(createProductForm == null) {
+		if (createProductForm == null) {
 			createProductForm = new CreateProductForm();
 		}
 		return createProductForm;
@@ -63,31 +93,65 @@ public class ProductController implements Serializable {
 
 	public void setCreateProductForm(CreateProductForm createProductForm) {
 		this.createProductForm = createProductForm;
+		if(createProductForm == null){
+			createProductForm = new CreateProductForm();
+		}
+		List<Category> getListCate = getListCategoryForCreateProduct();
+		HashMap<Integer, String> hshMap = createProductForm.getLstCate();
+		for (Category category : getListCate) {
+			if (hshMap == null) {
+				hshMap = new HashMap<Integer, String>();
+			}
+			hshMap.put(category.getCatId(), category.getCatName());
+			createProductForm.setLstCate(hshMap);
+		}
+		keyList = new ArrayList<Integer>(hshMap.keySet());
+		
 	}
 
 	@ManagedProperty(value = "#{updateProductForm}")
 	UpdateProductForm updateProductForm;
-	
-	
+
 	public UpdateProductForm getUpdateProductForm() {
-		if(updateProductForm == null) {
+
+		if (updateProductForm == null) {
 			updateProductForm = new UpdateProductForm();
 		}
+
 		return updateProductForm;
 	}
 
 	public void setUpdateProductForm(UpdateProductForm updateProductForm) {
 		this.updateProductForm = updateProductForm;
+		if (updateProductForm == null) {
+			updateProductForm = new UpdateProductForm();
+		}
+
+		List<Category> getListCate = getListCategoryForCreateProduct();
+		HashMap<Integer, String> hshMap = updateProductForm.getLstCate();
+		for (Category category : getListCate) {
+			
+			
+			if (hshMap == null) {
+				hshMap = new HashMap<Integer, String>();
+			}
+			hshMap.put(category.getCatId(), category.getCatName());
+			updateProductForm.setLstCate(hshMap);
+		}
+		keyList = new ArrayList<Integer>(hshMap.keySet());
+		
 	}
-	
+
 	public String getCreateProduct() {
 		String proName = this.createProductForm.getProName();
-		
-		System.out.println(proName);
+
+		int idCategory = this.getIdCate();
 		Product pro = new Product();
 		pro.setProName(proName);
+		pro.setProCategoryId(idCategory);
 		productService.add(pro);
-		return "listProduct";
+
+		return "listProduct?faces-redirect=true";
 	}
 
 	public String doUpdateProduct() {
@@ -95,7 +159,7 @@ public class ProductController implements Serializable {
 		String name = updateProductForm.getProName();
 		Product pro = new Product(id, name, null, null, null, null, null, null, null, null, null);
 		productService.update(id, pro);
-		return "listProduct";
+		return "listProduct?faces-redirect=true";
 	}
 
 	public String updateProduct() {
@@ -105,14 +169,19 @@ public class ProductController implements Serializable {
 		updateProductForm = new UpdateProductForm();
 		updateProductForm.setProName(pro.getProName());
 		updateProductForm.setProId(pro.getProId());
-		return "updateProduct";
+
+		return "updateProduct?faces-redirect=true";
+	}
+
+	public List<Category> getListCategoryForCreateProduct() {
+		return categoryService.getAll();
 	}
 
 	public String deleteProduct() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		int id = (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
 		productService.removeById(id);
-		return "listProduct";
+		return "listProduct?faces-redirect=true";
 	}
 
 }

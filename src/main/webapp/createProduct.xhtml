@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
 </h:head>
 <body>
@@ -12,14 +12,24 @@
 		<h:outputLabel value="Name: " />
 		<h:inputText value="#{productController.createProductForm.proName}"
 			id="proName" />
+			<br/>
+		<h:outputLabel value="Category:  " />
+		<h:selectOneMenu  value="#{productController.idCate}">
+			<c:forEach var="key" items="#{productController.keyList}">
+				<f:selectItem itemValue="#{key}"
+					itemLabel="#{productController.createProductForm.lstCate[key]}" />
+			</c:forEach>
+		</h:selectOneMenu >
 		<h:commandButton value="Add" type="submit"
 			action="#{productController.getCreateProduct()}"
 			onclick="checkValidate()" />
 
 	</h:form>
 </body>
-<h:outputScript library="js/vendor" name="jquery-2.2.4.min.js" target="head"/>
-<h:outputScript library="js/vendor" name="bootstrap.min.js" target="head"/>
+<h:outputScript library="js/vendor" name="jquery-2.2.4.min.js"
+	target="head" />
+<h:outputScript library="js/vendor" name="bootstrap.min.js"
+	target="head" />
 <h:outputScript>
 
 </h:outputScript>
