@@ -18,7 +18,7 @@ import stackjava.com.demojsf.model.Category;
 import stackjava.com.demojsf.model.Product;
 import stackjava.com.demojsf.service.ProductService;
 
-@ManagedBean
+@ManagedBean(name="productController")
 @SessionScoped
 @URLMappings(mappings = { @URLMapping(id = "product", pattern = "/products", viewId = "/listProduct.xhtml"),
 		@URLMapping(id = "addProduct", pattern = "/createProduct", viewId = "/createProduct.xhtml") })
@@ -85,7 +85,7 @@ public class ProductController implements Serializable {
 		return "listProduct";
 	}
 
-	public String getUpdateProduct() {
+	public String doUpdateProduct() {
 		int id = updateProductForm.getProId();
 		String name = updateProductForm.getProName();
 		Product pro = new Product(id, name, null, null, null, null, null, null, null, null, null);
