@@ -9,7 +9,6 @@ import javax.faces.bean.SessionScoped;
 
 import stackjava.com.demojsf.dao.ProductDAO;
 import stackjava.com.demojsf.model.Product;
-
 @ManagedBean
 @SessionScoped
 public class ProductService implements ModelServiceInterface<Product> , Serializable{

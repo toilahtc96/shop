@@ -165,5 +165,4 @@ public class Product {
 	public void setProGuarantee(String proGuarantee) {
 		this.proGuarantee = proGuarantee;
 	}
-
 }

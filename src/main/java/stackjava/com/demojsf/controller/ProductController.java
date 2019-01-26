@@ -44,7 +44,7 @@ public class ProductController implements Serializable {
 	}
 
 	public List<Product> getList() {
-		return list;
+		return this.list = productService.getAll();
 	}
 
 	public void setList(List<Product> list) {
@@ -82,23 +82,18 @@ public class ProductController implements Serializable {
 		Product pro = new Product();
 		pro.setProName(proName);
 		productService.add(pro);
-		System.out.println("sussceess");
 		return "listProduct";
 	}
 
 	public String getUpdateProduct() {
 		int id = updateProductForm.getProId();
-		// Category cate = categoryDAO.getById(id);
 		String name = updateProductForm.getProName();
-		// cate.setCatName(updateProductForm.getCatName());
-//		Category cate = new Category(id, name, null, null, null, null, null, null, null, null, null, null, null, null,
-//				null, null);
-//		productService.update(id, cate);
+		Product pro = new Product(id, name, null, null, null, null, null, null, null, null, null);
+		productService.update(id, pro);
 		return "listProduct";
 	}
 
 	public String updateProduct() {
-
 		FacesContext fc = FacesContext.getCurrentInstance();
 		int id = (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
 		Product pro = productService.getById(id);
@@ -109,18 +104,8 @@ public class ProductController implements Serializable {
 	}
 
 	public String deleteProduct() {
-		// Category cate = productService.getById(1);
-		// if (cate == null) {
-		// System.out.println("xxxxx");
-		// } else {
-		// System.out.println(cate.getCatName());
-		// }
 		FacesContext fc = FacesContext.getCurrentInstance();
 		int id = (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
-		// Category cate = categoryDAO.getById(id);
-		// updateProductForm = new updateProductForm();
-		// updateProductForm.setCatName(cate.getCatName());
-		// updateProductForm.setCatID(cate.getCatId());
 		productService.removeById(id);
 		return "listProduct";
 	}

@@ -21,6 +21,13 @@
 		<mapping class="stackjava.com.demojsf.model.Order" />
 		<mapping class="stackjava.com.demojsf.model.User" />
 		<mapping class="stackjava.com.demojsf.model.Category" />
+		<mapping class="stackjava.com.demojsf.model.Cart" />
+		<mapping class="stackjava.com.demojsf.model.Menu" />
+		<mapping class="stackjava.com.demojsf.model.Messages" />
+		<mapping class="stackjava.com.demojsf.model.Order" />
+		<mapping class="stackjava.com.demojsf.model.OrderDetail" />
 		<mapping class="stackjava.com.demojsf.model.Product" />
+		<mapping class="stackjava.com.demojsf.model.ProductComment" />
+		<mapping class="stackjava.com.demojsf.model.ProductRating" />
 	</session-factory>
 </hibernate-configuration>
