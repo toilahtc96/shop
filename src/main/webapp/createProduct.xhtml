@@ -12,14 +12,14 @@
 		<h:outputLabel value="Name: " />
 		<h:inputText value="#{productController.createProductForm.proName}"
 			id="proName" />
-			<br/>
+		<br />
 		<h:outputLabel value="Category:  " />
-		<h:selectOneMenu  value="#{productController.idCate}"	id="selectCate">
-			<c:forEach var="key" items="#{productController.keyList}">
+		<h:selectOneMenu value="#{productController.idCate}" id="selectCate">
+			<c:forEach var="key" items="#{categoryController.keyList}">
 				<f:selectItem itemValue="#{key}"
-					itemLabel="#{productController.createProductForm.lstCate[key]}" />
+					itemLabel="#{categoryController.createCategoryForm.listCate[key]}" />
 			</c:forEach>
-		</h:selectOneMenu >
+		</h:selectOneMenu>
 		<h:commandButton value="Add" type="submit"
 			action="#{productController.getCreateProduct()}"
 			onclick="checkValidate()" />

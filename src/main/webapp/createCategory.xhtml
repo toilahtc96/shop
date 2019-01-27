@@ -3,7 +3,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
 	<h:outputStylesheet name="bootstrap.css" library="css" />
 </h:head>
@@ -64,31 +65,15 @@
 					<f:validateRequired />
 				</h:inputText>
 				<br />
-				<h:outputLabel value="Active: " />
-				<h:inputText styleClass="form-control col-sm-6"
-					value="#{homeController.createCategoryForm.catActive}"
-					id="categoryActive"
-					required="#{not empty homeController.createCategoryForm.catActive} ">
-					<f:validateRequired />
-				</h:inputText>
 			</div>
 			<div class="col-sm-6" style="float: left;">
 				<h:outputLabel value="Parent ID: " />
-				<h:inputText styleClass="form-control col-sm-6"
-					value="#{homeController.createCategoryForm.catParent}"
-					id="categoryParent"
-					required="#{not empty homeController.createCategoryForm.catParent} ">
-					<f:validateRequired />
-				</h:inputText>
-				<br />
-
-				<h:outputLabel value="Children: " />
-				<h:inputText styleClass="form-control col-sm-6"
-					value="#{homeController.createCategoryForm.catChild}"
-					id="categoryChildren"
-					required="#{not empty homeController.createCategoryForm.catChild} ">
-					<f:validateRequired />
-				</h:inputText>
+				<h:selectOneMenu value="#{categoryController.idCate}" id="selectCate">
+					<c:forEach var="key" items="#{categoryController.keyList}">
+						<f:selectItem itemValue="#{key}"
+							itemLabel="#{categoryController.createCategoryForm.listCate[key]}" />
+					</c:forEach>
+				</h:selectOneMenu>
 				<br />
 
 				<h:outputLabel value="Hot: " />
@@ -125,8 +110,8 @@
 					required="#{not empty homeController.createCategoryForm.catSlug} ">
 					<f:validateRequired />
 				</h:inputText>
-				<br /><br/>
-				
+				<br /> <br />
+
 				<h:commandButton styleClass="btn btn-success" style="width:50%"
 					value="Add" type="submit" onclick="checkValidate()">
 

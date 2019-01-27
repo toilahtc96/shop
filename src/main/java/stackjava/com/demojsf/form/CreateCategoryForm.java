@@ -1,6 +1,7 @@
 package stackjava.com.demojsf.form;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -23,6 +24,17 @@ public class CreateCategoryForm {
 	Date catCreat;
 	Date catUpdate;
 	//phai nho get set
+	
+	HashMap<Integer, String> listCate;
+	
+
+	public HashMap<Integer, String> getListCate() {
+		return listCate;
+	}
+
+	public void setListCate(HashMap<Integer, String> listCate) {
+		this.listCate = listCate;
+	}
 
 	public String getCatName() {
 		return catName;

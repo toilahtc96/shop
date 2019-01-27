@@ -1,7 +1,9 @@
 package stackjava.com.demojsf.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -29,6 +31,24 @@ public class CategoryController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	List<Category> list;
+	List<Integer> keyList;
+	private int idCate;
+
+	public int getIdCate() {
+		return idCate;
+	}
+
+	public void setIdCate(int idCate) {
+		this.idCate = idCate;
+	}
+
+	public List<Integer> getKeyList() {
+		return keyList;
+	}
+
+	public void setKeyList(List<Integer> keyList) {
+		this.keyList = keyList;
+	}
 
 	@ManagedProperty(value = "#{categoryService}")
 	CategoryService categoryService;
@@ -46,6 +66,19 @@ public class CategoryController implements Serializable {
 
 	public void setCreateCategoryForm(CreateCategoryForm createCategoryForm) {
 		this.createCategoryForm = createCategoryForm;
+		if(createCategoryForm == null) {
+			createCategoryForm = new CreateCategoryForm();
+		}
+		List<Category> getListCate = categoryService.getAll();
+		HashMap<Integer, String> hashMap = createCategoryForm.getListCate();
+		for(Category category : getListCate) {
+			if(hashMap == null) {
+				hashMap = new HashMap<Integer, String>();
+			}
+			hashMap.put(category.getCatId(), category.getCatName());
+			createCategoryForm.setListCate(hashMap);
+		}
+		keyList = new ArrayList<Integer>(hashMap.keySet());
 	}
 
 	@ManagedProperty(value = "#{updateCategoryForm}")

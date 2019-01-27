@@ -9,6 +9,16 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class CreateProductForm {
 	String proName;
+	String selectCate;
+	public String getSelectCate() {
+		return selectCate;
+	}
+
+	public void setSelectCate(String selectCate) {
+		this.selectCate = selectCate;
+	}
+
+	//de phuc vu cho selectBox
 	HashMap<Integer, String> lstCate;
 
 	public HashMap<Integer, String> getLstCate() {
