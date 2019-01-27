@@ -75,6 +75,8 @@ public class CategoryController implements Serializable {
 		for(Category category : getListCate) {
 			if(hashMap == null) {
 				hashMap = new HashMap<Integer, String>();
+				hashMap.put(0, "Chose Parent");
+				//tieng viet hay tieng anh thi chon 1 ngon ngu thoi nhe
 			}
 			hashMap.put(category.getCatId(), category.getCatName());
 			createCategoryForm.setListCate(hashMap);

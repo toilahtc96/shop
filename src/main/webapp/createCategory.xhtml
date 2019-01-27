@@ -47,8 +47,8 @@
 				<br />
 
 			</div>
-			
-			
+
+
 			<div class="col-sm-6" style="float: left;">
 				<h:outputLabel value="Description: " />
 				<h:inputText styleClass="form-control col-sm-6"
@@ -64,19 +64,18 @@
 					id="categoryType">
 					<f:validateRequired />
 				</h:inputText>
-				<br /><br/>
-				
+				<br />
+
 				<h:outputLabel value="Parent ID: " />
 				<h:selectOneMenu value="#{categoryController.idCate}"
-					id="selectCate">
+					styleClass="form-control col-sm-6" id="selectCate">
 					<c:forEach var="key" items="#{categoryController.keyList}">
 						<f:selectItem itemValue="#{key}"
 							itemLabel="#{categoryController.createCategoryForm.listCate[key]}" />
 					</c:forEach>
 				</h:selectOneMenu>
-				<br /><br/>
-
-
+				<br />
+		
 				<h:outputLabel value="Slug: " />
 				<h:inputText styleClass="form-control col-sm-6"
 					value="#{homeController.createCategoryForm.catSlug}"
