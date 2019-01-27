@@ -8,9 +8,9 @@
 	<h:outputStylesheet name="bootstrap.css" library="css" />
 </h:head>
 <body>
-	<div class="container" >
+	<div class="container">
 		<h:form id="formCreateCategory">
-			<div class="col-sm-6" style="float:left;">
+			<div class="col-sm-6" style="float: left;">
 				<h:outputLabel value="Name: " />
 				<h:inputText styleClass="form-control col-sm-6"
 					value="#{homeController.createCategoryForm.catName}"
@@ -18,7 +18,6 @@
 					required="#{not empty homeController.createCategoryForm.catName} ">
 					<f:validateRequired />
 				</h:inputText>
-				<br />
 				<br />
 
 				<h:outputLabel value="Alias: " />
@@ -29,7 +28,6 @@
 					<f:validateRequired />
 				</h:inputText>
 				<br />
-				<br />
 
 				<h:outputLabel value="SeoText: " />
 				<h:inputText styleClass="form-control col-sm-6"
@@ -38,7 +36,6 @@
 					required="#{not empty homeController.createCategoryForm.catAlias} ">
 					<f:validateRequired />
 				</h:inputText>
-				<br />
 				<br />
 
 				<h:outputLabel value="Picture: " />
@@ -49,7 +46,6 @@
 					<f:validateRequired />
 				</h:inputText>
 				<br />
-				<br />
 
 				<h:outputLabel value="Description: " />
 				<h:inputText styleClass="form-control col-sm-6"
@@ -58,7 +54,6 @@
 					required="#{not empty homeController.createCategoryForm.catDes} ">
 					<f:validateRequired />
 				</h:inputText>
-				<br />
 				<br />
 
 				<h:outputLabel value="Type: " />
@@ -69,9 +64,6 @@
 					<f:validateRequired />
 				</h:inputText>
 				<br />
-				<br />
-			</div>
-			<div class ="col-sm-6" style="float:left;">
 				<h:outputLabel value="Active: " />
 				<h:inputText styleClass="form-control col-sm-6"
 					value="#{homeController.createCategoryForm.catActive}"
@@ -79,9 +71,8 @@
 					required="#{not empty homeController.createCategoryForm.catActive} ">
 					<f:validateRequired />
 				</h:inputText>
-				<br />
-				<br />
-
+			</div>
+			<div class="col-sm-6" style="float: left;">
 				<h:outputLabel value="Parent ID: " />
 				<h:inputText styleClass="form-control col-sm-6"
 					value="#{homeController.createCategoryForm.catParent}"
@@ -89,7 +80,6 @@
 					required="#{not empty homeController.createCategoryForm.catParent} ">
 					<f:validateRequired />
 				</h:inputText>
-				<br />
 				<br />
 
 				<h:outputLabel value="Children: " />
@@ -100,7 +90,6 @@
 					<f:validateRequired />
 				</h:inputText>
 				<br />
-				<br />
 
 				<h:outputLabel value="Hot: " />
 				<h:inputText styleClass="form-control col-sm-6"
@@ -109,7 +98,6 @@
 					required="#{not empty homeController.createCategoryForm.catHot} ">
 					<f:validateRequired />
 				</h:inputText>
-				<br />
 				<br />
 
 				<h:outputLabel value="New: " />
@@ -120,7 +108,6 @@
 					<f:validateRequired />
 				</h:inputText>
 				<br />
-				<br />
 
 				<h:outputLabel value="Root: " />
 				<h:inputText styleClass="form-control col-sm-6"
@@ -130,7 +117,6 @@
 					<f:validateRequired />
 				</h:inputText>
 				<br />
-				<br />
 
 				<h:outputLabel value="Slug: " />
 				<h:inputText styleClass="form-control col-sm-6"
@@ -139,15 +125,16 @@
 					required="#{not empty homeController.createCategoryForm.catSlug} ">
 					<f:validateRequired />
 				</h:inputText>
-				<br />
+				<br /><br/>
+				
+				<h:commandButton styleClass="btn btn-success" style="width:50%"
+					value="Add" type="submit" onclick="checkValidate()">
+
+					<f:ajax execute="categoryName"
+						listener="#{homeController.getCreateCategory()}" />
+				</h:commandButton>
 			</div>
 
-			<h:commandButton styleClass="btn btn-success" style="width:40%"
-				value="Add" type="button" onclick="checkValidate()">
-
-				<f:ajax execute="categoryName"
-					listener="#{homeController.getCreateCategory()}" />
-			</h:commandButton>
 
 			<!-- action="#{homeController.getCreateCategory()}" -->
 
