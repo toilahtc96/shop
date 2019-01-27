@@ -8,166 +8,152 @@
 	<h:outputStylesheet name="bootstrap.css" library="css" />
 </h:head>
 <body>
-	<h:form id="formCreateCategory">
-		<h:outputLabel value="Name: " />
-		<h:inputText styleClass="input-group-text"
-			value="#{homeController.createCategoryForm.catName}"
-			id="categoryName"
-			required="#{not empty homeController.createCategoryForm.catName} ">
-			<f:validateRequired />
-		</h:inputText>
-		<br />
-		<br />
+	<div class="container" >
+		<h:form id="formCreateCategory">
+			<div class="col-sm-6" style="float:left;">
+				<h:outputLabel value="Name: " />
+				<h:inputText styleClass="form-control col-sm-6"
+					value="#{homeController.createCategoryForm.catName}"
+					id="categoryName"
+					required="#{not empty homeController.createCategoryForm.catName} ">
+					<f:validateRequired />
+				</h:inputText>
+				<br />
+				<br />
 
-		<h:outputLabel value="Alias: " />
-		<h:inputText styleClass="input-group-text"
-			value="#{homeController.createCategoryForm.catAlias}"
-			id="categoryAlias"
-			required="#{not empty homeController.createCategoryForm.catAlias} ">
-			<f:validateRequired />
-		</h:inputText>
-		<br />
-		<br />
+				<h:outputLabel value="Alias: " />
+				<h:inputText styleClass="form-control col-sm-6"
+					value="#{homeController.createCategoryForm.catAlias}"
+					id="categoryAlias"
+					required="#{not empty homeController.createCategoryForm.catAlias} ">
+					<f:validateRequired />
+				</h:inputText>
+				<br />
+				<br />
 
-		<h:outputLabel value="SeoText: " />
-		<h:inputText styleClass="input-group-text"
-			value="#{homeController.createCategoryForm.catSeoText}"
-			id="categorySeoText"
-			required="#{not empty homeController.createCategoryForm.catAlias} ">
-			<f:validateRequired />
-		</h:inputText>
-		<br />
-		<br />
+				<h:outputLabel value="SeoText: " />
+				<h:inputText styleClass="form-control col-sm-6"
+					value="#{homeController.createCategoryForm.catSeoText}"
+					id="categorySeoText"
+					required="#{not empty homeController.createCategoryForm.catAlias} ">
+					<f:validateRequired />
+				</h:inputText>
+				<br />
+				<br />
 
-		<h:outputLabel value="Picture: " />
-		<h:inputText styleClass="input-group-text"
-			value="#{homeController.createCategoryForm.catPicture}"
-			id="categoryPicture"
-			required="#{not empty homeController.createCategoryForm.catPicture} ">
-			<f:validateRequired />
-		</h:inputText>
-		<br />
-		<br />
+				<h:outputLabel value="Picture: " />
+				<h:inputText styleClass="form-control col-sm-6"
+					value="#{homeController.createCategoryForm.catPicture}"
+					id="categoryPicture"
+					required="#{not empty homeController.createCategoryForm.catPicture} ">
+					<f:validateRequired />
+				</h:inputText>
+				<br />
+				<br />
 
-		<h:outputLabel value="Description: " />
-		<h:inputText styleClass="input-group-text"
-			value="#{homeController.createCategoryForm.catDes}"
-			id="categoryDescription"
-			required="#{not empty homeController.createCategoryForm.catDes} ">
-			<f:validateRequired />
-		</h:inputText>
-		<br />
-		<br />
+				<h:outputLabel value="Description: " />
+				<h:inputText styleClass="form-control col-sm-6"
+					value="#{homeController.createCategoryForm.catDes}"
+					id="categoryDescription"
+					required="#{not empty homeController.createCategoryForm.catDes} ">
+					<f:validateRequired />
+				</h:inputText>
+				<br />
+				<br />
 
-		<h:outputLabel value="Type: " />
-		<h:inputText
-			styleClass="input-group-text"
-			value="#{homeController.createCategoryForm.catType}"
-			id="categoryType"
-			required="#{not empty homeController.createCategoryForm.catType} ">
-			<f:validateRequired />
-		</h:inputText>
-		<br />
-		<br />
+				<h:outputLabel value="Type: " />
+				<h:inputText styleClass="form-control col-sm-6"
+					value="#{homeController.createCategoryForm.catType}"
+					id="categoryType"
+					required="#{not empty homeController.createCategoryForm.catType} ">
+					<f:validateRequired />
+				</h:inputText>
+				<br />
+				<br />
+			</div>
+			<div class ="col-sm-6" style="float:left;">
+				<h:outputLabel value="Active: " />
+				<h:inputText styleClass="form-control col-sm-6"
+					value="#{homeController.createCategoryForm.catActive}"
+					id="categoryActive"
+					required="#{not empty homeController.createCategoryForm.catActive} ">
+					<f:validateRequired />
+				</h:inputText>
+				<br />
+				<br />
 
-		<h:outputLabel value="Active: " />
-		<h:inputText styleClass="input-group-text"
-			value="#{homeController.createCategoryForm.catActive}"
-			id="categoryActive"
-			required="#{not empty homeController.createCategoryForm.catActive} ">
-			<f:validateRequired />
-		</h:inputText>
-		<br />
-		<br />
+				<h:outputLabel value="Parent ID: " />
+				<h:inputText styleClass="form-control col-sm-6"
+					value="#{homeController.createCategoryForm.catParent}"
+					id="categoryParent"
+					required="#{not empty homeController.createCategoryForm.catParent} ">
+					<f:validateRequired />
+				</h:inputText>
+				<br />
+				<br />
 
-		<h:outputLabel value="Parent ID: " />
-		<h:inputText styleClass="input-group-text"
-			value="#{homeController.createCategoryForm.catParent}"
-			id="categoryParent"
-			required="#{not empty homeController.createCategoryForm.catParent} ">
-			<f:validateRequired />
-		</h:inputText>
-		<br />
-		<br />
+				<h:outputLabel value="Children: " />
+				<h:inputText styleClass="form-control col-sm-6"
+					value="#{homeController.createCategoryForm.catChild}"
+					id="categoryChildren"
+					required="#{not empty homeController.createCategoryForm.catChild} ">
+					<f:validateRequired />
+				</h:inputText>
+				<br />
+				<br />
 
-		<h:outputLabel value="Children: " />
-		<h:inputText styleClass="input-group-text"
-			value="#{homeController.createCategoryForm.catChild}"
-			id="categoryChildren"
-			required="#{not empty homeController.createCategoryForm.catChild} ">
-			<f:validateRequired />
-		</h:inputText>
-		<br />
-		<br />
+				<h:outputLabel value="Hot: " />
+				<h:inputText styleClass="form-control col-sm-6"
+					value="#{homeController.createCategoryForm.catHot}"
+					id="categoryHot"
+					required="#{not empty homeController.createCategoryForm.catHot} ">
+					<f:validateRequired />
+				</h:inputText>
+				<br />
+				<br />
 
-		<h:outputLabel value="Hot: " />
-		<h:inputText styleClass="input-group-text"
-			value="#{homeController.createCategoryForm.catHot}" id="categoryHot"
-			required="#{not empty homeController.createCategoryForm.catHot} ">
-			<f:validateRequired />
-		</h:inputText>
-		<br />
-		<br />
+				<h:outputLabel value="New: " />
+				<h:inputText styleClass="form-control col-sm-6"
+					value="#{homeController.createCategoryForm.catNew}"
+					id="categoryNew"
+					required="#{not empty homeController.createCategoryForm.catNew} ">
+					<f:validateRequired />
+				</h:inputText>
+				<br />
+				<br />
 
-		<h:outputLabel value="New: " />
-		<h:inputText styleClass="input-group-text"
-			value="#{homeController.createCategoryForm.catNew}" id="categoryNew"
-			required="#{not empty homeController.createCategoryForm.catNew} ">
-			<f:validateRequired />
-		</h:inputText>
-		<br />
-		<br />
+				<h:outputLabel value="Root: " />
+				<h:inputText styleClass="form-control col-sm-6"
+					value="#{homeController.createCategoryForm.catRoot}"
+					id="categoryRoot"
+					required="#{not empty homeController.createCategoryForm.catRoot} ">
+					<f:validateRequired />
+				</h:inputText>
+				<br />
+				<br />
 
-		<h:outputLabel value="Root: " />
-		<h:inputText styleClass="input-group-text"
-			value="#{homeController.createCategoryForm.catRoot}"
-			id="categoryRoot"
-			required="#{not empty homeController.createCategoryForm.catRoot} ">
-			<f:validateRequired />
-		</h:inputText>
-		<br />
-		<br />
+				<h:outputLabel value="Slug: " />
+				<h:inputText styleClass="form-control col-sm-6"
+					value="#{homeController.createCategoryForm.catSlug}"
+					id="categorySlug"
+					required="#{not empty homeController.createCategoryForm.catSlug} ">
+					<f:validateRequired />
+				</h:inputText>
+				<br />
+			</div>
 
-		<h:outputLabel value="Slug: " />
-		<h:inputText styleClass="input-group-text"
-			value="#{homeController.createCategoryForm.catSlug}"
-			id="categorySlug"
-			required="#{not empty homeController.createCategoryForm.catSlug} ">
-			<f:validateRequired />
-		</h:inputText>
-		<br />
-		<br />
+			<h:commandButton styleClass="btn btn-success" style="width:40%"
+				value="Add" type="button" onclick="checkValidate()">
 
-		<h:outputLabel value="Create Date: " />
-		<h:inputText styleClass="input-group-text"
-			value="#{homeController.createCategoryForm.catCreate}"
-			id="categoryCreate"
-			required="#{not empty homeController.createCategoryForm.catCreate} ">
-			<f:validateRequired />
-		</h:inputText>
-		<br />
-		<br />
+				<f:ajax execute="categoryName"
+					listener="#{homeController.getCreateCategory()}" />
+			</h:commandButton>
 
-		<h:outputLabel value="Update Date: " />
-		<h:inputText styleClass="input-group-text"
-			value="#{homeController.createCategoryForm.catUpdate}"
-			id="categoryUpdate"
-			required="#{not empty homeController.createCategoryForm.catUpdate} ">
-			<f:validateRequired />
-		</h:inputText>
-		<br />
-		<br />
-
-		<h:commandButton value="Add" type="button" onclick="checkValidate()">
-
-			<f:ajax execute="categoryName"
-				listener="#{homeController.getCreateCategory()}" />
-		</h:commandButton>
-
-		<!-- action="#{homeController.getCreateCategory()}" -->
+			<!-- action="#{homeController.getCreateCategory()}" -->
 
 
-	</h:form>
+		</h:form>
+	</div>
 </body>
 <h:outputScript library="js/vendor" name="jquery-2.2.4.min.js"
 	target="head" />

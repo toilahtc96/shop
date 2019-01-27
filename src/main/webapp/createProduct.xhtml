@@ -14,7 +14,7 @@
 			id="proName" />
 			<br/>
 		<h:outputLabel value="Category:  " />
-		<h:selectOneMenu  value="#{productController.idCate}">
+		<h:selectOneMenu  value="#{productController.idCate}"	id="selectCate">
 			<c:forEach var="key" items="#{productController.keyList}">
 				<f:selectItem itemValue="#{key}"
 					itemLabel="#{productController.createProductForm.lstCate[key]}" />
