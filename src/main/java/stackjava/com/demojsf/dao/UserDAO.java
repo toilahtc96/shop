@@ -1,5 +1,6 @@
 package stackjava.com.demojsf.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -8,22 +9,18 @@ import javax.faces.bean.SessionScoped;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import stackjava.com.demojsf.connection.GetSessionHibernate;
 import stackjava.com.demojsf.model.User;
 
 @ManagedBean
 @SessionScoped
-public class UserDAO implements ModelDaoInterface<User>{
+public class UserDAO implements ModelDaoInterface<User>,Serializable {
 	@ManagedProperty(value = "#{getSessionHibernate}")
 	GetSessionHibernate getSessionHibernate;
-
-	public GetSessionHibernate getGetSessionHibernate() {
-		if(getSessionHibernate == null) {
-			getSessionHibernate = new GetSessionHibernate();
-		}
-		return getSessionHibernate;
-	}
 
 	public void setGetSessionHibernate(GetSessionHibernate getSessionHibernate) {
 		this.getSessionHibernate = getSessionHibernate;
@@ -31,7 +28,20 @@ public class UserDAO implements ModelDaoInterface<User>{
 
 	public UserDAO() {
 		super();
-		BasicConfigurator.configure();
+	}
+
+	@SuppressWarnings("static-access")
+	public boolean checkUserByName(String name) {
+		getSessionHibernate = new GetSessionHibernate();
+		Session session = getSessionHibernate.getSessionFactory().getCurrentSession();
+		Transaction tran = session.beginTransaction();
+		User user = (User)session.createQuery("From stackjava.com.demojsf.model.User u where u.userEmail = :email")
+				.setParameter("email", name).uniqueResult();
+		tran.commit();
+		if(user != null){
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -60,11 +70,9 @@ public class UserDAO implements ModelDaoInterface<User>{
 
 	@Override
 	public int add(User e) {
-		
-		
-		getSessionHibernate = this.getGetSessionHibernate();
+
 		int rs = getSessionHibernate.createRecord(e);
-		
+
 		// TODO Auto-generated method stub
 		return rs;
 	}
