@@ -9,7 +9,6 @@ import javax.faces.bean.RequestScoped;
 
 import org.apache.log4j.Logger;
 
-import stackjava.com.demojsf.bean.HelloBean;
 import stackjava.com.demojsf.dao.UserDAO;
 import stackjava.com.demojsf.model.User;
 
