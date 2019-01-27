@@ -21,8 +21,9 @@ import stackjava.com.demojsf.service.CategoryService;
 @ManagedBean
 @SessionScoped
 
-@URLMappings(mappings = { @URLMapping(id = "category", pattern = "/category", viewId = "/listCate.xhtml"),
-		@URLMapping(id = "addCategory", pattern = "/createCategory", viewId = "/createCategory.xhtml") })
+@URLMappings(mappings = { @URLMapping(id = "category", pattern = "/category", viewId = "/listCategory.xhtml"),
+		@URLMapping(id = "addCategory", pattern = "/createCategory", viewId = "/createCategory.xhtml"),
+		@URLMapping(id = "updateCategory", pattern = "/updateCategory", viewId = "/updateCategory.xhtml")})
 public class CategoryController implements Serializable {
 
 	/**
@@ -126,7 +127,7 @@ public class CategoryController implements Serializable {
 		cat.setCatName(catName);
 		categoryService.add(cat);
 		System.out.println("sussceess");
-		return "listCate";
+		return "listCategory?faces-redirect=true";
 	}
 
 	public String getUpdateCategory() {
@@ -135,7 +136,7 @@ public class CategoryController implements Serializable {
 		Category cate = new Category(id, name, null, null, null, null, null, null, null, null, null, null, null, null,
 				null, null);
 		categoryService.update(id, cate);
-		return "listCate";
+		return "listCategory?faces-redirect=true";
 	}
 
 	public String doUpdateCategory() {
@@ -146,13 +147,13 @@ public class CategoryController implements Serializable {
 		updateCategoryForm = new UpdateCategoryForm();
 		updateCategoryForm.setCatName(cate.getCatName());
 		updateCategoryForm.setCatID(cate.getCatId());
-		return "updateCategory";
+		return "updateCategory?faces-redirect=true";
 	}
 
 	public String deleteCategory() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		int id = (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
 		categoryService.removeById(id);
-		return "listCate";
+		return "listCategory?faces-redirect=true";
 	}
 }
