@@ -6,10 +6,15 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-	<title>Demo JSF</title>
+	<h:title rendered="#{not empty user}">Demo JSF</h:title>
+	<h:title rendered="#{empty user}">Chưa Đăng Nhập</h:title>
 </h:head>
-<h:body>
+<h:body rendered="#{empty user}">
+	<h2>Bạn Cần Đăng Nhập Để Vào Xem Trang Này</h2>
+</h:body>
+<h:body rendered="#{not empty user}">
 	<h2>stackjava.com - demo JSF</h2>
+
 	<h:form>
 		<h:commandButton action="adminLogin?faces-redirect=true" value="Page1" />
 	</h:form>

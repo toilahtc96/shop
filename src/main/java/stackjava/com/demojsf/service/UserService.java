@@ -25,6 +25,9 @@ public class UserService implements ModelServiceInterface<User>,Serializable {
 	public void setUserDAO(UserDAO userDAO) {
 		this.userDAO = userDAO;
 	}
+	public User getUserByEmailAndPassword(String email, String password){
+		return userDAO.getUserByEmailAndPassWord(email, password);
+	}
 
 	@Override
 	public User getById(int id) {

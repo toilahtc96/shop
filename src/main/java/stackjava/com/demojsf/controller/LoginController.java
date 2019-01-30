@@ -1,13 +1,18 @@
 package stackjava.com.demojsf.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
+
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 
 import stackjava.com.demojsf.form.LoginForm;
+import stackjava.com.demojsf.model.User;
 import stackjava.com.demojsf.service.UserService;
 
 @ManagedBean
@@ -21,20 +26,16 @@ public class LoginController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private boolean checkSave;
-	
-	@ManagedProperty(value="#{userService}")
+
+	@ManagedProperty(value = "#{userService}")
 	private UserService userService;
-	
-	
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
 
-
-	@ManagedProperty(value="#{loginForm}")
+	@ManagedProperty(value = "#{loginForm}")
 	private LoginForm loginForm;
-	
 
 	public boolean isCheckSave() {
 		return checkSave;
@@ -52,17 +53,28 @@ public class LoginController implements Serializable {
 		this.loginForm = loginForm;
 	}
 
-	
-	public String login(){
-		
+	public void login() {
+
 		String email = loginForm.getEmail();
 		String pass = loginForm.getPassword();
-		if(userService.checkUserByName(email)){
-			return "index";
-		}else{
-			return "login";
+		FacesContext context = FacesContext.getCurrentInstance();
+		if (userService.checkUserByName(email)) {
+			User user = userService.getUserByEmailAndPassword(email, pass);
+
+			if (user != null) {
+				context.getExternalContext().getSessionMap().put("user", user);
+				try {
+					context.getExternalContext().redirect("/JavaServerFaces");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			} else {
+				// Send an error message on Login Failure
+				context.addMessage(null, new FacesMessage("Authentication Failed. Check username or password."));
+			}
+
 		}
-		
+
 	}
 
 }

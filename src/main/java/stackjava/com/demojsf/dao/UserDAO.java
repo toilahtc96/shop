@@ -18,7 +18,7 @@ import stackjava.com.demojsf.model.User;
 
 @ManagedBean
 @SessionScoped
-public class UserDAO implements ModelDaoInterface<User>,Serializable {
+public class UserDAO implements ModelDaoInterface<User>, Serializable {
 	@ManagedProperty(value = "#{getSessionHibernate}")
 	GetSessionHibernate getSessionHibernate;
 
@@ -35,13 +35,29 @@ public class UserDAO implements ModelDaoInterface<User>,Serializable {
 		getSessionHibernate = new GetSessionHibernate();
 		Session session = getSessionHibernate.getSessionFactory().getCurrentSession();
 		Transaction tran = session.beginTransaction();
-		User user = (User)session.createQuery("From stackjava.com.demojsf.model.User u where u.userEmail = :email")
+		User user = (User) session.createQuery("From stackjava.com.demojsf.model.User u where u.userEmail = :email")
 				.setParameter("email", name).uniqueResult();
 		tran.commit();
-		if(user != null){
+		if (user != null) {
 			return true;
 		}
 		return false;
+	}
+
+	public User getUserByEmailAndPassWord(String name, String password) {
+		getSessionHibernate = new GetSessionHibernate();
+		User user = null;
+		Session session = getSessionHibernate.getSessionFactory().getCurrentSession();
+		Transaction tran = session.beginTransaction();
+		user = (User) session
+				.createQuery(
+						"From stackjava.com.demojsf.model.User u where u.userEmail = :email and u.userPassword = :password ")
+				.setParameter("email", name).setParameter("password", password).uniqueResult();
+		tran.commit();
+		if (user != null) {
+			return user;
+		}
+		return null;
 	}
 
 	@Override
@@ -76,7 +92,5 @@ public class UserDAO implements ModelDaoInterface<User>,Serializable {
 		// TODO Auto-generated method stub
 		return rs;
 	}
-
-	
 
 }
