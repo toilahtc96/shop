@@ -76,7 +76,6 @@ public class CategoryController implements Serializable {
 			if(hashMap == null) {
 				hashMap = new HashMap<Integer, String>();
 				hashMap.put(0, "Chose Parent");
-				//tieng viet hay tieng anh thi chon 1 ngon ngu thoi nhe
 			}
 			hashMap.put(category.getCatId(), category.getCatName());
 			createCategoryForm.setListCate(hashMap);
@@ -111,20 +110,20 @@ public class CategoryController implements Serializable {
 
 	public String getCreateCategory() {
 		String catName = this.createCategoryForm.getCatName();
-		String catAlias = this.createCategoryForm.getCatAlias();
-		String catSeoText = this.createCategoryForm.getCatSeoText();
-		String catPicture = this.createCategoryForm.getCatPicture();
-		String catDes = this.createCategoryForm.getCatDes();
-		String catType = this.createCategoryForm.getCatType();
-		int catActive = this.createCategoryForm.getCatActive();
-		int catParent = this.createCategoryForm.getCatParent();
-		int catChild = this.createCategoryForm.getCatChild();
-		int catHot = this.createCategoryForm.getCatHot();
-		int catNew = this.createCategoryForm.getCatNew();
-		int catRoot = this.createCategoryForm.getCatRoot();
-		String catSlug = this.createCategoryForm.getCatSlug();
-		Date catCreate = this.createCategoryForm.getCatCreat();
-		Date catUpdate = this.createCategoryForm.getCatUpdate();
+//		String catAlias = this.createCategoryForm.getCatAlias();
+//		String catSeoText = this.createCategoryForm.getCatSeoText();
+//		String catPicture = this.createCategoryForm.getCatPicture();
+//		String catDes = this.createCategoryForm.getCatDes();
+//		String catType = this.createCategoryForm.getCatType();
+//		int catActive = this.createCategoryForm.getCatActive();
+//		int catParent = this.createCategoryForm.getCatParent();
+//		int catChild = this.createCategoryForm.getCatChild();
+//		int catHot = this.createCategoryForm.getCatHot();
+//		int catNew = this.createCategoryForm.getCatNew();
+//		int catRoot = this.createCategoryForm.getCatRoot();
+//		String catSlug = this.createCategoryForm.getCatSlug();
+//		Date catCreate = this.createCategoryForm.getCatCreat();
+//		Date catUpdate = this.createCategoryForm.getCatUpdate();
 		Category cat = new Category();
 		cat.setCatName(catName);
 		categoryService.add(cat);

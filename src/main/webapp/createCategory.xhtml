@@ -7,7 +7,6 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
 	<h:outputStylesheet name="bootstrap.css" library="css" />
-
 </h:head>
 <body>
 	<div class="container">
@@ -15,16 +14,16 @@
 			<div class="col-sm-6" style="float: left;">
 				<h:outputLabel value="Name: " />
 				<h:inputText styleClass="form-control col-sm-6"
-					value="#{homeController.createCategoryForm.catName}"
+					value="#{categoryController.createCategoryForm.catName}"
 					id="categoryName"
-					required="#{not empty homeController.createCategoryForm.catName} ">
+					required="#{not empty categoryController.createCategoryForm.catName} ">
 					<f:validateRequired />
 				</h:inputText>
 				<br />
 
 				<h:outputLabel value="Alias: " />
 				<h:inputText styleClass="form-control col-sm-6"
-					value="#{homeController.createCategoryForm.catAlias}"
+					value="#{categoryController.createCategoryForm.catAlias}"
 					id="categoryAlias">
 					<f:validateRequired />
 				</h:inputText>
@@ -32,7 +31,7 @@
 
 				<h:outputLabel value="SeoText: " />
 				<h:inputText styleClass="form-control col-sm-6"
-					value="#{homeController.createCategoryForm.catSeoText}"
+					value="#{categoryController.createCategoryForm.catSeoText}"
 					id="categorySeoText">
 					<f:validateRequired />
 				</h:inputText>
@@ -40,7 +39,7 @@
 
 				<h:outputLabel value="Picture: " />
 				<h:inputText styleClass="form-control col-sm-6"
-					value="#{homeController.createCategoryForm.catPicture}"
+					value="#{categoryController.createCategoryForm.catPicture}"
 					id="categoryPicture">
 					<f:validateRequired />
 				</h:inputText>
@@ -52,7 +51,7 @@
 			<div class="col-sm-6" style="float: left;">
 				<h:outputLabel value="Description: " />
 				<h:inputText styleClass="form-control col-sm-6"
-					value="#{homeController.createCategoryForm.catDes}"
+					value="#{categoryController.createCategoryForm.catDes}"
 					id="categoryDescription">
 					<f:validateRequired />
 				</h:inputText>
@@ -60,7 +59,7 @@
 
 				<h:outputLabel value="Type: " />
 				<h:inputText styleClass="form-control col-sm-6"
-					value="#{homeController.createCategoryForm.catType}"
+					value="#{categoryController.createCategoryForm.catType}"
 					id="categoryType">
 					<f:validateRequired />
 				</h:inputText>
@@ -78,17 +77,14 @@
 		
 				<h:outputLabel value="Slug: " />
 				<h:inputText styleClass="form-control col-sm-6"
-					value="#{homeController.createCategoryForm.catSlug}"
+					value="#{categoryController.createCategoryForm.catSlug}"
 					id="categorySlug">
 					<f:validateRequired />
 				</h:inputText>
 				<br /> <br />
 
 				<h:commandButton styleClass="btn btn-success" style="width:50%"
-					value="Add" type="submit" onclick="checkValidate()">
-
-					<f:ajax execute="categoryName"
-						listener="#{homeController.getCreateCategory()}" />
+					value="Add" type="submit" onclick="checkValidate()" action = "#{categoryController.getCreateCategory()}">
 				</h:commandButton>
 			</div>
 
@@ -109,7 +105,6 @@
     $(document).ready(function() {
 	   checkValidate = function(){
 			var x = $("#formCreateCategory\\:categoryName").val();
-			alert(x);
 			if(x == ""){
 				alert("Phai nhap Ten");
     			return false;

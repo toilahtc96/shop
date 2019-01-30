@@ -36,8 +36,6 @@ public class ProductController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	List<Product> list;
 
-//	List<Integer> keyList;
-//	
 	private int idCate;
 	
 	public int getIdCate() {
@@ -48,23 +46,8 @@ public class ProductController implements Serializable {
 		this.idCate = idCate;
 	}
 
-//	public List<Integer> getKeyList() {
-//		return keyList;
-//	}
-//
-//	public void setKeyList(List<Integer> keyList) {
-//		this.keyList = keyList;
-//	}
-
 	@ManagedProperty(value = "#{productService}")
 	ProductService productService;
-
-//	@ManagedProperty(value = "#{categoryService}")
-//	CategoryService categoryService;
-//
-//	public void setCategoryService(CategoryService categoryService) {
-//		this.categoryService = categoryService;
-//	}
 
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
@@ -72,7 +55,6 @@ public class ProductController implements Serializable {
 
 	public ProductController() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public List<Product> getList() {
@@ -95,27 +77,6 @@ public class ProductController implements Serializable {
 
 	public void setCreateProductForm(CreateProductForm createProductForm) {
 		this.createProductForm = createProductForm;
-//		if(createProductForm == null){
-//			createProductForm = new CreateProductForm();
-//		}
-//		List<Category> getListCate = getListCategoryForCreateProduct();
-		//gui sang view. Nho productForm -> hashmap form
-		//
-//		HashMap<Integer, String> hshMap = createProductForm.getLstCate();
-		//tao 1 hashmap moi
-		//
-//		for (Category category : getListCate) {
-//			if (hshMap == null) {
-//				hshMap = new HashMap<Integer, String>();
-//			}
-//			hshMap.put(category.getCatId(), category.getCatName());
-//			//hashmap put. tham so 1 key, tham so 2 la value
-//			createProductForm.setLstCate(hshMap);
-//		}
-		//1 list ma no chi lay key hash id
-		//foreach ben view de ra duoc het cac cate minh lay duoc
-//		keyList = new ArrayList<Integer>(hshMap.keySet());
-				
 	}
 
 	@ManagedProperty(value = "#{updateProductForm}")
@@ -132,44 +93,15 @@ public class ProductController implements Serializable {
 
 	public void setUpdateProductForm(UpdateProductForm updateProductForm) {
 		this.updateProductForm = updateProductForm;
-//		if (updateProductForm == null) {
-//			updateProductForm = new UpdateProductForm();
-//		}
-//
-//		List<Category> getListCate = getListCategoryForCreateProduct();
-//		HashMap<Integer, String> hshMap = updateProductForm.getLstCate();
-//		for (Category category : getListCate) {
-//			
-//			
-//			if (hshMap == null) {
-//				hshMap = new HashMap<Integer, String>();
-//			}
-//			hshMap.put(category.getCatId(), category.getCatName());
-//			updateProductForm.setLstCate(hshMap);
-//		}
-//		keyList = new ArrayList<Integer>(hshMap.keySet());
-		
 	}
-//	CategoryController categoryController = new CategoryController();
-//	private int idCate = categoryController.getIdCate();
-//	public int getIdCate() {
-//		return idCate;
-//	}
-//
-//	public void setIdCate(int idCate) {
-//		this.idCate = idCate;
-//	}
-
+	
 	public String getCreateProduct() {
 		String proName = this.createProductForm.getProName();
-//		int idCategory = categoryController.getIdCate();
-//		String selectCate = this.createProductForm.getSelectCate();
 		int idCategory = this.getIdCate();
 		Product pro = new Product();
 		pro.setProName(proName);
 		pro.setProCategoryId(idCategory);
 		productService.add(pro);
-
 		return "listProduct?faces-redirect=true";
 	}
 
@@ -188,13 +120,8 @@ public class ProductController implements Serializable {
 		updateProductForm = new UpdateProductForm();
 		updateProductForm.setProName(pro.getProName());
 		updateProductForm.setProId(pro.getProId());
-
 		return "updateProduct?faces-redirect=true";
 	}
-
-//	public List<Category> getListCategoryForCreateProduct() {
-//		return categoryService.getAll();
-//	}
 	
 	public String deleteProduct() {
 		FacesContext fc = FacesContext.getCurrentInstance();

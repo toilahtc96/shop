@@ -1,5 +1,6 @@
 package stackjava.com.demojsf.form;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.faces.bean.ManagedBean;
@@ -10,6 +11,44 @@ import javax.faces.bean.SessionScoped;
 public class CreateProductForm {
 	String proName;
 	String selectCate;
+	float proPrice;
+	int proActive;
+	String proDescription;
+	Date proGuarantee;
+	
+	
+	public float getProPrice() {
+		return proPrice;
+	}
+
+	public void setProPrice(float proPrice) {
+		this.proPrice = proPrice;
+	}
+
+	public int getProActive() {
+		return proActive;
+	}
+
+	public void setProActive(int proActive) {
+		this.proActive = proActive;
+	}
+
+	public String getProDescription() {
+		return proDescription;
+	}
+
+	public void setProDescription(String proDescription) {
+		this.proDescription = proDescription;
+	}
+
+	public Date getProGuarantee() {
+		return proGuarantee;
+	}
+
+	public void setProGuarantee(Date proGuarantee) {
+		this.proGuarantee = proGuarantee;
+	}
+
 	public String getSelectCate() {
 		return selectCate;
 	}
