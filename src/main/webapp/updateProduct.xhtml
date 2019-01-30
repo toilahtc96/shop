@@ -15,11 +15,46 @@
 			<div class="col-sm-6" style="float: left;">
 				<h:outputLabel value="Name: " />
 				<h:inputText value="#{productController.updateProductForm.proName}"
-					id="productName" />
+					styleClass="form-control col-sm-6" id="productName" />
+				<br />
 
+				<h:outputLabel value="Price:  " />
+				<h:inputText styleClass="form-control col-sm-6"
+					value="#{productController.createProductForm.proPrice}"
+					id="productPrice">
+					<f:validateRequired />
+				</h:inputText>
+				<br />
+
+				<h:outputLabel value="Description: " />
+				<h:inputText styleClass="form-control col-sm-6"
+					value="#{productController.createProductForm.proDescription}"
+					id="productDescription">
+					<f:validateRequired />
+				</h:inputText>
+				<br />
 			</div>
+
 			<div class="col-sm-6" style="float: left;">
+				<h:outputLabel value="Category:  " />
+				<h:selectOneMenu value="#{productController.idCate}"
+					styleClass="form-control col-sm-6" id="selectCate">
+					<c:forEach var="key" items="#{categoryController.keyList}">
+						<f:selectItem itemValue="#{key}"
+							itemLabel="#{categoryController.createCategoryForm.listCate[key]}" />
+					</c:forEach>
+				</h:selectOneMenu>
+				<br />
+
+				<h:outputLabel value="Guarantee: " />
+				<h:inputText styleClass="form-control col-sm-6"
+					value="#{productController.createProductForm.proGuarantee}"
+					id="productGuarantee">
+					<f:validateRequired />
+				</h:inputText>
+				<br />
 				<h:commandButton value="Submit" type="submit"
+					styleClass="btn btn-success" style="width:50%"
 					action="#{productController.getUpdateProduct()}"
 					onclick="checkValidate()">
 					<f:param name="id" value="#{product.proId}" />
