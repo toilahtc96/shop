@@ -77,4 +77,14 @@ public class LoginController implements Serializable {
 
 	}
 
+	public void logout() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().invalidateSession();
+		try {
+			context.getExternalContext().redirect("/JavaServerFaces");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
