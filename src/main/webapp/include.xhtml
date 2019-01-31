@@ -1,13 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-<h:head>
-	<!-- Mobile Specific Meta -->
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 	<meta name="viewport"
 		content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<!-- Author Meta -->
@@ -47,8 +43,6 @@
 	<h:outputStylesheet  library="scss/theme" name="_reset.scss"/>
 	<h:outputStylesheet  library="scss/theme" name="_variables.scss"/>
 	<h:outputStylesheet name="bootstrap.css" library="css" />
-</h:head>
-<h:body>
 	<header class="header_area sticky-header">
 		<div class="main_menu">
 			<nav class="navbar navbar-expand-lg navbar-light main_box">
@@ -140,5 +134,4 @@
 	<h:outputScript library="js" name="api.js" />
 	<h:outputScript library="js" name="gmaps.min.js" />
 	<h:outputScript library="js" name="main.js" />
-</h:body>
-</html>
+</ui:composition>

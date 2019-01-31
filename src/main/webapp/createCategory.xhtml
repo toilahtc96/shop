@@ -4,11 +4,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<h:outputStylesheet name="bootstrap.css" library="css" />
 </h:head>
-<body>
+<h:body>
+	<div>
+	    <ui:insert name = "header">
+	      	<ui:include src="header.xhtml" />
+	    </ui:insert>
+ 	</div>
+ 	<br />
 	<div class="container">
 		<h:form id="formCreateCategory">
 			<div class="col-sm-6" style="float: left;">
@@ -91,10 +98,16 @@
 
 			<!-- action="#{homeController.getCreateCategory()}" -->
 
-
 		</h:form>
 	</div>
-</body>
+	<br/>
+	
+	<div>
+	    <ui:insert name = "footer">
+	      	<ui:include src="footer.xhtml" />
+	    </ui:insert>
+ 	</div>
+</h:body>
 <h:outputScript name="js/dist/js/bootstrap-checkbox.js" />
 <h:outputScript library="js/vendor" name="jquery-2.2.4.min.js"
 	target="head" />
