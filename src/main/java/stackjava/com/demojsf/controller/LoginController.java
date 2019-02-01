@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
+import com.ocpsoft.pretty.faces.annotation.URLMappings;
 
 import stackjava.com.demojsf.form.LoginForm;
 import stackjava.com.demojsf.model.User;
@@ -17,7 +18,9 @@ import stackjava.com.demojsf.service.UserService;
 
 @ManagedBean
 @SessionScoped
-@URLMapping(id = "login", pattern = "/admin/login", viewId = "/login.xhtml")
+
+@URLMappings(mappings = { @URLMapping(id = "login", pattern = "/admin/login", viewId = "/login.xhtml"),
+		@URLMapping(id ="adminHome", pattern = "/admin/home", viewId = "/adminHome.xhtml")})
 public class LoginController implements Serializable {
 
 	/**
@@ -65,7 +68,7 @@ public class LoginController implements Serializable {
 			if (user != null) {
 				context.getExternalContext().getSessionMap().put("user", user);
 				try {
-					context.getExternalContext().redirect("/JavaServerFaces");
+					context.getExternalContext().redirect("/JavaServerFaces/admin/home");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
