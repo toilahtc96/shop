@@ -3,8 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-<ui:composition template="header.xhtml" >
-</ui:composition>
+<h:body>
+<!-- <ui:composition template="header.xhtml" >
+</ui:composition> -->
+<ui:include src="/webapp/header.xhtml" />
 <section class="banner-area">
 	<div class="container">
 		<div class="row fullscreen align-items-center justify-content-start">
@@ -720,7 +722,7 @@
 </section>
 <!-- endbody -->
 
-<ui:composition template="footer.xhtml" >
+<ui:composition template="foot.xhtml" >
 </ui:composition>
 </h:body>
 </html>
