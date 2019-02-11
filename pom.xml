@@ -11,11 +11,14 @@
 
 
 	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/com.sun.facelets/jsf-facelets -->
 		<dependency>
 			<groupId>com.sun.facelets</groupId>
 			<artifactId>jsf-facelets</artifactId>
 			<version>1.1.14</version>
 		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/com.sun.faces/jsf-api -->
 		<dependency>
 			<groupId>com.sun.faces</groupId>
