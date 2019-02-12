@@ -45,11 +45,21 @@
 			</ui:insert>
 		</div>
 
-		<div id="content">sss</div>
+		<div id="banner">
+			<ui:insert name="banner">
+				<ui:include src="/banner.xhtml" />
+			</ui:insert>
+		</div>
+		
+		<div id="content">
+			<ui:insert name="content">
+				<ui:include src="/content.xhtml" />
+			</ui:insert>
+		</div>
 
 		<div id="footer">
 			<ui:insert name="footer">
-				<ui:include src="/footer.xhtml" />
+				<ui:include src="/footer2.xhtml" />
 			</ui:insert>
 		</div>
 
