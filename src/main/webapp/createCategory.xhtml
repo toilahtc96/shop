@@ -20,7 +20,7 @@
 	<meta charset="UTF-8" />
 	<!-- Site Title -->
 	<title>Karma Shop</title>
-	<h:outputStylesheet library="css" name="linearicons.css" />
+	<h:outputStylesheet name="resources/css/linearicons.css" />
 	<h:outputStylesheet library="css" name="font-awesome.min.css" />
 	<h:outputStylesheet library="css" name="themify-icons.css" />
 	<h:outputStylesheet library="css" name="bootstrap.css" />
@@ -48,14 +48,14 @@
 	<h:outputStylesheet library="scss/theme" name="_variables.scss" />
 	<h:outputStylesheet name="bootstrap.css" library="css" />
 </h:head>
-<body>
+<h:body>
 	<div class="container">
-	
-		<div id="header">
+
+		<!-- <div id="header">
 			<ui:insert name="header">
 				<ui:include src="header.xhtml" />
 			</ui:insert>
-		</div>
+		</div> -->
 		<br />
 
 		<h:form id="formCreateCategory">
@@ -140,16 +140,16 @@
 
 
 		</h:form>
-		
+
 		<br />
-		<div id="foot">
+		<div id="footer">
 			<ui:insert name="footer">
 				<ui:include src="footer.xhtml" />
 			</ui:insert>
 		</div>
-		
+
 	</div>
-</body>
+</h:body>
 <h:outputScript name="js/dist/js/bootstrap-checkbox.js" />
 <h:outputScript library="js/vendor" name="jquery-2.2.4.min.js"
 	target="head" />
