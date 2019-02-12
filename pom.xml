@@ -18,6 +18,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 			<groupId>com.sun.facelets</groupId>
 			<artifactId>jsf-facelets</artifactId>
 			<version>1.1.14</version>
@@ -26,6 +27,8 @@
 		
 
 		<dependency>
+=======
+>>>>>>> parent of b04a023... commit 2019
 =======
 >>>>>>> parent of b04a023... commit 2019
 =======

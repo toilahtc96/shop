@@ -2,6 +2,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
   <display-name>DemoJSF</display-name>
   <display-name>JavaServerFaces</display-name>
@@ -111,6 +112,8 @@
     <url-pattern>/faces/*</url-pattern>
   </servlet-mapping>
 =======
+=======
+>>>>>>> parent of b04a023... commit 2019
 =======
 >>>>>>> parent of b04a023... commit 2019
 =======
@@ -252,6 +255,9 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of b04a023... commit 2019
+=======
 >>>>>>> parent of b04a023... commit 2019
 =======
 >>>>>>> parent of b04a023... commit 2019
