@@ -5,12 +5,15 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<h:outputStylesheet name="bootstrap.css" library="css" />
 </h:head>
 <body>
-	<div class="container">
+<ui:composition template="/templateAdmin/layout.xhtml">
+	<ui:define name="content">
+		<div class="container">
 		<h:form id="formUpdateCategory">
 			<div class="col-sm-6" style="float: left;">
 				<h:outputLabel value="Name: " />
@@ -92,6 +95,8 @@
 			</div>
 		</h:form>
 	</div>
+	</ui:define>
+</ui:composition>
 </body>
 <h:outputScript library="js/vendor" name="jquery-2.2.4.min.js" />
 <h:outputScript library="js/vendor" name="bootstrap.min.js" />

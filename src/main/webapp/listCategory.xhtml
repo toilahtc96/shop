@@ -3,12 +3,15 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<h:outputStylesheet name="bootstrap.css" library="css" />
 </h:head>
 <body>
-	<div class="container">
+<ui:composition template="/templateAdmin/layout.xhtml">
+	<ui:define name="content">
+		<div class="container">
 		<table>
 			<tr>
 				<td width="15%" />
@@ -112,5 +115,7 @@
 
 		</h:form>
 	</div>
+	</ui:define>
+</ui:composition>
 </body>
 </html>
