@@ -48,4 +48,3 @@ src/main/webapp/template/Layout.xhtml
 .project
 .settings/org.eclipse.wst.common.component
 .settings/org.eclipse.wst.common.project.facet.core.prefs.xml
-*.xml
