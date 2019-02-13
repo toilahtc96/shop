@@ -1,17 +1,20 @@
 package stackjava.com.demojsf.form;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.servlet.http.Part;
+
 @ManagedBean
 @SessionScoped
-public class CreateCategoryForm {
+public class CreateCategoryForm implements Serializable {
 	String catName;
 	String catAlias;
 	String catSeoText;
-	String catPicture;
+	Part image;
 	String catDes;
 	String catType;
 	int catActive;
@@ -23,10 +26,9 @@ public class CreateCategoryForm {
 	String catSlug;
 	Date catCreat;
 	Date catUpdate;
-	//phai nho get set
-	
+	// phai nho get set
+
 	HashMap<Integer, String> listCate;
-	
 
 	public HashMap<Integer, String> getListCate() {
 		return listCate;
@@ -60,12 +62,14 @@ public class CreateCategoryForm {
 		this.catSeoText = catSeoText;
 	}
 
-	public String getCatPicture() {
-		return catPicture;
+	
+
+	public Part getImage() {
+		return image;
 	}
 
-	public void setCatPicture(String catPicture) {
-		this.catPicture = catPicture;
+	public void setImage(Part image) {
+		this.image = image;
 	}
 
 	public String getCatDes() {
@@ -155,6 +159,5 @@ public class CreateCategoryForm {
 	public void setCatUpdate(Date catUpdate) {
 		this.catUpdate = catUpdate;
 	}
-	
-	
+
 }

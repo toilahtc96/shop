@@ -1,5 +1,6 @@
 package stackjava.com.demojsf.form;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -7,7 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
-public class LoginForm {
+public class LoginForm implements Serializable {
 	
 	String email;
 	

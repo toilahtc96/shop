@@ -1,5 +1,6 @@
 package stackjava.com.demojsf.form;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import javax.faces.bean.ManagedBean;
@@ -7,7 +8,7 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-public class UpdateProductForm {
+public class UpdateProductForm implements Serializable {
 	int proId;
 	String proName;
 	HashMap<Integer, String> lstCate;

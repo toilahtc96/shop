@@ -9,6 +9,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.Part;
+
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
 
@@ -23,8 +25,8 @@ import stackjava.com.demojsf.service.CategoryService;
 
 @URLMappings(mappings = { @URLMapping(id = "category", pattern = "/category", viewId = "/listCategory.xhtml"),
 		@URLMapping(id = "addCategory", pattern = "/createCategory", viewId = "/createCategory.xhtml"),
-		@URLMapping(id = "updateCategory", pattern = "/updateCategory", viewId = "/updateCategory.xhtml")})
-public class CategoryController implements Serializable {
+		@URLMapping(id = "updateCategory", pattern = "/updateCategory", viewId = "/updateCategory.xhtml") })
+public class CategoryController extends CommonController implements Serializable {
 
 	/**
 	 * 
@@ -67,13 +69,13 @@ public class CategoryController implements Serializable {
 
 	public void setCreateCategoryForm(CreateCategoryForm createCategoryForm) {
 		this.createCategoryForm = createCategoryForm;
-		if(createCategoryForm == null) {
+		if (createCategoryForm == null) {
 			createCategoryForm = new CreateCategoryForm();
 		}
 		List<Category> getListCate = categoryService.getAll();
 		HashMap<Integer, String> hashMap = createCategoryForm.getListCate();
-		for(Category category : getListCate) {
-			if(hashMap == null) {
+		for (Category category : getListCate) {
+			if (hashMap == null) {
 				hashMap = new HashMap<Integer, String>();
 				hashMap.put(0, "Chose Parent");
 			}
@@ -110,20 +112,22 @@ public class CategoryController implements Serializable {
 
 	public String getCreateCategory() {
 		String catName = this.createCategoryForm.getCatName();
-//		String catAlias = this.createCategoryForm.getCatAlias();
-//		String catSeoText = this.createCategoryForm.getCatSeoText();
-//		String catPicture = this.createCategoryForm.getCatPicture();
-//		String catDes = this.createCategoryForm.getCatDes();
-//		String catType = this.createCategoryForm.getCatType();
-//		int catActive = this.createCategoryForm.getCatActive();
-//		int catParent = this.createCategoryForm.getCatParent();
-//		int catChild = this.createCategoryForm.getCatChild();
-//		int catHot = this.createCategoryForm.getCatHot();
-//		int catNew = this.createCategoryForm.getCatNew();
-//		int catRoot = this.createCategoryForm.getCatRoot();
-//		String catSlug = this.createCategoryForm.getCatSlug();
-//		Date catCreate = this.createCategoryForm.getCatCreat();
-//		Date catUpdate = this.createCategoryForm.getCatUpdate();
+
+		Part image = this.createCategoryForm.getImage();
+		// String catAlias = this.createCategoryForm.getCatAlias();
+		// String catSeoText = this.createCategoryForm.getCatSeoText();
+		// String catPicture = this.createCategoryForm.getCatPicture();
+		// String catDes = this.createCategoryForm.getCatDes();
+		// String catType = this.createCategoryForm.getCatType();
+		// int catActive = this.createCategoryForm.getCatActive();
+		// int catParent = this.createCategoryForm.getCatParent();
+		// int catChild = this.createCategoryForm.getCatChild();
+		// int catHot = this.createCategoryForm.getCatHot();
+		// int catNew = this.createCategoryForm.getCatNew();
+		// int catRoot = this.createCategoryForm.getCatRoot();
+		// String catSlug = this.createCategoryForm.getCatSlug();
+		// Date catCreate = this.createCategoryForm.getCatCreat();
+		// Date catUpdate = this.createCategoryForm.getCatUpdate();
 		Category cat = new Category();
 		cat.setCatName(catName);
 		categoryService.add(cat);

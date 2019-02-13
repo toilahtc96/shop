@@ -1,12 +1,14 @@
 package stackjava.com.demojsf.form;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped	
-public class UpdateCategoryForm {
-	int catID;
+public class UpdateCategoryForm  implements Serializable{
+	int catID; 
 	String catName;
 	String catAlias;
 	public int getCatID() {

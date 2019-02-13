@@ -1,5 +1,6 @@
 package stackjava.com.demojsf.form;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -8,7 +9,7 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-public class CreateProductForm {
+public class CreateProductForm implements Serializable {
 	String proName;
 	String selectCate;
 	float proPrice;
