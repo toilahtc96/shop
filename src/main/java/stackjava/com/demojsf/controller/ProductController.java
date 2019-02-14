@@ -25,9 +25,9 @@ import stackjava.com.demojsf.service.ProductService;
 
 @ManagedBean(name = "productController")
 @SessionScoped
-@URLMappings(mappings = { @URLMapping(id = "product", pattern = "/products", viewId = "/listProduct.xhtml"),
-		@URLMapping(id = "addProduct", pattern = "/createProduct", viewId = "/createProduct.xhtml"),
-		@URLMapping(id = "updateProduct", pattern = "/updateProduct", viewId = "/updateProduct.xhtml") })
+@URLMappings(mappings = { @URLMapping(id = "product", pattern = "/admin/products", viewId = "/admin/listProduct.xhtml"),
+		@URLMapping(id = "addProduct", pattern = "/admin/createProduct", viewId = "/admin/createProduct.xhtml"),
+		@URLMapping(id = "updateProduct", pattern = "/admin/updateProduct", viewId = "/admin/updateProduct.xhtml") })
 public class ProductController implements Serializable {
 
 	/**

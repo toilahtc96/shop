@@ -10,7 +10,7 @@ import com.ocpsoft.pretty.faces.annotation.URLMapping;
 @SuppressWarnings("serial")
 @ManagedBean
 @SessionScoped
-@URLMapping(id = "homeClient", pattern = "/dhh/shop", viewId = "/trangnaylanhumotvidumoi.xhtml")
+@URLMapping(id = "homeAdminController", pattern = "/dhh/shop", viewId = "/trangnaylanhumotvidumoi.xhtml")
 public class HomeController implements Serializable {
 
 }

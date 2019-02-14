@@ -23,9 +23,9 @@ import stackjava.com.demojsf.service.CategoryService;
 @ManagedBean(name="categoryController")
 @SessionScoped
 
-@URLMappings(mappings = { @URLMapping(id = "category", pattern = "/category", viewId = "/listCategory.xhtml"),
-		@URLMapping(id = "addCategory", pattern = "/createCategory", viewId = "/createCategory.xhtml"),
-		@URLMapping(id = "updateCategory", pattern = "/updateCategory", viewId = "/updateCategory.xhtml") })
+@URLMappings(mappings = { @URLMapping(id = "category", pattern = "/admin/category", viewId = "/admin/listCategory.xhtml"),
+		@URLMapping(id = "addCategory", pattern = "/admin/createCategory", viewId = "/admin/createCategory.xhtml"),
+		@URLMapping(id = "updateCategory", pattern = "/admin/updateCategory", viewId = "/admin/updateCategory.xhtml") })
 public class CategoryController extends CommonController implements Serializable {
 
 	/**
