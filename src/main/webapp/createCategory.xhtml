@@ -44,11 +44,10 @@
 							<br />
 
 							<h:outputLabel value="Picture: " />
-							<h:inputText styleClass="form-control col-sm-6"
-								value="#{categoryController.createCategoryForm.image}"
+							<h:inputFile styleClass="form-control col-sm-6"
+								value="#{categoryController.image}"
 								id="categoryPicture">
-								<f:validateRequired />
-							</h:inputText>
+							</h:inputFile>
 							<br />
 						</div>
 
@@ -92,7 +91,7 @@
 						</div>
 						<h:commandButton styleClass="btn btn-success" style="width:100%; margin-top:5%"
 								value="Add" type="submit" onclick="checkValidate()"
-								action="#{categoryController.getCreateCategory()}">
+								action="#{categoryController.addCreateCategory()}">
 							</h:commandButton>
 					</h:form>
 				</div>

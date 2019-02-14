@@ -20,7 +20,7 @@ import stackjava.com.demojsf.form.UpdateCategoryForm;
 import stackjava.com.demojsf.model.Category;
 import stackjava.com.demojsf.service.CategoryService;
 
-@ManagedBean
+@ManagedBean(name="categoryController")
 @SessionScoped
 
 @URLMappings(mappings = { @URLMapping(id = "category", pattern = "/category", viewId = "/listCategory.xhtml"),
@@ -110,10 +110,12 @@ public class CategoryController extends CommonController implements Serializable
 		this.list = list;
 	}
 
-	public String getCreateCategory() {
+	public String addCreateCategory() {
 		String catName = this.createCategoryForm.getCatName();
-
 		Part image = this.createCategoryForm.getImage();
+		this.setImage(image);
+		System.out.println("xxx");
+		this.doUpLoad();
 		// String catAlias = this.createCategoryForm.getCatAlias();
 		// String catSeoText = this.createCategoryForm.getCatSeoText();
 		// String catPicture = this.createCategoryForm.getCatPicture();

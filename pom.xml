@@ -20,7 +20,12 @@
 			<version>1.1.14</version>
 		</dependency>
 
-		
+		<!-- https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+			<version>2.2</version>
+		</dependency>
 
 		<dependency>
 
@@ -76,11 +81,11 @@
 			<version>1.2</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/myfaces/myfaces-jsf-api -->
-<dependency>
-    <groupId>myfaces</groupId>
-    <artifactId>myfaces-jsf-api</artifactId>
-    <version>1.0.9</version>
-</dependency>
+		<dependency>
+			<groupId>myfaces</groupId>
+			<artifactId>myfaces-jsf-api</artifactId>
+			<version>1.0.9</version>
+		</dependency>
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -126,6 +131,12 @@
 			<groupId>xml-apis</groupId>
 			<artifactId>xml-apis</artifactId>
 			<version>1.4.01</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.glassfish/javax.faces -->
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.faces</artifactId>
+			<version>2.2.0-m01</version>
 		</dependency>
 
 		<dependency>
