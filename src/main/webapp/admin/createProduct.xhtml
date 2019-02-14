@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet name="bootstrap.css" library="css" />
+</h:head>
+<body>
+	<ui:composition template="../templateAdmin/layout.xhtml">
+		<ui:define name="content">
+			<div class="container">
+				<h:form id="formCreateProduct">
+					<div class="col-sm-6" style="float: left;">
+						<h:outputLabel value="Name: " />
+						<h:inputText styleClass="form-control col-sm-6"
+							value="#{productController.createProductForm.proName}"
+							id="productName"
+							required="#{not empty productController.createProductForm.proName} ">
+							<f:validateRequired />
+						</h:inputText>
+						<br />
+
+						<h:outputLabel value="Price:  " />
+						<h:inputText styleClass="form-control col-sm-6"
+							value="#{productController.createProductForm.proPrice}"
+							id="productPrice">
+							<f:validateRequired />
+						</h:inputText>
+						<br />
+
+						<h:outputLabel value="Description: " />
+						<h:inputText styleClass="form-control col-sm-6"
+							value="#{productController.createProductForm.proDescription}"
+							id="productDescription">
+							<f:validateRequired />
+						</h:inputText>
+						<br />
+
+					</div>
+
+					<div class="col-sm-6" style="float: left;">
+						<h:outputLabel value="Category:  " />
+						<h:selectOneMenu value="#{productController.idCate}"
+							styleClass="form-control col-sm-6" id="selectCate">
+							<c:forEach var="key" items="#{categoryController.keyList}">
+								<f:selectItem itemValue="#{key}"
+									itemLabel="#{categoryController.createCategoryForm.listCate[key]}" />
+							</c:forEach>
+						</h:selectOneMenu>
+						<br />
+
+						<h:outputLabel value="Guarantee: " />
+						<h:inputText styleClass="form-control col-sm-6"
+							value="#{productController.createProductForm.proGuarantee}"
+							id="productGuarantee">
+							<f:validateRequired />
+						</h:inputText>
+						<br />
+
+						<h:commandButton styleClass="btn btn-success" style="width:50%"
+							value="Add" type="submit" onclick="checkValidate()"
+							action="#{productController.getCreateProduct()}">
+						</h:commandButton>
+					</div>
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</body>
+<h:outputScript library="js/vendor" name="jquery-2.2.4.min.js"
+	target="head" />
+<h:outputScript library="js/vendor" name="bootstrap.min.js"
+	target="head" />
+<h:outputScript>
+</h:outputScript>
+</html>

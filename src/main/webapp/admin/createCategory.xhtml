@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:body>
+
+	<ui:composition template="../templateAdmin/layout.xhtml">
+		<ui:define name="content">
+			<div class="container">
+				<h:form id="formCreateCategory">
+					<div class="col-sm-4" style="float: left;">
+						<h:outputLabel value="Name: " />
+						<h:inputText styleClass="form-control col-sm-4"
+							value="#{categoryController.createCategoryForm.catName}"
+							id="categoryName"
+							required="#{not empty categoryController.createCategoryForm.catName} ">
+							<f:validateRequired />
+						</h:inputText>
+						<br />
+
+						<h:outputLabel value="Alias: " />
+						<h:inputText styleClass="form-control col-sm-4"
+							value="#{categoryController.createCategoryForm.catAlias}"
+							id="categoryAlias">
+							<f:validateRequired />
+						</h:inputText>
+						<br />
+
+						<h:outputLabel value="SeoText: " />
+						<h:inputText styleClass="form-control col-sm-4"
+							value="#{categoryController.createCategoryForm.catSeoText}"
+							id="categorySeoText">
+							<f:validateRequired />
+						</h:inputText>
+						<br />
+
+						<h:outputLabel value="Picture: " />
+						<h:inputText styleClass="form-control col-sm-4"
+							value="#{categoryController.createCategoryForm.catPicture}"
+							id="categoryPicture">
+							<f:validateRequired />
+						</h:inputText>
+						<br />
+
+					</div>
+
+
+					<div class="col-sm-4" style="float: left;">
+						<h:outputLabel value="Description: " />
+						<h:inputText styleClass="form-control col-sm-4"
+							value="#{categoryController.createCategoryForm.catDes}"
+							id="categoryDescription">
+							<f:validateRequired />
+						</h:inputText>
+						<br />
+
+						<h:outputLabel value="Type: " />
+						<h:inputText styleClass="form-control col-sm-4"
+							value="#{categoryController.createCategoryForm.catType}"
+							id="categoryType">
+							<f:validateRequired />
+						</h:inputText>
+						<br />
+
+						<h:outputLabel value="Parent ID: " />
+						<h:selectOneMenu value="#{categoryController.idCate}"
+							styleClass="form-control col-sm-4" id="selectCate">
+							<c:forEach var="key" items="#{categoryController.keyList}">
+								<f:selectItem itemValue="#{key}"
+									itemLabel="#{categoryController.createCategoryForm.listCate[key]}" />
+							</c:forEach>
+						</h:selectOneMenu>
+						<br />
+
+						<h:outputLabel value="Slug: " />
+						<h:inputText styleClass="form-control col-sm-4"
+							value="#{categoryController.createCategoryForm.catSlug}"
+							id="categorySlug">
+							<f:validateRequired />
+						</h:inputText>
+						<br /> <br />
+
+						<h:commandButton styleClass="btn btn-success" style="width:100%"
+							value="Add" type="submit" onclick="checkValidate()"
+							action="#{categoryController.getCreateCategory()}">
+						</h:commandButton>
+					</div>
+				</h:form>
+			</div>
+			<br/>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

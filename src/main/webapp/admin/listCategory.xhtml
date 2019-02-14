@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet name="bootstrap.css" library="css" />
+</h:head>
+<body>
+	<ui:composition template="../templateAdmin/layout.xhtml">
+		<ui:define name="content">
+			<div class="container">
+			<!-- 	<table>
+					<tr>
+						<td width="15%" />
+						<td width="15%" />
+						<td></td>
+					</tr>
+				</table> -->
+				<h:form>
+					<h:dataTable value="#{categoryController.list}" var="category"
+						styleClass="table" headerClass="" rowClasses="">
+						<h:column>
+							<f:facet name="header">ID</f:facet>
+							<h:outputText value="#{category.catId}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Name</f:facet>
+							<h:outputText value="#{category.catName}" />
+						</h:column>
+						<!-- <h:column>
+					<f:facet name="header">Alias</f:facet>
+					<h:outputText value="#{category.catAlias}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">SeoText</f:facet>
+					<h:outputText value="#{category.catSeoText}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Picture</f:facet>
+					<h:outputText value="#{category.catPicture}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Description</f:facet>
+					<h:outputText value="#{category.catDescription}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Type</f:facet>
+					<h:outputText value="#{category.catType}" />
+				</h:column> -->
+						<h:column>
+							<f:facet name="header">Active</f:facet>
+							<input type="checkbox" class="form-check-input" id="checkActive"
+								style="margin-left: 1%" />
+							<h:outputText value="#{category.catActive}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Parent</f:facet>
+							<h:outputText value="#{category.catParentId}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Child</f:facet>
+							<h:outputText value="#{category.catHasChild}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Hot</f:facet>
+							<input type="checkbox" class="form-check-input" id="checkHot"
+								style="margin-left: 1%" />
+							<h:outputText value="#{category.catHot}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">New</f:facet>
+							<input type="checkbox" class="form-check-input" id="checkNew"
+								style="margin-left: 1%" />
+							<h:outputText value="#{category.catNew}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Root</f:facet>
+							<input type="checkbox" class="form-check-input" id="checkRoot"
+								style="margin-left: 1%" />
+							<h:outputText value="#{category.catRoot}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Slug</f:facet>
+							<h:outputText value="#{category.catSlug}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Create</f:facet>
+							<h:outputText value="#{category.catCreateAt}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Update</f:facet>
+							<h:outputText value="#{category.catUpdateAt}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Action</f:facet>
+							<h:commandButton
+								action="#{categoryController.doUpdateCategory()}" value="Update"
+								class="btn btn-outline-success btn-sm">
+								<f:param name="id" value="#{category.catId}" />
+							</h:commandButton>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Action</f:facet>
+							<h:commandButton action="#{categoryController.deleteCategory()}"
+								value="Delete" class="btn btn-outline-danger btn-sm">
+								<f:param name="id" value="#{category.catId}" />
+							</h:commandButton>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<button type="button" class="btn btn-primary">
+									<h:outputLink style="color:#ffffff;" value="createCategory">Add category</h:outputLink>
+								</button>
+							</f:facet>
+							
+							<h:inputText type = "file"></h:inputText>
+						</h:column>
+					</h:dataTable>
+
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>
