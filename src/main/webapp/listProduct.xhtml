@@ -3,75 +3,73 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<h:outputStylesheet name="bootstrap.css" library="css" />
 </h:head>
 <body>
-	<div class="container">
-		<table>
-			<tr>
-				<td width="15%" />
-				<td width="15%" />
-				<td></td>
-			</tr>
-		</table>
-		<h:form>
-			<h:dataTable value="#{productController.list}" var="product"
-				styleClass="table" headerClass="" rowClasses="">
-				<h:column>
-					<f:facet name="header">ID</f:facet>
-					<h:outputText value="#{product.proId}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">Name</f:facet>
-					<h:outputText value="#{product.proName}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">Category</f:facet>
-					<h:outputText value="#{product.proCategoryId}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">Price</f:facet>
-					<h:outputText value="#{product.proPrice}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">Active</f:facet>
-					<input type="checkbox" class="form-check-input" id="checkActive"
-						style="margin-left: 1%" />
-					<h:outputText value="#{product.proActive}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">Description</f:facet>
-					<h:outputText value="#{product.proDescription}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">Guarantee</f:facet>
-					<h:outputText value="#{product.proGuarantee}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">Action</f:facet>
-					<h:commandButton action="#{productController.updateProduct()}"
-						value="Update" class="btn btn-outline-success btn-sm">
-						<f:param name="id" value="#{product.proId}" />
-					</h:commandButton>
-				</h:column>
-				<h:column>
-					<f:facet name="header">Action</f:facet>
-					<h:commandButton action="#{productController.deleteProduct()}"
-						value="Delete" class="btn btn-outline-danger btn-sm">
-						<f:param name="id" value="#{product.proId}" />
-					</h:commandButton>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<button type="button" class="btn btn-primary">
-							<h:outputLink style="color:#ffffff;" value="createProduct">Add Product</h:outputLink>
-						</button>
-					</f:facet>
-				</h:column>
-			</h:dataTable>
-		</h:form>
-	</div>
+	<ui:composition template="/templateAdmin/layout.xhtml">
+		<ui:define name="content">
+			<div class="container">
+				<h:form>
+					<h:dataTable value="#{productController.list}" var="product"
+						styleClass="table" headerClass="" rowClasses="">
+						<h:column>
+							<f:facet name="header">ID</f:facet>
+							<h:outputText value="#{product.proId}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Name</f:facet>
+							<h:outputText value="#{product.proName}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Category</f:facet>
+							<h:outputText value="#{product.proCategoryId}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Price</f:facet>
+							<h:outputText value="#{product.proPrice}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Active</f:facet>
+							<input type="checkbox" class="form-check-input" id="checkActive"
+								style="margin-left: 1%" />
+							<h:outputText value="#{product.proActive}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Description</f:facet>
+							<h:outputText value="#{product.proDescription}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Guarantee</f:facet>
+							<h:outputText value="#{product.proGuarantee}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Action</f:facet>
+							<h:commandButton action="#{productController.updateProduct()}"
+								value="Update" class="btn btn-outline-success btn-sm">
+								<f:param name="id" value="#{product.proId}" />
+							</h:commandButton>
+						</h:column>
+						<h:column>
+							<f:facet name="header">Action</f:facet>
+							<h:commandButton action="#{productController.deleteProduct()}"
+								value="Delete" class="btn btn-outline-danger btn-sm">
+								<f:param name="id" value="#{product.proId}" />
+							</h:commandButton>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<button type="button" class="btn btn-primary">
+									<h:outputLink style="color:#ffffff;" value="createProduct">Add Product</h:outputLink>
+								</button>
+							</f:facet>
+						</h:column>
+					</h:dataTable>
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
 </body>
 </html>
