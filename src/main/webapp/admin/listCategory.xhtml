@@ -94,17 +94,17 @@
 							<f:facet name="header">Update</f:facet>
 							<h:outputText value="#{category.catUpdateAt}" />
 						</h:column>
-						<h:column>
+						<!-- <h:column>
 							<f:facet name="header">Action</f:facet>
 							<h:commandButton
-								action="#{categoryController.doUpdateCategory()}" value="Update"
+								action="#{categoryController.getUpdateCategory}" value="Update"
 								class="btn btn-outline-success btn-sm">
-								<f:param name="id" value="#{category.catId}" /><!-- hieu khong lam nhu nay la dc -->
+								<f:param name="id" value="#{category.catId}" />
 							</h:commandButton>
 						</h:column>
 						<h:column>
 							<f:facet name="header">Action</f:facet>
-							<h:commandButton action="#{categoryController.deleteCategory()}"
+							<h:commandButton action="#{categoryController.deleteCategory}"
 								value="Delete" class="btn btn-outline-danger btn-sm">
 								<f:param name="id" value="#{category.catId}" />
 							</h:commandButton>
@@ -117,7 +117,7 @@
 							</f:facet>
 							
 							<h:inputText type = "file"></h:inputText>
-						</h:column>
+						</h:column> -->
 					</h:dataTable>
 
 				</h:form>

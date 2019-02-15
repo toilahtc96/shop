@@ -41,6 +41,7 @@ public class CategoryDAO implements ModelDaoInterface<Category> , Serializable{
 
 	public CategoryDAO() {
 		super();
+		
 //		BasicConfigurator.configure();
 	}
 
