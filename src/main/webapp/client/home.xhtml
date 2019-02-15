@@ -187,10 +187,10 @@
 												</a>
 												<!-- <span class="lnr lnr-move"></span>  -->
 												<h:commandLink  class="social-info"
-													action="#{productController.productDetail}">
+													action="#{productController.productDetail(item.proId)}">
 													<span class="lnr lnr-move"></span>
 													<p class="hover-text">view more</p>
-													<f:param name="id" value="#{product.proId}" />
+													<!-- <f:param name="id" value="#{product.proId}" /> -->
 												</h:commandLink>
 												<!-- <p class="hover-text">view more</p> -->
 												<!-- cai nay la chi tiet product commandButton -->

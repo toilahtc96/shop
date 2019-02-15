@@ -133,10 +133,10 @@ public class ProductController implements Serializable {
 		// updateCategoryForm.setCatID(cate.getCatId());
 		// return "updateCategory?faces-redirect=true";
 	}
-
-	public String productDetail() {
-		FacesContext fc = FacesContext.getCurrentInstance();
-		int id = (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
+	
+	public String productDetail(int id) {
+//		FacesContext fc = FacesContext.getCurrentInstance();
+//		int id = (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
 		System.out.println(id);
 		Product pro = productService.getById(id);
 		productDetailForm = new ProductDetailForm();
