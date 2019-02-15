@@ -1,4 +1,5 @@
 package stackjava.com.demojsf.controller.admin;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +17,8 @@ import com.ocpsoft.pretty.faces.annotation.URLMappings;
 
 import stackjava.com.demojsf.dao.ProductDAO;
 import stackjava.com.demojsf.form.CreateProductForm;
+import stackjava.com.demojsf.form.ProductDetailForm;
+import stackjava.com.demojsf.form.UpdateCategoryForm;
 import stackjava.com.demojsf.form.UpdateProductForm;
 import stackjava.com.demojsf.model.Category;
 import stackjava.com.demojsf.model.Product;
@@ -36,7 +39,7 @@ public class ProductController implements Serializable {
 	List<Product> list;
 
 	private int idCate;
-	
+
 	public int getIdCate() {
 		return idCate;
 	}
@@ -93,7 +96,21 @@ public class ProductController implements Serializable {
 	public void setUpdateProductForm(UpdateProductForm updateProductForm) {
 		this.updateProductForm = updateProductForm;
 	}
-	
+
+	@ManagedProperty(value = "#{productDetailForm}")
+	ProductDetailForm productDetailForm;
+
+	public ProductDetailForm getProductDetailForm() {
+		if (productDetailForm == null) {
+			productDetailForm = new ProductDetailForm();
+		}
+		return productDetailForm;
+	}
+
+	public void setProductDetailForm(ProductDetailForm productDetailForm) {
+		this.productDetailForm = productDetailForm;
+	}
+
 	public String getCreateProduct() {
 		String proName = this.createProductForm.getProName();
 		int idCategory = this.getIdCate();
@@ -110,6 +127,22 @@ public class ProductController implements Serializable {
 		Product pro = new Product(id, name, null, null, null, null, null, null, null, null, null);
 		productService.update(id, pro);
 		return "listProduct?faces-redirect=true";
+
+		// updateCategoryForm = new UpdateCategoryForm();
+		// updateCategoryForm.setCatName(cate.getCatName());
+		// updateCategoryForm.setCatID(cate.getCatId());
+		// return "updateCategory?faces-redirect=true";
+	}
+
+	public String productDetail() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		int id = (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
+		System.out.println(id);
+		Product pro = productService.getById(id);
+		productDetailForm = new ProductDetailForm();
+		productDetailForm.setProID(pro.getProId());
+		productDetailForm.setProName(pro.getProName());
+		return "productDetail?faces-redirect=true";
 	}
 
 	public String updateProduct() {
@@ -121,18 +154,12 @@ public class ProductController implements Serializable {
 		updateProductForm.setProId(pro.getProId());
 		return "updateProduct?faces-redirect=true";
 	}
-	
+
 	public String deleteProduct() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		int id = (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
 		productService.removeById(id);
 		return "listProduct?faces-redirect=true";
 	}
-	
-	public String productDetail() {
-		return "productDetail?faces-redirect=true";
-	}
-
-	
 
 }

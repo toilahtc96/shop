@@ -1,6 +1,7 @@
 package stackjava.com.demojsf.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -83,15 +84,15 @@ public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
 	
 	@SuppressWarnings({ "unchecked", "unused" })
 	public List<Product> getListFilter(){
-//		@SuppressWarnings("static-access")
-//		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
-//		Transaction transObj = sessionObj.beginTransaction();
-//		List<Product> listPro = sessionObj.createCriteria(Product.class).list();
-//		return listPro;
-//		 Query query = getSessionHibernate.getSessionFactory().getCurrentSession().createQuery("from  " + Product.class.getProActive() + " where pro_active = 1 ");
-//		    query.setParameter("username", username);
-//		    return (MemberModel) query.uniqueResult();
-		return null;
+		@SuppressWarnings("static-access")
+		List<Product> listFilter = new ArrayList<Product>();
+		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
+		Transaction transObj = sessionObj.beginTransaction();
+		 Query query = sessionObj.createQuery("from  " + Product.class.getName() + " where pro_active = :hiep ");
+		 query.setParameter("hiep", "1");
+		 listFilter = (List<Product>) query.setMaxResults(8).list();
+		 return listFilter;
+		
 	}
 
 }
