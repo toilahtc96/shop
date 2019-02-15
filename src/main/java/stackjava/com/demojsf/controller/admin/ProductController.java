@@ -11,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.Part;
 
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
@@ -28,9 +29,9 @@ import stackjava.com.demojsf.service.ProductService;
 @ManagedBean(name = "productController")
 @SessionScoped
 @URLMappings(mappings = { @URLMapping(id = "product", pattern = "/admin/products", viewId = "/admin/listProduct.xhtml"),
-		@URLMapping(id = "addProduct", pattern = "/admin/createProduct", viewId = "/admin/createProduct.xhtml"),
-		@URLMapping(id = "updateProduct", pattern = "/admin/updateProduct", viewId = "/admin/updateProduct.xhtml") })
-public class ProductController implements Serializable {
+		@URLMapping(id = "addProductx", pattern = "/admin/createProduct", viewId = "/admin/createProduct.xhtml"),
+		@URLMapping(id = "updateProductx", pattern = "/admin/updateProduct", viewId = "/admin/updateProduct.xhtml") })
+public class ProductController extends CommonController implements Serializable {
 
 	/**
 	 * 
@@ -111,14 +112,22 @@ public class ProductController implements Serializable {
 		this.productDetailForm = productDetailForm;
 	}
 
-	public String getCreateProduct() {
-		String proName = this.createProductForm.getProName();
-		int idCategory = this.getIdCate();
+	public String addAbcProduct() {
+		System.out.println("add Product");
+		String proName = " ";
+		if (this.createProductForm.getProName() != null) {
+			proName = this.createProductForm.getProName();
+		}
+
+		int idCategory = 1;
+		Part image = this.createProductForm.getProImg();
+		this.setImage(image);
+		this.doUpLoad();
 		Product pro = new Product();
 		pro.setProName(proName);
 		pro.setProCategoryId(idCategory);
 		productService.add(pro);
-		return "listProduct?faces-redirect=true";
+		return "/admin/products";
 	}
 
 	public String doUpdateProduct() {
@@ -133,10 +142,11 @@ public class ProductController implements Serializable {
 		// updateCategoryForm.setCatID(cate.getCatId());
 		// return "updateCategory?faces-redirect=true";
 	}
-	
+
 	public String productDetail(int id) {
-//		FacesContext fc = FacesContext.getCurrentInstance();
-//		int id = (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
+		// FacesContext fc = FacesContext.getCurrentInstance();
+		// int id =
+		// (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
 		System.out.println(id);
 		Product pro = productService.getById(id);
 		productDetailForm = new ProductDetailForm();

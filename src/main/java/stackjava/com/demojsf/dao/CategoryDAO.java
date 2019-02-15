@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.apache.log4j.BasicConfigurator;
 import stackjava.com.demojsf.model.Category;
@@ -19,7 +21,7 @@ import stackjava.com.demojsf.connection.GetSessionHibernate;
 
 @ManagedBean
 @SessionScoped
-public class CategoryDAO implements ModelDaoInterface<Category> , Serializable{
+public class CategoryDAO implements ModelDaoInterface<Category>, Serializable {
 
 	/**
 	 * 
@@ -28,12 +30,12 @@ public class CategoryDAO implements ModelDaoInterface<Category> , Serializable{
 	@ManagedProperty(value = "#{getSessionHibernate}")
 	GetSessionHibernate getSessionHibernate;
 
-//	public GetSessionHibernate getGetSessionHibernate() {
-//		if (getSessionHibernate == null) {
-//			getSessionHibernate = new GetSessionHibernate();
-//		}
-//		return getSessionHibernate;
-//	}
+	// public GetSessionHibernate getGetSessionHibernate() {
+	// if (getSessionHibernate == null) {
+	// getSessionHibernate = new GetSessionHibernate();
+	// }
+	// return getSessionHibernate;
+	// }
 
 	public void setGetSessionHibernate(GetSessionHibernate getSessionHibernate) {
 		this.getSessionHibernate = getSessionHibernate;
@@ -41,8 +43,8 @@ public class CategoryDAO implements ModelDaoInterface<Category> , Serializable{
 
 	public CategoryDAO() {
 		super();
-		
-//		BasicConfigurator.configure();
+
+		// BasicConfigurator.configure();
 	}
 
 	@Override
@@ -52,7 +54,7 @@ public class CategoryDAO implements ModelDaoInterface<Category> , Serializable{
 			Session session = getSessionHibernate.getSessionFactory().openSession();
 			cate = (Category) session.get(Category.class, id);
 			System.out.println(cate.getCatName());
-			
+
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
@@ -60,12 +62,14 @@ public class CategoryDAO implements ModelDaoInterface<Category> , Serializable{
 		return cate;
 	}
 
-
 	@SuppressWarnings({ "unchecked", "unused" })
 	@Override
 	public List<Category> getAll() {
+
+		FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		@SuppressWarnings("static-access")
 		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
+
 		Transaction transObj = sessionObj.beginTransaction();
 		List<Category> listCate = sessionObj.createCriteria(Category.class).list();
 		return listCate;
@@ -73,18 +77,21 @@ public class CategoryDAO implements ModelDaoInterface<Category> , Serializable{
 
 	@Override
 	public int removeById(int id) {
-//		CategoryDAO categoryDAO = new CategoryDAO();
+		// CategoryDAO categoryDAO = new CategoryDAO();
 		Category cate = this.getById(id);
 		return getSessionHibernate.deleteRecord(cate);
 	}
-//	@SuppressWarnings({ "unused" })
+
+	// @SuppressWarnings({ "unused" })
 	@Override
 	public int update(int id, Category e) {
 		// TODO Auto-generated method stub
-//		@SuppressWarnings("static-access")
-//		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
-//		Transaction transObj = sessionObj.beginTransaction();
-//		Category cate = new Category(id, "Hiep dep trai", null, null, null, null, null, null, null, null, null, null, null, null, null, null);
+		// @SuppressWarnings("static-access")
+		// Session sessionObj =
+		// getSessionHibernate.getSessionFactory().getCurrentSession();
+		// Transaction transObj = sessionObj.beginTransaction();
+		// Category cate = new Category(id, "Hiep dep trai", null, null, null, null,
+		// null, null, null, null, null, null, null, null, null, null);
 		return getSessionHibernate.updateRecord(e);
 	}
 
@@ -92,6 +99,5 @@ public class CategoryDAO implements ModelDaoInterface<Category> , Serializable{
 	public int add(Category e) {
 		return getSessionHibernate.createRecord(e);
 	}
-	
 
 }

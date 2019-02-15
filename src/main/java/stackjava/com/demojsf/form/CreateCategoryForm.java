@@ -22,6 +22,15 @@ public class CreateCategoryForm implements Serializable {
 	int catChild;
 	int catHot;
 	int catNew;
+	String catPicture;
+	public String getCatPicture() {
+		return catPicture;
+	}
+
+	public void setCatPicture(String catPicture) {
+		this.catPicture = catPicture;
+	}
+
 	int catRoot;
 	String catSlug;
 	Date catCreat;

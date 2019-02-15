@@ -3,7 +3,7 @@ package stackjava.com.demojsf.form;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
-
+import javax.servlet.http.Part;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
@@ -16,8 +16,16 @@ public class CreateProductForm implements Serializable {
 	int proActive;
 	String proDescription;
 	Date proGuarantee;
-	
-	
+	Part proImg;
+
+	public Part getProImg() {
+		return proImg;
+	}
+
+	public void setProImg(Part proImg) {
+		this.proImg = proImg;
+	}
+
 	public float getProPrice() {
 		return proPrice;
 	}
@@ -58,7 +66,7 @@ public class CreateProductForm implements Serializable {
 		this.selectCate = selectCate;
 	}
 
-	//de phuc vu cho selectBox
+	// de phuc vu cho selectBox
 	HashMap<Integer, String> lstCate;
 
 	public HashMap<Integer, String> getLstCate() {
@@ -74,6 +82,9 @@ public class CreateProductForm implements Serializable {
 	}
 
 	public void setProName(String proName) {
+		if(proName ==null) {
+			this.proName = "";
+		}
 		this.proName = proName;
 	}
 
