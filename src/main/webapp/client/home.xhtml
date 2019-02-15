@@ -3,6 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:body>
 
@@ -152,41 +153,48 @@
 					<div class="row">
 						<!-- single product -->
 						<ui:repeat value="#{clientHomeController.list}" var="item">
-						<!-- phai co 1 cai form o day  -->
-						<div class="col-lg-3 col-md-6">
-						
-							<div class="single-product">
-							
-							<h:inputHidden value="#{item.proId}" />
-								<h:graphicImage class="img-fluid" name="img/product/p1.jpg"
-									alt="" />
-									<!-- cai nay sau nay cho image cua minh vao -->
-								<div class="product-details">
-									<h6><h:outputText value="#{item.proDescription}" /></h6>
-									
-									<div class="price">
-										<h6><h:outputText value="#{item.proPrice}"/> </h6>
-										<h6 class="l-through">$210.00</h6>
-									</div>
-									<div class="prd-bottom">
-										<a href="" class="social-info"> <span class="ti-bag"></span>
-											<p class="hover-text">add to bag</p>
-											<!-- cai nay la mot commandbutton vs action addToCart -->
-										</a> <a href="" class="social-info"> <span
-											class="lnr lnr-heart"></span>
-											<p class="hover-text">Wishlist</p>
-										</a> <a href="" class="social-info"> <span
-											class="lnr lnr-sync"></span>
-											<p class="hover-text">compare</p>
-										</a> <a href="" class="social-info"> <span
-											class="lnr lnr-move"></span>
-											<p class="hover-text">view more</p>
-											<!-- cai nay la chi tiet product commandButton -->
-										</a>
+							<!-- phai co 1 cai form o day  -->
+							<h:form>
+								<div class="col-lg-3 col-md-6">
+
+									<div class="single-product">
+
+										<h:inputHidden value="#{item.proId}" />
+										<h:graphicImage class="img-fluid" name="img/product/p1.jpg"
+											alt="" />
+										<!-- cai nay sau nay cho image cua minh vao -->
+										<div class="product-details">
+											<h6>
+												<h:outputText value="#{item.proDescription}" />
+											</h6>
+
+											<div class="price">
+												<h6>
+													<h:outputText value="#{item.proPrice}" />
+												</h6>
+												<h6 class="l-through">$210.00</h6>
+											</div>
+											<div class="prd-bottom">
+												<a href="" class="social-info"> <span class="ti-bag"></span>
+													<p class="hover-text">add to bag</p> <!-- cai nay la mot commandbutton vs action addToCart -->
+												</a> <a href="" class="social-info"> <span
+													class="lnr lnr-heart"></span>
+													<p class="hover-text">Wishlist</p>
+												</a> <a href="" class="social-info"> <span
+													class="lnr lnr-sync"></span>
+													<p class="hover-text">compare</p>
+												</a> <a href="" class="social-info"> <!-- <span class="lnr lnr-move"></span>  -->
+													<h:commandButton
+														action="#{productController.productDetail()}"
+														value="View More">
+														<f:param name="id" value="#{product.proId}" />
+													</h:commandButton> <!-- <p class="hover-text">view more</p> --> <!-- cai nay la chi tiet product commandButton -->
+												</a>
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
-						</div>
+							</h:form>
 						</ui:repeat>
 					</div>
 				</div>
@@ -195,8 +203,7 @@
 				<!-- <ui:repeat value="#{cart.items}" var="item">
             <h:commandButton value="#{item}" />
         </ui:repeat>  -->
-			</ui:remove>
-			 <!-- single product slide -->
+			</ui:remove> <!-- single product slide -->
 			<div class="single-product-slider">
 				<div class="container">
 					<div class="row justify-content-center">
@@ -560,19 +567,24 @@
 				<div class="row">
 					<div class="col-lg-9">
 						<div class="row">
-							<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-								<div class="single-related-product d-flex">
-									<a href="#"><h:graphicImage name="img/r1.jpg" alt="" /></a>
-									<div class="desc">
-										<a href="#" class="title">Black lace Heels</a>
-										<div class="price">
-											<h6>$189.00</h6>
-											<h6 class="l-through">$210.00</h6>
+							<ui:repeat value="#{clientHomeController.list}" var="pro">
+								<h:form>
+									<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+										<div class="single-related-product d-flex">
+											<a href="#"><h:graphicImage name="img/r1.jpg" alt="" /></a>
+											<div class="desc">
+												<a href="#" class="title">Black lace Heels</a>
+												<div class="price">
+													<h6>$189.00</h6>
+													<h6 class="l-through">$210.00</h6>
+												</div>
+											</div>
 										</div>
 									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+								</h:form>
+							</ui:repeat>
+
+							<!-- <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 								<div class="single-related-product d-flex">
 									<a href="#"><h:graphicImage name="img/r2.jpg" alt="" /></a>
 									<div class="desc">
@@ -583,8 +595,8 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+							</div> -->
+							<!-- <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 								<div class="single-related-product d-flex">
 									<a href="#"><h:graphicImage name="img/r3.jpg" alt="" /></a>
 									<div class="desc">
@@ -595,8 +607,8 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+							</div> -->
+							<!-- <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 								<div class="single-related-product d-flex">
 									<a href="#"><h:graphicImage name="img/r5.jpg" alt="" /></a>
 									<div class="desc">
@@ -607,8 +619,8 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+							</div> -->
+							<!-- <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 								<div class="single-related-product d-flex">
 									<a href="#"><h:graphicImage name="img/r6.jpg" alt="" /></a>
 									<div class="desc">
@@ -619,8 +631,8 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+							</div> -->
+							<!-- <div class="col-lg-4 col-md-4 col-sm-6 mb-20">
 								<div class="single-related-product d-flex">
 									<a href="#"><h:graphicImage name="img/r7.jpg" alt="" /></a>
 									<div class="desc">
@@ -631,8 +643,8 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6">
+							</div> -->
+							<!-- <div class="col-lg-4 col-md-4 col-sm-6">
 								<div class="single-related-product d-flex">
 									<a href="#"><h:graphicImage name="img/r9.jpg" alt="" /></a>
 									<div class="desc">
@@ -643,8 +655,8 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6">
+							</div> -->
+							<!-- <div class="col-lg-4 col-md-4 col-sm-6">
 								<div class="single-related-product d-flex">
 									<a href="#"><h:graphicImage name="img/r10.jpg" alt="" /></a>
 									<div class="desc">
@@ -655,8 +667,8 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-lg-4 col-md-4 col-sm-6">
+							</div> -->
+							<!-- <div class="col-lg-4 col-md-4 col-sm-6">
 								<div class="single-related-product d-flex">
 									<a href="#"><h:graphicImage name="img/r11.jpg" alt="" /></a>
 									<div class="desc">
@@ -667,7 +679,7 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
 					<div class="col-lg-3">

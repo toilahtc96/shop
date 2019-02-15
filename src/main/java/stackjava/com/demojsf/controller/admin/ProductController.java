@@ -1,5 +1,4 @@
-package stackjava.com.demojsf.controller;
-
+package stackjava.com.demojsf.controller.admin;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -129,5 +128,11 @@ public class ProductController implements Serializable {
 		productService.removeById(id);
 		return "listProduct?faces-redirect=true";
 	}
+	
+	public String productDetail() {
+		return "productDetail?faces-redirect=true";
+	}
+
+	
 
 }

@@ -1,5 +1,4 @@
-package stackjava.com.demojsf.controller;
-
+package stackjava.com.demojsf.controller.admin;
 import java.io.IOException;
 import java.io.Serializable;
 

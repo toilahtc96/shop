@@ -1,4 +1,4 @@
-package stackjava.com.demojsf.controller;
+package stackjava.com.demojsf.controller.admin;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,10 +27,6 @@ import stackjava.com.demojsf.service.CategoryService;
 		@URLMapping(id = "addCategory", pattern = "/admin/createCategory", viewId = "/admin/createCategory.xhtml"),
 		@URLMapping(id = "updateCategory", pattern = "/admin/updateCategory", viewId = "/admin/updateCategory.xhtml") })
 public class CategoryController extends CommonController implements Serializable {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	List<Category> list;

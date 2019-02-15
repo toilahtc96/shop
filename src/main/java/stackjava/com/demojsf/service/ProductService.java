@@ -54,5 +54,9 @@ public class ProductService implements ModelServiceInterface<Product> , Serializ
 		// TODO Auto-generated method stub
 		return productDAO.removeById(id);
 	}
+	
+	public List<Product> getListFilter(){
+		return productDAO.getListFilter();
+	}
 
 }

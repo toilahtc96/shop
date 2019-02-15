@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -78,6 +79,19 @@ public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
 		// TODO Auto-generated method stub
 		
 		return getSessionHibernate.createRecord(e);
+	}
+	
+	@SuppressWarnings({ "unchecked", "unused" })
+	public List<Product> getListFilter(){
+//		@SuppressWarnings("static-access")
+//		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
+//		Transaction transObj = sessionObj.beginTransaction();
+//		List<Product> listPro = sessionObj.createCriteria(Product.class).list();
+//		return listPro;
+//		 Query query = getSessionHibernate.getSessionFactory().getCurrentSession().createQuery("from  " + Product.class.getProActive() + " where pro_active = 1 ");
+//		    query.setParameter("username", username);
+//		    return (MemberModel) query.uniqueResult();
+		return null;
 	}
 
 }

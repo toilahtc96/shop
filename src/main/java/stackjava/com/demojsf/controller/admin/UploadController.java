@@ -1,5 +1,4 @@
-package stackjava.com.demojsf.controller;
-import java.io.File;
+package stackjava.com.demojsf.controller.admin;import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.Serializable;
