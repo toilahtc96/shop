@@ -127,7 +127,7 @@ public class CategoryController extends CommonController implements Serializable
 		cat.setCatName(catName);
 		categoryService.add(cat);
 		System.out.println("sussceess");
-		return "listCategory?faces-redirect=true";
+		return "/admin/categories?faces-redirect=true";
 	}
 
 	public String getUpdateCategory() {

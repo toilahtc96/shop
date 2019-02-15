@@ -12,7 +12,7 @@
 	<ui:composition template="../templateAdmin/layout.xhtml">
 		<ui:define name="content">
 			<div class="container">
-			<!-- 	<table>
+				<!-- 	<table>
 					<tr>
 						<td width="15%" />
 						<td width="15%" />
@@ -30,26 +30,26 @@
 							<f:facet name="header">Name</f:facet>
 							<h:outputText value="#{category.catName}" />
 						</h:column>
-						<!-- <h:column>
-					<f:facet name="header">Alias</f:facet>
-					<h:outputText value="#{category.catAlias}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">SeoText</f:facet>
-					<h:outputText value="#{category.catSeoText}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">Picture</f:facet>
-					<h:outputText value="#{category.catPicture}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">Description</f:facet>
-					<h:outputText value="#{category.catDescription}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">Type</f:facet>
-					<h:outputText value="#{category.catType}" />
-				</h:column> -->
+						<h:column>
+							<f:facet name="header">Alias</f:facet>
+							<h:outputText value="#{category.catAlias}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">SeoText</f:facet>
+							<h:outputText value="#{category.catSeoText}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Picture</f:facet>
+							<h:outputText value="#{category.catPicture}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Description</f:facet>
+							<h:outputText value="#{category.catDescription}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">Type</f:facet>
+							<h:outputText value="#{category.catType}" />
+						</h:column>
 						<h:column>
 							<f:facet name="header">Active</f:facet>
 							<input type="checkbox" class="form-check-input" id="checkActive"
@@ -94,10 +94,10 @@
 							<f:facet name="header">Update</f:facet>
 							<h:outputText value="#{category.catUpdateAt}" />
 						</h:column>
-						<!-- <h:column>
+						 <h:column>
 							<f:facet name="header">Action</f:facet>
 							<h:commandButton
-								action="#{categoryController.getUpdateCategory}" value="Update"
+								action="#{categoryController.doUpdateCategory}" value="Update"
 								class="btn btn-outline-success btn-sm">
 								<f:param name="id" value="#{category.catId}" />
 							</h:commandButton>
@@ -117,7 +117,7 @@
 							</f:facet>
 							
 							<h:inputText type = "file"></h:inputText>
-						</h:column> -->
+						</h:column> 
 					</h:dataTable>
 
 				</h:form>

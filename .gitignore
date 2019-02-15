@@ -49,3 +49,6 @@ src/main/webapp/template/Layout.xhtml
 
 .settings/org.eclipse.jdt.core.prefs
 .project
+.settings/org.eclipse.wst.common.project.facet.core.xml
+.classpath
+.classpath

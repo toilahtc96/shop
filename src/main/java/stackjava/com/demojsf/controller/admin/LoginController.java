@@ -67,7 +67,7 @@ public class LoginController implements Serializable {
 			if (user != null) {
 				context.getExternalContext().getSessionMap().put("user", user);
 				try {
-					context.getExternalContext().redirect("/JavaServerFaces/admin/home");
+					context.getExternalContext().redirect("DemoJSF/admin/home");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -84,7 +84,7 @@ public class LoginController implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		context.getExternalContext().invalidateSession();
 		try {
-			context.getExternalContext().redirect("/JavaServerFaces");
+			context.getExternalContext().redirect("/DemoJSF");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
