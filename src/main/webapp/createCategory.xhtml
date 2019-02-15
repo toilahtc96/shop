@@ -23,7 +23,7 @@
 								value="#{categoryController.createCategoryForm.catName}"
 								id="categoryName"
 								required="#{not empty categoryController.createCategoryForm.catName} ">
-								<f:validateRequired />
+								 
 							</h:inputText>
 							<br />
 
@@ -31,7 +31,7 @@
 							<h:inputText styleClass="form-control col-sm-6"
 								value="#{categoryController.createCategoryForm.catAlias}"
 								id="categoryAlias">
-								<f:validateRequired />
+								 
 							</h:inputText>
 							<br />
 
@@ -39,7 +39,7 @@
 							<h:inputText styleClass="form-control col-sm-6"
 								value="#{categoryController.createCategoryForm.catSeoText}"
 								id="categorySeoText">
-								<f:validateRequired />
+								 
 							</h:inputText>
 							<br />
 
@@ -57,7 +57,7 @@
 							<h:inputText styleClass="form-control col-sm-6"
 								value="#{categoryController.createCategoryForm.catDes}"
 								id="categoryDescription">
-								<f:validateRequired />
+								 
 							</h:inputText>
 							<br />
 
@@ -65,7 +65,7 @@
 							<h:inputText styleClass="form-control col-sm-6"
 								value="#{categoryController.createCategoryForm.catType}"
 								id="categoryType">
-								<f:validateRequired />
+								 
 							</h:inputText>
 							<br />
 
@@ -83,7 +83,7 @@
 							<h:inputText styleClass="form-control col-sm-6"
 								value="#{categoryController.createCategoryForm.catSlug}"
 								id="categorySlug">
-								<f:validateRequired />
+								 
 							</h:inputText>
 							<br /> <br />
 
@@ -91,7 +91,7 @@
 						</div>
 						<h:commandButton styleClass="btn btn-success" style="width:100%; margin-top:5%"
 								value="Add" type="submit" onclick="checkValidate()"
-								action="#{categoryController.addCreateCategory()}">
+								action="#{categoryController.addCreateCategory}">
 							</h:commandButton>
 					</h:form>
 				</div>
