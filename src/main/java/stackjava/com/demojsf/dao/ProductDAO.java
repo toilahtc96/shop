@@ -15,6 +15,7 @@ import org.hibernate.Transaction;
 import stackjava.com.demojsf.connection.GetSessionHibernate;
 import stackjava.com.demojsf.model.Category;
 import stackjava.com.demojsf.model.Product;
+
 @ManagedBean
 @SessionScoped
 public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
@@ -25,17 +26,15 @@ public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
 	private static final long serialVersionUID = 1L;
 	@ManagedProperty(value = "#{getSessionHibernate}")
 	GetSessionHibernate getSessionHibernate;
-	
+
 	public void setGetSessionHibernate(GetSessionHibernate getSessionHibernate) {
 		this.getSessionHibernate = getSessionHibernate;
 	}
 
-	
 	public ProductDAO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 
 	@Override
 	public Product getById(int id) {
@@ -44,14 +43,14 @@ public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
 			Session session = getSessionHibernate.getSessionFactory().openSession();
 			pro = (Product) session.get(Product.class, id);
 			System.out.println(pro.getProName());
-			
+
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
 
 		return pro;
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "unused" })
 	@Override
 	public List<Product> getAll() {
@@ -64,7 +63,7 @@ public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
 
 	@Override
 	public int removeById(int id) {
-//		ProductDAO productDAO = new ProductDAO();
+		// ProductDAO productDAO = new ProductDAO();
 		Product pro = this.getById(id);
 		return getSessionHibernate.deleteRecord(pro);
 	}
@@ -78,21 +77,33 @@ public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
 	@Override
 	public int add(Product e) {
 		// TODO Auto-generated method stub
-		
+
 		return getSessionHibernate.createRecord(e);
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "unused" })
-	public List<Product> getListFilter(){
-		@SuppressWarnings("static-access")
+	public List<Product> getListFilter() {
 		List<Product> listFilter = new ArrayList<Product>();
+		@SuppressWarnings("static-access")
 		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
 		Transaction transObj = sessionObj.beginTransaction();
-		 Query query = sessionObj.createQuery("from  " + Product.class.getName() + " where pro_active = :hiep ");
-		 query.setParameter("hiep", "1");
-		 listFilter = (List<Product>) query.setMaxResults(8).list();
-		 return listFilter;
-		
+		Query query = sessionObj.createQuery("from  " + Product.class.getName() + " where pro_active = :active ");
+		query.setParameter("active", "1");
+		listFilter = (List<Product>) query.setMaxResults(8).list();
+		return listFilter;
+
+	}
+
+	@SuppressWarnings({ "unchecked", "unused" })
+	public List<Product> getListProByIdCate(int catId) {
+		List<Product> listPro = new ArrayList<Product>();
+		@SuppressWarnings("static-access")
+		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
+		Transaction transObj = sessionObj.beginTransaction();
+		Query query = sessionObj.createQuery("from  " + Product.class.getName() + " where pro_category_id = :catId ");
+		query.setParameter("catId", catId);
+		listPro = query.setMaxResults(6).list();
+		return listPro;
 	}
 
 }

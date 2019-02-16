@@ -158,7 +158,4 @@ public class CategoryController extends CommonController implements Serializable
 		return "listCategory?faces-redirect=true";
 	}
 	
-	public List<Product> getListProFromIdCate(int catId){
-		return null;
-	}
 }
