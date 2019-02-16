@@ -16,6 +16,7 @@ import com.ocpsoft.pretty.faces.annotation.URLMappings;
 import stackjava.com.demojsf.form.CreateCategoryForm;
 import stackjava.com.demojsf.form.UpdateCategoryForm;
 import stackjava.com.demojsf.model.Category;
+import stackjava.com.demojsf.model.Product;
 import stackjava.com.demojsf.service.CategoryService;
 
 @ManagedBean(name="categoryController")
@@ -155,5 +156,9 @@ public class CategoryController extends CommonController implements Serializable
 		int id = (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
 		categoryService.removeById(id);
 		return "listCategory?faces-redirect=true";
+	}
+	
+	public List<Product> getListProFromIdCate(int catId){
+		return null;
 	}
 }

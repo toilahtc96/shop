@@ -17,6 +17,15 @@
 		<!-- Specifying Session Context -->
 		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
 
+
+		<!-- SQL Dialect -->
+       <!--  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property> -->
+ 
+        <!-- Database Connection Settings -->
+<!--         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3307/shop</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password"></property> -->
 		<!-- Mapping With Model Class Containing Annotations -->
 		<mapping class="stackjava.com.demojsf.model.Order" />
 		<mapping class="stackjava.com.demojsf.model.User" />
