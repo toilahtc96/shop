@@ -8,8 +8,7 @@ import javax.faces.bean.SessionScoped;
 import javax.servlet.http.Part;
 
 
-@ManagedBean(name = "uploadController")
-@SessionScoped
+
 public class UploadController implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Part image;

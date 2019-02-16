@@ -88,6 +88,18 @@
     <extension>svg#fontawesomeregular</extension>
     <mime-type>image/svg+xml</mime-type>
   </mime-mapping>
+  <mime-mapping>
+    <extension>less</extension>
+    <mime-type>text/css</mime-type>
+</mime-mapping>
+ <mime-mapping>
+    <extension>css</extension>
+    <mime-type>text/css</mime-type>
+</mime-mapping>
+<mime-mapping>
+    <extension>scss</extension>
+    <mime-type>text/css</mime-type>
+</mime-mapping>
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
