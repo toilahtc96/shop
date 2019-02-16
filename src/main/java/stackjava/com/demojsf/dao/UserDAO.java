@@ -6,14 +6,17 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.jws.soap.SOAPBinding.Use;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import stackjava.com.demojsf.connection.GetSessionHibernate;
+import stackjava.com.demojsf.model.Product;
 import stackjava.com.demojsf.model.User;
 
 @ManagedBean
@@ -44,15 +47,35 @@ public class UserDAO implements ModelDaoInterface<User>, Serializable {
 		return false;
 	}
 
-	public User getUserByEmailAndPassWord(String name, String password) {
+	public boolean checkUser(String email, String password) {
+		getSessionHibernate = new GetSessionHibernate();
+		@SuppressWarnings("static-access")
+		Session session = getSessionHibernate.getSessionFactory().getCurrentSession();
+		Transaction tran = session.beginTransaction();
+//		Query query = session
+//				.createQuery("from  " + User.class.getName() + " where use_email = :email and use_password = :pass");
+//		query.setParameter("email", email);
+//		query.setParameter("pass", password);
+//		User user = new User();
+//		user = (User) query.setMaxResults(1).list();
+		User user = (User) session.createQuery("from  " + User.class.getName() + " where use_email = :email and use_password = :password")
+		.setParameter("email", email).setParameter("password", password).uniqueResult();
+		tran.commit();
+		if (user != null) {
+			return true;
+		}
+		return false;
+	}
+
+	public User getUserByEmailAndPassWord(String email, String password) {
 		getSessionHibernate = new GetSessionHibernate();
 		User user = null;
+		@SuppressWarnings("static-access")
 		Session session = getSessionHibernate.getSessionFactory().getCurrentSession();
 		Transaction tran = session.beginTransaction();
 		user = (User) session
-				.createQuery(
-						"From stackjava.com.demojsf.model.User u where u.userEmail = :email and u.userPassword = :password ")
-				.setParameter("email", name).setParameter("password", password).uniqueResult();
+				.createQuery("from  " + User.class.getName() + " where use_email = :email and use_password = :password")
+				.setParameter("email", email).setParameter("password", password).uniqueResult();
 		tran.commit();
 		if (user != null) {
 			return user;

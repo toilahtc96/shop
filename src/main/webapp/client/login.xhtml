@@ -44,14 +44,16 @@
 						<h:form class="row login_form" action="contact_process.php"
 							method="post" id="contactForm" novalidate="novalidate">
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="name"
+								<h:inputText type="text" class="form-control" id="email" name="email"
 									placeholder="Username" onfocus="this.placeholder = ''"
-									onblur="this.placeholder = 'Username'"/>
+									onblur="this.placeholder = 'Username'"
+									value = "#{clientLoginController.clientLoginForm.email}"/>
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="name"
+								<h:inputSecret type="text" class="form-control" id="password" name="password"
 									placeholder="Password" onfocus="this.placeholder = ''"
-									onblur="this.placeholder = 'Password'"/>
+									onblur="this.placeholder = 'Password'"
+									value = "#{clientLoginController.clientLoginForm.password}"/>
 							</div>
 							<div class="col-md-12 form-group">
 								<div class="creat_account">
@@ -60,8 +62,7 @@
 								</div>
 							</div>
 							<div class="col-md-12 form-group">
-								<button type="submit" value="submit" class="primary-btn">Log
-									In</button>
+								<h:commandButton action="#{clientLoginController.login()}" type="submit" styleClass="primary-btn" value = "Log In"/>
 								<a href="#">Forgot Password?</a>
 							</div>
 						</h:form>

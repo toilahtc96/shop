@@ -57,7 +57,6 @@ public class LoginController implements Serializable {
 	}
 
 	public void login() {
-
 		String email = loginForm.getEmail();
 		String pass = loginForm.getPassword();
 		FacesContext context = FacesContext.getCurrentInstance();
