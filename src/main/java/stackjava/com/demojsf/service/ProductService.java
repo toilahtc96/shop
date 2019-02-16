@@ -58,5 +58,9 @@ public class ProductService implements ModelServiceInterface<Product> , Serializ
 	public List<Product> getListFilter(){
 		return productDAO.getListFilter();
 	}
+	
+	public List<Product> getListPRoByIdCate(int catId){
+		return productDAO.getListProByIdCate(catId);
+	}
 
 }

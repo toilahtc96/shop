@@ -186,5 +186,20 @@ public class ProductController extends CommonController implements Serializable 
 		productService.removeById(id);
 		return "listProduct?faces-redirect=true";
 	}
+	
+	List<Product> listProGetByIdCate;
+	
+	public List<Product> getListProGetByIdCate() {
+		return  listProGetByIdCate;
+	}
+
+	public void setListProGetByIdCate(List<Product> listProGetByIdCate) {
+		this.listProGetByIdCate = listProGetByIdCate;
+	}
+
+	public String getListProByIdCate(int catId){
+		this.listProGetByIdCate = productService.getListPRoByIdCate(catId);
+		return "category?faces-redirect=true";
+	}
 
 }
