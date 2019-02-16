@@ -13,10 +13,10 @@ import javax.servlet.http.Part;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
 
+import stackjava.com.demojsf.common.CommonController;
 import stackjava.com.demojsf.form.CreateCategoryForm;
 import stackjava.com.demojsf.form.UpdateCategoryForm;
 import stackjava.com.demojsf.model.Category;
-import stackjava.com.demojsf.model.Product;
 import stackjava.com.demojsf.service.CategoryService;
 
 @ManagedBean(name="categoryController")
@@ -157,5 +157,4 @@ public class CategoryController extends CommonController implements Serializable
 		categoryService.removeById(id);
 		return "listCategory?faces-redirect=true";
 	}
-	
 }

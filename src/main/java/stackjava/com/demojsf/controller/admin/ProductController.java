@@ -16,6 +16,7 @@ import javax.servlet.http.Part;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
 
+import stackjava.com.demojsf.common.CommonController;
 import stackjava.com.demojsf.dao.ProductDAO;
 import stackjava.com.demojsf.form.CreateProductForm;
 import stackjava.com.demojsf.form.ProductDetailForm;
@@ -153,6 +154,20 @@ public class ProductController extends CommonController implements Serializable 
 		productDetailForm.setProID(pro.getProId());
 		productDetailForm.setProName(pro.getProName());
 		return "productDetail?faces-redirect=true";
+	}
+
+	public void addProductToCookieCart(int id) {
+		if (this.getCookie("cart") != null) {
+			String value = this.getCookie("cart").getValue();
+			value += id;
+			this.setCookie("cart", value , 999999);
+		} else {
+			System.out.println("2");
+			this.setCookie("cart", "" + id, 999999);
+		}
+		if(this.getCookie("cart")!= null) {
+			System.out.println(this.getCookie("cart").getValue());
+		}
 	}
 
 	public String updateProduct() {

@@ -7,6 +7,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -17,7 +18,7 @@ import org.apache.log4j.Logger;
 
 @ManagedBean
 @SessionScoped
-public class GetSessionHibernate {
+public class GetSessionHibernate implements Serializable {
 /*
 	@PostConstruct
 	public void initialiseSession() {
