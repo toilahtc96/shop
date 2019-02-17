@@ -34,9 +34,11 @@
 									<li class="main-nav-list"><a data-toggle="collapse"
 										href="#fruitsVegetable" aria-expanded="false"
 										aria-controls="fruitsVegetable"><span
-											class="lnr lnr-arrow-right"></span> <h:commandLink
+											class="lnr lnr-arrow-right"></span> 
+											<h:commandLink
 												action="#{productController.getListProByIdCate(item.catId)}"
 												value="#{item.catName}">
+												<f:ajax  execute="@this" render=":form1:resultAjax" listener="#{productController.selectRows}"></f:ajax>
 												<f:param name="catId" value="#{category.catId}" />
 											</h:commandLink></a></li>
 								</ul>
@@ -131,8 +133,8 @@
 					<!-- Start Best Seller -->
 
 					<section class="lattest-product-area pb-40 category-list">
-					<h:form>
-						<div class="row">
+					<h:form id="form1">
+						<h:panelGroup class="row" id = "resultAjax">
 							<ui:repeat var="pro"
 								value="#{productController.listProGetByIdCate}">
 								<!-- single product -->
@@ -174,7 +176,7 @@
 									</div>
 								</div>
 							</ui:repeat>
-						</div>
+						</h:panelGroup>
 					</h:form> </section>
 
 					<!-- End Best Seller -->
