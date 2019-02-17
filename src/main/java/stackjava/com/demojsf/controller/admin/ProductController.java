@@ -159,6 +159,7 @@ public class ProductController extends CommonController implements Serializable 
 	public void addProductToCookieCart(int id) {
 		if (this.getCookie("cart") != null) {
 			String value = this.getCookie("cart").getValue();
+			System.out.println(value);
 			value += id;
 			this.setCookie("cart", value , 999999);
 		} else {
@@ -167,6 +168,7 @@ public class ProductController extends CommonController implements Serializable 
 		}
 		if(this.getCookie("cart")!= null) {
 			System.out.println(this.getCookie("cart").getValue());
+			//cho nay sout luon cai if ben tren kia kia?
 		}
 	}
 
