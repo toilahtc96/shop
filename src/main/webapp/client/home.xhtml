@@ -151,6 +151,7 @@
 						</div>
 					</div>
 					<h:form id="homeForm">
+					<h:inputHidden id="cart" value="#{clientHomeController.cart}" />
 						<div class="row">
 							<!-- single product -->
 
@@ -163,6 +164,7 @@
 									<div class="single-product">
 
 										<h:inputHidden value="#{item.proId}" />
+										
 										<h:graphicImage class="img-fluid" name="img/product/p1.jpg"
 											alt="" />
 										<!-- cai nay sau nay cho image cua minh vao -->
@@ -179,7 +181,7 @@
 											</div>
 											<div class="prd-bottom">
 												<h:commandLink class="social-info" id="link"
-													onclick=" return addToCart(#{item.proId});" action = "#{productController.getCart()}">
+													onclick="return addToCart(#{item.proId});">
 													<span class="ti-bag"></span>
 													<p class="hover-text">add to bag</p>
 
@@ -703,42 +705,39 @@
 		</ui:define>
 		<ui:define name="scriptJSF">
 			<h:outputScript>
-			
-		addToCart = function(id){
-			alert(id);
-			var cartString = "{["+id+",1]}";
-			setCookie("cart",cartString,1234);
-			var x = getCookie("cart");
-			alert(x);
-			return true;
-	    }
-			
-			
-		function setCookie(cname, cvalue, exdays) {
-			alert('set');
-			var d = new Date();
-  			d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  			var expires = "expires="+ d.toUTCString();
-  			document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-  			alert('setDone');
-		};
+		addToCart = function (id) {
 
-	function getCookie(cname) {
-		alert('get');
-  		var name = cname + "=";
-  		var decodedCookie = decodeURIComponent(document.cookie);
-		var ca = decodedCookie.split(';');
-  		for(var i = 0; i &lt; ca.length; i++) {
-	    	var c = ca[i];
-    		while (c.charAt(0) == ' ') {
-	      		c = c.substring(1);
-    		}
-    		if (c.indexOf(name) == 0) {
-	      		return c.substring(name.length, c.length);
-    		}
-	  	}
-	  	return "";
+	if (getCookie("cart") === "") {
+		var cartString = "[" + id + ",1]";
+		setCookie("cart", cartString, 100);
+		
+	} else {
+		var cartNow = getCookie("cart").toString();
+		
+		var cartArr = JSON.parse(cartNow);
+		//cartArr is Array
+		//check array length
+		
+		var listId = [];
+		for (i = 0; i &lt; cartArr.length; i++) {
+			listId.push((cartArr[i][0]));
+		}
+		if (!listId.includes(id)) {
+			var item = [id, 1];
+			cartArr.push(item);
+			cartArr = JSON.stringify(cartArr);
+			setCookie("cart",cartArr,1000);
+			alert("Đã Thêm Mới");
+			//var soluong = parseInt($(document).find(".quantity").find(".a_quantity").text()) + 1;
+			//$(document).find(".quantity").find(".a_quantity").text(soluong);
+		} else {
+			alert("Sản Phẩm Đã Có Trong Giở Hàng Của Bạn");
+		}
 	}
+	$("#homeForm\\:cart").val(getCookie("cart"));
+	return true;
+}
+
 		</h:outputScript>
 		</ui:define>
 	</ui:composition>

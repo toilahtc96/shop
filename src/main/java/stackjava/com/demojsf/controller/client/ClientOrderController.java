@@ -13,14 +13,15 @@ import stackjava.com.demojsf.service.OrderService;
 
 @ManagedBean
 @SessionScoped
-public class ClientOrderController implements Serializable{
+public class ClientOrderController implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@ManagedProperty(value = "#{orderService}")
 	OrderService orderService;
-	
+
 	List<Order> list;
 	
+
 	public List<Order> getList() {
 		return this.list = orderService.getAll();
 	}
@@ -32,13 +33,12 @@ public class ClientOrderController implements Serializable{
 	public void setOrderService(OrderService orderService) {
 		this.orderService = orderService;
 	}
-	
+
 	@ManagedProperty(value = "#{orderDetailForm}")
 	OrderDetailForm orderDetailForm;
-	
-	
+
 	public OrderDetailForm getOrderDetailForm() {
-		if(orderDetailForm == null) {
+		if (orderDetailForm == null) {
 			orderDetailForm = new OrderDetailForm();
 		}
 		return orderDetailForm;
