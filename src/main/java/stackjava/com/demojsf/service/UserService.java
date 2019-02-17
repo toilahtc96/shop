@@ -67,5 +67,9 @@ public class UserService implements ModelServiceInterface<User>,Serializable {
 	public boolean checkUser(String email,String password){
 		return userDAO.checkUser(email, password);
 	}
+	
+	public String getUserNameById(int useId) {
+		return userDAO.getUserNameById(useId);
+	}
 
 }

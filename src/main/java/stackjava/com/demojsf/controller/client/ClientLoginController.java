@@ -72,4 +72,8 @@ public class ClientLoginController implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public String getUserNameById(int useId) {
+		return userService.getUserNameById(useId);
+	}
 }

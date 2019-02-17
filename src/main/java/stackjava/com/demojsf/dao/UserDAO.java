@@ -82,6 +82,21 @@ public class UserDAO implements ModelDaoInterface<User>, Serializable {
 		}
 		return null;
 	}
+	
+	public String getUserNameById(int useId) {
+		getSessionHibernate = new GetSessionHibernate();
+//		String name = null;
+		User user = null;
+		@SuppressWarnings("static-access")
+		Session session = getSessionHibernate.getSessionFactory().getCurrentSession();
+		Transaction tran = session.beginTransaction();
+		user = (User) session.createQuery("form " + User.class.getName() + "where use_id = :useId").setParameter("useId", useId).uniqueResult();
+		tran.commit();
+		if(user != null) {
+			return user.getUserName();
+		}
+		return null;
+	}
 
 	@Override
 	public User getById(int id) {

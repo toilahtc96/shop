@@ -51,11 +51,16 @@ public class ClientOrderController implements Serializable{
 	public String getDetailOrder(int ordId) {
 		Order order = orderService.getById(ordId);
 		orderDetailForm = new OrderDetailForm();
-		orderDetailForm.setOrdId(String.valueOf(order.getOrderId()));
-		orderDetailForm.setOrdUserId(String.valueOf(order.getOrderUserId()));
-		orderDetailForm.setOrdTotalPrice(String.valueOf(order.getOrderTotalFrice()));
-		orderDetailForm.setOrdStatus(String.valueOf(order.getOrderStatus()));
-		orderDetailForm.setOrdCreateAt(String.valueOf(order.getOrderCreatedAt()));
-		return "orderDetail?faces-redirect=true";
+//		orderDetailForm.setOrdId(String.valueOf(order.getOrderId()));
+//		orderDetailForm.setOrdUserId(String.valueOf(order.getOrderUserId()));
+//		orderDetailForm.setOrdTotalPrice(String.valueOf(order.getOrderTotalFrice()));
+//		orderDetailForm.setOrdStatus(String.valueOf(order.getOrderStatus()));
+//		orderDetailForm.setOrdCreateAt(String.valueOf(order.getOrderCreatedAt()));
+		orderDetailForm.setOrdetId(order.getOrderId());
+//		orderDetailForm.setOrdetOrderId(order.get);
+		return "checkout?faces-redirect=true";
+	}
+	public String getCreateOrder() {
+		return "order?faces-redirect=true";
 	}
 }

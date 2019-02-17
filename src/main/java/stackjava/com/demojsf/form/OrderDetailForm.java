@@ -13,41 +13,54 @@ public class OrderDetailForm implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String ordId;
-	private String ordUserId;
-	private String ordTotalPrice;
-	private String ordStatus;
-	private String ordCreateAt;
-	public String getOrdId() {
-		return ordId;
+	private int ordetId;
+	private int ordetOrderId;
+	private int ordetProductId;
+	private int ordetQuantity;
+	private int ordetStatus;
+	private String ordetNote;
+	private String ordetCreatedAt;
+	public int getOrdetId() {
+		return ordetId;
 	}
-	public void setOrdId(String ordId) {
-		this.ordId = ordId;
+	public void setOrdetId(int ordetId) {
+		this.ordetId = ordetId;
 	}
-	public String getOrdUserId() {
-		return ordUserId;
+	public int getOrdetOrderId() {
+		return ordetOrderId;
 	}
-	public void setOrdUserId(String ordUserId) {
-		this.ordUserId = ordUserId;
+	public void setOrdetOrderId(int ordetOrderId) {
+		this.ordetOrderId = ordetOrderId;
 	}
-	public String getOrdTotalPrice() {
-		return ordTotalPrice;
+	public int getOrdetProductId() {
+		return ordetProductId;
 	}
-	public void setOrdTotalPrice(String ordTotalPrice) {
-		this.ordTotalPrice = ordTotalPrice;
+	public void setOrdetProductId(int ordetProductId) {
+		this.ordetProductId = ordetProductId;
 	}
-	public String getOrdStatus() {
-		return ordStatus;
+	public int getOrdetQuantity() {
+		return ordetQuantity;
 	}
-	public void setOrdStatus(String ordStatus) {
-		this.ordStatus = ordStatus;
+	public void setOrdetQuantity(int ordetQuantity) {
+		this.ordetQuantity = ordetQuantity;
 	}
-	public String getOrdCreateAt() {
-		return ordCreateAt;
+	public int getOrdetStatus() {
+		return ordetStatus;
 	}
-	public void setOrdCreateAt(String ordCreateAt) {
-		this.ordCreateAt = ordCreateAt;
+	public void setOrdetStatus(int ordetStatus) {
+		this.ordetStatus = ordetStatus;
 	}
-	
+	public String getOrdetNote() {
+		return ordetNote;
+	}
+	public void setOrdetNote(String ordetNote) {
+		this.ordetNote = ordetNote;
+	}
+	public String getOrdetCreatedAt() {
+		return ordetCreatedAt;
+	}
+	public void setOrdetCreatedAt(String ordetCreatedAt) {
+		this.ordetCreatedAt = ordetCreatedAt;
+	}
 	
 }
