@@ -153,8 +153,9 @@
 					<h:form id="homeForm">
 						<div class="row">
 							<!-- single product -->
-							
-							<ui:repeat value="#{clientHomeController.list}" var="item" paginator="true" rows="2" styleClass="paginated" >
+
+							<ui:repeat value="#{clientHomeController.list}" var="item"
+								paginator="true" rows="2" styleClass="paginated">
 								<!-- phai co 1 cai form o day  -->
 
 								<div class="col-lg-3 col-md-6">
@@ -177,8 +178,8 @@
 												<h6 class="l-through">$210.00</h6>
 											</div>
 											<div class="prd-bottom">
-												<h:commandLink class="social-info" id= "link"
-													action="#{productController.addProductToCookieCart(item.proId)}">
+												<h:commandLink class="social-info" id="link"
+													onclick=" return addToCart(#{item.proId});" action = "#{productController.getCart()}">
 													<span class="ti-bag"></span>
 													<p class="hover-text">add to bag</p>
 
@@ -230,7 +231,7 @@
 						</div>
 					</div>
 					<div class="row">
-						<!-- single product -->
+						single product
 						<div class="col-lg-3 col-md-6">
 							<div class="single-product">
 								<h:graphicImage class="img-fluid" name="img/product/p6.jpg"
@@ -259,7 +260,6 @@
 								</div>
 							</div>
 						</div>
-						<!-- single product -->
 						<div class="col-lg-3 col-md-6">
 							<div class="single-product">
 								<h:graphicImage class="img-fluid" name="img/product/p8.jpg"
@@ -288,7 +288,6 @@
 								</div>
 							</div>
 						</div>
-						<!-- single product -->
 						<div class="col-lg-3 col-md-6">
 							<div class="single-product">
 								<h:graphicImage class="img-fluid" name="img/product/p6.jpg"
@@ -317,7 +316,6 @@
 								</div>
 							</div>
 						</div>
-						<!-- single product -->
 						<div class="col-lg-3 col-md-6">
 							<div class="single-product">
 								<h:graphicImage class="img-fluid" name="img/product/p5.jpg"
@@ -346,7 +344,6 @@
 								</div>
 							</div>
 						</div>
-						<!-- single product -->
 						<div class="col-lg-3 col-md-6">
 							<div class="single-product">
 								<h:graphicImage class="img-fluid" name="img/product/p1.jpg"
@@ -375,7 +372,6 @@
 								</div>
 							</div>
 						</div>
-						<!-- single product -->
 						<div class="col-lg-3 col-md-6">
 							<div class="single-product">
 								<h:graphicImage class="img-fluid" name="img/product/p4.jpg"
@@ -404,7 +400,6 @@
 								</div>
 							</div>
 						</div>
-						<!-- single product -->
 						<div class="col-lg-3 col-md-6">
 							<div class="single-product">
 								<h:graphicImage class="img-fluid" name="img/product/p1.jpg"
@@ -433,7 +428,6 @@
 								</div>
 							</div>
 						</div>
-						<!-- single product -->
 						<div class="col-lg-3 col-md-6">
 							<div class="single-product">
 								<h:graphicImage class="img-fluid" name="img/product/p8.jpg"
@@ -465,7 +459,7 @@
 					</div>
 				</div>
 			</div>
-			</section>
+			 </section>
 			<!-- end product Area -->
 
 			<!-- Start exclusive deal Area -->
@@ -707,6 +701,46 @@
 			</div>
 			</section>
 			<!-- End related-product Area -->
+		</ui:define>
+		<ui:define name="scriptJSF">
+			<h:outputScript>
+			
+		addToCart = function(id){
+			alert(id);
+			var cartString = "{["+id+",1]}";
+			setCookie("cart",cartString,1234);
+			var x = getCookie("cart");
+			alert(x);
+			return true;
+	    }
+			
+			
+		function setCookie(cname, cvalue, exdays) {
+			alert('set');
+			var d = new Date();
+  			d.setTime(d.getTime() + (exdays*24*60*60*1000));
+  			var expires = "expires="+ d.toUTCString();
+  			document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  			alert('setDone');
+		};
+
+	function getCookie(cname) {
+		alert('get');
+  		var name = cname + "=";
+  		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(';');
+  		for(var i = 0; i &lt; ca.length; i++) {
+	    	var c = ca[i];
+    		while (c.charAt(0) == ' ') {
+	      		c = c.substring(1);
+    		}
+    		if (c.indexOf(name) == 0) {
+	      		return c.substring(name.length, c.length);
+    		}
+	  	}
+	  	return "";
+	}
+		</h:outputScript>
 		</ui:define>
 	</ui:composition>
 </h:body>
