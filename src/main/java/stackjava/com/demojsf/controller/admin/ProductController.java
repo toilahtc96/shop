@@ -13,6 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.Part;
 
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
@@ -43,6 +44,8 @@ public class ProductController extends CommonController implements Serializable 
 	List<Product> list;
 
 	private int idCate;
+	
+	
 
 	public int getIdCate() {
 		return idCate;
@@ -157,43 +160,7 @@ public class ProductController extends CommonController implements Serializable 
 		productDetailForm.setProName(pro.getProName());
 		return "productDetail?faces-redirect=true";
 	}
-
-	public void getCart() {
-		if (this.getCookie("cart") != null) {
-			System.out.println(getCookie("cart").getValue());
-		} else {
-			System.out.println("null");
-		}
-	}
-
-	public void addProductToCookieCart(int id) {
-		if (this.getCookie("cart") != null) {
-			String value = this.getCookie("cart").getValue();
-			System.out.println(value);
-			value += id + "";
-			try {
-				String valueEncode = URLEncoder.encode(value, "UTF-8");
-				this.setCookie("cart", "" + valueEncode + ",", 999999);
-			} catch (UnsupportedEncodingException e) {
-				System.out.println(e.getMessage());
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			this.setCookie("cart", value, 999999);
-		} else {
-			System.out.println("2");
-			String idQuantity = "{[" + id + ",1]}";
-			try {
-				String idQuantityEncode = URLEncoder.encode(idQuantity, "UTF-8");
-				this.setCookie("cart", "" + idQuantityEncode + ",", 999999);
-			} catch (UnsupportedEncodingException e) {
-				System.out.println(e.getMessage());
-				e.printStackTrace();
-			}
-		}
-
-	}
-
+	
 	public String updateProduct() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		int id = (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
