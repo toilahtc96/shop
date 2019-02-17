@@ -1,6 +1,8 @@
 package stackjava.com.demojsf.controller.admin;
 
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -156,20 +158,40 @@ public class ProductController extends CommonController implements Serializable 
 		return "productDetail?faces-redirect=true";
 	}
 
+	public void getCart() {
+		if (this.getCookie("cart") != null) {
+			System.out.println(getCookie("cart").getValue());
+		} else {
+			System.out.println("null");
+		}
+	}
+
 	public void addProductToCookieCart(int id) {
 		if (this.getCookie("cart") != null) {
 			String value = this.getCookie("cart").getValue();
 			System.out.println(value);
-			value += id;
-			this.setCookie("cart", value , 999999);
+			value += id + "";
+			try {
+				String valueEncode = URLEncoder.encode(value, "UTF-8");
+				this.setCookie("cart", "" + valueEncode + ",", 999999);
+			} catch (UnsupportedEncodingException e) {
+				System.out.println(e.getMessage());
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			this.setCookie("cart", value, 999999);
 		} else {
 			System.out.println("2");
-			this.setCookie("cart", "" + id, 999999);
+			String idQuantity = "{[" + id + ",1]}";
+			try {
+				String idQuantityEncode = URLEncoder.encode(idQuantity, "UTF-8");
+				this.setCookie("cart", "" + idQuantityEncode + ",", 999999);
+			} catch (UnsupportedEncodingException e) {
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+			}
 		}
-		if(this.getCookie("cart")!= null) {
-			System.out.println(this.getCookie("cart").getValue());
-			//cho nay sout luon cai if ben tren kia kia?
-		}
+
 	}
 
 	public String updateProduct() {
@@ -188,18 +210,18 @@ public class ProductController extends CommonController implements Serializable 
 		productService.removeById(id);
 		return "listProduct?faces-redirect=true";
 	}
-	
+
 	List<Product> listProGetByIdCate;
-	
+
 	public List<Product> getListProGetByIdCate() {
-		return  listProGetByIdCate;
+		return listProGetByIdCate;
 	}
 
 	public void setListProGetByIdCate(List<Product> listProGetByIdCate) {
 		this.listProGetByIdCate = listProGetByIdCate;
 	}
 
-	public String getListProByIdCate(int catId){
+	public String getListProByIdCate(int catId) {
 		this.listProGetByIdCate = productService.getListPRoByIdCate(catId);
 		return "category?faces-redirect=true";
 	}
