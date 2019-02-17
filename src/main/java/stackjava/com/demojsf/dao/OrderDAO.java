@@ -1,5 +1,6 @@
 package stackjava.com.demojsf.dao;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,9 @@ import stackjava.com.demojsf.model.Order;
 
 @ManagedBean
 @SessionScoped
-public class OrderDAO implements ModelDaoInterface<Order> {
+public class OrderDAO implements ModelDaoInterface<Order>,Serializable {
+
+	private static final long serialVersionUID = 1L;
 	@ManagedProperty(value = "#{getSessionHibernate}")
 	GetSessionHibernate getSessionHibernate;
 

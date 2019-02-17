@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="../templateClient/layout.xhtml">
+	<ui:define name="banner">
+		<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div
+				class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>Order</h1>
+					<nav class="d-flex align-items-center"> <a href="index.html">Home<span
+						class="lnr lnr-arrow-right"></span></a> <a href="category.html">Order</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+		</section>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form rendered="#{not empty user}">
+			<h2 style="text-align: center; margin-top: 20px;">Order</h2>
+			<div class="container">
+				<div class="order_details_table" style="margin-bottom: 50px;">
+					<h2>Order</h2>
+					<div class="table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th scope="col">ID</th>
+									<th scope="col">User ID</th>
+									<th scope="col">Total Price</th>
+									<th scope="col">Status</th>
+									<th scope="col">Create At</th>
+									<th scope="col">Detail</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">1</th>
+									<td>Mark</td>
+									<td>Otto</td>
+									<td>@mdo</td>
+									<td></td>
+									<td><h:commandButton
+											action="#{clientOrderController.getDetailOrder}"
+											value="Detail" class="btn btn-primary" /></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</h:form>
+		<div class="container">
+			<br />
+			<br />
+			<h:outputLabel value="Ban Can Dang Nhap De Xem Trang nay"
+				rendered="#{empty user}" />
+			<h:outputLink value="#{request.contextPath}/client/login"
+				rendered="#{empty user}">
+		login
+		</h:outputLink>
+			<br />
+			<br />
+		</div>
+	</ui:define>
+</ui:composition>
+</html>

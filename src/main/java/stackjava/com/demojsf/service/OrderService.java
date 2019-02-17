@@ -1,17 +1,20 @@
 package stackjava.com.demojsf.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+
 import stackjava.com.demojsf.dao.OrderDAO;
 import stackjava.com.demojsf.model.Order;
 
 @ManagedBean
-@RequestScoped
-public class OrderService implements ModelServiceInterface<Order> {
-
+@SessionScoped
+public class OrderService implements ModelServiceInterface<Order>,Serializable {
+	private static final long serialVersionUID = 1L;
 	@ManagedProperty(value = "#{orderDAO}")
 	OrderDAO orderDAO;
 

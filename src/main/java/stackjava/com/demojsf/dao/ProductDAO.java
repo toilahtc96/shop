@@ -57,7 +57,7 @@ public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
 		@SuppressWarnings("static-access")
 		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
 		Transaction transObj = sessionObj.beginTransaction();
-		List<Product> listPro = sessionObj.createCriteria(Product.class).list();
+		List<Product> listPro = sessionObj.createCriteria(Product.class).setMaxResults(8).list();
 		return listPro;
 	}
 
