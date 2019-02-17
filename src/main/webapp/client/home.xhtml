@@ -150,7 +150,7 @@
 							</div>
 						</div>
 					</div>
-					<h:form>
+					<h:form id="homeForm">
 						<div class="row">
 							<!-- single product -->
 							<ui:repeat value="#{clientHomeController.list}" var="item">
@@ -176,25 +176,24 @@
 												<h6 class="l-through">$210.00</h6>
 											</div>
 											<div class="prd-bottom">
-												<h:commandLink class="social-info"
+												<h:commandLink class="social-info" id= "link"
 													action="#{productController.addProductToCookieCart(item.proId)}">
-													<!-- <f:ajax onevent="click" listener="#{productController.addProductToCookieCart}"  /> -->
+													<f:ajax event="click" listener="#{productController.addProductToCookieCart}"/>
 													<span class="ti-bag"></span>
 													<p class="hover-text">add to bag</p>
-													
+
 													<!-- <f:param name="id" value="#{product.proId}" /> -->
 												</h:commandLink>
-												
-												 <a href="" class="social-info"> <span
+
+												<a href="" class="social-info"> <span
 													class="lnr lnr-heart"></span>
 													<p class="hover-text">Wishlist</p>
-												</a> 
-												<a href="" class="social-info"> <span
+												</a> <a href="" class="social-info"> <span
 													class="lnr lnr-sync"></span>
 													<p class="hover-text">compare</p>
 												</a>
 												<!-- <span class="lnr lnr-move"></span>  -->
-												<h:commandLink  class="social-info"
+												<h:commandLink class="social-info"
 													action="#{productController.productDetail(item.proId)}">
 													<span class="lnr lnr-move"></span>
 													<p class="hover-text">view more</p>

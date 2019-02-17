@@ -201,5 +201,4 @@ public class ProductController extends CommonController implements Serializable 
 		this.listProGetByIdCate = productService.getListPRoByIdCate(catId);
 		return "category?faces-redirect=true";
 	}
-
 }
