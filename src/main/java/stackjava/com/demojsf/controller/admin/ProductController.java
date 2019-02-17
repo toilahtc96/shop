@@ -148,7 +148,7 @@ public class ProductController extends CommonController implements Serializable 
 		// FacesContext fc = FacesContext.getCurrentInstance();
 		// int id =
 		// (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
-		System.out.println(id);
+//		System.out.println(id);
 		Product pro = productService.getById(id);
 		productDetailForm = new ProductDetailForm();
 		productDetailForm.setProID(pro.getProId());

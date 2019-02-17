@@ -40,9 +40,10 @@ public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
 	public Product getById(int id) {
 		Product pro = new Product();
 		try {
+			@SuppressWarnings("static-access")
 			Session session = getSessionHibernate.getSessionFactory().openSession();
 			pro = (Product) session.get(Product.class, id);
-			System.out.println(pro.getProName());
+//			System.out.println(pro.getProName());
 
 		} catch (Exception e) {
 			System.out.println(e.toString());

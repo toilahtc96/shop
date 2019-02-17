@@ -40,16 +40,22 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>Mark</td>
-									<td>Otto</td>
-									<td>@mdo</td>
-									<td></td>
-									<td><h:commandButton
-											action="#{clientOrderController.getDetailOrder}"
-											value="Detail" class="btn btn-primary" /></td>
-								</tr>
+								<h:form>
+									<ui:repeat var="item" value="#{clientOrderController.list}">
+										<tr>
+											<th scope="row"><h:outputText value="#{item.orderId}" />
+											</th>
+											<td><h:outputText value="#{item.orderUserId}" /></td>
+											<td><h:outputText value="#{item.orderTotalFrice}" /></td>
+											<td><h:outputText value="#{item.orderStatus}" /></td>
+											<td><h:outputText value="#{item.orderCreatedAt}" /></td>
+											<td><h:commandButton
+													action="#{clientOrderController.getDetailOrder(item.orderId)}"
+													value="Detail" class="btn btn-primary" />
+													</td>
+										</tr>
+									</ui:repeat>
+								</h:form>
 							</tbody>
 						</table>
 					</div>
@@ -57,16 +63,13 @@
 			</div>
 		</h:form>
 		<div class="container">
-			<br />
-			<br />
+			<br /> <br />
 			<h:outputLabel value="Ban Can Dang Nhap De Xem Trang nay"
 				rendered="#{empty user}" />
 			<h:outputLink value="#{request.contextPath}/client/login"
-				rendered="#{empty user}">
-		login
-		</h:outputLink>
-			<br />
-			<br />
+				rendered="#{empty user}">Login
+			</h:outputLink>
+			<br /> <br />
 		</div>
 	</ui:define>
 </ui:composition>

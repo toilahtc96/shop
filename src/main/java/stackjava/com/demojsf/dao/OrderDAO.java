@@ -7,16 +7,22 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
+import org.apache.xpath.operations.Or;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import stackjava.com.demojsf.connection.GetSessionHibernate;
+import stackjava.com.demojsf.model.Category;
 import stackjava.com.demojsf.model.Order;
+import stackjava.com.demojsf.model.Product;
 
 @ManagedBean
 @SessionScoped
-public class OrderDAO implements ModelDaoInterface<Order>,Serializable {
+public class OrderDAO implements ModelDaoInterface<Order>, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@ManagedProperty(value = "#{getSessionHibernate}")
@@ -39,15 +45,32 @@ public class OrderDAO implements ModelDaoInterface<Order>,Serializable {
 	}
 
 	public Order getById(int id) {
-		getSessionHibernate = this.getGetSessionHibernate();
-		Order order = new Order(1, 4, Float.valueOf(15), 1, new Date(), new Date());
-		getSessionHibernate.createRecord(order);
+//		getSessionHibernate = this.getGetSessionHibernate();
+//		Order order = new Order(1, 4, Float.valueOf(15), 1, new Date(), new Date());
+//		getSessionHibernate.createRecord(order);
+//		return order;
+		Order order = new Order();
+		try {
+			@SuppressWarnings("static-access")
+			Session session = getSessionHibernate.getSessionFactory().openSession();
+			order = (Order) session.get(Order.class, id);
+//			System.out.println(order.get());
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+
 		return order;
 	}
 
+	@SuppressWarnings({ "unchecked", "unused" })
 	public List<Order> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		@SuppressWarnings("static-access")
+		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
+		Transaction transObj = sessionObj.beginTransaction();
+		List<Order> listOrder = sessionObj.createCriteria(Order.class).list();
+		return listOrder;
 	}
 
 	public int removeById(int id) {

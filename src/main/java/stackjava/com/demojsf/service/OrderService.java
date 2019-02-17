@@ -37,7 +37,8 @@ public class OrderService implements ModelServiceInterface<Order>,Serializable {
 
 	public List<Order> getAll() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		return orderDAO.getAll();
 	}
 
 	public int add(Order order) {
