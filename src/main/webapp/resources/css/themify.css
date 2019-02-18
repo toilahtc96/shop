@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'themify';
+    src:
+    	url("#{resource['fonts/themify1.woff2']}") format('woff2'),
+    	url("#{resource['fonts/themify1.woff']}") format('woff'),
+        url('../fonts/themify1.woff') format('woff'),
+        url('../fonts/themify1.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+

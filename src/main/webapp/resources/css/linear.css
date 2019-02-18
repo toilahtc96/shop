@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'Linearicons-Free';
+    src:
+    	url("#{resource['fonts/Linearicons-Free1.woff2']}") format('woff2'),
+        url("#{resource['fonts/Linearicons-Free1.woff']}") format('woff'),
+        url('Linearicons-Free1.woff2') format('woff2'),
+        url('Linearicons-Free1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+

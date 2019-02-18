@@ -27,17 +27,23 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6">
-					<div class="login_box_img">
-						<h:graphicImage class="img-fluid" name="img/login.jpg" alt="" />
-						<div class="hover">
-							<h4>New to our website?</h4>
-							<p>There are advances being made in science and technology
-								everyday, and a good example of this is the</p>
-							<a class="primary-btn" href="registration.html">Create an
-								Account</a>
+					<h:form>
+						<div class="login_box_img">
+							<h:graphicImage class="img-fluid" name="img/login.jpg" alt="" />
+							<div class="hover">
+								<h4>New to our website?</h4>
+								<p>There are advances being made in science and technology
+									everyday, and a good example of this is the</p>
+								<h:commandButton
+									action="#{clientLoginController.getCreateAccount()}"
+									id="createbtn" type="submit" styleClass="primary-btn"
+									value="Create an Account" />
+
+							</div>
 						</div>
-					</div>
+					</h:form>
 				</div>
+
 				<div class="col-lg-6">
 					<div class="login_form_inner">
 						<h3>Log in to enter</h3>

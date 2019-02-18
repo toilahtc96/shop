@@ -22,46 +22,65 @@
 	</ui:define>
 
 	<ui:define name="content">
-		<div class = "container">
-			<div class="row" style = "padding: 5%;">
-					<div class="col-lg-8">
-						<h3>Information</h3>
-						<h:form class="row contact_form" action="#" method="post"
-							novalidate="novalidate">
-							<div class="col-md-12 form-group p_star">
-								<h:inputText type="text" class="form-control" id="name" name="name" />
-								<span class="placeholder" data-placeholder="Name"></span>
-							</div>
-							<div class="col-md-12 form-group p_star">
-								<h:inputSecret type="text" class="form-control" id="pass1" name="pass1" />
-								<span class="placeholder" data-placeholder="Password"></span>
-							</div>
-							<div class="col-md-12 form-group p_star">
-								<h:inputSecret type="text" class="form-control" id="pass2" name="pass2" />
-								<span class="placeholder" data-placeholder="Confirm Password"></span>
-							</div>
-							<div class="col-md-12 form-group p_star">
-								<h:inputText type="text" class="form-control" id="number"
-									name="number" /> <span class="placeholder"
-									data-placeholder="Phone number"></span>
-							</div>
-							<div class="col-md-12 form-group p_star">
-								<h:inputText type="text" class="form-control" id="email"
-									name="compemailany" /> <span class="placeholder"
-									data-placeholder="Email Address"></span>
-							</div>
-							<div class="col-md-12 form-group p_star">
-								<h:inputText type="text" class="form-control" id="address" name="address" />
-								<span class="placeholder" data-placeholder="Address"></span>
-							</div>
-							<div class="col-md-12 form-group p_star">
-								<h:inputText type="text" class="form-control" id="dob" name="dob" />
-								<span class="placeholder" data-placeholder="BirthDate"></span>
-							</div>
-						</h:form>
-					</div>
-					<div class = "col-lg-4"><h3>IMAGE</h3></div>
+		<div class="container">
+			<div class="row" style="padding: 5%;">
+				<div class="col-lg-8">
+					<h3 style="text-align: center;">Information</h3>
+					<h:form class="row contact_form" action="#" method="post"
+						novalidate="novalidate">
+						<div class="col-md-12 form-group p_star">
+							<h:inputText type="text" class="form-control" id="name"
+								name="name"
+								value = "#{clientLoginController.clientRegisterForm.useName}" />
+							<span class="placeholder" data-placeholder="Name"></span>
+						</div>
+						<div class="col-md-12 form-group p_star">
+							<h:inputSecret type="text" class="form-control" id="pass1"
+								name="pass1"
+								value = "#{clientLoginController.clientRegisterForm.usePassword}" />
+							<span class="placeholder" data-placeholder="Password"></span>
+						</div>
+						<div class="col-md-12 form-group p_star">
+							<h:inputSecret type="text" class="form-control" id="pass2"
+								name="pass2" />
+							<span class="placeholder" data-placeholder="Confirm Password"></span>
+						</div>
+						<div class="col-md-12 form-group p_star">
+							<h:inputText type="text" class="form-control" id="number"
+								name="number" 
+								value = "#{clientLoginController.clientRegisterForm.usePhone}"/>
+							<span class="placeholder" data-placeholder="Phone number"></span>
+						</div>
+						<div class="col-md-12 form-group p_star">
+							<h:inputText type="text" class="form-control" id="email"
+								name="compemailany"
+								value = "#{clientLoginController.clientRegisterForm.useEmail}" />
+							<span class="placeholder" data-placeholder="Email Address"></span>
+						</div>
+						<div class="col-md-12 form-group p_star">
+							<h:inputText type="text" class="form-control" id="address"
+								name="address"
+								value = "#{clientLoginController.clientRegisterForm.useAddress}" />
+							<span class="placeholder" data-placeholder="Address"></span>
+						</div>
+						<div class="col-md-12 form-group p_star">
+							<h:inputText type="text" class="form-control" id="dob" name="dob" 
+							value = "#{clientLoginController.clientRegisterForm.useBirthday}"/>
+							<span class="placeholder" data-placeholder="BirthDate"></span>
+						</div>
+						<div class="col-md-12">
+							<h:commandButton class="btn btn-secondary" style="width: 47%;"
+								action="#{clientLoginController.getCancelRegister()}" value="CANCEL" />
+							<h:commandButton class="btn btn-primary"
+								style="width: 47%; margin-left: 6%;" action="#{clientLoginController.CreateAnAccount()}" value="CREATE" />
+						</div>
+					</h:form>
 				</div>
+				<div class="col-lg-4">
+					<h3 style = "text-align: center;">Register</h3>
+					<h:graphicImage class="img-fluid" name="img/login.jpg" alt="" />
+				</div>
+			</div>
 		</div>
 	</ui:define>
 </ui:composition>

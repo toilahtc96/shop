@@ -2,6 +2,7 @@ package stackjava.com.demojsf.controller.client;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -12,6 +13,7 @@ import javax.faces.context.FacesContext;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 
 import stackjava.com.demojsf.form.ClientLoginForm;
+import stackjava.com.demojsf.form.ClientRegisterForm;
 import stackjava.com.demojsf.model.User;
 import stackjava.com.demojsf.service.UserService;
 
@@ -37,6 +39,17 @@ public class ClientLoginController implements Serializable {
 
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+	
+	@ManagedProperty(value = "#{clientRegisterForm}")
+	ClientRegisterForm clientRegisterForm;
+	
+	public ClientRegisterForm getClientRegisterForm() {
+		return clientRegisterForm;
+	}
+
+	public void setClientRegisterForm(ClientRegisterForm clientRegisterForm) {
+		this.clientRegisterForm = clientRegisterForm;
 	}
 
 	public void login() {
@@ -75,5 +88,34 @@ public class ClientLoginController implements Serializable {
 	
 	public String getUserNameById(int useId) {
 		return userService.getUserNameById(useId);
+	}
+	
+	public String getCreateAccount() {
+		return "register?faces-redirect=true";
+	}
+	
+	public String getCancelRegister() {
+		return "login?faces-redirect=true";
+	}
+	
+	public String CreateAnAccount() {
+		String useName = this.clientRegisterForm.getUseName();
+		String usePassword = this.clientRegisterForm.getUsePassword();
+		String usePhone = this.clientRegisterForm.getUsePhone();
+		String useEmail = this.clientRegisterForm.getUseEmail();
+		String useAddress = this.clientRegisterForm.getUseAddress();
+		String useBirhtday = this.clientRegisterForm.getUseBirthday();
+		User user = new User();
+		user.setUserName(useName);
+		user.setUserPassword(usePassword);
+		user.setUserPhone(usePhone);
+		user.setUserEmail(useEmail);
+		user.setUserAddress(useAddress);
+		user.setUserBirthday(Date.valueOf(useBirhtday));
+		user.setUserActive(1);
+		user.setUserGender(1);
+		user.setUserFacebook("damhaihiep");
+		userService.add(user);
+		return "login?faces-redirect=true";
 	}
 }
