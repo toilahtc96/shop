@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import org.json.*;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
 
@@ -45,92 +47,23 @@ public class ClientHomeController implements Serializable {
 		this.cart = cart;
 	}
 
-	@SuppressWarnings("deprecation")
-	public HashMap<Integer, Integer> checkCart() {
-		HashMap<Integer, Integer> hmCart = new HashMap<Integer, Integer>();
-		ArrayList<CartToClientForm> lstCartToClientForm = new ArrayList<CartToClientForm>();
-		// [[1,1],[2,1],[3,1],[6,1],[4,1]]
-		// [1,1],[2,1],[3,1],[6,1],[4,1]
-//		String cartT = "[[1,1]]";
-		/*List<String> list = new ArrayList<String>(Arrays.asList(cart.split("\\]")));
-		int i = 0;
-		for (String string : list) {
-			// System.out.println(string);
-
-			if (i == 0) {
-				List<String> listS = new ArrayList<String>(Arrays.asList(string.split("\\[")));
-				for (String string2 : listS) {
-					List<String> listSS = new ArrayList<String>(Arrays.asList(string2.split(",")));
-					CartToClientForm cart = new CartToClientForm();
-					for (int j = 0; j < listSS.size(); j++) {
-						if (!listSS.get(j).equals("")) {
-							System.out.println("a: " + listSS.get(j));
-							if (j % 2 == 0) {
-								if (Integer.parseInt(listSS.get(j)) != 0) {
-									cart.setId(Integer.parseInt(listSS.get(j)));
-								}
-							} else {
-								cart.setQuantity(Integer.parseInt(listSS.get(j)));
-							}
-
-						}
-					}
-					lstCartToClientForm.add(cart);
-				}
-			} else {
-				List<String> listS = new ArrayList<String>(Arrays.asList(string.split(",\\[")));
-				for (String string2 : listS) {
-					List<String> listSS = new ArrayList<String>(Arrays.asList(string2.split(",")));
-					CartToClientForm cart = new CartToClientForm();
-					for (int j = 0; j < listSS.size(); j++) {
-						if (!listSS.get(j).equals("")) {
-							System.out.println("a: " + listSS.get(j));
-							if (j % 2 == 0) {
-								if (Integer.parseInt(listSS.get(j)) != 0) {
-									cart.setId(Integer.parseInt(listSS.get(j)));
-								}
-							} else {
-								cart.setQuantity(Integer.parseInt(listSS.get(j)));
-							}
-
-						}
-					}
-					lstCartToClientForm.add(cart);
-				}
-			}
-			i++;
-
-		}
-		for (CartToClientForm string : lstCartToClientForm) {
-			System.out.println("id" + string.getId()  + " quantity: "+ string.getQuantity());
-		}*/
-		
-//		JSONArray mJsonArray = new JSONArray(cartT);
-//		JSONObject mJsonObject = new JSONObject();
-//		for (int i = 0; i < mJsonArray.length(); i++) {
-//		    mJsonObject = mJsonArray.getJSONObject(i);
-//		    System.out.println(mJsonObject.getString("1"));
-//		}
-		  String jsReturn =" [{1:1, 3:3}]";
-		    JSONArray array = new JSONArray(jsReturn); 
-		    for (Object object : array) {
-				System.out.println(object.toString().split(",")[0]);
-			}
-		    int i = 0;
-		    JSONObject myJsonObject = new JSONObject();
-		    while(i < array.length()){
-		        myJsonObject = array.getJSONObject(i); 
-		       
-		        i++;
-		    }
-		
-		return hmCart;
-
+	/*private String test;
+	
+	public String getTest() {
+		return this.parse(this.getCart());
 	}
 
-	public static void main(String[] args) {
-		ClientHomeController cl = new ClientHomeController();
-		cl.checkCart();
+	public void setTest(String test) {
+		this.test = test;
+	}
+*/
+	public String parse(String jsonLine) {
+		JsonElement jelement = new JsonParser().parse(jsonLine);
+		JsonArray jobject = jelement.getAsJsonArray();
+		for (JsonElement jsonElement : jobject) {
+			System.out.println(jsonElement.toString());
+		}
+		return "";
 	}
 
 	@ManagedProperty(value = "#{productService}")

@@ -215,11 +215,6 @@
 					</h:form>
 				</div>
 			</div>
-			<ui:remove>
-				<!-- <ui:repeat value="#{cart.items}" var="item">
-            <h:commandButton value="#{item}" />
-        </ui:repeat>  -->
-			</ui:remove> <!-- single product slide -->
 			<div class="single-product-slider">
 				<div class="container">
 					<div class="row justify-content-center">
@@ -460,17 +455,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="owl-controls">
-				<div class="owl-nav">
-					<div class="owl-prev" style="">
-						<h:graphicImage name="img/product/prev.png" />
-					</div>
-					<div class="owl-next" style="">
-						<h:graphicImage name="img/product/next.png" />
-					</div>
-				</div>
-				<div class="owl-dots" style="display: none;"></div>
-			</div>
+			
 			</section>
 			<!-- end product Area -->
 
@@ -715,44 +700,7 @@
 			<!-- End related-product Area -->
 		</ui:define>
 		<ui:define name="scriptJSF">
-			<h:outputScript>
-		addToCart = function (id) {
-
-	if (getCookie("cart") === "") {
-		var cartString = "[" + id + ",1]";
-		setCookie("cart", cartString, 100);
-		
-	} else {
-		var cartNow = getCookie("cart").toString();
-		
-		var cartArr = JSON.parse(cartNow);
-		//cartArr is Array
-		//check array length
-		
-		var listId = [];
-		for (i = 0; i &lt; cartArr.length; i++) {
-			listId.push((cartArr[i][0]));
-		}
-		if (!listId.includes(id)) {
-			var item = [id, 1];
-			cartArr.push(item);
-			cartArr = JSON.stringify(cartArr);
-			setCookie("cart",cartArr,1000);
-			alert("Đã Thêm Mới");
-			//var soluong = parseInt($(document).find(".quantity").find(".a_quantity").text()) + 1;
-			//$(document).find(".quantity").find(".a_quantity").text(soluong);
-		} else {
-			alert("Sản Phẩm Đã Có Trong Giở Hàng Của Bạn");
-		}
-	}
-	$("#homeForm\\:cart").val(getCookie("cart"));
-	return true;
-}
-var ctx = "${pageContext.request.contextPath}";
-function getContextPath() {
-   return window.location.pathname.substring(0, window.location.pathname.indexOf("/",2))+"/javax.faces.resource/";
-}
-		</h:outputScript>
+			<h:outputScript library="js" name="myjs.js" />
 		</ui:define>
 	</ui:composition>
 </h:body>
