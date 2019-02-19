@@ -27,17 +27,17 @@
 				<div class="col-lg-8">
 					<h3 style="text-align: center;">Information</h3>
 					<h:form class="row contact_form" action="#" method="post"
-						novalidate="novalidate" id = "createUserForm">
+						novalidate="novalidate" id="createUserForm">
 						<div class="col-md-12 form-group p_star">
 							<h:inputText type="text" class="form-control" id="name"
 								name="name"
-								value = "#{clientLoginController.clientRegisterForm.useName}" />
+								value="#{clientLoginController.clientRegisterForm.useName}" />
 							<span class="placeholder" data-placeholder="Name"></span>
 						</div>
 						<div class="col-md-12 form-group p_star">
 							<h:inputSecret type="text" class="form-control" id="pass1"
 								name="pass1"
-								value = "#{clientLoginController.clientRegisterForm.usePassword}" />
+								value="#{clientLoginController.clientRegisterForm.usePassword}" />
 							<span class="placeholder" data-placeholder="Password"></span>
 						</div>
 						<div class="col-md-12 form-group p_star">
@@ -47,62 +47,49 @@
 						</div>
 						<div class="col-md-12 form-group p_star">
 							<h:inputText type="text" class="form-control" id="number"
-								name="number" 
-								value = "#{clientLoginController.clientRegisterForm.usePhone}"/>
+								name="number"
+								value="#{clientLoginController.clientRegisterForm.usePhone}" />
 							<span class="placeholder" data-placeholder="Phone number"></span>
 						</div>
 						<div class="col-md-12 form-group p_star">
 							<h:inputText type="text" class="form-control" id="email"
 								name="compemailany"
-								value = "#{clientLoginController.clientRegisterForm.useEmail}" />
+								value="#{clientLoginController.clientRegisterForm.useEmail}" />
 							<span class="placeholder" data-placeholder="Email Address"></span>
 						</div>
 						<div class="col-md-12 form-group p_star">
 							<h:inputText type="text" class="form-control" id="address"
 								name="address"
-								value = "#{clientLoginController.clientRegisterForm.useAddress}" />
+								value="#{clientLoginController.clientRegisterForm.useAddress}" />
 							<span class="placeholder" data-placeholder="Address"></span>
 						</div>
 						<div class="col-md-12 form-group p_star">
-							<h:inputText type="text" class="form-control" id="dob" name="dob" 
-							value = "#{clientLoginController.clientRegisterForm.useBirthday}"/>
+							<h:inputText type="text" class="form-control" id="dob" name="dob"
+								value="#{clientLoginController.clientRegisterForm.useBirthday}" />
 							<span class="placeholder" data-placeholder="BirthDate"></span>
 						</div>
 						<div class="col-md-12">
 							<h:commandButton class="btn btn-secondary" style="width: 47%;"
-								action="#{clientLoginController.getCancelRegister()}" value="CANCEL" />
+								action="#{clientLoginController.getCancelRegister()}"
+								value="CANCEL" />
 							<h:commandButton class="btn btn-primary"
-								style="width: 47%; margin-left: 6%;" onclick="return checkParam();" action="#{clientLoginController.CreateAnAccount()}" value="CREATE" />
+								style="width: 47%; margin-left: 6%;"
+								onclick="return checkParam();"
+								action="#{clientLoginController.CreateAnAccount()}"
+								value="CREATE" />
 						</div>
 					</h:form>
 				</div>
 				<div class="col-lg-4">
-					<h3 style = "text-align: center;">Register</h3>
+					<h3 style="text-align: center;">Register</h3>
 					<h:graphicImage class="img-fluid" name="img/login.jpg" alt="" />
 				</div>
 			</div>
 		</div>
 	</ui:define>
 	<ui:define name="scriptJSF">
-		<h:outputScript target= "head">
-			checkParam = function(){
-				var name = $('#createUserForm\\:name').val();
-				var pass1 = $('#createUserForm\\:pass1').val();
-				var pass2 = $('#createUserForm\\:pass2').val();
-				var number = $('#createUserForm\\:number').val();
-				var address = $('#createUserForm\\:address').val();
-				var email = $('#createUserForm\\:email').val();
-				var dob = $('#createUserForm\\:dob').val();
-				if(name === "" || pass1 === "" || pass2 === "" || number === "" || address === "" || email === "" || dob === ""){
-					alert('Can nhap du thong tin!');
-					return false;
-				}
-				if(pass1 !== pass2){
-					alert('Xac nhan mat khau khong trung khop!');
-					return false;
-				}
-				return true;
-			}
+		<h:outputScript library="js" name="client.register.js">
+			
 		</h:outputScript>
 	</ui:define>
 </ui:composition>
