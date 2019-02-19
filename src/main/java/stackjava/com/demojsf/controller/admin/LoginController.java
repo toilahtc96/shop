@@ -61,7 +61,7 @@ public class LoginController implements Serializable {
 		String pass = loginForm.getPassword();
 		FacesContext context = FacesContext.getCurrentInstance();
 		if (userService.checkUserByName(email)) {
-			User user = userService.getUserByEmailAndPassword(email, pass);
+			User user = userService.getUserByNameAndPassword(email, pass);
 
 			if (user != null) {
 				context.getExternalContext().getSessionMap().put("user", user);

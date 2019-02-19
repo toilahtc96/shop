@@ -1,7 +1,10 @@
 function getContextPath() {
-   return window.location.pathname.substring(0, window.location.pathname.indexOf("/",2))+"/javax.faces.resource/";
+   return window.location.pathname.substring(0, window.location.pathname.indexOf("/",2));
 }
-var contextPath = getContextPath();
+function getContextPathResource() {
+	   return window.location.pathname.substring(0, window.location.pathname.indexOf("/",2))+"/javax.faces.resource/";
+	}
+var contextPath = getContextPathResource();
 $(document).ready(function(){
 	"use strict";
 

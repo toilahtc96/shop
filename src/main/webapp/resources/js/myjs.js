@@ -14,9 +14,6 @@ $(document).ready(function() {
 		} else {
 
 			if (window.confirm("Thêm Sản Phẩm Vào Giở Hàng?")) {
-				// They clicked Yes
-				var quantity = $(document).find(".a_quantity");
-				var quantityNum = quantity.text();
 				var product_id = id;
 				if ($.cookie("cartArray") != undefined) {
 					var cartArrayJs = JSON.parse($.cookie("cartArray"));
@@ -26,11 +23,15 @@ $(document).ready(function() {
 					}
 					if (!list_id.includes(product_id)) {
 						var item = [ product_id, "1" ];
+						if (typeof cartArr === "string") {
+							cartArr = JSON.parse(cartArr);
+						}
+						console.log(typeof cartArr);
 						cartArr.push(item);
-						cartArr = JSON.stringify(cartArr);
-						console.log(cartArr);
-						$("#homeForm\\:cart").val(cartArr);
-						$.cookie("cartArray", cartArr, {
+						cartArrStr = JSON.stringify(cartArr);
+						console.log(cartArrStr);
+						$("#homeForm\\:cart").val(cartArrStr);
+						$.cookie("cartArray", cartArrStr, {
 							path : '/'
 						});
 						alert("Đã Thêm Mới");
@@ -40,17 +41,19 @@ $(document).ready(function() {
 				} else {
 					var item = [ product_id, "1" ];
 					cartArr.push(item);
-					cartArr = JSON.stringify(cartArr);
-					$.cookie("cartArray", cartArr, {
+					cartArrStr = JSON.stringify(cartArr);
+					$.cookie("cartArray", cartArrStr, {
 						path : '/'
 					});
-					$("#homeForm\\:cart").val(cartArr);
+					$("#homeForm\\:cart").val(cartArrStr);
 					alert("Đã Thêm Mới");
 
 				}
 			} else {
 			}
 		}
-		return false;
+
+		return true;
 	}
+
 })

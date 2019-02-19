@@ -8,6 +8,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -16,12 +17,13 @@ import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
 
 import net.minidev.json.parser.JSONParser;
+import stackjava.com.demojsf.common.CommonController;
 import stackjava.com.demojsf.form.CartToClientForm;
 import stackjava.com.demojsf.model.Product;
 import stackjava.com.demojsf.service.ProductService;
 
 @SuppressWarnings("serial")
-@ManagedBean(name = "clientHomeController")
+@ManagedBean(name = "clientHomeController", eager = true)
 @SessionScoped
 @URLMappings(mappings = { @URLMapping(id = "clientHome", pattern = "/client/home", viewId = "/client/home.xhtml"),
 		@URLMapping(id = "clientCart", pattern = "/client/cart", viewId = "/client/cart.xhtml"),
@@ -32,7 +34,7 @@ import stackjava.com.demojsf.service.ProductService;
 		@URLMapping(id = "clientConfirmation", pattern = "/client/confirmation", viewId = "/client/confirmation.xhtml"),
 		@URLMapping(id = "clientProductDetail", pattern = "/client/productDetail", viewId = "/client/productDetail.xhtml"),
 		@URLMapping(id = "clientContact", pattern = "/client/contact", viewId = "/client/contact.xhtml") })
-public class ClientHomeController implements Serializable {
+public class ClientHomeController extends CommonController implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	List<Product> list;
@@ -47,21 +49,32 @@ public class ClientHomeController implements Serializable {
 		this.cart = cart;
 	}
 
-	/*private String test;
-	
-	public String getTest() {
-		return this.parse(this.getCart());
+	public void updateCart(AjaxBehaviorEvent event) {
+		parse(this.getCart());
+		System.out.println("test ajax" + this.getCart());
+
 	}
 
-	public void setTest(String test) {
-		this.test = test;
-	}
-*/
+	
+
+	/*
+	 * private String test;
+	 * 
+	 * public String getTest() { return this.parse(this.getCart()); }
+	 * 
+	 * public void setTest(String test) { this.test = test; }
+	 */
 	public String parse(String jsonLine) {
 		JsonElement jelement = new JsonParser().parse(jsonLine);
 		JsonArray jobject = jelement.getAsJsonArray();
 		for (JsonElement jsonElement : jobject) {
-			System.out.println(jsonElement.toString());
+			String productQuantity = jsonElement.toString();
+			String text01 = productQuantity.split("\\[")[1];
+			String text02 = text01.split("\\]")[0];
+			String id = text02.split(",")[0];
+			String quantity =  text02.split(",")[1];
+			System.out.println("id: " + id);
+			System.out.println("quantity: "+ quantity);
 		}
 		return "";
 	}
