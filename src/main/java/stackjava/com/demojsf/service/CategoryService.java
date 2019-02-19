@@ -14,7 +14,6 @@ import stackjava.com.demojsf.model.Category;
 @ManagedBean
 @SessionScoped
 public class CategoryService implements ModelServiceInterface<Category> , Serializable{
-
 	/**
 	 * 
 	 */

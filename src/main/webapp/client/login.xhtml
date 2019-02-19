@@ -50,11 +50,11 @@
 						<h:form class="row login_form" method="post" id="contactForm"
 							novalidate="novalidate">
 							<div class="col-md-12 form-group">
-								<h:inputText type="text" class="form-control" id="email"
-									name="email" placeholder="Username"
+								<h:inputText type="text" class="form-control" id="name"
+									name="name" placeholder="Username"
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = 'Username'"
-									value="#{clientLoginController.clientLoginForm.email}" />
+									value="#{clientLoginController.clientLoginForm.name}" />
 							</div>
 							<div class="col-md-12 form-group">
 								<h:inputSecret type="text" class="form-control" id="password"
@@ -87,8 +87,8 @@
 		<h:outputScript target="head">
 		checkParam = function(){
 		var password = $('#contactForm\\:password').val();
-		var username = $('#contactForm\\:email').val();
-		if(password ==="" || email ===""){
+		var username = $('#contactForm\\:name').val();
+		if(password ==="" || username ===""){
 		alert('Can nhap du thong tin');
 		 return false;
 		}

@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 public class CommonController {
-
 	private Part image;
 
 	public Part getImage() {

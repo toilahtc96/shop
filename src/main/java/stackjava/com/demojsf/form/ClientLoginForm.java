@@ -8,17 +8,9 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class ClientLoginForm implements Serializable {
-	private String email;
+	private String name;
 	private String password;
 	private boolean check;
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	public String getPassword() {
 		return password;
@@ -34,6 +26,14 @@ public class ClientLoginForm implements Serializable {
 
 	public void setCheck(boolean check) {
 		this.check = check;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }
