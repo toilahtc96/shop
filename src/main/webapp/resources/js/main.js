@@ -1,7 +1,6 @@
 function getContextPath() {
    return window.location.pathname.substring(0, window.location.pathname.indexOf("/",2))+"/javax.faces.resource/";
 }
-alert("x" + getContextPath());
 var contextPath = getContextPath();
 $(document).ready(function(){
 	"use strict";
@@ -60,8 +59,8 @@ $(document).ready(function(){
         autoplayTimeout: 5000,
         loop:true,
         nav:true,
-        navText:["<h:graphicImage name='img/banner/prev.png.xhtml' > ",
-        	"<h:graphicImage name='img/banner/next.png.xhtml' > "],
+        navText:["<img src ='"+contextPath+"img/banner/prev.png.jsf'>",
+        	"<img src ='"+contextPath+"img/banner/next.png.xhtml'>"],
         dots:false
     });
 
@@ -103,7 +102,9 @@ $(document).ready(function(){
         autoplayTimeout: 5000,
         loop:true,
         nav:false,
-        navText:["<img src=('#{resource['img/product/prev.png.xhtml']}')>","<img src=('#{resource['img/product/next.png.xhtml']}')"],
+        navText:["<img src ='"+contextPath+"img/product/prev.png.jsf'>",
+        	"<img src ='"+contextPath+"img/product/next.png.xhtml'>"],
+        	
         dots:false
     });
 

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.Map.Entry;
 
 import javax.faces.bean.ManagedBean;
@@ -15,7 +16,12 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.Part;
+import org.openqa.selenium.remote.server.handler.GetCookie;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
 
@@ -44,9 +50,21 @@ public class ProductController extends CommonController implements Serializable 
 	List<Product> list;
 
 	private int idCate;
-	
+
 	
 
+	
+
+	public String parse(String jsonLine) {
+		JsonElement jelement = new JsonParser().parse(this.getCookie("cartArray").getValue());
+		JsonArray jobject = jelement.getAsJsonArray();
+		for (JsonElement jsonElement : jobject) {
+			System.out.println(jsonElement.toString());
+		}
+		return "";
+	}
+
+	
 	public int getIdCate() {
 		return idCate;
 	}
@@ -153,14 +171,14 @@ public class ProductController extends CommonController implements Serializable 
 		// FacesContext fc = FacesContext.getCurrentInstance();
 		// int id =
 		// (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
-//		System.out.println(id);
+		// System.out.println(id);
 		Product pro = productService.getById(id);
 		productDetailForm = new ProductDetailForm();
 		productDetailForm.setProID(pro.getProId());
 		productDetailForm.setProName(pro.getProName());
 		return "productDetail?faces-redirect=true";
 	}
-	
+
 	public String updateProduct() {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		int id = (Integer.parseInt(fc.getExternalContext().getRequestParameterMap().get("id")));
