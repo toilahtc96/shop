@@ -25,8 +25,8 @@ public class UserService implements ModelServiceInterface<User>,Serializable {
 	public void setUserDAO(UserDAO userDAO) {
 		this.userDAO = userDAO;
 	}
-	public User getUserByEmailAndPassword(String email, String password){
-		return userDAO.getUserByEmailAndPassWord(email, password);
+	public User getUserByNameAndPassword(String name, String password){
+		return userDAO.getUserByNameAndPassWord(name, password);
 	}
 
 	@Override
@@ -64,8 +64,8 @@ public class UserService implements ModelServiceInterface<User>,Serializable {
 		return userDAO.checkUserByName(name);
 	}
 
-	public boolean checkUser(String email,String password){
-		return userDAO.checkUser(email, password);
+	public boolean checkUser(String name,String password){
+		return userDAO.checkUser(name, password);
 	}
 	
 	public String getUserNameById(int useId) {

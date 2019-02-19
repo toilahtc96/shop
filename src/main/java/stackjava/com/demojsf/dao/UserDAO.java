@@ -47,7 +47,7 @@ public class UserDAO implements ModelDaoInterface<User>, Serializable {
 		return false;
 	}
 
-	public boolean checkUser(String email, String password) {
+	public boolean checkUser(String name, String password) {
 		getSessionHibernate = new GetSessionHibernate();
 		@SuppressWarnings("static-access")
 		Session session = getSessionHibernate.getSessionFactory().getCurrentSession();
@@ -58,8 +58,8 @@ public class UserDAO implements ModelDaoInterface<User>, Serializable {
 //		query.setParameter("pass", password);
 //		User user = new User();
 //		user = (User) query.setMaxResults(1).list();
-		User user = (User) session.createQuery("from  " + User.class.getName() + " where use_email = :email and use_password = :password")
-		.setParameter("email", email).setParameter("password", password).uniqueResult();
+		User user = (User) session.createQuery("from  " + User.class.getName() + " where use_name = :name and use_password = :password")
+		.setParameter("name", name).setParameter("password", password).uniqueResult();
 		tran.commit();
 		if (user != null) {
 			return true;
@@ -67,15 +67,15 @@ public class UserDAO implements ModelDaoInterface<User>, Serializable {
 		return false;
 	}
 
-	public User getUserByEmailAndPassWord(String email, String password) {
+	public User getUserByNameAndPassWord(String name, String password) {
 		getSessionHibernate = new GetSessionHibernate();
 		User user = null;
 		@SuppressWarnings("static-access")
 		Session session = getSessionHibernate.getSessionFactory().getCurrentSession();
 		Transaction tran = session.beginTransaction();
 		user = (User) session
-				.createQuery("from  " + User.class.getName() + " where use_email = :email and use_password = :password")
-				.setParameter("email", email).setParameter("password", password).uniqueResult();
+				.createQuery("from  " + User.class.getName() + " where use_name = :name and use_password = :password")
+				.setParameter("name", name).setParameter("password", password).uniqueResult();
 		tran.commit();
 		if (user != null) {
 			return user;

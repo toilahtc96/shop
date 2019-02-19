@@ -53,15 +53,15 @@ public class ClientLoginController implements Serializable {
 	}
 
 	public void login() {
-		String email = clientLoginForm.getEmail();
+		String name = clientLoginForm.getName();
 		String password = clientLoginForm.getPassword();
 		FacesContext context = FacesContext.getCurrentInstance();
-		if (email.equals("") || password.equals("")) {
+		if (name.equals("") || password.equals("")) {
 			// so ra 1 alert
 			context.addMessage(null, new FacesMessage("Thiếu thông tin đăng nhập!"));
 		} else {
-			if (userService.checkUser(email, password)) {
-				User user = userService.getUserByEmailAndPassword(email, password);
+			if (userService.checkUser(name, password)) {
+				User user = userService.getUserByNameAndPassword(name, password);
 				if (user != null) {
 					context.getExternalContext().getSessionMap().put("user", user);
 					try {
@@ -72,6 +72,8 @@ public class ClientLoginController implements Serializable {
 				} else {
 					context.addMessage(null, new FacesMessage("Authentication Failed. Check username or password."));
 				}
+			}else {
+				context.addMessage(null, new FacesMessage("Thông tin đăng nhập sai!"));
 			}
 		}
 	}
@@ -115,6 +117,10 @@ public class ClientLoginController implements Serializable {
 		user.setUserActive(1);
 		user.setUserGender(1);
 		user.setUserFacebook("damhaihiep");
+		if(userService.checkUserByName(useName)) {
+			System.out.println("User da ton tai! ");
+			return "";
+		}
 		userService.add(user);
 		return "login?faces-redirect=true";
 	}
