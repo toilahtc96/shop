@@ -1,4 +1,8 @@
-
+function getContextPath() {
+   return window.location.pathname.substring(0, window.location.pathname.indexOf("/",2))+"/javax.faces.resource/";
+}
+alert("x" + getContextPath());
+var contextPath = getContextPath();
 $(document).ready(function(){
 	"use strict";
 
@@ -12,7 +16,7 @@ $(document).ready(function(){
 	$(".fullscreen").css("height", window_height)
     $(".fitscreen").css("height", fitscreen);
 
-  //------- Active Nice Select --------//
+  // ------- Active Nice Select --------//
 
     $('select').niceSelect();
 
@@ -40,40 +44,46 @@ $(document).ready(function(){
         $('#search_input_box').slideUp(500);
     });
 
-    /*==========================
-		javaScript for sticky header
-		============================*/
+    /*
+	 * ========================== javaScript for sticky header
+	 * ============================
+	 */
 			$(".sticky-header").sticky();
 
-    /*=================================
-    Javascript for banner area carousel
-    ==================================*/
+    /*
+	 * ================================= Javascript for banner area carousel
+	 * ==================================
+	 */
     $(".active-banner-slider").owlCarousel({
         items:1,
         autoplay:false,
         autoplayTimeout: 5000,
         loop:true,
         nav:true,
-        navText:["<img src='img/banner/prev.png'>","<img src='img/banner/next.png'>"],
+        navText:["<h:graphicImage name='img/banner/prev.png.xhtml' > ",
+        	"<h:graphicImage name='img/banner/next.png.xhtml' > "],
         dots:false
     });
 
-    /*=================================
-    Javascript for product area carousel
-    ==================================*/
+    /*
+	 * ================================= Javascript for product area carousel
+	 * ==================================
+	 */
     $(".active-product-area").owlCarousel({
         items:1,
         autoplay:false,
         autoplayTimeout: 5000,
         loop:true,
         nav:true,
-        navText:["<img src='img/product/prev.png'>","<img src='img/product/next.png'>"],
+        navText:["<img src ='"+contextPath+"img/product/prev.png.jsf'>",
+        	"<img src ='"+contextPath+"img/product/next.png.xhtml'>"],
         dots:false
     });
 
-    /*=================================
-    Javascript for single product area carousel
-    ==================================*/
+    /*
+	 * ================================= Javascript for single product area
+	 * carousel ==================================
+	 */
     $(".s_Product_carousel").owlCarousel({
       items:1,
       autoplay:false,
@@ -83,20 +93,21 @@ $(document).ready(function(){
       dots:true
     });
     
-    /*=================================
-    Javascript for exclusive area carousel
-    ==================================*/
+    /*
+	 * ================================= Javascript for exclusive area carousel
+	 * ==================================
+	 */
     $(".active-exclusive-product-slider").owlCarousel({
         items:1,
         autoplay:false,
         autoplayTimeout: 5000,
         loop:true,
-        nav:true,
-        navText:["<img src='img/product/prev.png'>","<img src='img/product/next.png'>"],
+        nav:false,
+        navText:["<img src=('#{resource['img/product/prev.png.xhtml']}')>","<img src=('#{resource['img/product/next.png.xhtml']}')"],
         dots:false
     });
 
-    //--------- Accordion Icon Change ---------//
+    // --------- Accordion Icon Change ---------//
 
     $('.collapse').on('shown.bs.collapse', function(){
         $(this).parent().find(".lnr-arrow-right").removeClass("lnr-arrow-right").addClass("lnr-arrow-left");
@@ -133,7 +144,8 @@ $(document).ready(function(){
             if ($target.is(":focus")) { // Checking if the target was focused
               return false;
             } else {
-              $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
+              $target.attr('tabindex','-1'); // Adding tabindex for elements
+												// not focusable
               $target.focus(); // Set focus again
             };
           });
@@ -143,7 +155,7 @@ $(document).ready(function(){
 
 
 
-      // -------   Mail Send ajax
+      // ------- Mail Send ajax
 
          $(document).ready(function() {
             var form = $('#booking'); // contact form
@@ -166,7 +178,10 @@ $(document).ready(function(){
                     success: function(data) {
                         alert.html(data).fadeIn(); // fade in response data
                         form.trigger('reset'); // reset form
-                        submit.attr("style", "display: none !important");; // reset submit button text
+                        submit.attr("style", "display: none !important");; // reset
+																			// submit
+																			// button
+																			// text
                     },
                     error: function(e) {
                         console.log(e)
@@ -242,7 +257,7 @@ $(document).ready(function(){
 
 
 
-    //----- Active No ui slider --------//
+    // ----- Active No ui slider --------//
 
 
 
@@ -283,7 +298,7 @@ $(document).ready(function(){
     });
 
     
-    //-------- Have Cupon Button Text Toggle Change -------//
+    // -------- Have Cupon Button Text Toggle Change -------//
 
     $('.have-btn').on('click', function(e){
         e.preventDefault();
@@ -303,7 +318,7 @@ $(document).ready(function(){
 
 
 
-  //------- Start Quantity Increase & Decrease Value --------//
+  // ------- Start Quantity Increase & Decrease Value --------//
 
 
 
@@ -346,11 +361,12 @@ $(document).ready(function(){
 
   init();
 
-//------- End Quantity Increase & Decrease Value --------//
+// ------- End Quantity Increase & Decrease Value --------//
 
   /*----------------------------------------------------*/
-  /*  Google map js
-    /*----------------------------------------------------*/
+  /*
+	 * Google map js /*----------------------------------------------------
+	 */
 
     if ($("#mapBox").length) {
         var $lat = $("#mapBox").data("lat");

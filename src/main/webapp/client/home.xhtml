@@ -463,10 +463,10 @@
 			<div class="owl-controls">
 				<div class="owl-nav">
 					<div class="owl-prev" style="">
-						<h:graphicImage name="img/product/prev.png"/>
+						<h:graphicImage name="img/product/prev.png" />
 					</div>
 					<div class="owl-next" style="">
-						<h:graphicImage name="img/product/next.png"/>
+						<h:graphicImage name="img/product/next.png" />
 					</div>
 				</div>
 				<div class="owl-dots" style="display: none;"></div>
@@ -748,7 +748,12 @@
 	$("#homeForm\\:cart").val(getCookie("cart"));
 	return true;
 }
-
+var ctx = "${pageContext.request.contextPath}";
+alert(ctx);
+alert("xxx");
+function getContextPath() {
+   return window.location.pathname.substring(0, window.location.pathname.indexOf("/",2))+"/javax.faces.resource/";
+}
 		</h:outputScript>
 		</ui:define>
 	</ui:composition>
