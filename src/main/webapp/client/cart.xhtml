@@ -12,7 +12,7 @@
 			<div
 				class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 				<div class="col-first">
-					<h1>Shopping Cart <h:outputText value="#{clientHomeController.test}" /></h1>
+					<h1>Shopping Cart</h1>
 					<nav class="d-flex align-items-center"> <a href="index.html">Home<span
 						class="lnr lnr-arrow-right"></span></a> <a href="category.html">Cart</a>
 					</nav>
@@ -25,12 +25,12 @@
 
 	<ui:define name="content">
 		<!--================Cart Area =================-->
-		<h:form rendered="#{not empty user}">
+		<h:form rendered="#{not empty user}" id="cartForm">
 			<section class="cart_area">
 			<div class="container">
 				<div class="cart_inner">
 					<div class="table-responsive">
-						<table class="table">
+						<table class="table" id="cartTable">
 							<thead>
 								<tr>
 									<th scope="col">Product</th>
@@ -40,108 +40,43 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>
-										<div class="media">
-											<div class="d-flex">
-												<h:graphicImage name="img/cart.jpg" alt="" />
+								<ui:repeat value="#{clientHomeController.lstIdProductInCart}" varStatus="index"
+									var="item" id="cartData">
+									<tr>
+										<td>
+											<div class="media">
+												<div class="d-flex">
+													<h:graphicImage name="img/cart.jpg" alt="" />
+												</div>
+												<div class="media-body">
+													<p><h:outputText value="#{item.pro.proName}" /><h:inputHidden value="#{item.pro.proId}"  id="name" /></p>
+												</div>
 											</div>
-											<div class="media-body">
-												<p>Minimalistic shop for multipurpose use</p>
+										</td>
+										<td>
+											<h5><h:outputText value="#{item.pro.proPrice}" /></h5>
+										</td>
+										<td>
+											<div class="product_count">
+												<input type="text" name="qty" id="sst" maxlength="12"
+													value="#{item.quantity}" title="Quantity:" class="input-text qty" /><h:inputHidden value="#{item.quantity}"  id="qty" />
+												<button
+													onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+													class="increase items-count" type="button">
+													<i class="lnr lnr-chevron-up"></i>
+												</button>
+												<button
+													onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+													class="reduced items-count" type="button">
+													<i class="lnr lnr-chevron-down"></i>
+												</button>
 											</div>
-										</div>
-									</td>
-									<td>
-										<h5>$360.00</h5>
-									</td>
-									<td>
-										<div class="product_count">
-											<input type="text" name="qty" id="sst" maxlength="12"
-												value="1" title="Quantity:" class="input-text qty" />
-											<button
-												onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-												class="increase items-count" type="button">
-												<i class="lnr lnr-chevron-up"></i>
-											</button>
-											<button
-												onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-												class="reduced items-count" type="button">
-												<i class="lnr lnr-chevron-down"></i>
-											</button>
-										</div>
-									</td>
-									<td>
-										<h5>$720.00</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="media">
-											<div class="d-flex">
-												<h:graphicImage name="img/cart.jpg" alt="" />
-											</div>
-											<div class="media-body">
-												<p>Minimalistic shop for multipurpose use</p>
-											</div>
-										</div>
-									</td>
-									<td>
-										<h5>$360.00</h5>
-									</td>
-									<td>
-										<div class="product_count">
-											<input type="text" name="qty" id="sst" maxlength="12"
-												value="1" title="Quantity:" class="input-text qty" />
-											<button
-												onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-												class="increase items-count" type="button">
-												<i class="lnr lnr-chevron-up"></i>
-											</button>
-											<button
-												onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-												class="reduced items-count" type="button">
-												<i class="lnr lnr-chevron-down"></i>
-											</button>
-										</div>
-									</td>
-									<td>
-										<h5>$720.00</h5>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="media">
-											<div class="d-flex">
-												<h:graphicImage name="img/cart.jpg" alt="" />
-											</div>
-											<div class="media-body">
-												<p>Minimalistic shop for multipurpose use</p>
-											</div>
-										</div>
-									</td>
-									<td>
-										<h5>$360.00</h5>
-									</td>
-									<td>
-										<div class="product_count">
-											<input type="text" name="qty" id="sst" maxlength="12"
-												value="1" title="Quantity:" class="input-text qty" />
-											<button
-												onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-												class="increase items-count" type="button">
-												<i class="lnr lnr-chevron-up"></i>
-											</button>
-											<button
-												onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-												class="reduced items-count" type="button">
-												<i class="lnr lnr-chevron-down"></i>
-											</button>
-										</div>
-									</td>
-									<td>
-										<h5>$720.00</h5>
-									</td>
-								</tr>
+										</td>
+										<td>
+											<h5><h:outputText value="#{item.quantity * item.pro.proPrice} " /></h5>
+										</td>
+									</tr>
+								</ui:repeat>
 								<tr>
 									<td></td>
 									<td></td>
@@ -158,8 +93,11 @@
 									<td></td>
 									<td>
 										<div class="checkout_btn_inner d-flex align-items-center">
-										<h:commandButton class="gray_btn" action="#" value="Continue Shopping" />
-										<h:commandButton class="primary-btn" action="#{clientOrderController.getCreateOrder()}" value="Creating to Order" />
+											<h:commandButton class="gray_btn" action="#{clientHomeController.getHome}"
+												value="Continue Shopping" />
+											<h:commandButton class="primary-btn" type="submit"
+												action="#{clientHomeController.getCreateOrder()}"
+												value="Creating to Order" />
 										</div>
 									</td>
 								</tr>

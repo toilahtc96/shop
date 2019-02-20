@@ -60,3 +60,6 @@ src/main/webapp/template/Layout.xhtml
 .classpath
 .classpath
 .classpath
+.classpath
+.settings/org.eclipse.wst.validation.prefs
+.settings/org.eclipse.wst.xsl.core.prefs

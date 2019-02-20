@@ -17,6 +17,9 @@ public class OrderService implements ModelServiceInterface<Order>,Serializable {
 	private static final long serialVersionUID = 1L;
 	@ManagedProperty(value = "#{orderDAO}")
 	OrderDAO orderDAO;
+	public List<Order> getAllByUserId(int userId) {
+		return orderDAO.getAllByUserId(userId);
+	}
 
 	public OrderDAO getOrderDAO() {
 		if (orderDAO == null) {
@@ -43,7 +46,7 @@ public class OrderService implements ModelServiceInterface<Order>,Serializable {
 
 	public int add(Order order) {
 		// TODO Auto-generated method stub
-		return 0;
+		return orderDAO.add(order);
 	}
 
 	@Override

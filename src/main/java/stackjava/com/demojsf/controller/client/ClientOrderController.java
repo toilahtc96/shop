@@ -60,7 +60,5 @@ public class ClientOrderController implements Serializable {
 //		orderDetailForm.setOrdetOrderId(order.get);
 		return "checkout?faces-redirect=true";
 	}
-	public String getCreateOrder() {
-		return "order?faces-redirect=true";
-	}
+	
 }

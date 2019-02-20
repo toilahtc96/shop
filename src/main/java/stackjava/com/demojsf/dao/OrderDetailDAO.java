@@ -18,12 +18,12 @@ import org.hibernate.Transaction;
 import stackjava.com.demojsf.connection.GetSessionHibernate;
 import stackjava.com.demojsf.model.Category;
 import stackjava.com.demojsf.model.Order;
+import stackjava.com.demojsf.model.OrderDetail;
 import stackjava.com.demojsf.model.Product;
-import stackjava.com.demojsf.model.User;
 
 @ManagedBean
 @SessionScoped
-public class OrderDAO implements ModelDaoInterface<Order>, Serializable {
+public class OrderDetailDAO implements ModelDaoInterface<OrderDetail>, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@ManagedProperty(value = "#{getSessionHibernate}")
@@ -40,54 +40,38 @@ public class OrderDAO implements ModelDaoInterface<Order>, Serializable {
 		this.getSessionHibernate = getSessionHibernate;
 	}
 
-	public OrderDAO() {
+	public OrderDetailDAO() {
 		super();
 		BasicConfigurator.configure();
 	}
 
-	public Order getById(int id) {
+	public OrderDetail getById(int id) {
 		// getSessionHibernate = this.getGetSessionHibernate();
 		// Order order = new Order(1, 4, Float.valueOf(15), 1, new Date(), new Date());
 		// getSessionHibernate.createRecord(order);
 		// return order;
-		Order order = new Order();
+		OrderDetail orderDetail = new OrderDetail();
 		try {
 			@SuppressWarnings("static-access")
 			Session session = getSessionHibernate.getSessionFactory().openSession();
-			order = (Order) session.get(Order.class, id);
+			orderDetail = (OrderDetail) session.get(OrderDetail.class, id);
 			// System.out.println(order.get());
 
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
 
-		return order;
+		return orderDetail;
 	}
 
 	@SuppressWarnings({ "unchecked", "unused" })
-	public List<Order> getAll() {
+	public List<OrderDetail> getAll() {
 		FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		@SuppressWarnings("static-access")
 		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
 		Transaction transObj = sessionObj.beginTransaction();
-		List<Order> listOrder = sessionObj.createCriteria(Order.class).list();
-		return listOrder;
-	}
-
-	@SuppressWarnings({ "unchecked", "unused" })
-	public List<Order> getAllByUserId(int userId) {
-		FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		@SuppressWarnings("static-access")
-		/*
-		 * User user = (User) session.
-		 * createQuery("From stackjava.com.demojsf.model.User u where u.userEmail = :email"
-		 * ) .setParameter("email", name).uniqueResult();
-		 */
-		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
-		Transaction transObj = sessionObj.beginTransaction();
-		List<Order> listOrder = (List<Order>) sessionObj
-				.createQuery("From stackjava.com.demojsf.model.Order u where u.orderUserId = :userId").setParameter("userId", userId).list();
-		return listOrder;
+		List<OrderDetail> listOrderDetail = sessionObj.createCriteria(OrderDetail.class).list();
+		return listOrderDetail;
 	}
 
 	public int removeById(int id) {
@@ -95,12 +79,7 @@ public class OrderDAO implements ModelDaoInterface<Order>, Serializable {
 		return 0;
 	}
 
-	public int update(int id, Order e) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int add(Order e) {
+	public int add(OrderDetail e) {
 		Session sessionObj = getSessionHibernate.getSessionFactory().openSession();
 
 		// Creating Transaction Object
@@ -113,8 +92,14 @@ public class OrderDAO implements ModelDaoInterface<Order>, Serializable {
 		// Closing The Session Object
 		sessionObj.close();
 		// logger.info("Successfully Created " + e.toString());
-		return e.getOrderId();
+		return e.getOrdetId();
 
+	}
+
+	@Override
+	public int update(int id, OrderDetail e) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

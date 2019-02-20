@@ -64,6 +64,7 @@ public class ClientLoginController implements Serializable {
 				User user = userService.getUserByNameAndPassword(name, password);
 				if (user != null) {
 					context.getExternalContext().getSessionMap().put("user", user);
+					
 					try {
 						context.getExternalContext().redirect("home");
 					} catch (IOException e) {
