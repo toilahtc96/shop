@@ -84,11 +84,12 @@ public class CommonController {
 			for (int i = 0; i < userCookies.length; i++) {
 				if (userCookies[i].getName().equals(name)) {
 					cookie = userCookies[i];
-					
+					System.out.println("have Cookie");
 					return cookie;
 				}
 			}
 		}
+		System.out.println("dont have Cookie");
 		return null;
 	}
 }
