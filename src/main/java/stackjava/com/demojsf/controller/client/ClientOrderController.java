@@ -1,6 +1,7 @@
 package stackjava.com.demojsf.controller.client;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -9,6 +10,8 @@ import javax.faces.bean.SessionScoped;
 
 import stackjava.com.demojsf.form.OrderDetailForm;
 import stackjava.com.demojsf.model.Order;
+import stackjava.com.demojsf.model.OrderDetail;
+import stackjava.com.demojsf.service.OrderDetailService;
 import stackjava.com.demojsf.service.OrderService;
 
 @ManagedBean
@@ -20,7 +23,6 @@ public class ClientOrderController implements Serializable {
 	OrderService orderService;
 
 	List<Order> list;
-	
 
 	public List<Order> getList() {
 		return this.list = orderService.getAll();
@@ -48,17 +50,27 @@ public class ClientOrderController implements Serializable {
 		this.orderDetailForm = orderDetailForm;
 	}
 
+	@ManagedProperty(name = "orderDetailService", value = "#{orderDetailService}")
+	private OrderDetailService orderDetailService;
+
+	private List<OrderDetail> listToCheckout;
+
+	public List<OrderDetail> getListToCheckout() {
+		return listToCheckout;
+	}
+
+	public void setListToCheckout(List<OrderDetail> listToCheckout) {
+		this.listToCheckout = listToCheckout;
+	}
+
+	public void setOrderDetailService(OrderDetailService orderDetailService) {
+		this.orderDetailService = orderDetailService;
+	}
+
 	public String getDetailOrder(int ordId) {
-		Order order = orderService.getById(ordId);
-		orderDetailForm = new OrderDetailForm();
-//		orderDetailForm.setOrdId(String.valueOf(order.getOrderId()));
-//		orderDetailForm.setOrdUserId(String.valueOf(order.getOrderUserId()));
-//		orderDetailForm.setOrdTotalPrice(String.valueOf(order.getOrderTotalFrice()));
-//		orderDetailForm.setOrdStatus(String.valueOf(order.getOrderStatus()));
-//		orderDetailForm.setOrdCreateAt(String.valueOf(order.getOrderCreatedAt()));
-		orderDetailForm.setOrdetId(order.getOrderId());
-//		orderDetailForm.setOrdetOrderId(order.get);
+		listToCheckout = new ArrayList<OrderDetail>();
+		listToCheckout = orderDetailService.getAllByOrderDetail(ordId);
 		return "checkout?faces-redirect=true";
 	}
-	
+
 }

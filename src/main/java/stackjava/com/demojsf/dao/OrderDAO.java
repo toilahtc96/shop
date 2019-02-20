@@ -78,11 +78,7 @@ public class OrderDAO implements ModelDaoInterface<Order>, Serializable {
 	public List<Order> getAllByUserId(int userId) {
 		FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 		@SuppressWarnings("static-access")
-		/*
-		 * User user = (User) session.
-		 * createQuery("From stackjava.com.demojsf.model.User u where u.userEmail = :email"
-		 * ) .setParameter("email", name).uniqueResult();
-		 */
+		
 		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
 		Transaction transObj = sessionObj.beginTransaction();
 		List<Order> listOrder = (List<Order>) sessionObj

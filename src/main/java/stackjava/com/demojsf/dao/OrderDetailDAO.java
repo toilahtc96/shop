@@ -73,6 +73,16 @@ public class OrderDetailDAO implements ModelDaoInterface<OrderDetail>, Serializa
 		List<OrderDetail> listOrderDetail = sessionObj.createCriteria(OrderDetail.class).list();
 		return listOrderDetail;
 	}
+	@SuppressWarnings({ "unchecked", "unused" })
+	public List<OrderDetail> getAllByOrderId(int orderId) {
+		FacesContext.getCurrentInstance().getExternalContext().getSession(false);
+		@SuppressWarnings("static-access")
+		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
+		Transaction transObj = sessionObj.beginTransaction();
+		List<OrderDetail> listOrderDetail = (List<OrderDetail>) sessionObj
+				.createQuery("From stackjava.com.demojsf.model.OrderDetail u where u.ordetOrderId = :orderId").setParameter("orderId", orderId).list();
+		return listOrderDetail;
+	}
 
 	public int removeById(int id) {
 		// TODO Auto-generated method stub

@@ -58,5 +58,8 @@ public class OrderDetailService implements ModelServiceInterface<OrderDetail>,Se
 		return orderDetailDAO.update(id, e);
 	}
 
+	public List<OrderDetail> getAllByOrderDetail(int orderId){
+		return orderDetailDAO.getAllByOrderId(orderId);
+	}
 
 }
