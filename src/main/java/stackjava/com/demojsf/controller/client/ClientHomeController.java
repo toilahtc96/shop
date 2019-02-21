@@ -39,7 +39,6 @@ import stackjava.com.demojsf.service.ProductService;
 @SessionScoped
 @URLMappings(mappings = { @URLMapping(id = "clientHome", pattern = "/client/home", viewId = "/client/home.xhtml"),
 		@URLMapping(id = "clientCart", pattern = "/client/cart", viewId = "/client/cart.xhtml"),
-		@URLMapping(id = "clientCheckout", pattern = "/client/checkout", viewId = "/client/checkout.xhtml"),
 		@URLMapping(id = "clientCategory", pattern = "/client/categories", viewId = "/client/category.xhtml"),
 		@URLMapping(id = "clientOrder", pattern = "/client/orders", viewId = "/client/order.xhtml"),
 		@URLMapping(id = "clientRegister", pattern = "/client/register", viewId = "/client/register.xhtml"),
@@ -123,13 +122,13 @@ public class ClientHomeController extends CommonController implements Serializab
 			orderForm.setOrdetId(order.getOrderId());
 			orderForm.setCreateDate(order.getOrderCreatedAt());
 			if (order.getOrderStatus() == 1) {
-				orderForm.setStatus("Đã hoàn tất");
+				orderForm.setStatus("Ä�Ã£ hoÃ n táº¥t");
 			}
 			if (order.getOrderStatus() == 2) {
-				orderForm.setStatus("Đang chờ");
+				orderForm.setStatus("Ä�ang chá»�");
 			}
 			if (order.getOrderStatus() == 3) {
-				orderForm.setStatus("Có lỗi!");
+				orderForm.setStatus("CÃ³ lá»—i!");
 			}
 			orderForm.setTotalPrice(order.getOrderTotalFrice());
 			orderForm.setUserName(u.getUserName());

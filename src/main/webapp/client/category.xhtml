@@ -38,7 +38,6 @@
 											<h:commandLink
 												action="#{productController.getListProByIdCate(item.catId)}"
 												value="#{item.catName}">
-												<!-- <f:ajax  execute="@this" render=":form1:resultAjax" listener="#{productController.selectRows}"></f:ajax> -->
 												<f:param name="catId" value="#{category.catId}" />
 											</h:commandLink></a></li>
 								</ul>
