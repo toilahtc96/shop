@@ -42,7 +42,7 @@ public class OrderDetailDAO implements ModelDaoInterface<OrderDetail>, Serializa
 
 	public OrderDetailDAO() {
 		super();
-		BasicConfigurator.configure();
+		
 	}
 
 	public OrderDetail getById(int id) {

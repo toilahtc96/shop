@@ -42,7 +42,7 @@ public class OrderDAO implements ModelDaoInterface<Order>, Serializable {
 
 	public OrderDAO() {
 		super();
-		BasicConfigurator.configure();
+		
 	}
 
 	public Order getById(int id) {

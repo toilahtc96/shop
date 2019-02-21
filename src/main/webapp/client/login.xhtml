@@ -84,18 +84,7 @@
 		<!--================End Login Box Area =================-->
 	</ui:define>
 	<ui:define name="scriptJSF">
-		<h:outputScript target="head">
-		checkParam = function(){
-		var password = $('#contactForm\\:password').val();
-		var username = $('#contactForm\\:name').val();
-		if(password ==="" || username ===""){
-		alert('Can nhap du thong tin');
-		 return false;
-		}
-		return true;
-		}
-			
-		</h:outputScript>
+		<h:outputScript target="head" library="js" name="/client/login.js"/>
 	</ui:define>
 </ui:composition>
 </html>

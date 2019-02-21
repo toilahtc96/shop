@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <ui:composition template="../templateClient/layout.xhtml">
 	<ui:define name="banner">
@@ -40,8 +41,11 @@
 								</tr>
 							</thead>
 							<tbody>
-								<ui:repeat value="#{clientHomeController.lstIdProductInCart}" varStatus="index"
-									var="item" id="cartData">
+							<c:set var="total" value="${0}" />
+							<c:set var="index" value="${1}" />
+								<c:forEach items="#{clientHomeController.lstIdProductInCart}"
+									varStatus="index" var="item" id="cartData" >
+									
 									<tr>
 										<td>
 											<div class="media">
@@ -49,34 +53,43 @@
 													<h:graphicImage name="img/cart.jpg" alt="" />
 												</div>
 												<div class="media-body">
-													<p><h:outputText value="#{item.pro.proName}" /><h:inputHidden value="#{item.pro.proId}"  id="name" /></p>
+													<p>
+														<h:outputText value="#{item.pro.proName}" />
+														<h:inputHidden value="#{item.pro.proId}" id="name" />
+														<c:set var="total" value="${total + item.pro.proPrice }"/>
+													</p>
 												</div>
 											</div>
 										</td>
 										<td>
-											<h5><h:outputText value="#{item.pro.proPrice}" /></h5>
+											<h5>
+												<h:outputText value="#{item.pro.proPrice}" />
+											</h5>
 										</td>
 										<td>
 											<div class="product_count">
-												<input type="text" name="qty" id="sst" maxlength="12"
-													value="#{item.quantity}" title="Quantity:" class="input-text qty" /><h:inputHidden value="#{item.quantity}"  id="qty" />
-												<button
-													onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+												<h:inputText type="text" name="qty" id="sst" maxlength="12"
+													value="#{item.quantity}" title="Quantity:"
+													class="input-text qty" />
+												<h:inputHidden value="#{item.quantity}" id="qty" />
+												<button onclick="increatmentNum(0)"
 													class="increase items-count" type="button">
 													<i class="lnr lnr-chevron-up"></i>
 												</button>
-												<button
-													onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+												<button onclick="descripmentNum(0)"
 													class="reduced items-count" type="button">
 													<i class="lnr lnr-chevron-down"></i>
 												</button>
+												<c:set var="index" value="index + 1 }"/>
 											</div>
 										</td>
 										<td>
-											<h5><h:outputText value="#{item.quantity * item.pro.proPrice} " /></h5>
+											<h5>
+												<h:outputText value="#{item.quantity * item.pro.proPrice} " />
+											</h5>
 										</td>
 									</tr>
-								</ui:repeat>
+								</c:forEach>
 								<tr>
 									<td></td>
 									<td></td>
@@ -84,7 +97,7 @@
 										<h5>Sub Total</h5>
 									</td>
 									<td>
-										<h5>$2160.00</h5>
+										<h5><h:outputText value="#{total} " /></h5>
 									</td>
 								</tr>
 								<tr class="out_button_area">
@@ -93,10 +106,13 @@
 									<td></td>
 									<td>
 										<div class="checkout_btn_inner d-flex align-items-center">
-											<h:commandButton class="gray_btn" action="#{clientHomeController.getHome}"
+
+											<h:commandButton class="gray_btn"
+												action="#{clientHomeController.getHome}"
 												value="Continue Shopping" />
 											<h:commandButton class="primary-btn" type="submit"
 												action="#{clientHomeController.getCreateOrder()}"
+												onclick="return confirmCreateOrder()"
 												value="Creating to Order" />
 										</div>
 									</td>
@@ -119,6 +135,9 @@
 			<br /> <br />
 		</div>
 		<!--================End Cart Area =================-->
+	</ui:define>
+	<ui:define name="scriptJSF">
+		<h:outputScript library="js" name="client/myjs.js" />
 	</ui:define>
 </ui:composition>
 </html>

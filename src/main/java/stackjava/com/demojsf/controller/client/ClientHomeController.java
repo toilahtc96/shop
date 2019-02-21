@@ -25,6 +25,7 @@ import net.minidev.json.parser.JSONParser;
 import stackjava.com.demojsf.common.CommonController;
 import stackjava.com.demojsf.form.CartToClientForm;
 import stackjava.com.demojsf.form.CartUpdatedForm;
+import stackjava.com.demojsf.form.OrdersForm;
 import stackjava.com.demojsf.model.Order;
 import stackjava.com.demojsf.model.OrderDetail;
 import stackjava.com.demojsf.model.Product;
@@ -52,7 +53,6 @@ public class ClientHomeController extends CommonController implements Serializab
 
 	@ManagedProperty(value = "#{orderDetailService}")
 	private OrderDetailService orderDetailService;
-	
 
 	public void setOrderDetailService(OrderDetailService orderDetailService) {
 		this.orderDetailService = orderDetailService;
@@ -61,7 +61,6 @@ public class ClientHomeController extends CommonController implements Serializab
 	@ManagedProperty(value = "#{orderService}")
 	private OrderService orderService;
 
-	
 	public void setOrderService(OrderService orderService) {
 		this.orderService = orderService;
 	}
@@ -71,6 +70,7 @@ public class ClientHomeController extends CommonController implements Serializab
 	public String getCart() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		if (context.getExternalContext().getSessionMap().get("cartArray") != null) {
+			System.out.println(context.getExternalContext().getSessionMap().get("cartArray").toString());
 			parse(context.getExternalContext().getSessionMap().get("cartArray").toString());
 			return context.getExternalContext().getSessionMap().get("cartArray").toString();
 		}
@@ -84,9 +84,11 @@ public class ClientHomeController extends CommonController implements Serializab
 
 	public void updateCart(AjaxBehaviorEvent event) {
 
-		parse(this.getCart());
-		FacesContext context = FacesContext.getCurrentInstance();
-		context.getExternalContext().getSessionMap().put("cartArray", this.getCart());
+		parse(this.getCart());/*
+								 * FacesContext context = FacesContext.getCurrentInstance();
+								 * context.getExternalContext().getSessionMap().put("cartArray",
+								 * this.getCart());
+								 */
 		System.out.println("ajax call");
 	}
 
@@ -107,15 +109,36 @@ public class ClientHomeController extends CommonController implements Serializab
 		this.lstIdProductInCart = lstIdProductInCart;
 	}
 
-	private List<Order> lstOrder;
-	
-	
-	
-	public List<Order> getLstOrder() {
+	private List<OrdersForm> lstOrder;
+
+	public List<OrdersForm> getLstOrder() {
+		System.out.println("getOrder");
+		FacesContext context = FacesContext.getCurrentInstance();
+		User u = (User) context.getExternalContext().getSessionMap().get("user");
+		int userId = u.getUserId();
+		List<Order> lstGetByUserId = orderService.getAllByUserId(userId);
+		lstOrder = new ArrayList<OrdersForm>();
+		for (Order order : lstGetByUserId) {
+			OrdersForm orderForm = new OrdersForm();
+			orderForm.setOrdetId(order.getOrderId());
+			orderForm.setCreateDate(order.getOrderCreatedAt());
+			if (order.getOrderStatus() == 1) {
+				orderForm.setStatus("Đã hoàn tất");
+			}
+			if (order.getOrderStatus() == 2) {
+				orderForm.setStatus("Đang chờ");
+			}
+			if (order.getOrderStatus() == 3) {
+				orderForm.setStatus("Có lỗi!");
+			}
+			orderForm.setTotalPrice(order.getOrderTotalFrice());
+			orderForm.setUserName(u.getUserName());
+			lstOrder.add(orderForm);
+		}
 		return lstOrder;
 	}
 
-	public void setLstOrder(List<Order> lstOrder) {
+	public void setLstOrder(List<OrdersForm> lstOrder) {
 		this.lstOrder = lstOrder;
 	}
 
@@ -123,20 +146,18 @@ public class ClientHomeController extends CommonController implements Serializab
 		return "home?faces-redirect=true";
 	}
 
-	
-	
 	public String getCreateOrder() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		if (lstIdProductInCart != null) {
 
-			
 			float total = 0;
 			Order order = new Order();
+
 			User u = (User) context.getExternalContext().getSessionMap().get("user");
-			lstOrder = orderService.getAllByUserId(u.getUserId());
+			lstOrder = this.getLstOrder();
 			List<OrderDetail> lstDetail = new ArrayList<OrderDetail>();
 			for (CartUpdatedForm product : lstIdProductInCart) {
-				
+
 				int id = product.getPro().getProId();
 				int qty = 10;
 				if (product.getQuantity() != null) {
@@ -147,7 +168,7 @@ public class ClientHomeController extends CommonController implements Serializab
 				CartUpdatedForm cartOrder = new CartUpdatedForm();
 				cartOrder.setPro(productService.getById(id) != null ? productService.getById(id) : null);
 				cartOrder.setQuantity(qty);
-				
+
 				System.out.println("quantity: " + qty);
 				total += qty * product.getPro().getProPrice();
 				OrderDetail orderDetail = new OrderDetail();
@@ -168,7 +189,6 @@ public class ClientHomeController extends CommonController implements Serializab
 				orderDetailService.add(orderDetail);
 			}
 			lstIdProductInCart.clear();
-			getCookie("cartArray").setValue(null);
 
 		} else {
 			System.out.println("list Null");
