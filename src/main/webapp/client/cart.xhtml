@@ -41,11 +41,14 @@
 								</tr>
 							</thead>
 							<tbody>
-							<c:set var="total" value="${0}" />
-							<c:set var="index" value="${1}" />
+								<c:set var="cartDB" value="#{clientHomeController.cartToShow}" />
+								<c:forEach items="#{clientHomeController.cartToShow}"
+									varStatus="index" var="item" id="cartData"/>
+								<c:set var="total" value="${0}" />
+								<c:set var="index" value="${1}" />
 								<c:forEach items="#{clientHomeController.lstIdProductInCart}"
-									varStatus="index" var="item" id="cartData" >
-									
+									varStatus="index" var="item" id="cartData">
+
 									<tr>
 										<td>
 											<div class="media">
@@ -56,7 +59,7 @@
 													<p>
 														<h:outputText value="#{item.pro.proName}" />
 														<h:inputHidden value="#{item.pro.proId}" id="name" />
-														<c:set var="total" value="${total + item.pro.proPrice }"/>
+														<c:set var="total" value="${total + item.pro.proPrice }" />
 													</p>
 												</div>
 											</div>
@@ -80,7 +83,7 @@
 													class="reduced items-count" type="button">
 													<i class="lnr lnr-chevron-down"></i>
 												</button>
-												<c:set var="index" value="index + 1 }"/>
+												<c:set var="index" value="index + 1 }" />
 											</div>
 										</td>
 										<td>
@@ -97,7 +100,9 @@
 										<h5>Sub Total</h5>
 									</td>
 									<td>
-										<h5><h:outputText value="#{total} " /></h5>
+										<h5>
+											<h:outputText value="#{total} " />
+										</h5>
 									</td>
 								</tr>
 								<tr class="out_button_area">

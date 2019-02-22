@@ -153,6 +153,7 @@
 					</div>
 					<h:form id="homeForm">
 						<h:outputText id="outputName" />
+						
 						<h:inputHidden id="cart" value="#{clientHomeController.cart}"/>
 						<div class="row">
 							<!-- single product -->
@@ -705,7 +706,8 @@
 			<!-- End related-product Area -->
 		</ui:define>
 		<ui:define name="scriptJSF">
-			<h:outputScript library="js" name="client/myjs.js" />
+			<h:outputScript rendered="#{not empty user}" library="js" name="client/myjs.js" />
+			<h:outputScript rendered="#{empty user}" library="js" name="client/myEmptyUserjs.js" />
 		</ui:define>
 	</ui:composition>
 </h:body>

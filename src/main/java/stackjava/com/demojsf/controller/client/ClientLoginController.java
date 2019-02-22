@@ -14,7 +14,9 @@ import com.ocpsoft.pretty.faces.annotation.URLMapping;
 
 import stackjava.com.demojsf.form.ClientLoginForm;
 import stackjava.com.demojsf.form.ClientRegisterForm;
+import stackjava.com.demojsf.model.Cart;
 import stackjava.com.demojsf.model.User;
+import stackjava.com.demojsf.service.CartService;
 import stackjava.com.demojsf.service.UserService;
 
 @ManagedBean
@@ -25,6 +27,20 @@ public class ClientLoginController implements Serializable {
 
 	@ManagedProperty(value = "#{clientLoginForm}")
 	private ClientLoginForm clientLoginForm;
+
+	@ManagedProperty(value = "#{cartService}")
+	private CartService cartService;
+
+	public void setCartService(CartService cartService) {
+		this.cartService = cartService;
+	}
+
+	@ManagedProperty(value = "#{clientHomeController}")
+	private ClientHomeController clientHomeController;
+
+	public void setClientHomeController(ClientHomeController clientHomeController) {
+		this.clientHomeController = clientHomeController;
+	}
 
 	public ClientLoginForm getClientLoginForm() {
 		return clientLoginForm;
@@ -40,10 +56,10 @@ public class ClientLoginController implements Serializable {
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-	
+
 	@ManagedProperty(value = "#{clientRegisterForm}")
 	ClientRegisterForm clientRegisterForm;
-	
+
 	public ClientRegisterForm getClientRegisterForm() {
 		return clientRegisterForm;
 	}
@@ -64,8 +80,13 @@ public class ClientLoginController implements Serializable {
 				User user = userService.getUserByNameAndPassword(name, password);
 				if (user != null) {
 					context.getExternalContext().getSessionMap().put("user", user);
-					
+
 					try {
+
+						if (cartService.getByUserId(clientHomeController.getUserId()) != null) {
+							Cart cartO = cartService.getByUserId(clientHomeController.getUserId());
+							clientHomeController.setCart(cartO.getCarListProductQuantity());
+						}
 						context.getExternalContext().redirect("home");
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -73,7 +94,7 @@ public class ClientLoginController implements Serializable {
 				} else {
 					context.addMessage(null, new FacesMessage("Authentication Failed. Check username or password."));
 				}
-			}else {
+			} else {
 				context.addMessage(null, new FacesMessage("Thông tin đăng nhập sai!"));
 			}
 		}
@@ -88,19 +109,19 @@ public class ClientLoginController implements Serializable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public String getUserNameById(int useId) {
 		return userService.getUserNameById(useId);
 	}
-	
+
 	public String getCreateAccount() {
 		return "register?faces-redirect=true";
 	}
-	
+
 	public String getCancelRegister() {
 		return "login?faces-redirect=true";
 	}
-	
+
 	public String CreateAnAccount() {
 		String useName = this.clientRegisterForm.getUseName();
 		String usePassword = this.clientRegisterForm.getUsePassword();
@@ -118,7 +139,7 @@ public class ClientLoginController implements Serializable {
 		user.setUserActive(1);
 		user.setUserGender(1);
 		user.setUserFacebook("damhaihiep");
-		if(userService.checkUserByName(useName)) {
+		if (userService.checkUserByName(useName)) {
 			System.out.println("User da ton tai! ");
 			return "";
 		}
