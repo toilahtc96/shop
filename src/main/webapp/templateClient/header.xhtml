@@ -51,6 +51,7 @@
 	</h:head>
 	<h:body>
 		<header class="header_area sticky-header">
+		<h:form>
 			<div class="main_menu">
 				<nav class="navbar navbar-expand-lg navbar-light main_box">
 					<div class="container">
@@ -87,7 +88,8 @@
 									role="button" aria-haspopup="true" aria-expanded="false">User</a>
 									<ul class="dropdown-menu">
 										<li class="nav-item">
-											<a class="nav-link">Log In</a>
+										<a class = "nav-link"></a>
+											<h:outputLink styleClass = "nav-link" value="/JavaServerFaces/client/login">Log in</h:outputLink>
 										</li>
 										<li class="nav-item"><a class="nav-link"
 											href="home.xhtml">Log out</a></li>
@@ -108,6 +110,7 @@
 					</div>
 				</nav>
 			</div>
+			</h:form>
 			<div class="search_input" id="search_input_box">
 				<div class="container">
 					<h:form class="d-flex justify-content-between">
