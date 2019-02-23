@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -158,13 +160,13 @@ public class ClientHomeController extends CommonController implements Serializab
 			orderForm.setOrdetId(order.getOrderId());
 			orderForm.setCreateDate(order.getOrderCreatedAt());
 			if (order.getOrderStatus() == 1) {
-				orderForm.setStatus("Đã Hoàn Tất");
+				orderForm.setStatus("Ä�Ă£ HoĂ n Táº¥t");
 			}
 			if (order.getOrderStatus() == 2) {
-				orderForm.setStatus("Chưa Gửi");
+				orderForm.setStatus("ChÆ°a Gá»­i");
 			}
 			if (order.getOrderStatus() == 3) {
-				orderForm.setStatus("Đang Gửi");
+				orderForm.setStatus("Ä�ang Gá»­i");
 			}
 			orderForm.setTotalPrice(order.getOrderTotalFrice());
 			orderForm.setUserName(u.getUserName());
@@ -301,5 +303,5 @@ public class ClientHomeController extends CommonController implements Serializab
 	public void setListFilter(List<Product> listFilter) {
 		this.listFilter = listFilter;
 	}
-
+	
 }

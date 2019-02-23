@@ -82,7 +82,7 @@ public class OrderDAO implements ModelDaoInterface<Order>, Serializable {
 		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
 		Transaction transObj = sessionObj.beginTransaction();
 		List<Order> listOrder = (List<Order>) sessionObj
-				.createQuery("From stackjava.com.demojsf.model.Order u where u.orderUserId = :userId").setParameter("userId", userId).list();
+				.createQuery("From stackjava.com.demojsf.model.Order u where u.orderUserId = :userId order by u.orderCreatedAt DESC").setParameter("userId", userId).list();
 		return listOrder;
 	}
 

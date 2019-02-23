@@ -34,11 +34,10 @@
 									<li class="main-nav-list"><a data-toggle="collapse"
 										href="#fruitsVegetable" aria-expanded="false"
 										aria-controls="fruitsVegetable"><span
-											class="lnr lnr-arrow-right"></span> 
-											<h:commandLink
+											class="lnr lnr-arrow-right"></span> <h:commandLink
 												value="#{item.catName}">
 												<f:ajax execute="@form" render=":formCate:resultAjax"
-														listener="#{clientCategoryController.getListProByIdCate(item.catId)}" />
+													listener="#{clientCategoryController.getListProByIdCate(item.catId)}" />
 												<f:param name="catId" value="#{category.catId}" />
 											</h:commandLink></a></li>
 								</ul>
@@ -105,13 +104,21 @@
 				<div class="col-xl-9 col-lg-8 col-md-7">
 					<!-- Start Filter Bar -->
 					<div class="filter-bar d-flex flex-wrap align-items-center">
-						<div class="sorting">
-							<select>
-								<option value="1">Default sorting</option>
-								<option value="1">Default sorting</option>
-								<option value="1">Default sorting</option>
-							</select>
-						</div>
+					<h:outputLabel value="Sort By: " />
+						<h:form>
+							<div class="sorting">
+								<h:selectOneMenu value="#">
+									<f:selectItem itemValue="#{clientCategoryController.value}"
+										itemLabel="Price" />
+									<f:selectItem itemValue="#{clientCategoryController.value}"
+										itemLabel="Name" />
+									<f:selectItem itemValue="#{clientCategoryController.value}"
+										itemLabel="Date" />
+									<f:ajax listener="#{clientCategoryController.listener}"
+										execute="@form" render=":formCate:resultAjax" />
+								</h:selectOneMenu>
+							</div>
+						</h:form>
 						<div class="sorting mr-auto">
 							<select>
 								<option value="1">Show 12</option>
@@ -134,11 +141,10 @@
 
 					<section class="lattest-product-area pb-40 category-list">
 					<h:form id="formCate">
-					<h:inputHidden value="#{clientCategoryController.startList}" />
+						<h:inputHidden value="#{clientCategoryController.startList}" />
 						<h:outputText id="outputName" />
 						<h:panelGroup class="row" id="resultAjax">
-							<ui:repeat var="pro"
-								value="#{clientCategoryController.list}">
+							<ui:repeat var="pro" value="#{clientCategoryController.list}">
 								<!-- single product -->
 								<div class="col-lg-4 col-md-6">
 									<div class="single-product">

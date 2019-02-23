@@ -43,7 +43,7 @@ public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
 			@SuppressWarnings("static-access")
 			Session session = getSessionHibernate.getSessionFactory().openSession();
 			pro = (Product) session.get(Product.class, id);
-//			System.out.println(pro.getProName());
+			// System.out.println(pro.getProName());
 
 		} catch (Exception e) {
 			System.out.println(e.toString());
@@ -101,10 +101,37 @@ public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
 		@SuppressWarnings("static-access")
 		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
 		Transaction transObj = sessionObj.beginTransaction();
-		Query query = sessionObj.createQuery("from  " + Product.class.getName() + " where pro_category_id = :catId ");
+		Query query = sessionObj.createQuery(
+				"from  " + Product.class.getName() + " where pro_category_id = :catId order by pro_price asc");
 		query.setParameter("catId", catId);
 		listPro = query.setMaxResults(6).list();
 		return listPro;
 	}
+
+//	@SuppressWarnings({ "unchecked", "unused" })
+//	public List<Product> getListProByIdCateSortByDate(int catId) {
+//		List<Product> listPro = new ArrayList<Product>();
+//		@SuppressWarnings("static-access")
+//		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
+//		Transaction transObj = sessionObj.beginTransaction();
+//		Query query = sessionObj.createQuery(
+//				"from  " + Product.class.getName() + " where pro_category_id = :catId order by pro_name asc");
+//		query.setParameter("catId", catId);
+//		listPro = query.setMaxResults(6).list();
+//		return listPro;
+//	}
+//
+//	@SuppressWarnings({ "unchecked", "unused" })
+//	public List<Product> getListProByIdCateSortByName(int catId) {
+//		List<Product> listPro = new ArrayList<Product>();
+//		@SuppressWarnings("static-access")
+//		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
+//		Transaction transObj = sessionObj.beginTransaction();
+//		Query query = sessionObj.createQuery(
+//				"from  " + Product.class.getName() + " where pro_category_id = :catId order by pro_create_time desc");
+//		query.setParameter("catId", catId);
+//		listPro = query.setMaxResults(6).list();
+//		return listPro;
+//	}
 
 }
