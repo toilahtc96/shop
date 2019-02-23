@@ -87,3 +87,6 @@ src/main/webapp/template/Layout.xhtml
 .settings/org.eclipse.wst.validation.prefs
 .settings/org.eclipse.wst.common.component
 .project
+.settings/.jsdtscope
+*.prefs
+.settings/org.eclipse.wst.common.project.facet.core.xml

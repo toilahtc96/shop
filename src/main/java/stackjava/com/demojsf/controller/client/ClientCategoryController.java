@@ -33,6 +33,16 @@ public class ClientCategoryController implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private String sortString;
+
+	public String getSortString() {
+
+		return sortString;
+	}
+
+	public void setSortString(String sortString) {
+		this.sortString = sortString;
+	}
 
 	private String cartInCate;
 
@@ -66,6 +76,9 @@ public class ClientCategoryController implements Serializable {
 	private String startList;
 
 	public String getStartList() {
+		if (this.getSortString() == null || this.getSortString().equals("")) {
+			this.setSortString("Sort Product By");
+		}
 		if (this.getList() == null) {
 			listCate = this.getListCate();
 			System.out.println(listCate.get(0).getCatId());
