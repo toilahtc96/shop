@@ -77,13 +77,15 @@ public class ClientHomeController extends CommonController implements Serializab
 	private String cartToShow;
 
 	public String getCartToShow() {
-		System.out.println("check");
-		if (!this.getCart().equals("") && this.getCart() != null) {
+		//set cart to ""
+		if ( this.getCart() != null && !this.getCart().equals("")) {
 			parse(this.getCart());
+			this.setCart("");
 		} else {
 			if (cartService.getByUserId(this.getUserId()) != null) {
 				String cartSFromDB = cartService.getByUserId(this.getUserId()).getCarListProductQuantity();
 				parse(cartSFromDB);
+				this.setCart("");
 			}
 		}
 
@@ -268,8 +270,7 @@ public class ClientHomeController extends CommonController implements Serializab
 			cart.setCarId(cartService.getByUserId(this.getUserId()).getCarId());
 			cartService.update(cart.getCarId(), cart);
 		} else {
-			System.out.println("null");
-			cartService.add(cart);
+			return "/client/login";
 		}
 
 		return "";

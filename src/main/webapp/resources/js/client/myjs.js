@@ -1,7 +1,9 @@
 $(document).ready(
 		function() {
 			var cartDB = $("#homeForm\\:cart").val();
+			console.log(cartDB);
 			if (cartDB != "") {
+				console.log("this wrong!");
 				$.cookie("cartArray", cartDB, {
 					path : '/'
 				});
@@ -70,6 +72,7 @@ $(document).ready(
 						path : '/'
 					});
 					$("#homeForm\\:cart").val("");
+					alert($("#homeForm\\:cart").val());
 					return true;
 				} else {
 					return false;
