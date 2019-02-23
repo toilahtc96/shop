@@ -45,6 +45,7 @@ import stackjava.com.demojsf.service.ProductService;
 @SessionScoped
 @URLMappings(mappings = { @URLMapping(id = "product", pattern = "/admin/products", viewId = "/admin/listProduct.xhtml"),
 		@URLMapping(id = "addProductx", pattern = "/admin/createProduct", viewId = "/admin/createProduct.xhtml"),
+		@URLMapping(id = "clientProductDetail", pattern = "/client/productDetail", viewId = "/client/productDetail.xhtml"),
 		@URLMapping(id = "updateProductx", pattern = "/admin/updateProduct", viewId = "/admin/updateProduct.xhtml") })
 public class ProductController extends CommonController implements Serializable {
 
@@ -167,6 +168,7 @@ public class ProductController extends CommonController implements Serializable 
 		productDetailForm = new ProductDetailForm();
 		productDetailForm.setProID(pro.getProId());
 		productDetailForm.setProName(pro.getProName());
+		productDetailForm.setProPrice(pro.getProPrice());
 		return "productDetail?faces-redirect=true";
 	}
 

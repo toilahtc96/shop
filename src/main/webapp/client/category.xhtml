@@ -134,6 +134,7 @@
 
 					<section class="lattest-product-area pb-40 category-list">
 					<h:form id="formCate">
+					<h:inputHidden id="cartInDetail" value="#{clientProductController.cartInDetail}"/>
 					<h:inputHidden value="#{clientCategoryController.startList}" />
 						<h:outputText id="outputName" />
 						<h:panelGroup class="row" id="resultAjax">
@@ -161,7 +162,7 @@
 													<p class="hover-text">add to bag</p>
 													<!--    -->
 													<f:ajax execute="@form" render=":formCate:outputName"
-														listener="#{clientHomeController.updateCart}" />
+														listener="#{clientCategoryController.updateCart}" />
 													<!-- <f:param name="id" value="#{product.proId}" /> -->
 												</h:commandLink>
 												<a href="" class="social-info"> <span
@@ -194,7 +195,7 @@
 	</ui:define>
 	<ui:define name="scriptJSF">
 		<h:outputScript rendered="#{not empty user}" library="js"
-			name="client/myjs.js" />
+			name="client/categoryJS.js" />
 		<h:outputScript rendered="#{empty user}" library="js"
 			name="client/myEmptyUserjs.js" />
 	</ui:define>

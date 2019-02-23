@@ -1,6 +1,6 @@
 $(document).ready(
 		function() {
-			var cartDB = $("#homeForm\\:cart").val();
+			var cartDB = $("#productDetailForm\\:cartInDetail").val();
 
 			if (cartDB != "") {
 
@@ -11,7 +11,7 @@ $(document).ready(
 			cartArr = [];
 			if ($.cookie("cartArray")) {
 				var cartArr = JSON.parse($.cookie("cartArray"));
-				console.log(cartArr);
+
 			}
 			addToCart = function(id) {
 
@@ -34,21 +34,25 @@ $(document).ready(
 							cartArr.push(item);
 							cartArrStr = JSON.stringify(cartArr);
 							console.log(cartArrStr);
-							$("#homeForm\\:cart").val(cartArrStr);
+							$("#productDetailForm\\:cartInDetail").val(
+									cartArrStr);
 							$.cookie("cartArray", cartArrStr, {
 								path : '/'
 							});
 							console.log("cart them moi 1: "
-									+ $("#homeForm\\:cart").val());
+									+ $("#productDetailForm\\:cartInDetail")
+											.val());
 							alert("Đã Thêm Mới");
 						} else {
 							cartArrStr = JSON.stringify(cartArr);
-							$("#homeForm\\:cart").val(cartArrStr);
+							$("#productDetailForm\\:cartInDetail").val(
+									cartArrStr);
 							$.cookie("cartArray", cartArrStr, {
 								path : '/'
 							});
 							console.log("cart da co: "
-									+ $("#homeForm\\:cart").val());
+									+ $("#productDetailForm\\:cartInDetail")
+											.val());
 							alert("Sản Phẩm Đã Có Trong Giở Hàng Của Bạn");
 						}
 					} else {
@@ -60,7 +64,7 @@ $(document).ready(
 						$.cookie("cartArray", cartArrStr, {
 							path : '/'
 						});
-						$("#homeForm\\:cart").val(cartArrStr);
+						$("#productDetailForm\\:cartInDetail").val(cartArrStr);
 						console.log("cart them moi: "
 								+ $("#homeForm\\:cart").val());
 						alert("Đã Thêm Mới");
@@ -77,8 +81,8 @@ $(document).ready(
 					$.removeCookie('cartArray', {
 						path : '/'
 					});
-					$("#homeForm\\:cart").val("");
-					alert($("#homeForm\\:cart").val());
+					$("#productDetailForm\\:cartInDetail").val("");
+					alert($("#productDetailForm\\:cartInDetail").val());
 					return true;
 				} else {
 					return false;

@@ -27,21 +27,23 @@ import stackjava.com.demojsf.service.ProductService;
 
 @ManagedBean
 @SessionScoped
-public class ClientCategoryController implements Serializable {
+public class ClientProductController implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String cartInCate;
+	private String cartInDetail;
 
-	public String getCartInCate() {
-		return cartInCate;
+	
+
+	public String getCartInDetail() {
+		return cartInDetail;
 	}
 
-	public void setCartInCate(String cartInCate) {
-		this.cartInCate = cartInCate;
+	public void setCartInDetail(String cartInDetail) {
+		this.cartInDetail = cartInDetail;
 	}
 
 	List<Product> list;
@@ -123,9 +125,9 @@ public class ClientCategoryController implements Serializable {
 
 	public void updateCart(AjaxBehaviorEvent event) {
 
-		if (this.getCartInCate() != null && !this.getCartInCate().equals("")) {
+		if (this.getCartInDetail() != null && !this.getCartInDetail().equals("")) {
 			System.out.println("1");
-			parse(this.getCartInCate());
+			parse(this.getCartInDetail());
 		}
 		System.out.println("2");
 		/*
