@@ -103,7 +103,7 @@ public class CategoryController extends CommonController implements Serializable
 	public void setList(List<Category> list) {
 		this.list = list;
 	}
-
+	
 	public String addCreateCategory() {
 		String catName = this.createCategoryForm.getCatName();
 		/*Part image = this.createCategoryForm.getImage();

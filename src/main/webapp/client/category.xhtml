@@ -36,8 +36,9 @@
 										aria-controls="fruitsVegetable"><span
 											class="lnr lnr-arrow-right"></span> 
 											<h:commandLink
-												action="#{productController.getListProByIdCate(item.catId)}"
 												value="#{item.catName}">
+												<f:ajax execute="@form" render=":formCate:resultAjax"
+														listener="#{clientCategoryController.getListProByIdCate(item.catId)}" />
 												<f:param name="catId" value="#{category.catId}" />
 											</h:commandLink></a></li>
 								</ul>
@@ -132,10 +133,12 @@
 					<!-- Start Best Seller -->
 
 					<section class="lattest-product-area pb-40 category-list">
-					<h:form id="form1">
-						<h:panelGroup class="row" id = "resultAjax">
+					<h:form id="formCate">
+					<h:inputHidden value="#{clientCategoryController.startList}" />
+						<h:outputText id="outputName" />
+						<h:panelGroup class="row" id="resultAjax">
 							<ui:repeat var="pro"
-								value="#{productController.listProGetByIdCate}">
+								value="#{clientCategoryController.list}">
 								<!-- single product -->
 								<div class="col-lg-4 col-md-6">
 									<div class="single-product">
@@ -152,19 +155,23 @@
 												<h6 class="l-through">$210.00</h6>
 											</div>
 											<div class="prd-bottom">
-
-												<a href="" class="social-info"> <span class="ti-bag"></span>
+												<h:commandLink class="social-info" id="link"
+													onclick="return addToCart(#{pro.proId});">
+													<span class="ti-bag"></span>
 													<p class="hover-text">add to bag</p>
-												</a> 
+													<!--    -->
+													<f:ajax execute="@form" render=":formCate:outputName"
+														listener="#{clientHomeController.updateCart}" />
+													<!-- <f:param name="id" value="#{product.proId}" /> -->
+												</h:commandLink>
 												<a href="" class="social-info"> <span
 													class="lnr lnr-heart"></span>
 													<p class="hover-text">Wishlist</p>
-												</a> 
-												<a href="" class="social-info"> <span
+												</a> <a href="" class="social-info"> <span
 													class="lnr lnr-sync"></span>
 													<p class="hover-text">compare</p>
-												</a> 
-												<h:commandLink  class="social-info"
+												</a>
+												<h:commandLink class="social-info"
 													action="#{productController.productDetail(pro.proId)}">
 													<span class="lnr lnr-move"></span>
 													<p class="hover-text">view more</p>
@@ -179,11 +186,17 @@
 					</h:form> </section>
 
 					<!-- End Best Seller -->
-					
-					
+
+
 				</div>
 			</div>
 		</div>
+	</ui:define>
+	<ui:define name="scriptJSF">
+		<h:outputScript rendered="#{not empty user}" library="js"
+			name="client/myjs.js" />
+		<h:outputScript rendered="#{empty user}" library="js"
+			name="client/myEmptyUserjs.js" />
 	</ui:define>
 </ui:composition>
 </html>
