@@ -270,6 +270,7 @@ public class ClientHomeController extends CommonController implements Serializab
 			cart.setCarId(cartService.getByUserId(this.getUserId()).getCarId());
 			cartService.update(cart.getCarId(), cart);
 		} else {
+			cartService.add(cart);
 			return "/client/login";
 		}
 
