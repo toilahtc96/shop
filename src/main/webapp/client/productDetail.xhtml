@@ -45,40 +45,61 @@
 							</div>
 						</div>
 					</div>
+
 					<div class="col-lg-5 offset-lg-1">
-						<div class="s_product_text">
-							<h3>Faded SkyBlu Denim Jeans</h3>
-							<h2>$149.99</h2>
-							<ul class="list">
-								<li><a class="active" href="#"><span>Pro ID</span> <h:outputText
-											value="#{productController.productDetailForm.proID}" /> </a></li>
-								<li><a href="#"><span>Pro Name</span> <h:outputText
-											value="#{productController.productDetailForm.proName}" /></a></li>
-							</ul>
-							<p>Mill Oil is an innovative oil filled radiator with the
-								most modern technology. If you are looking for something that
-								can make your interior look awesome, and at the same time give
-								you the pleasant warm feeling during the winter.</p>
-							<div class="product_count">
-								<label for="qty">Quantity:</label> <h:inputText type="text" name="qty"
-									id="sst" maxlength="12" value="1" title="Quantity:"
-									class="h:inputText-text qty" />
-								<button
-									onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-									class="increase items-count" type="button">
-									<i class="lnr lnr-chevron-up"></i>
-								</button>
-								<button
-									onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-									class="reduced items-count" type="button">
-									<i class="lnr lnr-chevron-down"></i>
-								</button>
+						<h:form id="productDetailForm">
+							<h:inputHidden id="outputName" />
+							<h:inputHidden id="cartInDetail"
+								value="#{clientProductController.cartInDetail}" />
+							<div class="s_product_text">
+								<h3>
+									<h:outputText
+										value="#{productController.productDetailForm.proName}" />
+								</h3>
+								<h2>
+									<h:outputText
+										value="#{productController.productDetailForm.proPrice}" />
+								</h2>
+								<ul class="list">
+									<li><a class="active" href="#"><span>Product ID</span>
+											<h:outputText
+												value="#{productController.productDetailForm.proID}" /> </a></li>
+									<li><a href="#"><span>Product Name</span> <h:outputText
+												value="#{productController.productDetailForm.proName}" /></a></li>
+								</ul>
+								<p>Mill Oil is an innovative oil filled radiator with the
+									most modern technology. If you are looking for something that
+									can make your interior look awesome, and at the same time give
+									you the pleasant warm feeling during the winter.</p>
+								<div class="product_count">
+									<label for="qty">Quantity:</label> <input type="text"
+										name="qty" id="sst" maxlength="12" value="1" title="Quantity:"
+										class="input-text qty" />
+									<button
+										onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+										class="increase items-count" type="button">
+										<i class="lnr lnr-chevron-up"></i>
+									</button>
+									<button
+										onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+										class="reduced items-count" type="button">
+										<i class="lnr lnr-chevron-down"></i>
+									</button>
+								</div>
+								<div class="card_area d-flex align-items-center">
+									<h:commandLink class="primary-btn" id="link"
+										onclick="return addToCart(#{productController.productDetailForm.proID});">
+										add to bag
+										<!--    -->
+										<f:ajax execute="@form" render=":productDetailForm:outputName"
+											listener="#{clientProductController.updateCart}" />
+										<!-- <f:param name="id" value="#{product.proId}" /> -->
+									</h:commandLink>
+								</div>
 							</div>
-							<div class="card_area d-flex align-items-center">
-								<a class="primary-btn" href="#">Add to Cart</a>
-							</div>
-						</div>
+						</h:form>
 					</div>
+
 				</div>
 			</div>
 		</div>
@@ -451,5 +472,13 @@
 		</section>
 		<!--================End Product Description Area =================-->
 	</ui:define>
+
+	<ui:define name="scriptJSF">
+		<h:outputScript rendered="#{not empty user}" library="js"
+			name="client/productDetialJS.js" />
+		<h:outputScript rendered="#{empty user}" library="js"
+			name="client/myEmptyUserjs.js" />
+	</ui:define>
+
 </ui:composition>
 </html>

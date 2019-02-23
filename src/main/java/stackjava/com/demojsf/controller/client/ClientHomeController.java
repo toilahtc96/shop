@@ -48,7 +48,6 @@ import stackjava.com.demojsf.service.ProductService;
 		@URLMapping(id = "clientOrder", pattern = "/client/orders", viewId = "/client/order.xhtml"),
 		@URLMapping(id = "clientRegister", pattern = "/client/register", viewId = "/client/register.xhtml"),
 		@URLMapping(id = "clientConfirmation", pattern = "/client/confirmation", viewId = "/client/confirmation.xhtml"),
-		@URLMapping(id = "clientProductDetail", pattern = "/client/productDetail", viewId = "/client/productDetail.xhtml"),
 		@URLMapping(id = "clientContact", pattern = "/client/contact", viewId = "/client/contact.xhtml") })
 public class ClientHomeController extends CommonController implements Serializable {
 
@@ -79,8 +78,8 @@ public class ClientHomeController extends CommonController implements Serializab
 	private String cartToShow;
 
 	public String getCartToShow() {
-		//set cart to ""
-		if ( this.getCart() != null && !this.getCart().equals("")) {
+		// set cart to ""
+		if (this.getCart() != null && !this.getCart().equals("")) {
 			parse(this.getCart());
 			this.setCart("");
 		} else {
@@ -118,9 +117,11 @@ public class ClientHomeController extends CommonController implements Serializab
 
 	public void updateCart(AjaxBehaviorEvent event) {
 
-		if (!this.getCart().equals("") && this.getCart() != null) {
+		if (this.getCart() != null && !this.getCart().equals("")) {
+			System.out.println("1");
 			parse(this.getCart());
 		}
+		System.out.println("2");
 		/*
 		 * FacesContext context = FacesContext.getCurrentInstance();
 		 * context.getExternalContext().getSessionMap().put("cartArray",

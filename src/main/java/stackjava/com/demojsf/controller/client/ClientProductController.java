@@ -11,7 +11,6 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
-import stackjava.com.demojsf.dao.ProductDAO;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -28,31 +27,23 @@ import stackjava.com.demojsf.service.ProductService;
 
 @ManagedBean
 @SessionScoped
-public class ClientCategoryController implements Serializable {
+public class ClientProductController implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String sortString;
 
-	public String getSortString() {
+	private String cartInDetail;
 
-		return sortString;
+	
+
+	public String getCartInDetail() {
+		return cartInDetail;
 	}
 
-	public void setSortString(String sortString) {
-		this.sortString = sortString;
-	}
-
-	private String cartInCate;
-
-	public String getCartInCate() {
-		return cartInCate;
-	}
-
-	public void setCartInCate(String cartInCate) {
-		this.cartInCate = cartInCate;
+	public void setCartInDetail(String cartInDetail) {
+		this.cartInDetail = cartInDetail;
 	}
 
 	List<Product> list;
@@ -77,9 +68,6 @@ public class ClientCategoryController implements Serializable {
 	private String startList;
 
 	public String getStartList() {
-		if (this.getSortString() == null || this.getSortString().equals("")) {
-			this.setSortString("Sort Product By");
-		}
 		if (this.getList() == null) {
 			listCate = this.getListCate();
 			System.out.println(listCate.get(0).getCatId());
@@ -135,68 +123,11 @@ public class ClientCategoryController implements Serializable {
 		return listPro;
 	}
 
-	private String value;
-
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
-
-	// @ManagedProperty(value = "#{productDAO}")
-	// ProductDAO productDAO;
-	//
-	// public ProductDAO getProductDAO() {
-	// return productDAO;
-	// }
-	//
-	// public void setProductDAO(ProductDAO productDAO) {
-	// this.productDAO = productDAO;
-	// }
-	//
-	// public List<Product> getListProByIdCateSortByDate(int catId) {
-	// List<Product> listPro = new ArrayList<Product>();
-	// listPro = productDAO.getListProByIdCateSortByDate(catId);
-	// this.setList(listPro);
-	// return listPro;
-	// }
-	//
-	// public List<Product> getListProByIdCateSortByName(int catId) {
-	// List<Product> listPro = new ArrayList<Product>();
-	// listPro = productDAO.getListProByIdCateSortByName(catId);
-	// this.setList(listPro);
-	// return listPro;
-	// }
-	//
-	// List<Product> listProSortByDate;
-	//
-	// List<Product> listProSortByName;
-	//
-	// public List<Product> getListProSortByDate(int catId) {
-	// return this.listProSortByDate =
-	// productDAO.getListProByIdCateSortByDate(catId);
-	// }
-	//
-	// public void setListProSortByDate(List<Product> listProSortByDate) {
-	// this.listProSortByDate = listProSortByDate;
-	// }
-	//
-	// public List<Product> getListProSortByName(int catId) {
-	// return this.listProSortByDate =
-	// productDAO.getListProByIdCateSortByName(catId);
-	// }
-	//
-	// public void setListProSortByName(List<Product> listProSortByName) {
-	// this.listProSortByName = listProSortByName;
-	// }
-	//
 	public void updateCart(AjaxBehaviorEvent event) {
 
-		if (this.getCartInCate() != null && !this.getCartInCate().equals("")) {
+		if (this.getCartInDetail() != null && !this.getCartInDetail().equals("")) {
 			System.out.println("1");
-			parse(this.getCartInCate());
+			parse(this.getCartInDetail());
 		}
 		System.out.println("2");
 		/*
