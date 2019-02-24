@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -64,10 +65,9 @@ public class ClientProductController implements Serializable {
 	public void setListCate(List<Category> listCate) {
 		this.listCate = listCate;
 	}
-
-	private String startList;
-
-	public String getStartList() {
+	
+	@PostConstruct
+	public void init() {
 		if (this.getList() == null) {
 			listCate = this.getListCate();
 			System.out.println(listCate.get(0).getCatId());
@@ -75,13 +75,8 @@ public class ClientProductController implements Serializable {
 				this.list = productService.getListPRoByIdCate(listCate.get(0).getCatId());
 			}
 		}
-		return startList;
 	}
-
-	public void setStartList(String startList) {
-
-		this.startList = startList;
-	}
+	
 
 	public List<Product> getList() {
 

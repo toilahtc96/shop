@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -74,11 +75,10 @@ public class ClientHomeController extends CommonController implements Serializab
 	public void setOrderService(OrderService orderService) {
 		this.orderService = orderService;
 	}
-
-	private String cartToShow;
-
-	public String getCartToShow() {
+	@PostConstruct
+	public void init() {
 		// set cart to ""
+		System.out.println("post COnstruct");
 		if (this.getCart() != null && !this.getCart().equals("")) {
 			parse(this.getCart());
 			this.setCart("");
@@ -90,12 +90,9 @@ public class ClientHomeController extends CommonController implements Serializab
 			}
 		}
 
-		return cartToShow;
 	}
+	
 
-	public void setCartToShow(String cartToShow) {
-		this.cartToShow = cartToShow;
-	}
 
 	private String cart;
 
@@ -304,5 +301,5 @@ public class ClientHomeController extends CommonController implements Serializab
 	public void setListFilter(List<Product> listFilter) {
 		this.listFilter = listFilter;
 	}
-	
+
 }

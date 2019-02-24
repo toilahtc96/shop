@@ -141,7 +141,8 @@
 
 					<section class="lattest-product-area pb-40 category-list">
 					<h:form id="formCate">
-						<h:inputHidden value="#{clientCategoryController.startList}" />
+						<h:inputHidden id="cartInCate"
+							value="#{clientCategoryController.cartInCate}" />
 						<h:outputText id="outputName" />
 						<h:panelGroup class="row" id="resultAjax">
 							<ui:repeat var="pro" value="#{clientCategoryController.list}">
