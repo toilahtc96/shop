@@ -49,6 +49,9 @@ public class OrdersForm implements Serializable{
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
+	public OrdersForm() {
+		super();
+	}
 	
 	
 }

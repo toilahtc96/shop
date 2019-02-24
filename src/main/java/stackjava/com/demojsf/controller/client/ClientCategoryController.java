@@ -11,6 +11,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import stackjava.com.demojsf.dao.ProductDAO;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -134,6 +135,63 @@ public class ClientCategoryController implements Serializable {
 		return listPro;
 	}
 
+	private String value;
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	// @ManagedProperty(value = "#{productDAO}")
+	// ProductDAO productDAO;
+	//
+	// public ProductDAO getProductDAO() {
+	// return productDAO;
+	// }
+	//
+	// public void setProductDAO(ProductDAO productDAO) {
+	// this.productDAO = productDAO;
+	// }
+	//
+	// public List<Product> getListProByIdCateSortByDate(int catId) {
+	// List<Product> listPro = new ArrayList<Product>();
+	// listPro = productDAO.getListProByIdCateSortByDate(catId);
+	// this.setList(listPro);
+	// return listPro;
+	// }
+	//
+	// public List<Product> getListProByIdCateSortByName(int catId) {
+	// List<Product> listPro = new ArrayList<Product>();
+	// listPro = productDAO.getListProByIdCateSortByName(catId);
+	// this.setList(listPro);
+	// return listPro;
+	// }
+	//
+	// List<Product> listProSortByDate;
+	//
+	// List<Product> listProSortByName;
+	//
+	// public List<Product> getListProSortByDate(int catId) {
+	// return this.listProSortByDate =
+	// productDAO.getListProByIdCateSortByDate(catId);
+	// }
+	//
+	// public void setListProSortByDate(List<Product> listProSortByDate) {
+	// this.listProSortByDate = listProSortByDate;
+	// }
+	//
+	// public List<Product> getListProSortByName(int catId) {
+	// return this.listProSortByDate =
+	// productDAO.getListProByIdCateSortByName(catId);
+	// }
+	//
+	// public void setListProSortByName(List<Product> listProSortByName) {
+	// this.listProSortByName = listProSortByName;
+	// }
+	//
 	public void updateCart(AjaxBehaviorEvent event) {
 
 		if (this.getCartInCate() != null && !this.getCartInCate().equals("")) {
