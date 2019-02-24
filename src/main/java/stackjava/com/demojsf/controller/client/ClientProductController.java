@@ -36,9 +36,11 @@ public class ClientProductController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String cartInDetail;
-
+	
+	
 	
 
+	
 	public String getCartInDetail() {
 		return cartInDetail;
 	}
@@ -65,17 +67,7 @@ public class ClientProductController implements Serializable {
 	public void setListCate(List<Category> listCate) {
 		this.listCate = listCate;
 	}
-	
-	@PostConstruct
-	public void init() {
-		if (this.getList() == null) {
-			listCate = this.getListCate();
-			System.out.println(listCate.get(0).getCatId());
-			if (listCate.get(0) != null) {
-				this.list = productService.getListPRoByIdCate(listCate.get(0).getCatId());
-			}
-		}
-	}
+
 	
 
 	public List<Product> getList() {
@@ -109,13 +101,6 @@ public class ClientProductController implements Serializable {
 
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
-	}
-
-	public List<Product> getListProByIdCate(int catId) {
-		List<Product> listPro = new ArrayList<Product>();
-		listPro = productService.getListPRoByIdCate(catId);
-		this.setList(listPro);
-		return listPro;
 	}
 
 	public void updateCart(AjaxBehaviorEvent event) {

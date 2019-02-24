@@ -10,6 +10,7 @@ import java.util.Map;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.Map.Entry;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
@@ -56,6 +57,13 @@ public class ProductController extends CommonController implements Serializable 
 	List<Product> list;
 
 	private int idCate;
+	
+
+	@PostConstruct
+	public void init() {
+		
+	}
+
 	
 	public int getIdCate() {
 		return idCate;
@@ -199,8 +207,5 @@ public class ProductController extends CommonController implements Serializable 
 		this.listProGetByIdCate = listProGetByIdCate;
 	}
 
-	public String getListProByIdCate(int catId) {
-		this.listProGetByIdCate = productService.getListPRoByIdCate(catId);
-		return "category?faces-redirect=true";
-	}
+	
 }

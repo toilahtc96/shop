@@ -9,9 +9,10 @@ import javax.faces.bean.SessionScoped;
 
 import stackjava.com.demojsf.dao.ProductDAO;
 import stackjava.com.demojsf.model.Product;
+
 @ManagedBean
 @SessionScoped
-public class ProductService implements ModelServiceInterface<Product> , Serializable{
+public class ProductService implements ModelServiceInterface<Product>, Serializable {
 
 	/**
 	 * 
@@ -54,13 +55,17 @@ public class ProductService implements ModelServiceInterface<Product> , Serializ
 		// TODO Auto-generated method stub
 		return productDAO.removeById(id);
 	}
-	
-	public List<Product> getListFilter(){
+
+	public List<Product> getListFilter() {
 		return productDAO.getListFilter();
 	}
-	
-	public List<Product> getListPRoByIdCate(int catId){
-		return productDAO.getListProByIdCate(catId);
+
+	public List<Product> getListPRoByIdCate(int catId, int position, int pageSize) {
+		return productDAO.getListProByIdCate(catId, position, pageSize);
+	}
+
+	public long countTotalRecords() {
+		return productDAO.countTotalRecords();
 	}
 
 }

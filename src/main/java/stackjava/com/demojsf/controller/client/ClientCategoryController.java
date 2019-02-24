@@ -12,6 +12,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import stackjava.com.demojsf.common.PaginationResult;
 import stackjava.com.demojsf.dao.ProductDAO;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -36,6 +37,73 @@ public class ClientCategoryController implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String sortString;
+	private int pageCurrent;
+	private int pageSize;
+	private static int PAGESIZE = 1;
+	private long totalPage;
+	private List<Integer> listPage;
+
+	public List<Integer> getListPage() {
+		return listPage;
+	}
+
+	public void setListPage(List<Integer> listPage) {
+		this.listPage = listPage;
+	}
+
+	@PostConstruct
+	public void init() {
+		this.setTotalPage(productService.countTotalRecords());
+		if (this.pageCurrent <= 0) {
+			this.setPageCurrent(1);
+			System.out.println("so page " + (productService.countTotalRecords() / PAGESIZE + 1));
+			System.out.println("set page In clientCateController");
+		}
+		if (this.getSortString() == null || this.getSortString().equals("")) {
+			this.setSortString("Sort Product By");
+		}
+		if (this.getList() == null) {
+			listCate = this.getListCate();
+			System.out.println(listCate.get(0).getCatId());
+			if (listCate.get(0) != null) {
+				this.list = productService.getListPRoByIdCate(listCate.get(0).getCatId(), (pageCurrent - 1) * pageSize,
+						this.getPageSize());
+				System.out.println("page total: " + this.list.size());
+				this.setTotalPage(this.list.size() / PAGESIZE + 1);
+				int check = (this.list.size() / PAGESIZE) + 1;
+				System.out.println("so page : " + check );
+				List<Integer> listPageSet = new ArrayList<Integer>();
+				for (int i = 1; i <= this.getTotalPage(); i++) {
+					listPageSet.add(i);
+				}
+				this.setListPage(listPageSet);
+			}
+		}
+	}
+
+	public long getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(long totalPage) {
+		this.totalPage = totalPage;
+	}
+
+	public int getPageSize() {
+		return PAGESIZE;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public int getPageCurrent() {
+		return pageCurrent;
+	}
+
+	public void setPageCurrent(int pageCurrent) {
+		this.pageCurrent = pageCurrent;
+	}
 
 	public String getSortString() {
 
@@ -74,20 +142,6 @@ public class ClientCategoryController implements Serializable {
 	public void setListCate(List<Category> listCate) {
 		this.listCate = listCate;
 	}
-	
-	@PostConstruct
-	public void init() {
-		if (this.getSortString() == null || this.getSortString().equals("")) {
-			this.setSortString("Sort Product By");
-		}
-		if (this.getList() == null) {
-			listCate = this.getListCate();
-			System.out.println(listCate.get(0).getCatId());
-			if (listCate.get(0) != null) {
-				this.list = productService.getListPRoByIdCate(listCate.get(0).getCatId());
-			}
-		}
-	}
 
 	public List<Product> getList() {
 
@@ -124,7 +178,7 @@ public class ClientCategoryController implements Serializable {
 
 	public List<Product> getListProByIdCate(int catId) {
 		List<Product> listPro = new ArrayList<Product>();
-		listPro = productService.getListPRoByIdCate(catId);
+		listPro = productService.getListPRoByIdCate(catId, (pageCurrent - 1) * pageSize, this.getPageSize());
 		this.setList(listPro);
 		return listPro;
 	}

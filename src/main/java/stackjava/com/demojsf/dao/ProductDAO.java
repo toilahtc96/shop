@@ -12,13 +12,14 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import stackjava.com.demojsf.common.PaginationResult;
 import stackjava.com.demojsf.connection.GetSessionHibernate;
 import stackjava.com.demojsf.model.Category;
 import stackjava.com.demojsf.model.Product;
 
 @ManagedBean
 @SessionScoped
-public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
+public class ProductDAO implements ModelDaoInterface<Product>, PaginationInterface<Product>, Serializable {
 
 	/**
 	 * 
@@ -96,7 +97,7 @@ public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
 	}
 
 	@SuppressWarnings({ "unchecked", "unused" })
-	public List<Product> getListProByIdCate(int catId) {
+	public List<Product> getListProByIdCate(int catId, int position, int pageSize) {
 		List<Product> listPro = new ArrayList<Product>();
 		@SuppressWarnings("static-access")
 		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
@@ -104,34 +105,62 @@ public class ProductDAO implements ModelDaoInterface<Product>, Serializable {
 		Query query = sessionObj.createQuery(
 				"from  " + Product.class.getName() + " where pro_category_id = :catId order by pro_price asc");
 		query.setParameter("catId", catId);
-		listPro = query.setMaxResults(6).list();
+		query.setFirstResult(position);
+		query.setMaxResults(1);
+		listPro = query.list();
+		System.out.println("ProductDao list size: "+ listPro.size());
+		System.out.println("position"+position);
+		System.out.println("pageSize"+pageSize);
 		return listPro;
 	}
 
-//	@SuppressWarnings({ "unchecked", "unused" })
-//	public List<Product> getListProByIdCateSortByDate(int catId) {
-//		List<Product> listPro = new ArrayList<Product>();
-//		@SuppressWarnings("static-access")
-//		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
-//		Transaction transObj = sessionObj.beginTransaction();
-//		Query query = sessionObj.createQuery(
-//				"from  " + Product.class.getName() + " where pro_category_id = :catId order by pro_name asc");
-//		query.setParameter("catId", catId);
-//		listPro = query.setMaxResults(6).list();
-//		return listPro;
-//	}
-//
-//	@SuppressWarnings({ "unchecked", "unused" })
-//	public List<Product> getListProByIdCateSortByName(int catId) {
-//		List<Product> listPro = new ArrayList<Product>();
-//		@SuppressWarnings("static-access")
-//		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
-//		Transaction transObj = sessionObj.beginTransaction();
-//		Query query = sessionObj.createQuery(
-//				"from  " + Product.class.getName() + " where pro_category_id = :catId order by pro_create_time desc");
-//		query.setParameter("catId", catId);
-//		listPro = query.setMaxResults(6).list();
-//		return listPro;
-//	}
+	@Override
+	public long countTotalRecords() {
+		Session session = getSessionHibernate.getSessionFactory().getCurrentSession();
+		Transaction transObj = session.beginTransaction();
+		String countQ = "Select count (c.proId) from " + Product.class.getName() + " c";
+		Query countQuery = session.createQuery(countQ);
+		System.out.println("count: "+(Long) countQuery.uniqueResult() );
+		return (Long) countQuery.uniqueResult();
+	}
+
+	@Override
+	public List<Product> getUsingSession(int position, int pageSize) {
+		Session session = getSessionHibernate.getSessionFactory().openSession();
+		Query query = session.createQuery("FROM " + Product.class.getName());
+		query.setFirstResult(position);
+		query.setMaxResults(pageSize);
+		return query.list();
+	}
+
+	// @SuppressWarnings({ "unchecked", "unused" })
+	// public List<Product> getListProByIdCateSortByDate(int catId) {
+	// List<Product> listPro = new ArrayList<Product>();
+	// @SuppressWarnings("static-access")
+	// Session sessionObj =
+	// getSessionHibernate.getSessionFactory().getCurrentSession();
+	// Transaction transObj = sessionObj.beginTransaction();
+	// Query query = sessionObj.createQuery(
+	// "from " + Product.class.getName() + " where pro_category_id = :catId order by
+	// pro_name asc");
+	// query.setParameter("catId", catId);
+	// listPro = query.setMaxResults(6).list();
+	// return listPro;
+	// }
+	//
+	// @SuppressWarnings({ "unchecked", "unused" })
+	// public List<Product> getListProByIdCateSortByName(int catId) {
+	// List<Product> listPro = new ArrayList<Product>();
+	// @SuppressWarnings("static-access")
+	// Session sessionObj =
+	// getSessionHibernate.getSessionFactory().getCurrentSession();
+	// Transaction transObj = sessionObj.beginTransaction();
+	// Query query = sessionObj.createQuery(
+	// "from " + Product.class.getName() + " where pro_category_id = :catId order by
+	// pro_create_time desc");
+	// query.setParameter("catId", catId);
+	// listPro = query.setMaxResults(6).list();
+	// return listPro;
+	// }
 
 }
