@@ -107,14 +107,11 @@
 						<h:outputLabel value="Sort By: " />
 						<h:form>
 							<div class="sorting">
-								<h:selectOneMenu value="#">
-									<f:selectItem itemValue="#{clientCategoryController.value}"
-										itemLabel="Price" />
-									<f:selectItem itemValue="#{clientCategoryController.value}"
-										itemLabel="Name" />
-									<f:selectItem itemValue="#{clientCategoryController.value}"
-										itemLabel="Date" />
-									<f:ajax listener="#{clientCategoryController.listener}"
+								<h:selectOneMenu value="#{clientCategoryController.value}">
+									<f:selectItem itemValue="Price"/>
+									<f:selectItem itemValue="Name"/>
+									<f:selectItem itemValue="Date" />
+									<f:ajax listener="#{clientCategoryController.getListProByIdCateSort()}"
 										execute="@form" render=":formCate:resultAjax" />
 								</h:selectOneMenu>
 							</div>

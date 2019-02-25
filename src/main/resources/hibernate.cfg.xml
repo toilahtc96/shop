@@ -27,7 +27,6 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password"></property> -->
 		<!-- Mapping With Model Class Containing Annotations -->
-		<mapping class="stackjava.com.demojsf.model.Order" />
 		<mapping class="stackjava.com.demojsf.model.User" />
 		<mapping class="stackjava.com.demojsf.model.Category" />
 		<mapping class="stackjava.com.demojsf.model.Cart" />
@@ -38,5 +37,6 @@
 		<mapping class="stackjava.com.demojsf.model.Product" />
 		<mapping class="stackjava.com.demojsf.model.ProductComment" />
 		<mapping class="stackjava.com.demojsf.model.ProductRating" />
+		<mapping class="stackjava.com.demojsf.model.Banner" />
 	</session-factory>
 </hibernate-configuration>

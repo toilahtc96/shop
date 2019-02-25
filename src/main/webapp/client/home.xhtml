@@ -153,8 +153,8 @@
 					</div>
 					<h:form id="homeForm">
 						<h:outputText id="outputName" />
-						
-						<h:inputHidden id="cart" value="#{clientHomeController.cart}"/>
+
+						<h:inputHidden id="cart" value="#{clientHomeController.cart}" />
 						<div class="row">
 							<!-- single product -->
 
@@ -168,15 +168,19 @@
 									<div class="single-product">
 
 										<h:inputHidden id="productId" value="#{item.proId}" />
-
-										<h:graphicImage class="img-fluid" name="img/product/p1.jpg"
-											alt="" />
+										<h:commandLink
+											action="#{productController.productDetail(item.proId)}">
+											<h:graphicImage class="img-fluid" name="img/product/p1.jpg"
+												alt="" />
+										</h:commandLink>
 										<!-- cai nay sau nay cho image cua minh vao -->
 										<div class="product-details">
-											<h6>
-												<h:outputText value="#{item.proName}" />
-											</h6>
-
+											<h:commandLink
+												action="#{productController.productDetail(item.proId)}">
+												<h6>
+													<h:outputText value="#{item.proName}" />
+												</h6>
+											</h:commandLink>
 											<div class="price">
 												<h6>
 													<h:outputText value="#{item.proPrice}" />
@@ -706,9 +710,11 @@
 			<!-- End related-product Area -->
 		</ui:define>
 		<ui:define name="scriptJSF">
-		<!-- Button trigger modal -->
-			<h:outputScript rendered="#{not empty user}" library="js" name="client/myjs.js" />
-			<h:outputScript rendered="#{empty user}" library="js" name="client/myEmptyUserjs.js" />
+			<!-- Button trigger modal -->
+			<h:outputScript rendered="#{not empty user}" library="js"
+				name="client/myjs.js" />
+			<h:outputScript rendered="#{empty user}" library="js"
+				name="client/myEmptyUserjs.js" />
 		</ui:define>
 	</ui:composition>
 </h:body>
