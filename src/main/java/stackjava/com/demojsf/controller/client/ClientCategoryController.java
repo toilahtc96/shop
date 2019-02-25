@@ -12,7 +12,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
-import stackjava.com.demojsf.common.PaginationResult;
+import org.hibernate.internal.jaxb.SourceType;
+
 import stackjava.com.demojsf.dao.ProductDAO;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -39,9 +40,18 @@ public class ClientCategoryController implements Serializable {
 	private String sortString;
 	private int pageCurrent;
 	private int pageSize;
-	private static int PAGESIZE = 1;
+	private static int PAGESIZE = 10;
 	private long totalPage;
 	private List<Integer> listPage;
+	private int idCateCurrent;
+
+	public int getIdCateCurrent() {
+		return idCateCurrent;
+	}
+
+	public void setIdCateCurrent(int idCateCurrent) {
+		this.idCateCurrent = idCateCurrent;
+	}
 
 	public List<Integer> getListPage() {
 		return listPage;
@@ -64,6 +74,7 @@ public class ClientCategoryController implements Serializable {
 		}
 		if (this.getList() == null) {
 			listCate = this.getListCate();
+			idCateCurrent = listCate.get(0).getCatId();
 			System.out.println(listCate.get(0).getCatId());
 			if (listCate.get(0) != null) {
 				this.list = productService.getListPRoByIdCate(listCate.get(0).getCatId(), (pageCurrent - 1) * pageSize,
@@ -71,7 +82,7 @@ public class ClientCategoryController implements Serializable {
 				System.out.println("page total: " + this.list.size());
 				this.setTotalPage(this.list.size() / PAGESIZE + 1);
 				int check = (this.list.size() / PAGESIZE) + 1;
-				System.out.println("so page : " + check );
+				System.out.println("so page : " + check);
 				List<Integer> listPageSet = new ArrayList<Integer>();
 				for (int i = 1; i <= this.getTotalPage(); i++) {
 					listPageSet.add(i);
@@ -177,6 +188,7 @@ public class ClientCategoryController implements Serializable {
 	}
 
 	public List<Product> getListProByIdCate(int catId) {
+		this.setIdCateCurrent(catId);
 		List<Product> listPro = new ArrayList<Product>();
 		listPro = productService.getListPRoByIdCate(catId, (pageCurrent - 1) * pageSize, this.getPageSize());
 		this.setList(listPro);
@@ -193,23 +205,28 @@ public class ClientCategoryController implements Serializable {
 		this.value = value;
 	}
 
-	// @ManagedProperty(value = "#{productDAO}")
-	// ProductDAO productDAO;
-	//
-	// public ProductDAO getProductDAO() {
-	// return productDAO;
-	// }
-	//
-	// public void setProductDAO(ProductDAO productDAO) {
-	// this.productDAO = productDAO;
-	// }
-	//
-	// public List<Product> getListProByIdCateSortByDate(int catId) {
-	// List<Product> listPro = new ArrayList<Product>();
-	// listPro = productDAO.getListProByIdCateSortByDate(catId);
-	// this.setList(listPro);
-	// return listPro;
-	// }
+	@ManagedProperty(value = "#{productDAO}")
+	ProductDAO productDAO;
+
+	public ProductDAO getProductDAO() {
+		return productDAO;
+	}
+
+	public void setProductDAO(ProductDAO productDAO) {
+		this.productDAO = productDAO;
+	}
+
+	public List<Product> getListProByIdCateSort() {
+		if (value.equals("") || value.equals("Price")) {
+			list = productDAO.getListProByIdCate(idCateCurrent, (pageCurrent - 1) * pageSize, this.getPageSize());
+		} else if (value.equals("Date")) {
+			list = productDAO.getListProByIdCateSortByDate(idCateCurrent);
+		} else if (value.equals("Name")) {
+			list = productDAO.getListProByIdCateSortByName(idCateCurrent);
+		}
+		return list;
+	}
+
 	//
 	// public List<Product> getListProByIdCateSortByName(int catId) {
 	// List<Product> listPro = new ArrayList<Product>();
