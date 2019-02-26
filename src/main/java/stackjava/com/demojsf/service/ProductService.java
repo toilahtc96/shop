@@ -64,8 +64,8 @@ public class ProductService implements ModelServiceInterface<Product>, Serializa
 		return productDAO.getListProByIdCate(catId, position, pageSize);
 	}
 
-	public long countTotalRecords() {
-		return productDAO.countTotalRecords();
+	public long countTotalRecords(int idCate) {
+		return productDAO.countTotalRecords(idCate);
 	}
 
 }

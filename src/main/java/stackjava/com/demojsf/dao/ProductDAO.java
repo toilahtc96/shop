@@ -25,7 +25,7 @@ public class ProductDAO implements ModelDaoInterface<Product>, PaginationInterfa
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@ManagedProperty(value = "#{getSessionHibernate}")
 	GetSessionHibernate getSessionHibernate;
 
@@ -100,28 +100,37 @@ public class ProductDAO implements ModelDaoInterface<Product>, PaginationInterfa
 	@SuppressWarnings({ "unchecked", "unused" })
 	public List<Product> getListProByIdCate(int catId, int position, int pageSize) {
 		List<Product> listPro = new ArrayList<Product>();
-		@SuppressWarnings("static-access")
-		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
-		Transaction transObj = sessionObj.beginTransaction();
-		Query query = sessionObj.createQuery(
-				"from  " + Product.class.getName() + " where pro_category_id = :catId order by pro_price asc");
-		query.setParameter("catId", catId);
-		query.setFirstResult(position);
-		query.setMaxResults(6);
-		listPro = query.list();
-		System.out.println("ProductDao list size: " + listPro.size());
-		System.out.println("position" + position);
-		System.out.println("pageSize" + pageSize);
+		try {
+			
+			@SuppressWarnings("static-access")
+			Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
+			Transaction transObj = sessionObj.beginTransaction();
+			Query query = sessionObj.createQuery(
+					"from  " + Product.class.getName() + " where pro_category_id = :catId order by pro_price asc");
+			query.setParameter("catId", catId);
+			query.setFirstResult(position);
+			query.setMaxResults(2);
+			listPro = query.list();
+			
+
+		} catch (Exception e) {
+			System.out.println("dao Exception " + e.getMessage());
+		}
 		return listPro;
 	}
 
 	@Override
-	public long countTotalRecords() {
+	public long countTotalRecords(int idCate) {
+
 		Session session = getSessionHibernate.getSessionFactory().getCurrentSession();
 		Transaction transObj = session.beginTransaction();
-		String countQ = "Select count (c.proId) from " + Product.class.getName() + " c";
+		String countQ = "";
+		if (idCate != -1) {
+			countQ = "Select count (c.proId) from " + Product.class.getName() + " c where c.proCategoryId = " + idCate;
+		} else {
+			countQ = "Select count (c.proId) from " + Product.class.getName() + " c";
+		}
 		Query countQuery = session.createQuery(countQ);
-		System.out.println("count: " + (Long) countQuery.uniqueResult());
 		return (Long) countQuery.uniqueResult();
 	}
 
@@ -135,31 +144,29 @@ public class ProductDAO implements ModelDaoInterface<Product>, PaginationInterfa
 	}
 
 	@SuppressWarnings({ "unchecked", "unused" })
-	 public List<Product> getListProByIdCateSortByName(int catId) {
-	 List<Product> listPro = new ArrayList<Product>();
-	 @SuppressWarnings("static-access")
-	 Session sessionObj =
-	 getSessionHibernate.getSessionFactory().getCurrentSession();
-	 Transaction transObj = sessionObj.beginTransaction();
-	 Query query = sessionObj.createQuery(
-	 "from " + Product.class.getName() + " where pro_category_id = :catId order by pro_name asc");
-	 query.setParameter("catId", catId);
-	 listPro = query.setMaxResults(6).list();
-	 return listPro;
-	 }
+	public List<Product> getListProByIdCateSortByName(int catId) {
+		List<Product> listPro = new ArrayList<Product>();
+		@SuppressWarnings("static-access")
+		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
+		Transaction transObj = sessionObj.beginTransaction();
+		Query query = sessionObj.createQuery(
+				"from " + Product.class.getName() + " where pro_category_id = :catId order by pro_name asc");
+		query.setParameter("catId", catId);
+		listPro = query.setMaxResults(6).list();
+		return listPro;
+	}
 
 	@SuppressWarnings({ "unchecked", "unused" })
-	 public List<Product> getListProByIdCateSortByDate(int catId) {
-	 List<Product> listPro = new ArrayList<Product>();
-	 @SuppressWarnings("static-access")
-	 Session sessionObj =
-	 getSessionHibernate.getSessionFactory().getCurrentSession();
-	 Transaction transObj = sessionObj.beginTransaction();
-	 Query query = sessionObj.createQuery(
-	 "from " + Product.class.getName() + " where pro_category_id = :catId order by pro_create_time desc");
-	 query.setParameter("catId", catId);
-	 listPro = query.setMaxResults(6).list();
-	 return listPro;
-	 }
+	public List<Product> getListProByIdCateSortByDate(int catId) {
+		List<Product> listPro = new ArrayList<Product>();
+		@SuppressWarnings("static-access")
+		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
+		Transaction transObj = sessionObj.beginTransaction();
+		Query query = sessionObj.createQuery(
+				"from " + Product.class.getName() + " where pro_category_id = :catId order by pro_create_time desc");
+		query.setParameter("catId", catId);
+		listPro = query.setMaxResults(6).list();
+		return listPro;
+	}
 
 }
