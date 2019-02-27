@@ -2,7 +2,7 @@ package stackjava.com.demojsf.controller.client;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -61,6 +61,7 @@ public class ClientLoginController implements Serializable {
 	ClientRegisterForm clientRegisterForm;
 
 	public ClientRegisterForm getClientRegisterForm() {
+		clientRegisterForm = new ClientRegisterForm();
 		return clientRegisterForm;
 	}
 
@@ -123,19 +124,21 @@ public class ClientLoginController implements Serializable {
 	}
 
 	public String CreateAnAccount() {
-		String useName = this.clientRegisterForm.getUseName();
-		String usePassword = this.clientRegisterForm.getUsePassword();
-		String usePhone = this.clientRegisterForm.getUsePhone();
-		String useEmail = this.clientRegisterForm.getUseEmail();
-		String useAddress = this.clientRegisterForm.getUseAddress();
-		String useBirhtday = this.clientRegisterForm.getUseBirthday();
+		System.out.println("check");
+		String useName = clientRegisterForm.getUseName();
+		String usePassword = clientRegisterForm.getUsePassword();
+		String usePhone = clientRegisterForm.getUsePhone();
+		String useEmail = clientRegisterForm.getUseEmail();
+		String useAddress = clientRegisterForm.getUseAddress();
+		Date useBirhtday = clientRegisterForm.getUseBirthday();
+		System.out.println("userDate" + useBirhtday);
 		User user = new User();
 		user.setUserName(useName);
 		user.setUserPassword(usePassword);
 		user.setUserPhone(usePhone);
 		user.setUserEmail(useEmail);
 		user.setUserAddress(useAddress);
-		user.setUserBirthday(Date.valueOf(useBirhtday));
+		// user.setUserBirthday(Date.valueOf(useBirhtday));
 		user.setUserActive(1);
 		user.setUserGender(1);
 		user.setUserFacebook("damhaihiep");

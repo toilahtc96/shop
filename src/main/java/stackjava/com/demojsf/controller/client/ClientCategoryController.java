@@ -41,8 +41,8 @@ public class ClientCategoryController implements Serializable {
 	private int pageCurrent;
 	private int pageSize;
 	private static int PAGESIZE = 2;
-	private static int PAGENAVIGATION = 2;
-	private long totalPage;
+	private static int PAGENAVIGATION = 4;
+	private int totalPage;
 	private int idCateCurrent;
 	private long pageShowNavigation;
 	private int headPage;
@@ -64,14 +64,18 @@ public class ClientCategoryController implements Serializable {
 		this.tailPage = tailPage;
 	}
 
-	public long getTotalPage() {
+	public int getTotalPage() {
 		int dem = (int) productService.countTotalRecords(idCateCurrent);
 		int pageNum = getPageNum(dem);
+
 		totalPage = pageNum;
+		if (totalPage < 1) {
+			totalPage = 1;
+		}
 		return totalPage;
 	}
 
-	public void setTotalPage(long totalPage) {
+	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
 
@@ -105,6 +109,7 @@ public class ClientCategoryController implements Serializable {
 	@PostConstruct
 	public void init() {
 		try {
+
 			if (this.pageCurrent <= 0) {
 				this.setPageCurrent(1);
 			}
@@ -118,17 +123,21 @@ public class ClientCategoryController implements Serializable {
 				if (listCate.get(0) != null) {
 					System.out.println("check" + this.getIdCateCurrent());
 					// Set list Pro hien thi mac dinh
-					this.setList( productService.getListPRoByIdCate(listCate.get(0).getCatId(),
+					this.setList(productService.getListPRoByIdCate(listCate.get(0).getCatId(),
 							(pageCurrent - 1) * this.getPageSize(), this.getPageSize()));
 					// End
 					System.out.println(this.getList().size());
 
 					// Set phan trang init
-					
 
 					int dem = (int) productService.countTotalRecords(idCateCurrent);
 					int pageNum = getPageNum(dem);
-					this.setTotalPage(pageNum);
+					if (pageNum > 0) {
+						this.setTotalPage(pageNum);
+					} else {
+						this.setTotalPage(1);
+					}
+					System.out.println("total Page" + this.getTotalPage());
 					// End
 
 					// setHeadPage end TailPage
@@ -146,51 +155,48 @@ public class ClientCategoryController implements Serializable {
 
 				}
 			}
+			System.out.println("init Head" + this.getHeadPage());
+			System.out.println("init Tail" + this.getTailPage());
+			System.out.println("init Pagination" + this.getPageShowNavigation());
 		} catch (Exception e) {
 			System.out.println("Loi khi init" + e.getMessage());
 		}
 	}
 
 	public void nextPage(AjaxBehaviorEvent event) {
-
-		if (pageCurrent == tailPage && tailPage < totalPage) {
-			this.setHeadPage(tailPage);
-			if ((totalPage - tailPage) > PAGENAVIGATION) {
-				this.setTailPage(this.getHeadPage() + PAGENAVIGATION);
-			} else {
-				this.setTailPage((int) totalPage);
-			}
+		// set lai head va tail cho for theo tung truong hop
+		// set lai product theo current Page
+		System.out.println("current" + this.getPageCurrent());
+		System.out.println("tail" + this.getTailPage());
+		System.out.println("total" + this.getTotalPage());
+		System.out.println("head" + this.getHeadPage());
+		if (this.getPageCurrent() == this.getTailPage() && this.getPageCurrent() < this.getTotalPage()) {
+			System.out.println("update Next");
+			this.setHeadPage(this.getPageCurrent() - (PAGENAVIGATION / 2) + 1);
+			this.setTailPage(this.getPageCurrent() + (PAGENAVIGATION / 2));
+			System.out.println("head update" + this.getHeadPage());
+			System.out.println("tail update" + this.getTailPage());
 		} else {
-			if (pageCurrent < totalPage) {
-				this.setPageCurrent(pageCurrent += 1);
-			}
+			System.out.println("Don't Update Next");
+			System.out.println("head" + this.getHeadPage());
 		}
-
+		System.out.println("Pagination" + this.getPageShowNavigation());
 		this.setList(productService.getListPRoByIdCate(listCate.get(0).getCatId(),
 				(this.getPageCurrent() - 1) * PAGESIZE + 1, this.getPageSize()));
-	
 
 	}
-	
+
 	public void prevPage(AjaxBehaviorEvent event) {
-
-		if (pageCurrent == headPage && headPage >1) {
-			this.setHeadPage(this.getHeadPage()-1);
-			if ((headPage - PAGENAVIGATION) > 1) {
-				this.setHeadPage(this.getHeadPage()-PAGENAVIGATION);
-				this.setTailPage(this.getHeadPage() +PAGENAVIGATION);
-				
-				
-			}
+		// set lai head va tail cho for theo tung truong hop
+		// set lai product theo current Page
+		System.out.println("ajax Prev");
+		if (this.getPageCurrent() == this.getHeadPage() && this.getPageCurrent() > 1) {
+			this.setHeadPage(this.getPageCurrent() - (PAGENAVIGATION) + 1);
+			this.setTailPage(this.getPageCurrent() - (PAGENAVIGATION / 2));
 		} else {
-			if (pageCurrent > 1) {
-				this.setPageCurrent(pageCurrent -= 1);
-			}
 		}
-
 		this.setList(productService.getListPRoByIdCate(listCate.get(0).getCatId(),
 				(this.getPageCurrent() - 1) * PAGESIZE + 1, this.getPageSize()));
-		
 
 	}
 
@@ -286,6 +292,36 @@ public class ClientCategoryController implements Serializable {
 		List<Product> listPro = new ArrayList<Product>();
 		listPro = productService.getListPRoByIdCate(catId, (pageCurrent - 1) * pageSize, this.getPageSize());
 		this.setList(listPro);
+
+		// End
+		System.out.println(this.getList().size());
+
+		// Set phan trang ajax cate
+
+		int dem = (int) productService.countTotalRecords(catId);
+		int pageNum = getPageNum(dem);
+		if (pageNum > 0) {
+			this.setTotalPage(pageNum);
+		} else {
+			this.setTotalPage(1);
+		}
+		System.out.println("total Page" + this.getTotalPage());
+		// End
+
+		// setHeadPage end TailPage
+		if (this.getHeadPage() < 1) {
+			this.setHeadPage(1);
+		}
+		if (this.getTailPage() < 1) {
+			this.setTailPage(1);
+			if (pageNum > PAGENAVIGATION) {
+				this.setTailPage(PAGENAVIGATION);
+			} else {
+				this.setTailPage(pageNum);
+			}
+		}
+		this.setPageCurrent(pageNum);
+
 		return listPro;
 	}
 

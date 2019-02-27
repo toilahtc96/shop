@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 <ui:composition template="../templateClient/layout.xhtml">
 	<ui:define name="banner">
@@ -30,43 +31,44 @@
 						novalidate="novalidate" id="createUserForm">
 						<div class="col-md-12 form-group p_star">
 							<h:inputText type="text" class="form-control" id="name"
-								name="name"
+								a:placeholder="username" name="name"
 								value="#{clientLoginController.clientRegisterForm.useName}" />
-							<span class="placeholder" data-placeholder="Name"></span>
 						</div>
 						<div class="col-md-12 form-group p_star">
 							<h:inputSecret type="text" class="form-control" id="pass1"
-								name="pass1"
+								a:placeholder="password" name="pass1"
 								value="#{clientLoginController.clientRegisterForm.usePassword}" />
-							<span class="placeholder" data-placeholder="Password"></span>
 						</div>
 						<div class="col-md-12 form-group p_star">
 							<h:inputSecret type="text" class="form-control" id="pass2"
-								name="pass2" />
-							<span class="placeholder" data-placeholder="Confirm Password"></span>
+								a:placeholder="password again" name="pass2" />
+
 						</div>
 						<div class="col-md-12 form-group p_star">
 							<h:inputText type="text" class="form-control" id="number"
-								name="number"
+								name="number" a:placeholder="phone"
 								value="#{clientLoginController.clientRegisterForm.usePhone}" />
-							<span class="placeholder" data-placeholder="Phone number"></span>
+
 						</div>
 						<div class="col-md-12 form-group p_star">
 							<h:inputText type="text" class="form-control" id="email"
-								name="compemailany"
+								name="compemailany" a:placeholder="email"
 								value="#{clientLoginController.clientRegisterForm.useEmail}" />
-							<span class="placeholder" data-placeholder="Email Address"></span>
+
 						</div>
 						<div class="col-md-12 form-group p_star">
 							<h:inputText type="text" class="form-control" id="address"
-								name="address"
+								name="address" a:placeholder="address"
 								value="#{clientLoginController.clientRegisterForm.useAddress}" />
-							<span class="placeholder" data-placeholder="Address"></span>
+
 						</div>
 						<div class="col-md-12 form-group p_star">
-							<h:inputText type="text" class="form-control" id="dob" name="dob"
-								value="#{clientLoginController.clientRegisterForm.useBirthday}" />
-							<span class="placeholder" data-placeholder="BirthDate"></span>
+							<h:inputText id="dob" name="dob" a:placeholder="date Of Birth"
+								value="#{clientLoginController.clientRegisterForm.useBirthday}"
+								styleClass="form-control datepicker" >
+								<f:convertDateTime pattern="yyyy/mm/dd hh:mm:ss"/>
+								</h:inputText>
+
 						</div>
 						<div class="col-md-12">
 							<h:commandButton class="btn btn-secondary" style="width: 47%;"
@@ -76,7 +78,9 @@
 								style="width: 47%; margin-left: 6%;"
 								onclick="return checkParam();"
 								action="#{clientLoginController.CreateAnAccount()}"
-								value="CREATE" />
+								value="CREATE">
+								
+							</h:commandButton>
 						</div>
 					</h:form>
 				</div>
@@ -88,9 +92,13 @@
 		</div>
 	</ui:define>
 	<ui:define name="scriptJSF">
-		<h:outputScript library="js" name="client/client.register.js">
-			
-		</h:outputScript>
+		<h:outputScript library="js"
+			name="client/jquery-ui-1.12.1/jquery-ui.js" />
+
+		<h:outputScript library="js" name="client/client.register.js" />
+
+		<h:outputScript library="js" name="client/formatDatePicker.js" />
+
 	</ui:define>
 </ui:composition>
 </html>

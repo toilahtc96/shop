@@ -33,7 +33,7 @@ $(document).ready(function() {
 				$("#paginatorForm\\:pageCurrent").val(i);
 			}
 		}
-		return false;
+		return true;
 	}
 	goNext = function(a, max) {
 		var divNavigation = $(a).parent();
@@ -42,24 +42,57 @@ $(document).ready(function() {
 		for (var i = 0; i < $(aList).length; i++) {
 			var attrClass = $(aList[i]).attr("class");
 			if ($(aList[i]).attr("class") == 'active') {
-				nextPage = i;
+				nextPage = aList[i].text;
+				console.log(nextPage);
 			}
 		}
 		if (nextPage < max) {
-			nextPage = nextPage + 1;
+			console.log("+");
+			console.log(nextPage);
+			nextPage = 1 + parseInt(nextPage);
+			console.log("x" + nextPage);
+			$("#paginatorForm\\:pageCurrent").val(nextPage);
 		}
 		for (var i = 0; i < $(aList).length; i++) {
 			$(aList[i]).attr("class", "");
+		}
+		console.log("length: " + $(aList).length);
+		console.log("nextPage" + nextPage);
+		for (var i = 0; i < $(aList).length; i++) {
 			if (nextPage == i) {
-				if (i == $(aList).length - 1) {
-					$(aList[i - 1]).attr("class", "active");
-					$("#paginatorForm\\:pageCurrent").val(i-1);
-				} else {
-					$(aList[i]).attr("class", "active");
-					$("#paginatorForm\\:pageCurrent").val(i);
-				}
+				$(aList[i]).attr("class", "active");
 			}
 		}
 		return true;
 	}
+	
+	function handleAjax(data) {
+		
+		var status = data.status;
+
+		switch (status) {
+		case "begin":
+			// This is the start of the AJAX request.
+			console.log("begin");
+			document.getElementsByTagName('body')[0].className = 'loading';
+			break;
+
+		case "complete":
+			console.log("complete");
+			// This is invoked right after AJAX response is
+			// returned.
+			break;
+
+		case "success":
+			console.log("success");
+			// This is invoked right after successful processing
+			// of AJAX response and update of HTML DOM.
+			document.getElementsByTagName('body')[0].className = 'loading';
+			break;
+		}
+	}
+	// Setup the statusUpdate function to hear all events on the
+	// page
+	jsf.ajax.addOnEvent(handleAjax);
+	
 });
