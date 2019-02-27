@@ -1,5 +1,6 @@
 package stackjava.com.demojsf.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,7 +13,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "category", uniqueConstraints = { @UniqueConstraint(columnNames = { "cat_id" }) })
-public class Category {
+public class Category implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cat_id", length = 11, nullable = false, unique = true)

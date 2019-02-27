@@ -40,10 +40,49 @@ public class ClientCategoryController implements Serializable {
 	private String sortString;
 	private int pageCurrent;
 	private int pageSize;
-	private static int PAGESIZE = 10;
+	private static int PAGESIZE = 2;
+	private static int PAGENAVIGATION = 2;
 	private long totalPage;
-	private List<Integer> listPage;
 	private int idCateCurrent;
+	private long pageShowNavigation;
+	private int headPage;
+	private int tailPage;
+
+	public int getHeadPage() {
+		return headPage;
+	}
+
+	public void setHeadPage(int headPage) {
+		this.headPage = headPage;
+	}
+
+	public int getTailPage() {
+		return tailPage;
+	}
+
+	public void setTailPage(int tailPage) {
+		this.tailPage = tailPage;
+	}
+
+	public long getTotalPage() {
+		int dem = (int) productService.countTotalRecords(idCateCurrent);
+		int pageNum = getPageNum(dem);
+		totalPage = pageNum;
+		return totalPage;
+	}
+
+	public void setTotalPage(long totalPage) {
+		this.totalPage = totalPage;
+	}
+
+	public long getPageShowNavigation() {
+		pageShowNavigation = PAGENAVIGATION;
+		return pageShowNavigation;
+	}
+
+	public void setPageShowNavigation(long pageShowNavigation) {
+		this.pageShowNavigation = pageShowNavigation;
+	}
 
 	public int getIdCateCurrent() {
 		return idCateCurrent;
@@ -53,51 +92,106 @@ public class ClientCategoryController implements Serializable {
 		this.idCateCurrent = idCateCurrent;
 	}
 
-	public List<Integer> getListPage() {
-		return listPage;
-	}
-
-	public void setListPage(List<Integer> listPage) {
-		this.listPage = listPage;
+	public int getPageNum(int productNum) {
+		int pageNum = 1;
+		if (productNum % PAGESIZE == 0) {
+			pageNum = productNum / PAGESIZE;
+		} else {
+			pageNum = productNum / PAGESIZE + 1;
+		}
+		return pageNum;
 	}
 
 	@PostConstruct
 	public void init() {
-		this.setTotalPage(productService.countTotalRecords());
-		if (this.pageCurrent <= 0) {
-			this.setPageCurrent(1);
-			System.out.println("so page " + (productService.countTotalRecords() / PAGESIZE + 1));
-			System.out.println("set page In clientCateController");
-		}
-		if (this.getSortString() == null || this.getSortString().equals("")) {
-			this.setSortString("Sort Product By");
-		}
-		if (this.getList() == null) {
-			listCate = this.getListCate();
-			idCateCurrent = listCate.get(0).getCatId();
-			System.out.println(listCate.get(0).getCatId());
-			if (listCate.get(0) != null) {
-				this.list = productService.getListPRoByIdCate(listCate.get(0).getCatId(), (pageCurrent - 1) * pageSize,
-						this.getPageSize());
-				System.out.println("page total: " + this.list.size());
-				this.setTotalPage(this.list.size() / PAGESIZE + 1);
-				int check = (this.list.size() / PAGESIZE) + 1;
-				System.out.println("so page : " + check);
-				List<Integer> listPageSet = new ArrayList<Integer>();
-				for (int i = 1; i <= this.getTotalPage(); i++) {
-					listPageSet.add(i);
+		try {
+			if (this.pageCurrent <= 0) {
+				this.setPageCurrent(1);
+			}
+
+			if (this.getList() == null) {
+				listCate = this.getListCate();
+				idCateCurrent = listCate.get(0).getCatId();
+				if (idCateCurrent <= 0) {
+					idCateCurrent = -1;
 				}
-				this.setListPage(listPageSet);
+				if (listCate.get(0) != null) {
+					System.out.println("check" + this.getIdCateCurrent());
+					// Set list Pro hien thi mac dinh
+					this.setList( productService.getListPRoByIdCate(listCate.get(0).getCatId(),
+							(pageCurrent - 1) * this.getPageSize(), this.getPageSize()));
+					// End
+					System.out.println(this.getList().size());
+
+					// Set phan trang init
+					
+
+					int dem = (int) productService.countTotalRecords(idCateCurrent);
+					int pageNum = getPageNum(dem);
+					this.setTotalPage(pageNum);
+					// End
+
+					// setHeadPage end TailPage
+					if (this.getHeadPage() < 1) {
+						this.setHeadPage(1);
+					}
+					if (this.getTailPage() < 1) {
+						this.setTailPage(1);
+						if (pageNum > PAGENAVIGATION) {
+							this.setTailPage(PAGENAVIGATION);
+						} else {
+							this.setTailPage(pageNum);
+						}
+					}
+
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("Loi khi init" + e.getMessage());
+		}
+	}
+
+	public void nextPage(AjaxBehaviorEvent event) {
+
+		if (pageCurrent == tailPage && tailPage < totalPage) {
+			this.setHeadPage(tailPage);
+			if ((totalPage - tailPage) > PAGENAVIGATION) {
+				this.setTailPage(this.getHeadPage() + PAGENAVIGATION);
+			} else {
+				this.setTailPage((int) totalPage);
+			}
+		} else {
+			if (pageCurrent < totalPage) {
+				this.setPageCurrent(pageCurrent += 1);
 			}
 		}
-	}
 
-	public long getTotalPage() {
-		return totalPage;
-	}
+		this.setList(productService.getListPRoByIdCate(listCate.get(0).getCatId(),
+				(this.getPageCurrent() - 1) * PAGESIZE + 1, this.getPageSize()));
+	
 
-	public void setTotalPage(long totalPage) {
-		this.totalPage = totalPage;
+	}
+	
+	public void prevPage(AjaxBehaviorEvent event) {
+
+		if (pageCurrent == headPage && headPage >1) {
+			this.setHeadPage(this.getHeadPage()-1);
+			if ((headPage - PAGENAVIGATION) > 1) {
+				this.setHeadPage(this.getHeadPage()-PAGENAVIGATION);
+				this.setTailPage(this.getHeadPage() +PAGENAVIGATION);
+				
+				
+			}
+		} else {
+			if (pageCurrent > 1) {
+				this.setPageCurrent(pageCurrent -= 1);
+			}
+		}
+
+		this.setList(productService.getListPRoByIdCate(listCate.get(0).getCatId(),
+				(this.getPageCurrent() - 1) * PAGESIZE + 1, this.getPageSize()));
+		
+
 	}
 
 	public int getPageSize() {
