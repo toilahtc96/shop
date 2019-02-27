@@ -37,7 +37,8 @@
 										aria-controls="fruitsVegetable"><span
 											class="lnr lnr-arrow-right"></span> <h:commandLink
 												value="#{item.catName}">
-												<f:ajax execute="@form" render=":formCate:resultAjax"
+												<f:ajax execute="@form"
+													render=":formCate:resultAjax :paginatorForm "
 													listener="#{clientCategoryController.getListProByIdCate(item.catId)}" />
 												<f:param name="catId" value="#{category.catId}" />
 											</h:commandLink></a></li>
@@ -134,13 +135,20 @@
 									end="#{clientCategoryController.tailPage}">
 									<c:if test="${i == clientCategoryController.headPage}">
 										<h:commandLink href="" class="prev-arrow"
-											onclick="return goPrev(this);">
+											onclick="return goPrev(this);" >
 											<i class="fa fa-long-arrow-left" aria-hidden="true"
 												style="padding-top: 30%; padding-bottom: 34%"></i>
-												<f:ajax execute="@form" render=":paginatorForm :formCate:resultAjax"
+											<f:ajax execute="@form" 
+												render=":paginatorForm :formCate:resultAjax"
 												listener="#{clientCategoryController.prevPage}" />
 										</h:commandLink>
 
+									</c:if>
+									<c:if test="${i lt clientCategoryController.pageCurrent }">
+										<h:commandLink href="" class=""
+											onclick="return goPage(this,#{i});">
+											<h:outputText value="#{i}" />
+										</h:commandLink>
 									</c:if>
 									<c:if test="${i == clientCategoryController.pageCurrent}">
 										<h:commandLink href="" class="active"
@@ -148,19 +156,22 @@
 											<h:outputText value="#{clientCategoryController.pageCurrent}" />
 										</h:commandLink>
 									</c:if>
-									<c:if test="${i gt clientCategoryController.pageCurrent }">
-										<h:commandLink href="" class=""
-											onclick="return goPage(this,#{clientCategoryController.pageCurrent + 1});">
-											<h:outputText
-												value="#{clientCategoryController.pageCurrent +1}" />
-										</h:commandLink>
+									<c:if test="${i gt clientCategoryController.pageCurrent}">
+										<c:if
+											test="${clientCategoryController.pageCurrent le clientCategoryController.totalPage }">
+											<h:commandLink href="" class=""
+												onclick="return goPage(this,#{i});">
+												<h:outputText value="#{i}" />
+											</h:commandLink>
+										</c:if>
 									</c:if>
 									<c:if test="${i == clientCategoryController.tailPage}">
 										<h:commandLink class="next-arrow"
 											onclick="return goNext(this,#{clientCategoryController.totalPage});">
 											<i class="fa fa-long-arrow-right" aria-hidden="true"
 												style="padding-top: 30%; padding-bottom: 34%"></i>
-											<f:ajax execute="@form" render=":paginatorForm :formCate:resultAjax"
+											<f:ajax execute="@form"
+												render=":paginatorForm :formCate:resultAjax"
 												listener="#{clientCategoryController.nextPage}" />
 										</h:commandLink>
 									</c:if>

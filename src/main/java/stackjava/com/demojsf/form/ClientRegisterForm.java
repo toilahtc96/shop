@@ -18,7 +18,7 @@ public class ClientRegisterForm implements Serializable{
 	private String useName;
 	private String usePhone;
 	private String usePassword;
-	private String useBirthday;
+	private Date useBirthday;
 	private String useAddress;
 	private String useEmail;
 	public String getUseName() {
@@ -39,10 +39,10 @@ public class ClientRegisterForm implements Serializable{
 	public void setUsePassword(String usePassword) {
 		this.usePassword = usePassword;
 	}
-	public String getUseBirthday() {
+	public Date getUseBirthday() {
 		return useBirthday;
 	}
-	public void setUseBirthday(String useBirthday) {
+	public void setUseBirthday(Date useBirthday) {
 		this.useBirthday = useBirthday;
 	}
 	public String getUseAddress() {
