@@ -1,14 +1,28 @@
 package stackjava.com.demojsf.controller.admin;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.Part;
+
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileItemFactory;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
 
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
@@ -19,9 +33,11 @@ import stackjava.com.demojsf.form.UpdateCategoryForm;
 import stackjava.com.demojsf.model.Category;
 import stackjava.com.demojsf.service.CategoryService;
 
-@ManagedBean(name="categoryController")
+@ManagedBean(name = "categoryController")
 @SessionScoped
-@URLMappings(mappings = { @URLMapping(id = "category", pattern = "/admin/categories", viewId = "/admin/listCategory.xhtml"),
+@MultipartConfig
+@URLMappings(mappings = {
+		@URLMapping(id = "category", pattern = "/admin/categories", viewId = "/admin/listCategory.xhtml"),
 		@URLMapping(id = "addCategory", pattern = "/admin/createCategory", viewId = "/admin/createCategory.xhtml"),
 		@URLMapping(id = "updateCategory", pattern = "/admin/updateCategory", viewId = "/admin/updateCategory.xhtml") })
 public class CategoryController extends CommonController implements Serializable {
@@ -52,6 +68,29 @@ public class CategoryController extends CommonController implements Serializable
 
 	public void setCategoryService(CategoryService categoryService) {
 		this.categoryService = categoryService;
+	}
+
+	private Part image;
+
+	public Part getImage() {
+		return image;
+	}
+
+	public void setImage(Part image) {
+		this.image = image;
+	}
+
+	public void uploadImage(AjaxBehaviorEvent event) {
+		System.out.println("ajax Call");
+		if(this.getImage() == null) {
+			System.out.println("null");
+			return;
+		}
+		try (InputStream input = this.getImage().getInputStream()) {
+			Files.copy(input, new File("C:/Users/toila/Desktop/images", this.getImage().getSubmittedFileName()).toPath());
+		} catch (IOException e) {
+			System.out.println("e exception" + e.getMessage());
+		}
 	}
 
 	@ManagedProperty(value = "#{createCategoryForm}")
@@ -103,13 +142,13 @@ public class CategoryController extends CommonController implements Serializable
 	public void setList(List<Category> list) {
 		this.list = list;
 	}
-	
+
 	public String addCreateCategory() {
 		String catName = this.createCategoryForm.getCatName();
-		/*Part image = this.createCategoryForm.getImage();
-		this.setImage(image);
-		System.out.println("xxx");
-		this.doUpLoad();*/
+		/*
+		 * Part image = this.createCategoryForm.getImage(); this.setImage(image);
+		 * System.out.println("xxx"); this.doUpLoad();
+		 */
 		// String catAlias = this.createCategoryForm.getCatAlias();
 		// String catSeoText = this.createCategoryForm.getCatSeoText();
 		// String catPicture = this.createCategoryForm.getCatPicture();
