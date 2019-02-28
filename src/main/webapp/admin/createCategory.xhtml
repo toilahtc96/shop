@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 <h:head>
 	<!-- Mobile Specific Meta -->
 
@@ -14,84 +14,90 @@
 
 	<ui:composition template="/templateAdmin/layout.xhtml">
 		<ui:define name="content">
-				<h2 style="text-align:center">Tạo Mới Một Loại Sản Phẩm</h2>
-					<h:form id="formCreateCategory" enctype="multipart/form-data">
-						<div class="col-sm-6" style="float: left;">
-							<h:outputLabel value="Name: " />
-							<h:inputText styleClass="form-control col-sm-6"
-								value="#{categoryController.createCategoryForm.catName}"
-								id="categoryName"
-								required="#{not empty categoryController.createCategoryForm.catName} ">
-								<f:validateRequired />
-							</h:inputText>
-							<br />
+			<h2 style="text-align: center">Tạo Mới Một Loại Sản Phẩm</h2>
+			<h:form prependId="false" enctype="multipart/form-data"
+				id="formCreateCategory">
+				<h:inputHidden id="ajaxOutput" />
+				<div class="col-sm-6" style="float: left;">
+					<h:outputLabel value="Name: " />
+					<h:inputText styleClass="form-control col-sm-6"
+						value="#{categoryController.createCategoryForm.catName}"
+						id="categoryName"
+						required="#{not empty categoryController.createCategoryForm.catName} ">
 
-							<h:outputLabel value="Alias: " />
-							<h:inputText styleClass="form-control col-sm-6"
-								value="#{categoryController.createCategoryForm.catAlias}"
-								id="categoryAlias">
-								<f:validateRequired />
-							</h:inputText>
-							<br />
+					</h:inputText>
+					<br />
 
-							<h:outputLabel value="SeoText: " />
-							<h:inputText styleClass="form-control col-sm-6"
-								value="#{categoryController.createCategoryForm.catSeoText}"
-								id="categorySeoText">
-								<f:validateRequired />
-							</h:inputText>
-							<br />
+					<h:outputLabel value="Alias: " />
+					<h:inputText styleClass="form-control col-sm-6"
+						value="#{categoryController.createCategoryForm.catAlias}"
+						id="categoryAlias">
 
-							<h:outputLabel value="Picture: " />
-							<h:inputFile styleClass="form-control col-sm-6"
-								value="#{categoryController.image}"
-								id="categoryPicture">
-							</h:inputFile>
-							<br />
-						</div>
+					</h:inputText>
+					<br />
+
+					<h:outputLabel value="SeoText: " />
+					<h:inputText styleClass="form-control col-sm-6"
+						value="#{categoryController.createCategoryForm.catSeoText}"
+						id="categorySeoText">
+
+					</h:inputText>
+					<br />
+
+					<h:outputLabel value="Picture: " />
+
+					<h:inputFile styleClass="form-control col-sm-6"
+						value="#{categoryController.image}" id="categoryPicture">
+						<!-- <f:ajax execute="@this"
+							render=":formCreateCategory:ajaxOutput"
+							listener="#{categoryController.uploadImage}" /> -->
+					</h:inputFile>
+					<br />
+				</div>
 
 
-						<div class="col-sm-6" style="float: left;">
-							<h:outputLabel value="Description: " />
-							<h:inputText styleClass="form-control col-sm-6"
-								value="#{categoryController.createCategoryForm.catDes}"
-								id="categoryDescription">
-								<f:validateRequired />
-							</h:inputText>
-							<br />
+				<div class="col-sm-6" style="float: left;">
+					<h:outputLabel value="Description: " />
+					<h:inputText styleClass="form-control col-sm-6"
+						value="#{categoryController.createCategoryForm.catDes}"
+						id="categoryDescription">
 
-							<h:outputLabel value="Type: " />
-							<h:inputText styleClass="form-control col-sm-6"
-								value="#{categoryController.createCategoryForm.catType}"
-								id="categoryType">
-								<f:validateRequired />
-							</h:inputText>
-							<br />
+					</h:inputText>
+					<br />
 
-							<h:outputLabel value="Parent ID: " />
-							<h:selectOneMenu value="#{categoryController.idCate}"
-								styleClass="form-control col-sm-6" id="selectCate">
-								<c:forEach var="key" items="#{categoryController.keyList}">
-									<f:selectItem itemValue="#{key}"
-										itemLabel="#{categoryController.createCategoryForm.listCate[key]}" />
-								</c:forEach>
-							</h:selectOneMenu>
-							<br />
+					<h:outputLabel value="Type: " />
+					<h:inputText styleClass="form-control col-sm-6"
+						value="#{categoryController.createCategoryForm.catType}"
+						id="categoryType">
 
-							<h:outputLabel value="Slug: " />
-							<h:inputText styleClass="form-control col-sm-6"
-								value="#{categoryController.createCategoryForm.catSlug}"
-								id="categorySlug">
-								<f:validateRequired />
-							</h:inputText>
-							<br /> <br />
+					</h:inputText>
+					<br />
 
-							
-						</div>
-						<h:commandButton styleClass="btn btn-success" style="width:100%; margin-top:5%"
-								value="Add" type="submit" action="#{categoryController.addCreateCategory}">
-							</h:commandButton>
-					</h:form>
+					<h:outputLabel value="Parent ID: " />
+					<h:selectOneMenu value="#{categoryController.idCate}"
+						styleClass="form-control col-sm-6" id="selectCate">
+						<c:forEach var="key" items="#{categoryController.keyList}">
+							<f:selectItem itemValue="#{key}"
+								itemLabel="#{categoryController.createCategoryForm.listCate[key]}" />
+						</c:forEach>
+					</h:selectOneMenu>
+					<br />
+
+					<h:outputLabel value="Slug: " />
+					<h:inputText styleClass="form-control col-sm-6"
+						value="#{categoryController.createCategoryForm.catSlug}"
+						id="categorySlug">
+
+					</h:inputText>
+					<br /> <br />
+
+
+				</div>
+				<h:commandButton styleClass="btn btn-success"
+					style="width:100%; margin-top:5%" value="Add" type="submit"
+					action="#{categoryController.addCreateCategory}">
+				</h:commandButton>
+			</h:form>
 			<br />
 		</ui:define>
 	</ui:composition>

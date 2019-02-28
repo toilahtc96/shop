@@ -5,9 +5,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -15,19 +16,12 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.Part;
-
-import org.apache.tomcat.util.http.fileupload.FileItem;
-import org.apache.tomcat.util.http.fileupload.FileItemFactory;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
-import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
-
+import org.apache.commons.io.FilenameUtils;
 import com.ocpsoft.pretty.faces.annotation.URLMapping;
 import com.ocpsoft.pretty.faces.annotation.URLMappings;
 
-import stackjava.com.demojsf.common.CommonController;
 import stackjava.com.demojsf.form.CreateCategoryForm;
 import stackjava.com.demojsf.form.UpdateCategoryForm;
 import stackjava.com.demojsf.model.Category;
@@ -35,16 +29,17 @@ import stackjava.com.demojsf.service.CategoryService;
 
 @ManagedBean(name = "categoryController")
 @SessionScoped
-@MultipartConfig
 @URLMappings(mappings = {
 		@URLMapping(id = "category", pattern = "/admin/categories", viewId = "/admin/listCategory.xhtml"),
 		@URLMapping(id = "addCategory", pattern = "/admin/createCategory", viewId = "/admin/createCategory.xhtml"),
 		@URLMapping(id = "updateCategory", pattern = "/admin/updateCategory", viewId = "/admin/updateCategory.xhtml") })
-public class CategoryController extends CommonController implements Serializable {
-	private static final long serialVersionUID = 1L;
+@MultipartConfig
+public class CategoryController extends HttpServlet implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	List<Category> list;
 	List<Integer> keyList;
+	private String folder = "c:/Users/dvgp_admin/Desktop/images";
 	private int idCate;
 
 	public int getIdCate() {
@@ -82,15 +77,30 @@ public class CategoryController extends CommonController implements Serializable
 
 	public void uploadImage(AjaxBehaviorEvent event) {
 		System.out.println("ajax Call");
-		if(this.getImage() == null) {
-			System.out.println("null");
-			return;
+		Part uploadedFile = getImage();
+
+		// final Path destination = Paths.get("c:/temp/" +
+		// FilenameUtils.getName(getSubmittedFileName(uploadedFile)));
+
+		// When using servlet 3.1
+		final Path destination = Paths.get(
+				"c:/Users/dvgp_admin/Desktop/images/" + FilenameUtils.getName(uploadedFile.getSubmittedFileName()));
+
+		InputStream bytes = null;
+
+		if (uploadedFile != null) {
+
+			try {
+				bytes = uploadedFile.getInputStream();
+				Files.copy(bytes, destination);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
+
 		}
-		try (InputStream input = this.getImage().getInputStream()) {
-			Files.copy(input, new File("C:/Users/toila/Desktop/images", this.getImage().getSubmittedFileName()).toPath());
-		} catch (IOException e) {
-			System.out.println("e exception" + e.getMessage());
-		}
+
 	}
 
 	@ManagedProperty(value = "#{createCategoryForm}")
@@ -145,6 +155,27 @@ public class CategoryController extends CommonController implements Serializable
 
 	public String addCreateCategory() {
 		String catName = this.createCategoryForm.getCatName();
+		if (this.getImage() != null) {
+			System.out.println("!=null");
+			System.out.println(this.getImage().getSubmittedFileName());
+			final Path destination = Paths.get(
+					"c:/Users/toila/Desktop/images/" + FilenameUtils.getName(image.getSubmittedFileName()));
+
+			InputStream bytes = null;
+
+			try {
+				bytes = image.getInputStream();
+				Files.copy(bytes, destination);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
+
+		} else {
+			System.out.println("null");
+		}
+
 		/*
 		 * Part image = this.createCategoryForm.getImage(); this.setImage(image);
 		 * System.out.println("xxx"); this.doUpLoad();
@@ -165,9 +196,9 @@ public class CategoryController extends CommonController implements Serializable
 		// Date catUpdate = this.createCategoryForm.getCatUpdate();
 		Category cat = new Category();
 		cat.setCatName(catName);
-		categoryService.add(cat);
+		// categoryService.add(cat);
 		System.out.println("sussceess");
-		return "/admin/categories?faces-redirect=true";
+		return "/admin/listCategory?faces-redirect=true";
 	}
 
 	public String getUpdateCategory() {
