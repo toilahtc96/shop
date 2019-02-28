@@ -1,12 +1,21 @@
 package stackjava.com.demojsf.controller.admin;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.Map.Entry;
 
@@ -57,14 +66,12 @@ public class ProductController extends CommonController implements Serializable 
 	List<Product> list;
 
 	private int idCate;
-	
 
 	@PostConstruct
 	public void init() {
-		
+
 	}
 
-	
 	public int getIdCate() {
 		return idCate;
 	}
@@ -138,6 +145,7 @@ public class ProductController extends CommonController implements Serializable 
 
 	public String addAbcProduct() {
 		System.out.println("add Product");
+		System.out.println("path" + getPathImge());
 		String proName = " ";
 		if (this.createProductForm.getProName() != null) {
 			proName = this.createProductForm.getProName();
@@ -146,14 +154,51 @@ public class ProductController extends CommonController implements Serializable 
 		int idCategory = 1;
 		Part image = this.createProductForm.getProImg();
 		this.setImage(image);
-		this.doUpLoad();
 		Product pro = new Product();
 		pro.setProName(proName);
 		pro.setProCategoryId(idCategory);
-		productService.add(pro);
-		return "/admin/products";
+
+		if (this.createProductForm.getProImg() != null) {
+			System.out.println("!=null");
+			File file = new File("resources/images/" + this.createProductForm.getProImg().getSubmittedFileName());
+			String absolutePath = file.getAbsolutePath();
+			System.out.println("absolutePath" + absolutePath);
+			final Path destination = Paths.get("c:/Users/toila/Desktop/images/"
+					+ FilenameUtils.getName(this.createProductForm.getProImg().getSubmittedFileName()));
+
+			InputStream bytes = null;
+
+			try {
+				bytes = image.getInputStream();
+				Files.copy(bytes, destination);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println(e.getMessage());
+			}
+
+		} else {
+			System.out.println("null");
+		}
+		// productService.add(pro);
+		return "/admin/listProduct?faces-redirect=true";
 	}
 
+	public static void main(String[] args) {
+		System.out.println();
+		String projectDir = new File("").getAbsolutePath();
+		String path = projectDir+"\\src\\main\\webapp\\resources\\img";
+		ProductController p = new ProductController();
+		System.out.println("xx"+ p.getPathImge());
+		System.out.println(path);
+	}
+
+	public String getPathImge() {
+		String projectDir = new File("").getAbsolutePath();
+		
+		String path = projectDir+"\\src\\main\\webapp\\resources\\img";
+		return path;
+	}
 	public String doUpdateProduct() {
 		int id = updateProductForm.getProId();
 		String name = updateProductForm.getProName();
@@ -207,5 +252,4 @@ public class ProductController extends CommonController implements Serializable 
 		this.listProGetByIdCate = listProGetByIdCate;
 	}
 
-	
 }
