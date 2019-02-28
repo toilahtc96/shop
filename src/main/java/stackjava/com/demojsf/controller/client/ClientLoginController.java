@@ -77,7 +77,7 @@ public class ClientLoginController implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		if (name.equals("") || password.equals("")) {
 			// so ra 1 alert
-			context.addMessage(null, new FacesMessage("Thiếu thông tin đăng nhập!"));
+			context.addMessage("contactForm:name", new FacesMessage("Thiếu thông tin đăng nhập!"));
 		} else {
 			if (userService.checkUser(name, password)) {
 				User user = userService.getUserByNameAndPassword(name, password);
@@ -95,10 +95,10 @@ public class ClientLoginController implements Serializable {
 						e.printStackTrace();
 					}
 				} else {
-					context.addMessage(null, new FacesMessage("Authentication Failed. Check username or password."));
+					context.addMessage("contactForm:name", new FacesMessage("Authentication Failed. Check username or password."));
 				}
 			} else {
-				context.addMessage(null, new FacesMessage("Thông tin đăng nhập sai!"));
+				context.addMessage("contactForm:name", new FacesMessage("Thông tin đăng nhập sai!"));
 			}
 		}
 	}

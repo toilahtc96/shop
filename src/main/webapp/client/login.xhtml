@@ -27,7 +27,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6">
-					<h:form>
+					<h:form id="loginForm">
 						<div class="login_box_img">
 							<h:graphicImage class="img-fluid" name="img/login.jpg" alt="" />
 							<div class="hover">
@@ -55,6 +55,7 @@
 									onfocus="this.placeholder = ''"
 									onblur="this.placeholder = 'Username'"
 									value="#{clientLoginController.clientLoginForm.name}" />
+									<h:message for = "contactForm:name" style = "color:red" /> 
 							</div>
 							<div class="col-md-12 form-group">
 								<h:inputSecret type="text" class="form-control" id="password"
