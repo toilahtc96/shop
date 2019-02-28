@@ -21,7 +21,7 @@ public class User {
 	@Column(name = "use_email", length=50, nullable=true)
 	private String userEmail;
 
-	@Column(name="use_name", length=50, nullable=true)
+	@Column(name="use_name", length=50, nullable=false)
 	private String userName;
 	
 	@Column(name="use_phone", length=20, nullable=true)
@@ -30,19 +30,19 @@ public class User {
 	@Column(name="use_password", length=20, nullable=false)
 	private String userPassword;
 	
-	@Column(name="use_active", nullable=false)
+	@Column(name="use_active", nullable=true)
 	private int userActive;
 	
-	@Column(name="use_birthday", nullable=false)
+	@Column(name="use_birthday", nullable=true)
 	private Date userBirthday;
 	
-	@Column(name="use_gender", nullable=false)
+	@Column(name="use_gender", nullable=true)
 	private Integer userGender;
 	
 	@Column(name="use_avarta", length=50, nullable=true)
 	private String userAvarta;
 	
-	@Column(name="use_facebook", length=50, nullable=false)
+	@Column(name="use_facebook", length=50, nullable=true)
 	private String userFacebook;
 	
 	@Column(name="use_create_time", nullable=true)

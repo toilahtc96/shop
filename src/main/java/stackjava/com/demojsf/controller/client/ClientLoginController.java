@@ -61,7 +61,9 @@ public class ClientLoginController implements Serializable {
 	ClientRegisterForm clientRegisterForm;
 
 	public ClientRegisterForm getClientRegisterForm() {
-		clientRegisterForm = new ClientRegisterForm();
+		if (clientRegisterForm == null) {
+			clientRegisterForm = new ClientRegisterForm();
+		}
 		return clientRegisterForm;
 	}
 
@@ -123,25 +125,12 @@ public class ClientLoginController implements Serializable {
 		return "login?faces-redirect=true";
 	}
 
-	public String CreateAnAccount() {
-		System.out.println("check");
+	public String createAnAccount() {
 		String useName = clientRegisterForm.getUseName();
 		String usePassword = clientRegisterForm.getUsePassword();
-		String usePhone = clientRegisterForm.getUsePhone();
-		String useEmail = clientRegisterForm.getUseEmail();
-		String useAddress = clientRegisterForm.getUseAddress();
-		Date useBirhtday = clientRegisterForm.getUseBirthday();
-		System.out.println("userDate" + useBirhtday);
 		User user = new User();
 		user.setUserName(useName);
 		user.setUserPassword(usePassword);
-		user.setUserPhone(usePhone);
-		user.setUserEmail(useEmail);
-		user.setUserAddress(useAddress);
-		// user.setUserBirthday(Date.valueOf(useBirhtday));
-		user.setUserActive(1);
-		user.setUserGender(1);
-		user.setUserFacebook("damhaihiep");
 		if (userService.checkUserByName(useName)) {
 			System.out.println("User da ton tai! ");
 			return "";

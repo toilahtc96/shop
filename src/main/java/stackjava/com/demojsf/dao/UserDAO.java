@@ -119,7 +119,11 @@ public class UserDAO implements ModelDaoInterface<User>, Serializable {
 	@Override
 	public int update(int id, User e) {
 		// TODO Auto-generated method stub
-		return 0;
+//		@SuppressWarnings("static-access")
+//		Session session = getSessionHibernate.getSessionFactory().getCurrentSession();
+//		@SuppressWarnings("unused")
+//		Transaction tran = session.beginTransaction();
+		return getSessionHibernate.updateRecord(e);
 	}
 
 	@Override

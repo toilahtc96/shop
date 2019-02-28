@@ -18,7 +18,8 @@
 		<meta charset="UTF-8" />
 		<!-- Site Title -->
 		<title>Karma Shop</title>
-		<h:outputStylesheet library="js" name="client/jquery-ui-1.12.1/jquery-ui.css" />
+		<h:outputStylesheet library="js"
+			name="client/jquery-ui-1.12.1/jquery-ui.css" />
 		<h:outputStylesheet library="css" name="linearicons.css" />
 		<h:outputStylesheet library="css" name="linear.css" />
 		<h:outputStylesheet library="css" name="font-awesome.min.css" />
@@ -53,66 +54,75 @@
 	</h:head>
 	<h:body>
 		<header class="header_area sticky-header">
-		<h:form>
-			<div class="main_menu">
-				<nav class="navbar navbar-expand-lg navbar-light main_box">
-					<div class="container">
-						<a class="navbar-brand logo_h" href="index.html"> <h:graphicImage
-								value="" library="img" name="logo.png" alt="" />
-						</a>
-						<button class="navbar-toggler" type="button"
-							data-toggle="collapse" data-target="#navbarSupportedContent"
-							aria-controls="navbarSupportedContent" aria-expanded="false"
-							aria-label="Toggle navigation">
-							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span>
-						</button>
-						<div class="collapse navbar-collapse offset"
-							id="navbarSupportedContent">
-							<ul class="nav navbar-nav menu_nav ml-auto">
-								<li class="nav-item"><a class="nav-link" href="home.xhtml">Home</a>
-								</li>
-								<li class="nav-item submenu dropdown"><a href="#"
-									class="nav-link dropdown-toggle" data-toggle="dropdown"
-									role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
-									<ul class="dropdown-menu">
-										<li class="nav-item"><a class="nav-link"
-											href="cart.xhtml">Shopping Cart</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="order.xhtml">Order</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="checkout.xhtml">Product Checkout</a></li>
-									</ul></li>
-								<li class="nav-item"><a class="nav-link"
-									href="/JavaServerFaces/client/categories">Category</a></li>
-								<li class="nav-item submenu dropdown"><a href="#"
-									class="nav-link dropdown-toggle" data-toggle="dropdown"
-									role="button" aria-haspopup="true" aria-expanded="false">User</a>
-									<ul class="dropdown-menu">
-										<li class="nav-item">
-										<a class = "nav-link">
-											<h:outputLink styleClass = "nav-link" value="/JavaServerFaces/client/login">Log in</h:outputLink>
-										</a>
-										</li>
-										<li class="nav-item"><a class="nav-link"
-											href="home.xhtml">Log out</a></li>
-									</ul></li>
-								<li class="nav-item"><a class="nav-link"
-									href="contact.xhtml">Contact</a></li>
-							</ul>
-							<ul class="nav navbar-nav navbar-right">
-								<li class="nav-item"><a href="#" class="cart"><span
-										class="ti-bag"></span></a></li>
-								<li class="nav-item">
-									<button class="search">
-										<span class="lnr lnr-magnifier" id="search"></span>
-									</button>
-								</li>
-							</ul>
+			<h:form>
+				<div class="main_menu">
+					<nav class="navbar navbar-expand-lg navbar-light main_box">
+						<div class="container">
+							<a class="navbar-brand logo_h" href="index.html"> <h:graphicImage
+									value="" library="img" name="logo.png" alt="" />
+							</a>
+							<button class="navbar-toggler" type="button"
+								data-toggle="collapse" data-target="#navbarSupportedContent"
+								aria-controls="navbarSupportedContent" aria-expanded="false"
+								aria-label="Toggle navigation">
+								<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+							<div class="collapse navbar-collapse offset"
+								id="navbarSupportedContent">
+								<ul class="nav navbar-nav menu_nav ml-auto">
+									<li class="nav-item"><a class="nav-link" href="home.xhtml">Home</a>
+									</li>
+									<li class="nav-item submenu dropdown"><a href="#"
+										class="nav-link dropdown-toggle" data-toggle="dropdown"
+										role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
+										<ul class="dropdown-menu">
+											<li class="nav-item"><a class="nav-link"
+												href="cart.xhtml">Shopping Cart</a></li>
+											<li class="nav-item"><a class="nav-link"
+												href="order.xhtml">Order</a></li>
+											<li class="nav-item"><a class="nav-link"
+												href="checkout.xhtml">Product Checkout</a></li>
+										</ul></li>
+									<li class="nav-item"><a class="nav-link"
+										href="/JavaServerFaces/client/categories">Category</a></li>
+									<li class="nav-item submenu dropdown">
+									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+										role="button" aria-haspopup="true" aria-expanded="false"><h:outputText
+												value="User"
+												rendered="#{empty user}" />
+									</a> <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+										role="button" aria-haspopup="true" aria-expanded="false"><h:outputText
+												value="#{clientLoginController.clientLoginForm.name}"
+												rendered="#{not empty user}" /></a>
+										<ul class="dropdown-menu">
+											<li class="nav-item"><a class="nav-link"> <h:outputLink
+														styleClass="nav-link"
+														value="/JavaServerFaces/client/login">Log in</h:outputLink>
+											</a></li>
+											<li class="nav-item"><a class="nav-link"
+												href="home.xhtml">Log out</a></li>
+											<li class="nav-item"><a class="nav-link"> <h:outputLink
+														styleClass="nav-link"
+														value="/JavaServerFaces/client/editUser" rendered="#{not empty user}">Information</h:outputLink>
+											</a></li>
+										</ul></li>
+									<li class="nav-item"><a class="nav-link"
+										href="contact.xhtml">Contact</a></li>
+								</ul>
+								<ul class="nav navbar-nav navbar-right">
+									<li class="nav-item"><a href="#" class="cart"><span
+											class="ti-bag"></span></a></li>
+									<li class="nav-item">
+										<button class="search">
+											<span class="lnr lnr-magnifier" id="search"></span>
+										</button>
+									</li>
+								</ul>
+							</div>
 						</div>
-					</div>
-				</nav>
-			</div>
+					</nav>
+				</div>
 			</h:form>
 			<div class="search_input" id="search_input_box">
 				<div class="container">

@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="../templateClient/layout.xhtml">
+	<ui:define name="banner">
+		<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div
+				class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>User/Edit</h1>
+					<nav class="d-flex align-items-center"> <a href="index.html">Home<span
+						class="lnr lnr-arrow-right"></span></a> <a href="category.html">User/Edit</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+		</section>
+	</ui:define>
+
+	<ui:define name="content">
+		<div class="container">
+			<div class="row" style="padding: 5%;">
+				<div class="col-lg-12">
+					<h:form class="row login_form" method="post"
+						id="clientEditUserForm" novalidate="novalidate">
+						<div class="col-lg-6">
+							<div class="col-md-12 form-group">
+								<h4>User Name :</h4>
+								<h:inputText disabled="true" type="text" class="form-control"
+									id="name" name="name"
+									value="#{clientLoginController.clientLoginForm.name}" />
+							</div>
+							<div class="col-md-12 form-group">
+								<h4>PassWord :</h4>
+								<h:inputText disabled="true" type="text" class="form-control"
+									id="password" name="password"
+									value="#{clientLoginController.clientLoginForm.password}" />
+							</div>
+							<div class="col-md-12 form-group">
+								<h4>New PassWord :</h4>
+								<h:inputText type="text" class="form-control" id="newPassword"
+									name="newPassword"
+									value="#{clientUserController.clientEditUserForm.useNewPass}" />
+							</div>
+							<div class="col-md-12 form-group">
+								<h4>Phone :</h4>
+								<h:inputText type="text" class="form-control" id="phone"
+									name="phone"
+									value="#{clientUserController.clientEditUserForm.usePhone}" />
+							</div>
+							<div class="col-md-12 form-group">
+								<h4>Email :</h4>
+								<h:inputText type="text" class="form-control" id="email"
+									name="email"
+									value="#{clientUserController.clientEditUserForm.useEmail}">
+								</h:inputText>
+							</div>
+							<div class="col-md-12">
+								<h:commandButton class="btn btn-secondary" style="width: 100%;"
+									action="#" value="CANCEL" />
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-md-12 form-group">
+								<h4>Address :</h4>
+								<h:inputText type="text" class="form-control" id="address"
+									name="address"
+									value="#{clientUserController.clientEditUserForm.useAddress}" />
+							</div>
+							<div class="col-md-12 form-group">
+								<h4>Birth Day :</h4>
+								<h:inputText id="dob" name="dob"
+									value="#{clientUserController.clientEditUserForm.useDob}"
+									styleClass="form-control datepicker">
+									<f:convertDateTime pattern="dd-MM-yyyy" />
+								</h:inputText>
+							</div>
+							<div class="col-md-12 form-group">
+								<h4>Gender :</h4>
+								<h5>
+									<h:selectOneRadio
+										value="#{clientUserController.clientEditUserForm.useGender}">
+										<f:selectItem itemValue="1" itemLabel="Male" />
+										<f:selectItem itemValue="0" itemLabel="Female" />
+									</h:selectOneRadio>
+								</h5>
+							</div>
+							<div class="col-md-12 form-group">
+								<h4>Avatar :</h4>
+								<h:inputText type="text" class="form-control" id="avatar"
+									name="avatar"
+									value="#{clientUserController.clientEditUserForm.useAvatar}" />
+							</div>
+							<div class="col-md-12 form-group">
+								<h4>Facebook :</h4>
+								<h:inputText type="text" class="form-control" id="facebook"
+									name="facebook"
+									value="#{clientUserController.clientEditUserForm.useFacebook}" />
+							</div>
+							<h:commandButton class="btn btn-primary" style="width: 100%"
+								onclick="return checkParam();"
+								action="#{clientUserController.getUpdateUserInfomation}"
+								value="UPDATE" />
+						</div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+	<ui:define name="scriptJSF">
+		<h:outputScript library="js"
+			name="client/jquery-ui-1.12.1/jquery-ui.js" />
+			<h:outputScript library="js" name="client/client.editUser.js"/>
+
+		<h:outputScript library="js" name="client/formatDatePicker.js" />
+	</ui:define>
+</ui:composition>
+</html>
