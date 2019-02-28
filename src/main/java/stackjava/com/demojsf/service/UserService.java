@@ -52,7 +52,7 @@ public class UserService implements ModelServiceInterface<User>,Serializable {
 	@Override
 	public int update(int id, User e) {
 		// TODO Auto-generated method stub
-		return 0;
+		return userDAO.update(id, e);
 	}
 
 	@Override

@@ -30,45 +30,21 @@
 					<h:form class="row contact_form" action="#" method="post"
 						novalidate="novalidate" id="createUserForm">
 						<div class="col-md-12 form-group p_star">
+							<h4>User Name :</h4>
 							<h:inputText type="text" class="form-control" id="name"
-								a:placeholder="username" name="name"
+								name="name"
 								value="#{clientLoginController.clientRegisterForm.useName}" />
 						</div>
 						<div class="col-md-12 form-group p_star">
+							<h4>PassWord :</h4>
 							<h:inputSecret type="text" class="form-control" id="pass1"
-								a:placeholder="password" name="pass1"
+								name="pass1"
 								value="#{clientLoginController.clientRegisterForm.usePassword}" />
 						</div>
 						<div class="col-md-12 form-group p_star">
+							<h4>Confirm PassWord :</h4>
 							<h:inputSecret type="text" class="form-control" id="pass2"
-								a:placeholder="password again" name="pass2" />
-
-						</div>
-						<div class="col-md-12 form-group p_star">
-							<h:inputText type="text" class="form-control" id="number"
-								name="number" a:placeholder="phone"
-								value="#{clientLoginController.clientRegisterForm.usePhone}" />
-
-						</div>
-						<div class="col-md-12 form-group p_star">
-							<h:inputText type="text" class="form-control" id="email"
-								name="compemailany" a:placeholder="email"
-								value="#{clientLoginController.clientRegisterForm.useEmail}" />
-
-						</div>
-						<div class="col-md-12 form-group p_star">
-							<h:inputText type="text" class="form-control" id="address"
-								name="address" a:placeholder="address"
-								value="#{clientLoginController.clientRegisterForm.useAddress}" />
-
-						</div>
-						<div class="col-md-12 form-group p_star">
-							<h:inputText id="dob" name="dob" a:placeholder="date Of Birth"
-								value="#{clientLoginController.clientRegisterForm.useBirthday}"
-								styleClass="form-control datepicker" >
-								<f:convertDateTime pattern="yyyy/mm/dd hh:mm:ss"/>
-								</h:inputText>
-
+								name="pass2" />
 						</div>
 						<div class="col-md-12">
 							<h:commandButton class="btn btn-secondary" style="width: 47%;"
@@ -77,7 +53,7 @@
 							<h:commandButton class="btn btn-primary"
 								style="width: 47%; margin-left: 6%;"
 								onclick="return checkParam();"
-								action="#{clientLoginController.CreateAnAccount()}"
+								action="#{clientLoginController.createAnAccount()}"
 								value="CREATE">
 								
 							</h:commandButton>
