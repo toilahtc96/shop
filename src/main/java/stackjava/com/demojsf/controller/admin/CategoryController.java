@@ -159,7 +159,7 @@ public class CategoryController extends HttpServlet implements Serializable {
 			System.out.println("!=null");
 			System.out.println(this.getImage().getSubmittedFileName());
 			final Path destination = Paths.get(
-					"c:/Users/toila/Desktop/images/" + FilenameUtils.getName(image.getSubmittedFileName()));
+					"C:/Users/HaiHiep/Desktop/images/" + FilenameUtils.getName(image.getSubmittedFileName()));
 
 			InputStream bytes = null;
 

@@ -163,7 +163,7 @@ public class ProductController extends CommonController implements Serializable 
 			File file = new File("resources/images/" + this.createProductForm.getProImg().getSubmittedFileName());
 			String absolutePath = file.getAbsolutePath();
 			System.out.println("absolutePath" + absolutePath);
-			final Path destination = Paths.get("c:/Users/toila/Desktop/images/"
+			final Path destination = Paths.get("C:/Users/HaiHiep/Desktop/images/"
 					+ FilenameUtils.getName(this.createProductForm.getProImg().getSubmittedFileName()));
 
 			InputStream bytes = null;

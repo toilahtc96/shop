@@ -4278,11 +4278,11 @@ label {
     height: 40px;
     line-height: 38px;
     text-transform: uppercase;
-    padding: 0px 38px;
+    padding: 0px 0px;
     margin-right: -3px;
     border-radius: 0; }
   .cart_inner .table tbody tr.bottom_button td .cupon_text .gray_btn {
-    padding: 0px 40px; }
+    padding: 0px 0px; }
 .cart_inner .table tbody tr.shipping_area td:nth-child(3) {
   vertical-align: top; }
 .cart_inner .table tbody tr.shipping_area .shipping_box {
