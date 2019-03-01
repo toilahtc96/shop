@@ -26,7 +26,7 @@ public class ClientLoginController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@ManagedProperty(value = "#{clientLoginForm}")
-	private ClientLoginForm clientLoginForm;
+	ClientLoginForm clientLoginForm;
 
 	@ManagedProperty(value = "#{cartService}")
 	private CartService cartService;
@@ -43,6 +43,9 @@ public class ClientLoginController implements Serializable {
 	}
 
 	public ClientLoginForm getClientLoginForm() {
+		if (clientLoginForm == null) {
+			clientLoginForm = new ClientLoginForm();
+		}
 		return clientLoginForm;
 	}
 
@@ -75,31 +78,26 @@ public class ClientLoginController implements Serializable {
 		String name = clientLoginForm.getName();
 		String password = clientLoginForm.getPassword();
 		FacesContext context = FacesContext.getCurrentInstance();
-		if (name.equals("") || password.equals("")) {
-			// so ra 1 alert
-			context.addMessage("contactForm:name", new FacesMessage("Thiếu thông tin đăng nhập!"));
-		} else {
-			if (userService.checkUser(name, password)) {
-				User user = userService.getUserByNameAndPassword(name, password);
-				if (user != null) {
-					context.getExternalContext().getSessionMap().put("user", user);
+		if (userService.checkUser(name, password)) {
+			User user = userService.getUserByNameAndPassword(name, password);
+			if (user != null) {
+				context.getExternalContext().getSessionMap().put("user", user);
+				try {
 
-					try {
-
-						if (cartService.getByUserId(clientHomeController.getUserId()) != null) {
-							Cart cartO = cartService.getByUserId(clientHomeController.getUserId());
-							clientHomeController.setCart(cartO.getCarListProductQuantity());
-						}
-						context.getExternalContext().redirect("home");
-					} catch (IOException e) {
-						e.printStackTrace();
+					if (cartService.getByUserId(clientHomeController.getUserId()) != null) {
+						Cart cartO = cartService.getByUserId(clientHomeController.getUserId());
+						clientHomeController.setCart(cartO.getCarListProductQuantity());
 					}
-				} else {
-					context.addMessage("contactForm:name", new FacesMessage("Authentication Failed. Check username or password."));
+					context.getExternalContext().redirect("home");
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
 			} else {
-				context.addMessage("contactForm:name", new FacesMessage("Thông tin đăng nhập sai!"));
+				context.addMessage("contactForm",
+						new FacesMessage("Authentication Failed. Check username or password."));
 			}
+		} else {
+			context.addMessage("contactForm", new FacesMessage("Thông tin đăng nhập sai!"));
 		}
 	}
 

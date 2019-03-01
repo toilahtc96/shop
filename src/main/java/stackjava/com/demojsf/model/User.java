@@ -11,54 +11,65 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "users", uniqueConstraints={@UniqueConstraint(columnNames={"use_id"})})
+@Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = { "use_id" }) })
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "use_id", length=11, nullable=false, unique=true)
+	@Column(name = "use_id", length = 11, nullable = false, unique = true)
 	private Integer userId;
 
-	@Column(name = "use_email", length=50, nullable=true)
+	@Column(name = "use_email", length = 50, nullable = true)
 	private String userEmail;
 
-	@Column(name="use_name", length=50, nullable=false)
+	@Column(name = "use_name", length = 50, nullable = false)
 	private String userName;
-	
-	@Column(name="use_phone", length=20, nullable=true)
+
+	@Column(name = "use_phone", length = 20, nullable = true)
 	private String userPhone;
-	
-	@Column(name="use_password", length=20, nullable=false)
+
+	@Column(name = "use_password", length = 20, nullable = false)
 	private String userPassword;
-	
-	@Column(name="use_active", nullable=true)
+
+	@Column(name = "use_active", nullable = true)
 	private int userActive;
-	
-	@Column(name="use_birthday", nullable=true)
+
+	@Column(name = "use_birthday", nullable = true)
 	private Date userBirthday;
-	
-	@Column(name="use_gender", nullable=true)
+
+	@Column(name = "use_gender", nullable = true)
 	private Integer userGender;
-	
-	@Column(name="use_avarta", length=50, nullable=true)
+
+	@Column(name = "use_avarta", length = 50, nullable = true)
 	private String userAvarta;
-	
-	@Column(name="use_facebook", length=50, nullable=true)
+
+	@Column(name = "use_facebook", length = 50, nullable = true)
 	private String userFacebook;
-	
-	@Column(name="use_create_time", nullable=true)
+
+	@Column(name = "use_create_time", nullable = true)
 	private Date userCreateTime;
-	
-	@Column(name="use_update_time", nullable=true)
+
+	@Column(name = "use_update_time", nullable = true)
 	private Date userUpdateTime;
-	
-	@Column(name="use_address", length=50, nullable=true)
+
+	@Column(name = "use_address", length = 50, nullable = true)
 	private String userAddress;
-	
-	@Column(name="use_shop_address", length=50, nullable=true)
+
+	@Column(name = "use_shop_address", length = 50, nullable = true)
 	private String userShopAddress;
 
+	@Column(name = "use_roles", nullable = true)
+	private int userRoles;
+
+	public int getUserRoles() {
+		return userRoles;
+	}
+
+	public void setUserRoles(int userRoles) {
+		this.userRoles = userRoles;
+	}
+
 	public User() {
-	
+
 	}
 
 	public Integer getUserId() {
@@ -201,9 +212,5 @@ public class User {
 		this.userAddress = userAddress;
 		this.userShopAddress = userShopAddress;
 	}
-	
-	
-	
-	
 
 }
