@@ -58,13 +58,13 @@ public class User {
 	private String userShopAddress;
 
 	@Column(name = "use_roles", nullable = true)
-	private int userRoles;
+	private Integer userRoles;
 
-	public int getUserRoles() {
+	public Integer getUserRoles() {
 		return userRoles;
 	}
 
-	public void setUserRoles(int userRoles) {
+	public void setUserRoles(Integer userRoles) {
 		this.userRoles = userRoles;
 	}
 
