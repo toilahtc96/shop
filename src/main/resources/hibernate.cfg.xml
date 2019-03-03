@@ -10,9 +10,9 @@
 
 		<!-- Database Connection Settings -->
 		<property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-		<property name="hibernate.connection.url">jdbc:sqlserver://localhost:1433;databaseName=shop;</property>
-		<property name="hibernate.connection.username">sa</property>
-		<property name="hibernate.connection.password">1234567</property>		
+		<property name="hibernate.connection.url">jdbc:sqlserver://shophtcdhh.database.windows.net:1433;database=Shop;</property>
+		<property name="hibernate.connection.username">wecandoit@shophtcdhh</property>
+		<property name="hibernate.connection.password">123456a@</property>		
 
 		<!-- Specifying Session Context -->
 		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>

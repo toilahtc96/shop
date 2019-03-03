@@ -57,15 +57,15 @@ public class User {
 	@Column(name = "use_shop_address", length = 50, nullable = true)
 	private String userShopAddress;
 
-	@Column(name = "use_roles", nullable = true)
-	private Integer userRoles;
+	@Column(name = "use_role", nullable = true)
+	private Integer userRole;
 
 	public Integer getUserRoles() {
-		return userRoles;
+		return userRole;
 	}
 
-	public void setUserRoles(Integer userRoles) {
-		this.userRoles = userRoles;
+	public void setUserRoles(Integer userRole) {
+		this.userRole = userRole;
 	}
 
 	public User() {
