@@ -31,7 +31,7 @@ public class User {
 	private String userPassword;
 
 	@Column(name = "use_active", nullable = true)
-	private int userActive;
+	private Integer userActive;
 
 	@Column(name = "use_birthday", nullable = true)
 	private Date userBirthday;
@@ -60,11 +60,12 @@ public class User {
 	@Column(name = "use_role", nullable = true)
 	private Integer userRole;
 
-	public Integer getUserRoles() {
+	
+	public Integer getUserRole() {
 		return userRole;
 	}
 
-	public void setUserRoles(Integer userRole) {
+	public void setUserRole(Integer userRole) {
 		this.userRole = userRole;
 	}
 
@@ -112,11 +113,11 @@ public class User {
 		this.userPassword = userPassword;
 	}
 
-	public int getUserActive() {
+	public Integer getUserActive() {
 		return userActive;
 	}
 
-	public void setUserActive(int userActive) {
+	public void setUserActive(Integer userActive) {
 		this.userActive = userActive;
 	}
 
@@ -194,7 +195,7 @@ public class User {
 	}
 
 	public User(Integer userId, String userEmail, String userName, String userPhone, String userPassword,
-			int userActive, Date userBirthday, Integer userGender, String userAvarta, String userFacebook,
+			Integer userActive, Date userBirthday, Integer userGender, String userAvarta, String userFacebook,
 			Date userCreateTime, Date userUpdateTime, String userAddress, String userShopAddress) {
 		super();
 		this.userId = userId;
