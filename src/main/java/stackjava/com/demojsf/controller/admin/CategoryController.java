@@ -78,6 +78,8 @@ public class CategoryController extends HttpServlet implements Serializable {
 	public void uploadImage(AjaxBehaviorEvent event) {
 		System.out.println("ajax Call");
 		Part uploadedFile = getImage();
+		
+		//resources
 
 		// final Path destination = Paths.get("c:/temp/" +
 		// FilenameUtils.getName(getSubmittedFileName(uploadedFile)));
