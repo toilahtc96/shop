@@ -111,21 +111,25 @@ public class CategoryController extends HttpServlet implements Serializable {
 	}
 
 	public void setCreateCategoryForm(CreateCategoryForm createCategoryForm) {
-		this.createCategoryForm = createCategoryForm;
-		if (createCategoryForm == null) {
-			createCategoryForm = new CreateCategoryForm();
-		}
-		List<Category> getListCate = categoryService.getAll();
-		HashMap<Integer, String> hashMap = createCategoryForm.getListCate();
-		for (Category category : getListCate) {
-			if (hashMap == null) {
-				hashMap = new HashMap<Integer, String>();
-				hashMap.put(0, "Chose Parent");
+		try {
+			this.createCategoryForm = createCategoryForm;
+			if (createCategoryForm == null) {
+				createCategoryForm = new CreateCategoryForm();
 			}
-			hashMap.put(category.getCatId(), category.getCatName());
-			createCategoryForm.setListCate(hashMap);
+			List<Category> getListCate = categoryService.getAll();
+			HashMap<Integer, String> hashMap = createCategoryForm.getListCate();
+			for (Category category : getListCate) {
+				if (hashMap == null) {
+					hashMap = new HashMap<Integer, String>();
+					hashMap.put(0, "Chose Parent");
+				}
+				hashMap.put(category.getCatId(), category.getCatName());
+				createCategoryForm.setListCate(hashMap);
+			}
+			keyList = new ArrayList<Integer>(hashMap.keySet());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
-		keyList = new ArrayList<Integer>(hashMap.keySet());
 	}
 
 	@ManagedProperty(value = "#{updateCategoryForm}")
@@ -158,8 +162,8 @@ public class CategoryController extends HttpServlet implements Serializable {
 		if (this.getImage() != null) {
 			System.out.println("!=null");
 			System.out.println(this.getImage().getSubmittedFileName());
-			final Path destination = Paths.get(
-					"C:/Users/HaiHiep/Desktop/images/" + FilenameUtils.getName(image.getSubmittedFileName()));
+			final Path destination = Paths
+					.get("C:/Users/HaiHiep/Desktop/images/" + FilenameUtils.getName(image.getSubmittedFileName()));
 
 			InputStream bytes = null;
 
