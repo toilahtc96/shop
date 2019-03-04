@@ -10,48 +10,48 @@
 
 		<div id="header">
 			<ui:insert name="header">
-				<ui:include src="header.xhtml" />
+				<ui:include src="header.xhtml" /> 
 			</ui:insert>
 		</div>
 
 		<div id="banner">
 			<ui:insert name="banner">
-				<ui:include src="banner.xhtml" />
+				<!-- <ui:include src="banner.xhtml" /> -->
 			</ui:insert>
 		</div>
 
-		<div id="features">
-			<ui:insert>
+		<div id="features" >
+			<ui:insert name = "features">
 				<ui:include src="features.xhtml" />
 			</ui:insert>
 		</div>
 
-		<div id="event">
-			<ui:insert>
+		<div id="event" >
+			<ui:insert name = "event">
 				<ui:include src="event.xhtml" />
 			</ui:insert>
 		</div>
 
-		<div id="content">
+		<div id="content" style="min-height:1000px">
 			<ui:insert name="content">
 				<ui:include src="content.xhtml" />
 			</ui:insert>
 		</div>
 
 		<div id="time">
-			<ui:insert>
+			<ui:insert name = "time">
 				<ui:include src="time.xhtml" />
 			</ui:insert>
 		</div>
 
 		<div id="brand">
-			<ui:insert>
+			<ui:insert name = "brand">
 				<ui:include src="brand.xhtml" />
 			</ui:insert>
 		</div>
 
 		<div id="deal">
-			<ui:insert>
+			<ui:insert name = "deal">
 				<ui:include src="deal.xhtml" />
 			</ui:insert>
 		</div>
