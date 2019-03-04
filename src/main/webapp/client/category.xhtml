@@ -12,11 +12,10 @@
 			<div
 				class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 				<div class="col-first">
-					<h1>Shop Category Page</h1>
-					<nav class="d-flex align-items-center"> <a href="index.html">Home<span
-						class="lnr lnr-arrow-right"></span></a> <a href="#">Shop<span
-						class="lnr lnr-arrow-right"></span></a> <a href="category.html">Fashion
-						Category</a> </nav>
+					<h1>Shop Category</h1>
+					<nav class="d-flex align-items-center"> <a href="index.html">Home
+						<span class="lnr lnr-arrow-right"></span>
+					</a> <a href="category.html">Category</a> </nav>
 				</div>
 			</div>
 		</div>
@@ -51,40 +50,30 @@
 						<div class="common-filter">
 							<div class="head">Brands</div>
 							<h:form action="#">
-								<ul>
-									<li class="filter-list"><input class="pixel-radio"
-										type="radio" id="apple" name="brand" /><label for="apple">Apple<span>(29)</span></label></li>
-									<li class="filter-list"><input class="pixel-radio"
-										type="radio" id="asus" name="brand" /><label for="asus">Asus<span>(29)</span></label></li>
-									<li class="filter-list"><input class="pixel-radio"
-										type="radio" id="gionee" name="brand" /><label for="gionee">Gionee<span>(19)</span></label></li>
-									<li class="filter-list"><input class="pixel-radio"
-										type="radio" id="micromax" name="brand" /><label
-										for="micromax">Micromax<span>(19)</span></label></li>
-									<li class="filter-list"><input class="pixel-radio"
-										type="radio" id="samsung" name="brand" /><label for="samsung">Samsung<span>(19)</span></label></li>
-								</ul>
+								<ui:repeat var="brand"
+									value="#{clientBrandController.getAllListBrand()}">
+									<ul>
+										<li class="filter-list"><input class="pixel-radio"
+											type="radio" id="apple" name="brand" /> <h:outputText
+												value="#{brand.bra_name}" /></li>
+									</ul>
+								</ui:repeat>
 							</h:form>
 						</div>
 						<div class="common-filter">
 							<div class="head">Color</div>
 							<h:form action="#">
-								<ul>
-									<li class="filter-list"><input class="pixel-radio"
-										type="radio" id="black" name="color" /><label for="black">Black<span>(29)</span></label></li>
-									<li class="filter-list"><input class="pixel-radio"
-										type="radio" id="balckleather" name="color" /><label
-										for="balckleather">Black Leather<span>(29)</span></label></li>
-									<li class="filter-list"><input class="pixel-radio"
-										type="radio" id="blackred" name="color" /><label
-										for="blackred">Black with red<span>(19)</span>
-									</label></li>
-									<li class="filter-list"><input class="pixel-radio"
-										type="radio" id="gold" name="color" /><label for="gold">Gold<span>(19)</span></label></li>
-									<li class="filter-list"><input class="pixel-radio"
-										type="radio" id="spacegrey" name="color" /><label
-										for="spacegrey">Spacegrey<span>(19)</span></label></li>
-								</ul>
+								<ui:repeat var="color" value="#{clientProductController.getAllColorProduct()}">
+									<ul>
+										<li class="filter-list">
+											<input class="pixel-radio" type="radio" id="black" name="color" />
+											<h:outputText value="#{color}" />
+											<!-- <label for="black">Black
+												<span>(29)</span>
+											</label> -->
+										</li>
+									</ul>
+								</ui:repeat>
 							</h:form>
 						</div>
 						<div class="common-filter">
@@ -135,10 +124,10 @@
 									end="#{clientCategoryController.tailPage}">
 									<c:if test="${i == clientCategoryController.headPage}">
 										<h:commandLink href="" class="prev-arrow"
-											onclick="return goPrev(this);" >
+											onclick="return goPrev(this);">
 											<i class="fa fa-long-arrow-left" aria-hidden="true"
 												style="padding-top: 30%; padding-bottom: 34%"></i>
-											<f:ajax execute="@form" 
+											<f:ajax execute="@form"
 												render=":paginatorForm :formCate:resultAjax"
 												listener="#{clientCategoryController.prevPage}" />
 										</h:commandLink>

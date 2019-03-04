@@ -38,5 +38,7 @@
 		<mapping class="stackjava.com.demojsf.model.ProductComment" />
 		<mapping class="stackjava.com.demojsf.model.ProductRating" />
 		<mapping class="stackjava.com.demojsf.model.Banner" />
+		<mapping class="stackjava.com.demojsf.model.Brand" />
+		<mapping class="stackjava.com.demojsf.model.WishList" />
 	</session-factory>
 </hibernate-configuration>

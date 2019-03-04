@@ -46,6 +46,7 @@ import stackjava.com.demojsf.service.ProductService;
 @URLMappings(mappings = { @URLMapping(id = "clientHome", pattern = "/client/home", viewId = "/client/home.xhtml"),
 		@URLMapping(id = "clientCart", pattern = "/client/cart", viewId = "/client/cart.xhtml"),
 		@URLMapping(id = "clientCategory", pattern = "/client/categories", viewId = "/client/category.xhtml"),
+		@URLMapping(id = "clientCheckout", pattern = "/client/checkout", viewId = "/client/checkout.xhtml"),
 		@URLMapping(id = "clientOrder", pattern = "/client/orders", viewId = "/client/order.xhtml"),
 		@URLMapping(id = "clientRegister", pattern = "/client/register", viewId = "/client/register.xhtml"),
 		@URLMapping(id = "clientEdit", pattern = "/client/editUser", viewId = "/client/editUser.xhtml"),

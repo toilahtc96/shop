@@ -48,6 +48,13 @@ public class Product implements Serializable {
 
 	@Column(name = "pro_guarantee", length = 20, nullable = true)
 	private String proGuarantee;
+	
+	@Column(name = "pro_color", length = 50, nullable = true)
+	private String proColor;
+	
+	@Column(name = "pro_brand", nullable = true)
+	private Integer proBrand;
+	
 
 	public Product() {
 		super();
@@ -166,4 +173,21 @@ public class Product implements Serializable {
 	public void setProGuarantee(String proGuarantee) {
 		this.proGuarantee = proGuarantee;
 	}
+
+	public String getProColor() {
+		return proColor;
+	}
+
+	public void setProColor(String proColor) {
+		this.proColor = proColor;
+	}
+
+	public Integer getProBrand() {
+		return proBrand;
+	}
+
+	public void setProBrand(Integer proBrand) {
+		this.proBrand = proBrand;
+	}
+	
 }

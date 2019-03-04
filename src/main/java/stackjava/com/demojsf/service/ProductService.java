@@ -68,4 +68,7 @@ public class ProductService implements ModelServiceInterface<Product>, Serializa
 		return productDAO.countTotalRecords(idCate);
 	}
 
+	public List<String> getAllColorProduct() {
+		return productDAO.getAllColorProduct();
+	}
 }

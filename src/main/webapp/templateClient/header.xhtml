@@ -71,21 +71,30 @@
 							<div class="collapse navbar-collapse offset"
 								id="navbarSupportedContent">
 								<ul class="nav navbar-nav menu_nav ml-auto">
-									<li class="nav-item"><a class="nav-link" href="home.xhtml">Home</a>
+									<li class="nav-item"><a class="nav-link"><h:outputLink
+														styleClass="nav-link"
+														value="/JavaServerFaces/client/home">Home</h:outputLink></a>
 									</li>
 									<li class="nav-item submenu dropdown"><a href="#"
 										class="nav-link dropdown-toggle" data-toggle="dropdown"
 										role="button" aria-haspopup="true" aria-expanded="false">Shop</a>
 										<ul class="dropdown-menu">
-											<li class="nav-item"><a class="nav-link"
-												href="cart.xhtml">Shopping Cart</a></li>
-											<li class="nav-item"><a class="nav-link"
-												href="order.xhtml">Order</a></li>
-											<li class="nav-item"><a class="nav-link"
-												href="checkout.xhtml">Product Checkout</a></li>
+											<li class="nav-item"><a class="nav-link"><h:outputLink
+														styleClass="nav-link"
+														value="/JavaServerFaces/client/cart">Shopping Cart</h:outputLink></a></li>
+											<li class="nav-item"><a class="nav-link"><h:outputLink
+														styleClass="nav-link"
+														value="/JavaServerFaces/client/orders">Order</h:outputLink></a></li>
+											<li class="nav-item"><a class="nav-link"><h:outputLink
+														styleClass="nav-link"
+														value="/JavaServerFaces/client/checkout">Product Checkout</h:outputLink></a></li>
+											<li class="nav-item"><a class="nav-link"><h:outputLink
+														styleClass="nav-link"
+														value="/JavaServerFaces/client/confirmation">Confirmation</h:outputLink></a></li>
 										</ul></li>
-									<li class="nav-item"><a class="nav-link"
-										href="/JavaServerFaces/client/categories">Category</a></li>
+									<li class="nav-item"><a class="nav-link"><h:outputLink
+														styleClass="nav-link"
+														value="/JavaServerFaces/client/categories">Category</h:outputLink></a></li>
 									<li class="nav-item submenu dropdown">
 									<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
 										role="button" aria-haspopup="true" aria-expanded="false"><h:outputText
@@ -100,18 +109,20 @@
 														styleClass="nav-link"
 														value="/JavaServerFaces/client/login">Log in</h:outputLink>
 											</a></li>
-											<li class="nav-item"><a class="nav-link"
-												href="home.xhtml">Log out</a></li>
+											<li class="nav-item"><a class="nav-link"><h:outputLink
+														styleClass="nav-link"
+														value="/JavaServerFaces/client/home">Log out</h:outputLink></a></li>
 											<li class="nav-item"><a class="nav-link"> <h:outputLink
 														styleClass="nav-link"
 														value="/JavaServerFaces/client/editUser" rendered="#{not empty user}">Information</h:outputLink>
 											</a></li>
 										</ul></li>
-									<li class="nav-item"><a class="nav-link"
-										href="contact.xhtml">Contact</a></li>
+									<li class="nav-item"><a class="nav-link"><h:outputLink
+														styleClass="nav-link"
+														value="/JavaServerFaces/client/contact">Contact</h:outputLink></a></li>
 								</ul>
 								<ul class="nav navbar-nav navbar-right">
-									<li class="nav-item"><a href="#" class="cart"><span
+									<li class="nav-item"><a href="/JavaServerFaces/client/cart" class="cart"><span
 											class="ti-bag"></span></a></li>
 									<li class="nav-item">
 										<button class="search">

@@ -37,10 +37,6 @@ public class ClientProductController implements Serializable {
 
 	private String cartInDetail;
 	
-	
-	
-
-	
 	public String getCartInDetail() {
 		return cartInDetail;
 	}
@@ -67,8 +63,6 @@ public class ClientProductController implements Serializable {
 	public void setListCate(List<Category> listCate) {
 		this.listCate = listCate;
 	}
-
-	
 
 	public List<Product> getList() {
 
@@ -161,6 +155,15 @@ public class ClientProductController implements Serializable {
 		}
 
 		return "";
+	}
+	
+	public List<Product> getListProByBrand(){
+		List<Product> listPro = new ArrayList<>();
+		return listPro;
+	}
+	
+	public List<String> getAllColorProduct() {
+		return productService.getAllColorProduct();
 	}
 
 }

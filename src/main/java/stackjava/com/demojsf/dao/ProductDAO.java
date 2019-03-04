@@ -1,6 +1,7 @@
 package stackjava.com.demojsf.dao;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,7 +102,7 @@ public class ProductDAO implements ModelDaoInterface<Product>, PaginationInterfa
 	public List<Product> getListProByIdCate(int catId, int position, int pageSize) {
 		List<Product> listPro = new ArrayList<Product>();
 		try {
-			
+
 			@SuppressWarnings("static-access")
 			Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
 			Transaction transObj = sessionObj.beginTransaction();
@@ -111,7 +112,6 @@ public class ProductDAO implements ModelDaoInterface<Product>, PaginationInterfa
 			query.setFirstResult(position);
 			query.setMaxResults(2);
 			listPro = query.list();
-			
 
 		} catch (Exception e) {
 			System.out.println("dao Exception " + e.getMessage());
@@ -167,6 +167,24 @@ public class ProductDAO implements ModelDaoInterface<Product>, PaginationInterfa
 		query.setParameter("catId", catId);
 		listPro = query.setMaxResults(6).list();
 		return listPro;
+	}
+
+	@SuppressWarnings({ "unchecked", "unused","static-access" })
+	public List<String> getAllColorProduct() {
+		List<String> listColor = new ArrayList<>();
+		Session session = getSessionHibernate.getSessionFactory().getCurrentSession();
+		Transaction transaction = session.beginTransaction();
+		String hbl = "select distinct p.proColor from "+ Product.class.getName() +" p order by p.proColor asc";
+		Query query = session.createQuery(hbl);
+		listColor = query.list();
+//		System.out.println(listColor.toString());
+		return listColor;
+
+	}
+	
+	public static void main(String[] args) {
+		ProductDAO productDAO = new ProductDAO();
+		productDAO.getAllColorProduct();
 	}
 
 }

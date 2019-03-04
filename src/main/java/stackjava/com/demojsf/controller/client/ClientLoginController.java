@@ -78,6 +78,7 @@ public class ClientLoginController implements Serializable {
 		String name = clientLoginForm.getName();
 		String password = clientLoginForm.getPassword();
 		FacesContext context = FacesContext.getCurrentInstance();
+		System.out.println("name" + name +  "      pass" + password);
 		if (userService.checkUser(name, password)) {
 			User user = userService.getUserByNameAndPassword(name, password);
 			if (user != null) {
