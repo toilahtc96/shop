@@ -40,5 +40,6 @@
 		<mapping class="stackjava.com.demojsf.model.Banner" />
 		<mapping class="stackjava.com.demojsf.model.Brand" />
 		<mapping class="stackjava.com.demojsf.model.WishList" />
+		<mapping class="stackjava.com.demojsf.model.Contact" />
 	</session-factory>
 </hibernate-configuration>

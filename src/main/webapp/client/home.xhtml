@@ -9,6 +9,133 @@
 <h:body>
 
 	<ui:composition template="../templateClient/layout2.xhtml">
+		<ui:define name="content">
+			<section class="owl-carousel active-product-area section_gap">
+			<!-- single product slide -->
+			<div class="single-product-slider">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-lg-6 text-center">
+							<div class="section-title">
+								<h1>Latest Products</h1>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+									sed do eiusmod tempor incididunt ut labore et dolore magna
+									aliqua.</p>
+							</div>
+						</div>
+					</div>
+					<h:form id="lastestProduct">
+						<h:outputText id="outputName" />
+						<h:inputHidden id="cart" value="#{clientHomeController.cart}" />
+						<div class="row">
+							<!-- single product -->
+							<ui:repeat value="#{clientHomeController.list}" var="item"
+								id="repeatProductId" varStatus="repeatProductStatus"
+								paginator="true" rows="2" styleClass="paginated">
+								<div class="col-lg-3 col-md-6">
+									<div class="single-product">
+										<h:inputHidden id="productId" value="#{item.proId}" />
+										<h:commandLink
+											action="#{productController.productDetail(item.proId)}">
+											<h:graphicImage class="img-fluid" name="img/product/p1.jpg"
+												alt="" />
+										</h:commandLink>
+										<div class="product-details">
+											<h:commandLink
+												action="#{productController.productDetail(item.proId)}">
+												<h6>
+													<h:outputText value="#{item.proName}" />
+												</h6>
+											</h:commandLink>
+											<div class="price">
+												<h6>
+													<h:outputText value="#{item.proPrice}" />
+												</h6>
+												<h6 class="l-through">$210.00</h6>
+											</div>
+											<div class="prd-bottom">
+												<h:commandLink class="social-info" id="link"
+													onclick="return addToCart(#{item.proId});">
+													<span class="ti-bag"></span>
+													<p class="hover-text">add to bag</p>
+													<!--    -->
+													<f:ajax render=":lastestProduct:outputName"
+														listener="#{clientHomeController.updateCart}" />
+													<!-- <f:param name="id" value="#{product.proId}" /> -->
+												</h:commandLink>
+												<a href="" class="social-info"> <span
+													class="lnr lnr-heart"></span>
+													<p class="hover-text">Wishlist</p>
+												</a> <a href="" class="social-info"> <span
+													class="lnr lnr-sync"></span>
+													<p class="hover-text">compare</p>
+												</a>
+												<h:commandLink class="social-info"
+													action="#{productController.productDetail(item.proId)}">
+													<span class="lnr lnr-move"></span>
+													<p class="hover-text">view more</p>
+													<!-- <f:param name="id" value="#{product.proId}" /> -->
+												</h:commandLink>
+											</div>
+										</div>
+									</div>
+								</div>
+							</ui:repeat>
+						</div>
+					</h:form>
+				</div>
+			</div>
+			<div class="single-product-slider">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-lg-6 text-center">
+							<div class="section-title">
+								<h1>Coming Products</h1>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+									sed do eiusmod tempor incididunt ut labore et dolore magna
+									aliqua.</p>
+							</div>
+
+						</div>
+					</div>
+					<h:form id="commingProduct">
+						<div class="row">
+							<div class="col-lg-3 col-md-6">
+								<div class="single-product">
+									<h:graphicImage class="img-fluid" name="img/product/p6.jpg"
+										alt="" />
+									<div class="product-details">
+										<h6>addidas New Hammer sole for Sports person</h6>
+										<div class="price">
+											<h6>$150.00</h6>
+											<h6 class="l-through">$210.00</h6>
+										</div>
+										<div class="prd-bottom">
+
+											<a href="" class="social-info"> <span class="ti-bag"></span>
+												<p class="hover-text">add to bag</p>
+											</a> <a href="" class="social-info"> <span
+												class="lnr lnr-heart"></span>
+												<p class="hover-text">Wishlist</p>
+											</a> <a href="" class="social-info"> <span
+												class="lnr lnr-sync"></span>
+												<p class="hover-text">compare</p>
+											</a> <a href="" class="social-info"> <span
+												class="lnr lnr-move"></span>
+												<p class="hover-text">view more</p>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</h:form>
+				</div>
+			</div>
+			</section>
+			<!-- end product Area -->
+		</ui:define>
+
 		<ui:define name="scriptJSF">
 			<!-- Button trigger modal -->
 			<h:outputScript rendered="#{not empty user}" library="js"

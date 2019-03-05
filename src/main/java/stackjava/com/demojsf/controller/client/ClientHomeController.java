@@ -49,7 +49,7 @@ import stackjava.com.demojsf.service.ProductService;
 		@URLMapping(id = "clientCheckout", pattern = "/client/checkout", viewId = "/client/checkout.xhtml"),
 		@URLMapping(id = "clientOrder", pattern = "/client/orders", viewId = "/client/order.xhtml"),
 		@URLMapping(id = "clientRegister", pattern = "/client/register", viewId = "/client/register.xhtml"),
-		@URLMapping(id = "clientEdit", pattern = "/client/editUser", viewId = "/client/editUser.xhtml"),
+		@URLMapping(id = "clientInformation", pattern = "/client/userInfomation", viewId = "/client/userInfomation.xhtml"),
 		@URLMapping(id = "clientConfirmation", pattern = "/client/confirmation", viewId = "/client/confirmation.xhtml"),
 		@URLMapping(id = "clientContact", pattern = "/client/contact", viewId = "/client/contact.xhtml") })
 public class ClientHomeController extends CommonController implements Serializable {

@@ -27,7 +27,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6">
-					<h:form id="loginForm">
+					<h:form id="createForm">
 						<div class="login_box_img">
 							<h:graphicImage class="img-fluid" name="img/login.jpg" alt="" />
 							<div class="hover">
@@ -47,7 +47,7 @@
 				<div class="col-lg-6">
 					<div class="login_form_inner">
 						<h3>Log in to enter</h3>
-						<h:form class="row login_form" method="post" id="contactForm"
+						<h:form class="row login_form" method="post" id="loginForm"
 							novalidate="novalidate">
 							<div class="col-md-12 form-group">
 								<h:inputText type="text" class="form-control" id="name"
@@ -56,7 +56,7 @@
 									onblur="this.placeholder = 'Username'"
 									value="#{clientLoginController.clientLoginForm.name}" />
 							</div>
-							
+
 							<div class="col-md-12 form-group">
 								<h:inputSecret type="text" class="form-control" id="password"
 									name="password" placeholder="Password"
@@ -64,29 +64,29 @@
 									onblur="this.placeholder = 'Password'"
 									value="#{clientLoginController.clientLoginForm.password}" />
 							</div>
-							
-							<div class="col-md-12 form-group">
-								<h:messages style="color:red"/>
+							<div id="loading" style="display: none;"
+								class="col-md-12 form-group">
+								<h:graphicImage name="img/loading.gif" />
 							</div>
-							
+							<div class="col-md-12 form-group" id="messages">
+								<h:messages style="color:red" />
+							</div>
+
 							<div class="col-md-12 form-group">
 								<div class="creat_account">
 									<input type="checkbox" id="f-option2" name="selector" /> <label
 										for="f-option2">Keep me logged in</label>
 								</div>
 							</div>
-							
+
 							<div class="col-md-12 form-group">
 								<h:commandButton onclick="return checkParam();" id="loginbtn"
 									type="submit" styleClass="primary-btn" value="Log In">
-									<f:ajax render="contactForm" 
-										listener="#{clientLoginController.login()}" 
+									<f:ajax render="loginForm" execute="loginForm"
+										listener="#{clientLoginController.login()}"
 										onevent="ajaxOneEvent"/>
 								</h:commandButton>
 								<a href="#">Forgot Password?</a>
-							</div>
-							<div id = "loading" style="display:none;">
-								<h:graphicImage name="img/loading.gif" />
 							</div>
 						</h:form>
 					</div>
@@ -99,12 +99,25 @@
 	<ui:define name="scriptJSF">
 		<h:outputScript target="head" library="js" name="/client/login.js" />
 		<h:outputScript>
+			function checkParam(){
+				$.removeCookie('cartArray', { path: '/' });
+				var password = $('#contactForm\\:password').val();
+				var username = $('#contactForm\\:name').val();
+				if (password === "" || username === "") {
+					alert('Can nhap du thong tin');
+					return false;
+				}
+				return true;
+			}
+					
 			function ajaxOneEvent(data){
-                var status=data.status;
-                if("begin"==status){
+                var status = data.status;
+                if("begin" == status){
                     document.getElementById("loading").style.display="block";
-                }else if ("success"==status){
+                    document.getElementById("messages").style.display="none";
+                }else if("success" == status){
                     document.getElementById("loading").style.display="none";
+                    document.getElementById("messages").style.display="block";
                     return true;
                 }
             }
