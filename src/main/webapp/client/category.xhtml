@@ -175,7 +175,7 @@
 					<section class="lattest-product-area pb-40 category-list">
 					<h:form id="formCate">
 						<h:inputHidden id="cartInCate"
-							value="#{clientCategoryController.cartInCate}" />
+							value="#{clientHomeController.cart}" />
 						<h:outputText id="outputName" />
 						<h:panelGroup class="row" id="resultAjax">
 							<ui:repeat var="pro" value="#{clientCategoryController.list}">
@@ -196,12 +196,12 @@
 											</div>
 											<div class="prd-bottom">
 												<h:commandLink class="social-info" id="link"
-													onclick="return addToCart(#{pro.proId});">
+													onclick="addToCart(#{pro.proId});">
 													<span class="ti-bag"></span>
 													<p class="hover-text">add to bag</p>
 													<!--    -->
 													<f:ajax execute="@form" render=":formCate:outputName"
-														listener="#{clientCategoryController.updateCart}" />
+														listener="#{clientHomeController.updateCart}" />
 													<!-- <f:param name="id" value="#{product.proId}" /> -->
 												</h:commandLink>
 												<a href="" class="social-info"> <span

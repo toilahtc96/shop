@@ -1,5 +1,6 @@
 package stackjava.com.demojsf.controller.client;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +16,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIOutput;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.servlet.ServletContext;
 
 import org.apache.xpath.operations.Or;
 
@@ -82,19 +84,15 @@ public class ClientHomeController extends CommonController implements Serializab
 		// set cart to ""
 		System.out.println("post COnstruct");
 		if (this.getCart() != null && !this.getCart().equals("")) {
-			System.out.println("1");
 			parse(this.getCart());
 			this.setCart("");
 		} else {
-			System.out.println("3");
 			if (cartService.getByUserId(this.getUserId()) != null) {
-				System.out.println("2");
-				System.out.println("get Cart");
 				String cartSFromDB = cartService.getByUserId(this.getUserId()).getCarListProductQuantity();
 				parse(cartSFromDB);
 //				this.setCart("");
 			}else {
-				System.out.println("this null");
+				System.out.println("cart null");
 			}
 		}
 
@@ -107,12 +105,10 @@ public class ClientHomeController extends CommonController implements Serializab
 		FacesContext context = FacesContext.getCurrentInstance();
 
 		if (context.getExternalContext().getSessionMap().get("cartArray") != null) {
-			System.out.println("test");
 			System.out.println(context.getExternalContext().getSessionMap().get("cartArray").toString());
 			parse(context.getExternalContext().getSessionMap().get("cartArray").toString());
 			return context.getExternalContext().getSessionMap().get("cartArray").toString();
 		}
-		System.out.println("cartx: "+cart);
 
 		return cart;
 	}
@@ -122,8 +118,10 @@ public class ClientHomeController extends CommonController implements Serializab
 	}
 
 	public void updateCart(AjaxBehaviorEvent event) {
+		System.out.println("======>>>"+this.getCart());
 		if (this.getCart() != null && !this.getCart().equals("")) {
 			parse(this.getCart());
+			System.out.println("======>>>"+this.getCart());
 		}
 		/*
 		 * FacesContext context = FacesContext.getCurrentInstance();
@@ -151,6 +149,7 @@ public class ClientHomeController extends CommonController implements Serializab
 	}
 
 	private List<OrdersForm> lstOrder;
+	
 
 	public List<OrdersForm> getLstOrder() {
 		FacesContext context = FacesContext.getCurrentInstance();
@@ -197,6 +196,7 @@ public class ClientHomeController extends CommonController implements Serializab
 
 	}
 
+	//cái này có thể chuyển qua ordercontroller
 	public String getCreateOrder() {
 		if (lstIdProductInCart != null) {
 			float total = 0;

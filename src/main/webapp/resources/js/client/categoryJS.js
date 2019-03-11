@@ -1,7 +1,7 @@
 $(document).ready(
 		function() {
 
-			var cartDB = $("#formCate\\:cartInCate").val();
+			var cartDB = $("#formCate\\:cart").val();
 
 			if (cartDB != "") {
 
@@ -35,21 +35,21 @@ $(document).ready(
 							cartArr.push(item);
 							cartArrStr = JSON.stringify(cartArr);
 							console.log(cartArrStr);
-							$("#formCate\\:cartInCate").val(cartArrStr);
+							$("#formCate\\:cart").val(cartArrStr);
 							$.cookie("cartArray", cartArrStr, {
 								path : '/'
 							});
 							console.log("cart them moi 1: "
-									+ $("#formCate\\:cartInCate").val());
+									+ $("#formCate\\:cart").val());
 							alert("Đã Thêm Mới");
 						} else {
 							cartArrStr = JSON.stringify(cartArr);
-							$("#formCate\\:cartInCate").val(cartArrStr);
+							$("#formCate\\:cart").val(cartArrStr);
 							$.cookie("cartArray", cartArrStr, {
 								path : '/'
 							});
 							console.log("cart da co: "
-									+ $("#formCate\\:cartInCate").val());
+									+ $("#formCate\\:cart").val());
 							alert("Sản Phẩm Đã Có Trong Giở Hàng Của Bạn");
 						}
 					} else {
@@ -61,7 +61,7 @@ $(document).ready(
 						$.cookie("cartArray", cartArrStr, {
 							path : '/'
 						});
-						$("#formCate\\:cartInCate").val(cartArrStr);
+						$("#formCate\\:cart").val(cartArrStr);
 						console.log("cart them moi: "
 								+ $("#homeForm\\:cart").val());
 						alert("Đã Thêm Mới");
@@ -78,8 +78,8 @@ $(document).ready(
 					$.removeCookie('cartArray', {
 						path : '/'
 					});
-					$("#formCate\\:cartInCate").val("");
-					alert($("#formCate\\:cartInCate").val());
+					$("#formCate\\:cart").val("");
+					alert($("#formCate\\:cart").val());
 					return true;
 				} else {
 					return false;
