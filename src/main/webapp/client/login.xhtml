@@ -80,7 +80,7 @@
 							</div>
 
 							<div class="col-md-12 form-group">
-								<h:commandButton onclick="return checkParam();" id="loginbtn"
+								<h:commandButton onclick="return checkParam()" id="loginbtn"
 									type="submit" styleClass="primary-btn" value="Log In">
 									<f:ajax render="loginForm" execute="loginForm"
 										listener="#{clientLoginController.login()}"
@@ -99,12 +99,12 @@
 	<ui:define name="scriptJSF">
 		<h:outputScript target="head" library="js" name="/client/login.js" />
 		<h:outputScript>
-			function checkParam(){
+			checkParam = function(){
 				$.removeCookie('cartArray', { path: '/' });
-				var password = $('#contactForm\\:password').val();
-				var username = $('#contactForm\\:name').val();
+				var password = $('#loginForm\\:name').val();
+				var username = $('#loginForm\\:password').val();
 				if (password === "" || username === "") {
-					alert('Can nhap du thong tin');
+					alert('Cần nhập thông tin');
 					return false;
 				}
 				return true;

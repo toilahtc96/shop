@@ -82,30 +82,37 @@ public class ClientHomeController extends CommonController implements Serializab
 		// set cart to ""
 		System.out.println("post COnstruct");
 		if (this.getCart() != null && !this.getCart().equals("")) {
+			System.out.println("1");
 			parse(this.getCart());
 			this.setCart("");
 		} else {
+			System.out.println("3");
 			if (cartService.getByUserId(this.getUserId()) != null) {
+				System.out.println("2");
+				System.out.println("get Cart");
 				String cartSFromDB = cartService.getByUserId(this.getUserId()).getCarListProductQuantity();
 				parse(cartSFromDB);
-				this.setCart("");
+//				this.setCart("");
+			}else {
+				System.out.println("this null");
 			}
 		}
 
 	}
 	
-
-
 	private String cart;
 
 	public String getCart() {
+		System.out.println("getCart");
 		FacesContext context = FacesContext.getCurrentInstance();
 
 		if (context.getExternalContext().getSessionMap().get("cartArray") != null) {
+			System.out.println("test");
 			System.out.println(context.getExternalContext().getSessionMap().get("cartArray").toString());
 			parse(context.getExternalContext().getSessionMap().get("cartArray").toString());
 			return context.getExternalContext().getSessionMap().get("cartArray").toString();
 		}
+		System.out.println("cartx: "+cart);
 
 		return cart;
 	}
@@ -115,12 +122,9 @@ public class ClientHomeController extends CommonController implements Serializab
 	}
 
 	public void updateCart(AjaxBehaviorEvent event) {
-
 		if (this.getCart() != null && !this.getCart().equals("")) {
-			System.out.println("1");
 			parse(this.getCart());
 		}
-		System.out.println("2");
 		/*
 		 * FacesContext context = FacesContext.getCurrentInstance();
 		 * context.getExternalContext().getSessionMap().put("cartArray",
@@ -149,7 +153,6 @@ public class ClientHomeController extends CommonController implements Serializab
 	private List<OrdersForm> lstOrder;
 
 	public List<OrdersForm> getLstOrder() {
-		System.out.println("getOrder");
 		FacesContext context = FacesContext.getCurrentInstance();
 		User u = (User) context.getExternalContext().getSessionMap().get("user");
 		int userId = u.getUserId();
@@ -160,13 +163,13 @@ public class ClientHomeController extends CommonController implements Serializab
 			orderForm.setOrdetId(order.getOrderId());
 			orderForm.setCreateDate(order.getOrderCreatedAt());
 			if (order.getOrderStatus() == 1) {
-				orderForm.setStatus("Ä�Ă£ HoĂ n Táº¥t");
+				orderForm.setStatus("Đã Hoàn Tất");
 			}
 			if (order.getOrderStatus() == 2) {
-				orderForm.setStatus("ChÆ°a Gá»­i");
+				orderForm.setStatus("Chưa Gửi");
 			}
 			if (order.getOrderStatus() == 3) {
-				orderForm.setStatus("Ä�ang Gá»­i");
+				orderForm.setStatus("Đã Hủy");
 			}
 			orderForm.setTotalPrice(order.getOrderTotalFrice());
 			orderForm.setUserName(u.getUserName());
@@ -195,7 +198,6 @@ public class ClientHomeController extends CommonController implements Serializab
 	}
 
 	public String getCreateOrder() {
-
 		if (lstIdProductInCart != null) {
 			float total = 0;
 			Order order = new Order();
@@ -214,7 +216,6 @@ public class ClientHomeController extends CommonController implements Serializab
 				cartOrder.setPro(productService.getById(id) != null ? productService.getById(id) : null);
 				cartOrder.setQuantity(qty);
 
-				System.out.println("quantity: " + qty);
 				total += qty * product.getPro().getProPrice();
 				OrderDetail orderDetail = new OrderDetail();
 				orderDetail.setOrdetCreatedAt(new Date());
@@ -237,6 +238,7 @@ public class ClientHomeController extends CommonController implements Serializab
 			if (cartService.getByUserId(this.getUserId()) != null) {
 				cartService.removeById(cartService.getByUserId(this.getUserId()).getCarId());
 			}
+			this.setCart(null);
 
 		} else {
 			System.out.println("list Null");
@@ -267,8 +269,6 @@ public class ClientHomeController extends CommonController implements Serializab
 		cart.setCarUserId(this.getUserId());
 
 		if (cartService.getByUserId(this.getUserId()) != null) {
-			System.out.println("not null");
-			System.out.println(jsonLine);
 			cart.setCarId(cartService.getByUserId(this.getUserId()).getCarId());
 			cartService.update(cart.getCarId(), cart);
 		} else {

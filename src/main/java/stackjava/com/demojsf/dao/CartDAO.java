@@ -72,7 +72,7 @@ public class CartDAO implements ModelDaoInterface<Cart>, Serializable {
 		Session sessionObj = getSessionHibernate.getSessionFactory().getCurrentSession();
 		Transaction transObj = sessionObj.beginTransaction();
 		Cart cart = (Cart) sessionObj
-				.createQuery("From stackjava.com.demojsf.model.Cart c where c.carUserId = :carUserId")
+				.createQuery("From Cart c where c.carUserId = :carUserId")
 				.setParameter("carUserId", userid).uniqueResult();
 		return cart;
 

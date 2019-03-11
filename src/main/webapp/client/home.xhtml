@@ -59,7 +59,7 @@
 													<span class="ti-bag"></span>
 													<p class="hover-text">add to bag</p>
 													<!--    -->
-													<f:ajax render=":lastestProduct:outputName"
+													<f:ajax render=":lastestProduct:outputName" execute="@form"
 														listener="#{clientHomeController.updateCart}" />
 													<!-- <f:param name="id" value="#{product.proId}" /> -->
 												</h:commandLink>

@@ -21,8 +21,8 @@
 		</section>
 	</ui:define>
 
-	<ui:define name="content">
-		<div class="container">
+	<ui:define name="content" >
+		<div class="container" style="min-height: 1000px">
 			<div class="row" style="padding: 5%;">
 				<div class="col-xl-3 col-lg-4 col-md-5">
 					<h:form>
@@ -35,104 +35,106 @@
 								<li class="main-nav-list"><a data-toggle="collapse"
 									href="#fruitsVegetable" aria-expanded="false"
 									aria-controls="fruitsVegetable"> <span
-										class="lnr lnr-arrow-right"></span> <h:commandLink action="#"
-											value="Update Information" /> <h:commandLink action="#"
-											value="Change Password" />
+										class="lnr lnr-arrow-right"></span> 
+										<h:commandLink onclick="return getChangeInfo()" value="Update Information" /> 
+										<h:commandLink value="Change Password" onclick="return getChangePassword()" />
 								</a></li>
 							</ul>
 						</div>
 					</h:form>
 				</div>
 				<div class="col-xl-9 col-lg-8 col-md-7">
-					<div class="filter-bar d-flex flex-wrap align-items-center"
-						style="height: 60px;">
-						<h3
-							style="width: 100%; text-align: center; color: #fff; font-size: x-large; margin-top: auto;">Information</h3>
-					</div>
-					<h:form class="row login_form" method="post"
-						id="userInformationForm" novalidate="novalidate"
-						style="padding-top: 20px;">
-						<div class="col-lg-6">
-							<div class="col-md-12 form-group">
-								<h4>User Name :</h4>
-								<h:inputText disabled="true" type="text" class="form-control"
-									id="name" name="name"
-									value="#{clientLoginController.clientLoginForm.name}" />
+					<div id="information-change">
+						<div class="filter-bar d-flex flex-wrap align-items-center"
+							style="height: 60px;">
+							<h3
+								style="width: 100%; text-align: center; color: #fff; font-size: x-large; margin-top: auto;">Information</h3>
+						</div>
+						<h:form class="row login_form" method="post"
+							id="userInformationForm" novalidate="novalidate"
+							style="padding-top: 20px;">
+							<div class="col-lg-6">
+								<div class="col-md-12 form-group">
+									<h4>Phone :</h4>
+									<h:inputText type="text" class="form-control" id="phone"
+										name="phone"
+										value="#{clientUserController.clientEditUserForm.usePhone}" />
+								</div>
+								<div class="col-md-12 form-group">
+									<h4>Email :</h4>
+									<h:inputText type="text" class="form-control" id="email"
+										name="email"
+										value="#{clientUserController.clientEditUserForm.useEmail}">
+									</h:inputText>
+								</div>
+
+								<div class="col-md-12 form-group">
+									<h4>Address :</h4>
+									<h:inputText type="text" class="form-control" id="address"
+										name="address"
+										value="#{clientUserController.clientEditUserForm.useAddress}" />
+								</div>
+								<div class="col-md-12 form-group">
+									<h4>Birth Day :</h4>
+									<h:inputText id="dob" name="dob"
+										value="#{clientUserController.clientEditUserForm.useDob}"
+										styleClass="form-control datepicker">
+										<f:convertDateTime pattern="dd-MM-yyyy" />
+									</h:inputText>
+								</div>
+
 							</div>
-							<div class="col-md-12 form-group">
-								<h4>PassWord :</h4>
-								<h:inputText disabled="true" type="text" class="form-control"
-									id="password" name="password"
-									value="#{clientLoginController.clientLoginForm.password}" />
-							</div>
-							<div class="col-md-12 form-group">
-								<h4>New PassWord :</h4>
-								<h:inputText type="text" class="form-control" id="newPassword"
-									name="newPassword"
-									value="#{clientUserController.clientEditUserForm.useNewPass}" />
-							</div>
-							<div class="col-md-12 form-group">
-								<h4>Phone :</h4>
-								<h:inputText type="text" class="form-control" id="phone"
-									name="phone"
-									value="#{clientUserController.clientEditUserForm.usePhone}" />
-							</div>
-							<div class="col-md-12 form-group">
-								<h4>Email :</h4>
-								<h:inputText type="text" class="form-control" id="email"
-									name="email"
-									value="#{clientUserController.clientEditUserForm.useEmail}">
-								</h:inputText>
+							<div class="col-lg-6">
+
+								<div class="col-md-12 form-group">
+									<h4>Gender :</h4>
+									<h5>
+										<h:selectOneRadio
+											value="#{clientUserController.clientEditUserForm.useGender}">
+											<f:selectItem itemValue="1" itemLabel="Male" />
+											<f:selectItem itemValue="0" itemLabel="Female" />
+										</h:selectOneRadio>
+									</h5>
+								</div>
+								<div class="col-md-12 form-group">
+									<h4>Avatar :</h4>
+									<h:inputText type="text" class="form-control" id="avatar"
+										name="avatar"
+										value="#{clientUserController.clientEditUserForm.useAvatar}" />
+								</div>
+								<div class="col-md-12 form-group">
+									<h4>Facebook :</h4>
+									<h:inputText type="text" class="form-control" id="facebook"
+										name="facebook"
+										value="#{clientUserController.clientEditUserForm.useFacebook}" />
+								</div>
+
+
 							</div>
 							<div class="col-md-12">
-								<h:commandButton class="btn btn-secondary" style="width: 100%;"
-									action="#" value="CANCEL" />
+								<h:commandButton class="btn btn-secondary"
+									style="width: 45%;margin-right:5%;" action="#" value="CANCEL" />
+								<h:commandButton class="btn btn-primary"
+									style="width: 45%; margin-left:5%;"
+									onclick="return checkParam();"
+									action="#{clientUserController.getUpdateUserInfomation}"
+									value="UPDATE" />
 							</div>
+						</h:form>
+					</div>
+					<div id="password-change" style="display: none;">
+						<div class="filter-bar d-flex flex-wrap align-items-center"
+							style="height: 60px;">
+							<h3
+								style="width: 100%; text-align: center; color: #fff; font-size: x-large; margin-top: auto;">Change
+								Password</h3>
 						</div>
-						<div class="col-lg-6">
-							<div class="col-md-12 form-group">
-								<h4>Address :</h4>
-								<h:inputText type="text" class="form-control" id="address"
-									name="address"
-									value="#{clientUserController.clientEditUserForm.useAddress}" />
-							</div>
-							<div class="col-md-12 form-group">
-								<h4>Birth Day :</h4>
-								<h:inputText id="dob" name="dob"
-									value="#{clientUserController.clientEditUserForm.useDob}"
-									styleClass="form-control datepicker">
-									<f:convertDateTime pattern="dd-MM-yyyy" />
-								</h:inputText>
-							</div>
-							<div class="col-md-12 form-group">
-								<h4>Gender :</h4>
-								<h5>
-									<h:selectOneRadio
-										value="#{clientUserController.clientEditUserForm.useGender}">
-										<f:selectItem itemValue="1" itemLabel="Male" />
-										<f:selectItem itemValue="0" itemLabel="Female" />
-									</h:selectOneRadio>
-								</h5>
-							</div>
-							<div class="col-md-12 form-group">
-								<h4>Avatar :</h4>
-								<h:inputText type="text" class="form-control" id="avatar"
-									name="avatar"
-									value="#{clientUserController.clientEditUserForm.useAvatar}" />
-							</div>
-							<div class="col-md-12 form-group">
-								<h4>Facebook :</h4>
-								<h:inputText type="text" class="form-control" id="facebook"
-									name="facebook"
-									value="#{clientUserController.clientEditUserForm.useFacebook}" />
-							</div>
-							<h:commandButton class="btn btn-primary" style="width: 100%"
-								onclick="return checkParam();"
-								action="#{clientUserController.getUpdateUserInfomation}"
-								value="UPDATE" />
-						</div>
-					</h:form>
+						<div id="form Test">ssssssssssssssssssssssssss</div>
+					</div>
 				</div>
+
+
+
 			</div>
 		</div>
 	</ui:define>

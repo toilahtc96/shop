@@ -78,7 +78,6 @@ public class ClientLoginController implements Serializable {
 		String name = clientLoginForm.getName();
 		String password = clientLoginForm.getPassword();
 		FacesContext context = FacesContext.getCurrentInstance();
-		System.out.println("name" + name +  "      pass" + password);
 		if (userService.checkUser(name, password)) {
 			User user = userService.getUserByNameAndPassword(name, password);
 			if (user != null) {
@@ -88,6 +87,8 @@ public class ClientLoginController implements Serializable {
 					if (cartService.getByUserId(clientHomeController.getUserId()) != null) {
 						Cart cartO = cartService.getByUserId(clientHomeController.getUserId());
 						clientHomeController.setCart(cartO.getCarListProductQuantity());
+						clientHomeController.parse(cartO.getCarListProductQuantity());
+						System.out.println("call Cart from ClientLoginController");
 					}
 					context.getExternalContext().redirect("home");
 				} catch (IOException e) {
@@ -108,6 +109,7 @@ public class ClientLoginController implements Serializable {
 		try {
 			context.getExternalContext().redirect("/JavaServerFaces");
 		} catch (IOException e) {
+			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
 	}

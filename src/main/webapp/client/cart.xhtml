@@ -27,6 +27,7 @@
 	<ui:define name="content">
 		<!--================Cart Area =================-->
 		<h:form rendered="#{not empty user}" id="cartForm">
+		<h:outputText id = "outputName"/>
 			<section class="cart_area">
 			<div class="container">
 				<div class="cart_inner">
@@ -51,13 +52,19 @@
 											<div class="media">
 												<div class="d-flex">
 													<h:graphicImage name="img/cart.jpg" alt="" />
+													
 												</div>
 												<div class="media-body">
 													<p>
 														<h:outputText value="#{item.pro.proName}" />
+														
 														<h:inputHidden value="#{item.pro.proId}" id="name" />
 														<c:set var="total" value="${total + item.pro.proPrice }" />
 													</p>
+													<h:commandLink onclick="return removeItemOncart(#{item.pro.proId})" class="fa fa-trash-o fa-2x" aria-hidden="true">
+													<f:ajax render=":cartForm:outputName" execute="@form"
+														listener="#{clientHomeController.updateCart}" />
+													</h:commandLink>
 												</div>
 											</div>
 										</td>
