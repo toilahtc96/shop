@@ -88,7 +88,7 @@ public class ClientLoginController implements Serializable {
 						Cart cartO = cartService.getByUserId(clientHomeController.getUserId());
 						clientHomeController.setCart(cartO.getCarListProductQuantity());
 						clientHomeController.parse(cartO.getCarListProductQuantity());
-						System.out.println("call Cart from ClientLoginController");
+						
 					}
 					context.getExternalContext().redirect("home");
 				} catch (IOException e) {

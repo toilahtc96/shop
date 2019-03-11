@@ -101,11 +101,9 @@ public class ClientHomeController extends CommonController implements Serializab
 	private String cart;
 
 	public String getCart() {
-		System.out.println("getCart");
 		FacesContext context = FacesContext.getCurrentInstance();
 
 		if (context.getExternalContext().getSessionMap().get("cartArray") != null) {
-			System.out.println(context.getExternalContext().getSessionMap().get("cartArray").toString());
 			parse(context.getExternalContext().getSessionMap().get("cartArray").toString());
 			return context.getExternalContext().getSessionMap().get("cartArray").toString();
 		}
@@ -118,10 +116,8 @@ public class ClientHomeController extends CommonController implements Serializab
 	}
 
 	public void updateCart(AjaxBehaviorEvent event) {
-		System.out.println("======>>>"+this.getCart());
 		if (this.getCart() != null && !this.getCart().equals("")) {
 			parse(this.getCart());
-			System.out.println("======>>>"+this.getCart());
 		}
 		/*
 		 * FacesContext context = FacesContext.getCurrentInstance();

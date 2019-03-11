@@ -145,7 +145,6 @@ public class ProductController extends CommonController implements Serializable 
 
 	public String addAbcProduct() {
 		System.out.println("add Product");
-		System.out.println("path" + getPathImge());
 		String proName = " ";
 		if (this.createProductForm.getProName() != null) {
 			proName = this.createProductForm.getProName();
@@ -159,41 +158,14 @@ public class ProductController extends CommonController implements Serializable 
 		pro.setProCategoryId(idCategory);
 
 		if (this.createProductForm.getProImg() != null) {
-			System.out.println("!=null");
-			String serverPath = System.getProperty("user.dir");
-			System.out.println("user dir: " +serverPath);
-			
-			File file = new File(serverPath + "/resources/img/" + this.createProductForm.getProImg().getSubmittedFileName());
-			String absolutePath = file.getAbsolutePath();
-			System.out.println("absolutePath" + absolutePath);
-			final Path destination = Paths.get("C:/Users/toila/Desktop/images/"
-					+ FilenameUtils.getName(this.createProductForm.getProImg().getSubmittedFileName()));
-
-			InputStream bytes = null;
-
-			try {
-				bytes = image.getInputStream();
-				Files.copy(bytes, destination);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.out.println(e.getMessage());
-			}
-
+			String folderName = "product";
+			String imageName = this.createProductForm.getProImg().getSubmittedFileName();
+			doUpLoad(folderName, imageName, this.createProductForm.getProImg());
 		} else {
 			System.out.println("null");
 		}
 		// productService.add(pro);
 		return "/admin/listProduct?faces-redirect=true";
-	}
-
-	public static void main(String[] args) {
-		System.out.println();
-		String projectDir = new File("").getAbsolutePath();
-		String path = projectDir+"\\src\\main\\webapp\\resources\\img";
-		ProductController p = new ProductController();
-		System.out.println("xx"+ p.getPathImge());
-		System.out.println(path);
 	}
 
 	public String getPathImge() {
